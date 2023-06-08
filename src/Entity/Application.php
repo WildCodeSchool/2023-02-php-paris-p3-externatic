@@ -23,13 +23,13 @@ class Application
     private ?Offer $offer = null;
 
     #[ORM\Column]
-    private ?bool $isFavorite = null;
+    private ?bool $favorite = null;
 
     #[ORM\Column(length: 100)]
     private ?string $status = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $applicationAt = null;
+    private ?\DateTimeInterface $applicationDate = null;
 
     public function getId(): ?int
     {
@@ -60,14 +60,14 @@ class Application
         return $this;
     }
 
-    public function isIsFavorite(): ?bool
+    public function isFavorite(): ?bool
     {
-        return $this->isFavorite;
+        return $this->favorite;
     }
 
-    public function setIsFavorite(bool $isFavorite): self
+    public function setFavorite(bool $favorite): self
     {
-        $this->isFavorite = $isFavorite;
+        $this->favorite = $favorite;
 
         return $this;
     }
@@ -84,14 +84,14 @@ class Application
         return $this;
     }
 
-    public function getApplicationAt(): ?\DateTimeInterface
+    public function getApplicationDate(): ?\DateTimeInterface
     {
-        return $this->applicationAt;
+        return $this->applicationDate;
     }
 
-    public function setApplicationAt(\DateTimeInterface $applicationAt): self
+    public function setApplicationDate(\DateTimeInterface $applicationDate): self
     {
-        $this->applicationAt = $applicationAt;
+        $this->applicationDate = $applicationDate;
 
         return $this;
     }
