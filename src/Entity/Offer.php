@@ -41,11 +41,11 @@ class Offer
     #[ORM\Column(length: 150)]
     private ?string $experience = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?int $salary = null;
+    #[ORM\Column]
+    private ?int $salaryMin = null;
 
-    #[ORM\OneToOne(mappedBy: 'offer', cascade: ['persist', 'remove'])]
-    private ?Application $application = null;
+    #[ORM\Column]
+    private ?int $salaryMax = null;
 
     #[ORM\ManyToMany(targetEntity: Skill::class, mappedBy: 'offers')]
     private Collection $skills;
@@ -53,9 +53,13 @@ class Offer
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $location = null;
 
+    #[ORM\OneToMany(mappedBy: 'offer', targetEntity: Application::class)]
+    private Collection $applications;
+
     public function __construct()
     {
         $this->skills = new ArrayCollection();
+        $this->applications = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -159,31 +163,26 @@ class Offer
         return $this;
     }
 
-    public function getSalary(): ?int
+    public function getSalaryMin(): ?int
     {
-        return $this->salary;
+        return $this->salaryMin;
     }
 
-    public function setSalary(?int $salary): self
+    public function setSalaryMin(?int $salaryMin): self
     {
-        $this->salary = $salary;
+        $this->salaryMin = $salaryMin;
 
         return $this;
     }
 
-    public function getApplication(): ?Application
+    public function getSalaryMax(): ?int
     {
-        return $this->application;
+        return $this->salaryMax;
     }
 
-    public function setApplication(Application $application): self
+    public function setSalaryMax(int $salaryMax): self
     {
-        // set the owning side of the relation if necessary
-        if ($application->getOffer() !== $this) {
-            $application->setOffer($this);
-        }
-
-        $this->application = $application;
+        $this->salaryMax = $salaryMax;
 
         return $this;
     }
@@ -223,6 +222,36 @@ class Offer
     public function setLocation(?string $location): self
     {
         $this->location = $location;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Application>
+     */
+    public function getApplications(): Collection
+    {
+        return $this->applications;
+    }
+
+    public function addApplication(Application $application): self
+    {
+        if (!$this->applications->contains($application)) {
+            $this->applications->add($application);
+            $application->setOffer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeApplication(Application $application): self
+    {
+        if ($this->applications->removeElement($application)) {
+            // set the owning side to null (unless already changed)
+            if ($application->getOffer() === $this) {
+                $application->setOffer(null);
+            }
+        }
 
         return $this;
     }

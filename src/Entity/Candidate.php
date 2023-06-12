@@ -59,15 +59,19 @@ class Candidate
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
-    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
-    private ?Application $application = null;
-
     #[ORM\ManyToMany(targetEntity: Skill::class, mappedBy: 'candidate')]
     private Collection $skills;
+
+    #[ORM\Column]
+    private ?bool $visible = null;
+
+    #[ORM\OneToMany(mappedBy: 'candidate', targetEntity: Application::class)]
+    private Collection $applications;
 
     public function __construct()
     {
         $this->skills = new ArrayCollection();
+        $this->applications = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -243,23 +247,6 @@ class Candidate
         return $this;
     }
 
-    public function getApplication(): ?Application
-    {
-        return $this->application;
-    }
-
-    public function setApplication(Application $application): self
-    {
-        // set the owning side of the relation if necessary
-        if ($application->getUser() !== $this) {
-            $application->setUser($this);
-        }
-
-        $this->application = $application;
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, Skill>
      */
@@ -282,6 +269,48 @@ class Candidate
     {
         if ($this->skills->removeElement($skill)) {
             $skill->removeCandidate($this);
+        }
+
+        return $this;
+    }
+
+    public function isVisible(): ?bool
+    {
+        return $this->visible;
+    }
+
+    public function setVisible(bool $visible): self
+    {
+        $this->visible = $visible;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Application>
+     */
+    public function getApplications(): Collection
+    {
+        return $this->applications;
+    }
+
+    public function addApplication(Application $application): self
+    {
+        if (!$this->applications->contains($application)) {
+            $this->applications->add($application);
+            $application->setCandidate($this);
+        }
+
+        return $this;
+    }
+
+    public function removeApplication(Application $application): self
+    {
+        if ($this->applications->removeElement($application)) {
+            // set the owning side to null (unless already changed)
+            if ($application->getCandidate() === $this) {
+                $application->setCandidate(null);
+            }
         }
 
         return $this;

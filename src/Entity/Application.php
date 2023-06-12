@@ -14,14 +14,6 @@ class Application
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\OneToOne(inversedBy: 'application', cascade: ['persist', 'remove'])]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Candidate $user = null;
-
-    #[ORM\OneToOne(inversedBy: 'application', cascade: ['persist', 'remove'])]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Offer $offer = null;
-
     #[ORM\Column]
     private ?bool $favorite = null;
 
@@ -31,33 +23,17 @@ class Application
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $applicationDate = null;
 
+    #[ORM\ManyToOne(inversedBy: 'applications')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Candidate $candidate = null;
+
+    #[ORM\ManyToOne(inversedBy: 'applications')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Offer $offer = null;
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getUser(): ?Candidate
-    {
-        return $this->user;
-    }
-
-    public function setUser(Candidate $user): self
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    public function getOffer(): ?Offer
-    {
-        return $this->offer;
-    }
-
-    public function setOffer(Offer $offer): self
-    {
-        $this->offer = $offer;
-
-        return $this;
     }
 
     public function isFavorite(): ?bool
@@ -92,6 +68,30 @@ class Application
     public function setApplicationDate(\DateTimeInterface $applicationDate): self
     {
         $this->applicationDate = $applicationDate;
+
+        return $this;
+    }
+
+    public function getCandidate(): ?Candidate
+    {
+        return $this->candidate;
+    }
+
+    public function setCandidate(?Candidate $candidate): self
+    {
+        $this->candidate = $candidate;
+
+        return $this;
+    }
+
+    public function getOffer(): ?Offer
+    {
+        return $this->offer;
+    }
+
+    public function setOffer(?Offer $offer): self
+    {
+        $this->offer = $offer;
 
         return $this;
     }
