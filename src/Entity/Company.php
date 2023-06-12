@@ -25,13 +25,13 @@ class Company
     #[ORM\Column(length: 150)]
     private ?string $sector = null;
 
-    #[ORM\Column(type: Types::TEXT)]
+    #[ORM\Column(type: Types::TEXT, length: 300)]
     private ?string $presentation = null;
 
     #[ORM\Column(length: 150)]
-    private ?string $picture = null;
+    private ?string $logo = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?int $salesRevenue = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
@@ -105,14 +105,14 @@ class Company
         return $this;
     }
 
-    public function getPicture(): ?string
+    public function getLogo(): ?string
     {
-        return $this->picture;
+        return $this->logo;
     }
 
-    public function setPicture(string $picture): self
+    public function setLogo(string $logo): self
     {
-        $this->picture = $picture;
+        $this->logo = $logo;
 
         return $this;
     }

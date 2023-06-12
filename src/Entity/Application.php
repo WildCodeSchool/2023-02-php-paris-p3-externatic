@@ -20,7 +20,7 @@ class Application
     #[ORM\Column(length: 100)]
     private ?string $status = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $applicationDate = null;
 
     #[ORM\ManyToOne(inversedBy: 'applications')]

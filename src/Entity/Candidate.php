@@ -28,13 +28,13 @@ class Candidate
     #[ORM\Column(length: 255)]
     private ?string $location = null;
 
-    #[ORM\Column(length: 100)]
+    #[ORM\Column(length: 100, nullable: true)]
     private ?string $phone = null;
 
     #[ORM\Column(length: 150)]
     private ?string $resume = null;
 
-    #[ORM\Column(type: Types::TEXT)]
+    #[ORM\Column(type: Types::TEXT, length: 300)]
     private ?string $introduction = null;
 
     #[ORM\Column(length: 150)]
@@ -46,7 +46,7 @@ class Candidate
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $linkedin = null;
 
-    #[ORM\Column(length: 150)]
+    #[ORM\Column(length: 150, nullable: true)]
     private ?string $picture = null;
 
     #[ORM\Column(length: 255, nullable: true)]

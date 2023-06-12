@@ -24,10 +24,10 @@ class Offer
     private ?string $title = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $addDate = null;
+    private ?\DateTimeInterface $creationDate = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $planedAt = null;
+    private ?\DateTimeInterface $startingDate = null;
 
     #[ORM\Column(length: 150)]
     private ?string $contract = null;
@@ -44,17 +44,23 @@ class Offer
     #[ORM\Column]
     private ?int $salaryMin = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?int $salaryMax = null;
 
     #[ORM\ManyToMany(targetEntity: Skill::class, mappedBy: 'offers')]
     private Collection $skills;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 255)]
     private ?string $location = null;
 
     #[ORM\OneToMany(mappedBy: 'offer', targetEntity: Application::class)]
     private Collection $applications;
+
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $interviewProcess = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $picture = null;
 
     public function __construct()
     {
@@ -91,26 +97,26 @@ class Offer
         return $this;
     }
 
-    public function getAddDate(): ?\DateTimeInterface
+    public function getCreationDate(): ?\DateTimeInterface
     {
-        return $this->addDate;
+        return $this->creationDate;
     }
 
-    public function setAddDate(\DateTimeInterface $addDate): self
+    public function setCreationDate(\DateTimeInterface $creationDate): self
     {
-        $this->addDate = $addDate;
+        $this->creationDate = $creationDate;
 
         return $this;
     }
 
-    public function getPlanedAt(): ?\DateTimeInterface
+    public function getStartingDate(): ?\DateTimeInterface
     {
-        return $this->planedAt;
+        return $this->startingDate;
     }
 
-    public function setPlanedAt(\DateTimeInterface $planedAt): self
+    public function setStartingDate(\DateTimeInterface $startingdate): self
     {
-        $this->planedAt = $planedAt;
+        $this->startingDate = $startingdate;
 
         return $this;
     }
@@ -252,6 +258,30 @@ class Offer
                 $application->setOffer(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getInterviewProcess(): ?string
+    {
+        return $this->interviewProcess;
+    }
+
+    public function setInterviewProcess(string $interviewProcess): self
+    {
+        $this->interviewProcess = $interviewProcess;
+
+        return $this;
+    }
+
+    public function getPicture(): ?string
+    {
+        return $this->picture;
+    }
+
+    public function setPicture(?string $picture): self
+    {
+        $this->picture = $picture;
 
         return $this;
     }
