@@ -24,9 +24,11 @@ class User
     private ?string $password = null;
 
     #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Candidate $candidate = null;
 
     #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Company $company = null;
 
     public function getId(): ?int
