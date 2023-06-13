@@ -34,7 +34,7 @@ class Company
     #[ORM\Column(nullable: true)]
     private ?int $salesRevenue = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $creationYear = null;
 
     #[ORM\Column(length: 255)]
@@ -47,9 +47,16 @@ class Company
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Offer::class)]
     private Collection $offers;
 
+    #[ORM\OneToMany(mappedBy: 'favorite', targetEntity: Candidate::class)]
+    private Collection $favoriteCandidates;
+
+    #[ORM\ManyToOne(inversedBy: 'favoriteCompanies')]
+    private ?Candidate $favorite = null;
+
     public function __construct()
     {
         $this->offers = new ArrayCollection();
+        $this->favoriteCandidates = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -107,7 +114,7 @@ class Company
 
     public function getLogo(): ?string
     {
-        return $this->logo;
+        return 'uploads/companyLogos/' . $this->logo;
     }
 
     public function setLogo(string $logo): self
@@ -191,6 +198,48 @@ class Company
                 $offer->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Candidate>
+     */
+    public function getFavoriteCandidates(): Collection
+    {
+        return $this->favoriteCandidates;
+    }
+
+    public function addFavoriteCandidate(Candidate $favoriteCandidate): self
+    {
+        if (!$this->favoriteCandidates->contains($favoriteCandidate)) {
+            $this->favoriteCandidates->add($favoriteCandidate);
+            $favoriteCandidate->setFavorite($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFavoriteCandidate(Candidate $favoriteCandidate): self
+    {
+        if ($this->favoriteCandidates->removeElement($favoriteCandidate)) {
+            // set the owning side to null (unless already changed)
+            if ($favoriteCandidate->getFavorite() === $this) {
+                $favoriteCandidate->setFavorite(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getFavorite(): ?Candidate
+    {
+        return $this->favorite;
+    }
+
+    public function setFavorite(?Candidate $favorite): self
+    {
+        $this->favorite = $favorite;
 
         return $this;
     }

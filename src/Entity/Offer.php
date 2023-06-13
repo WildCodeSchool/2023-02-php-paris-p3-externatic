@@ -24,10 +24,10 @@ class Offer
     private ?string $title = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $creationDate = null;
+    private ?\DateTimeInterface $createdAt = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $startingDate = null;
+    private ?\DateTimeInterface $startAt = null;
 
     #[ORM\Column(length: 150)]
     private ?string $contract = null;
@@ -42,10 +42,10 @@ class Offer
     private ?string $experience = null;
 
     #[ORM\Column]
-    private ?int $salaryMin = null;
+    private ?int $minSalary = null;
 
     #[ORM\Column(nullable: true)]
-    private ?int $salaryMax = null;
+    private ?int $maxSalary = null;
 
     #[ORM\ManyToMany(targetEntity: Skill::class, mappedBy: 'offers')]
     private Collection $skills;
@@ -62,10 +62,14 @@ class Offer
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $picture = null;
 
+    #[ORM\ManyToMany(targetEntity: Candidate::class, inversedBy: 'favoriteOffers')]
+    private Collection $favorite;
+
     public function __construct()
     {
         $this->skills = new ArrayCollection();
         $this->applications = new ArrayCollection();
+        $this->favorite = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -97,26 +101,26 @@ class Offer
         return $this;
     }
 
-    public function getCreationDate(): ?\DateTimeInterface
+    public function getCreatedAt(): ?\DateTimeInterface
     {
-        return $this->creationDate;
+        return $this->createdAt;
     }
 
-    public function setCreationDate(\DateTimeInterface $creationDate): self
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $this->creationDate = $creationDate;
+        $this->createdAt = $createdAt;
 
         return $this;
     }
 
-    public function getStartingDate(): ?\DateTimeInterface
+    public function getStartAt(): ?\DateTimeInterface
     {
-        return $this->startingDate;
+        return $this->startAt;
     }
 
-    public function setStartingDate(\DateTimeInterface $startingdate): self
+    public function setStartAt(\DateTimeInterface $startAt): self
     {
-        $this->startingDate = $startingdate;
+        $this->startAt = $startAt;
 
         return $this;
     }
@@ -169,26 +173,26 @@ class Offer
         return $this;
     }
 
-    public function getSalaryMin(): ?int
+    public function getMinSalary(): ?int
     {
-        return $this->salaryMin;
+        return $this->minSalary;
     }
 
-    public function setSalaryMin(?int $salaryMin): self
+    public function setMinSalary(?int $minSalary): self
     {
-        $this->salaryMin = $salaryMin;
+        $this->minSalary = $minSalary;
 
         return $this;
     }
 
-    public function getSalaryMax(): ?int
+    public function getMaxSalary(): ?int
     {
-        return $this->salaryMax;
+        return $this->maxSalary;
     }
 
-    public function setSalaryMax(int $salaryMax): self
+    public function setMaxSalary(int $maxSalary): self
     {
-        $this->salaryMax = $salaryMax;
+        $this->maxSalary = $maxSalary;
 
         return $this;
     }
@@ -276,12 +280,36 @@ class Offer
 
     public function getPicture(): ?string
     {
-        return $this->picture;
+        return 'uploads/offerPictures/' . $this->picture;
     }
 
     public function setPicture(?string $picture): self
     {
         $this->picture = $picture;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Candidate>
+     */
+    public function getFavorite(): Collection
+    {
+        return $this->favorite;
+    }
+
+    public function addFavorite(Candidate $favorite): self
+    {
+        if (!$this->favorite->contains($favorite)) {
+            $this->favorite->add($favorite);
+        }
+
+        return $this;
+    }
+
+    public function removeFavorite(Candidate $favorite): self
+    {
+        $this->favorite->removeElement($favorite);
 
         return $this;
     }

@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use phpDocumentor\Reflection\Types\Nullable;
 
 #[ORM\Entity(repositoryClass: CandidateRepository::class)]
 class Candidate
@@ -68,10 +69,21 @@ class Candidate
     #[ORM\OneToMany(mappedBy: 'candidate', targetEntity: Application::class)]
     private Collection $applications;
 
+    #[ORM\ManyToMany(targetEntity: Offer::class, mappedBy: 'favorite')]
+    private Collection $favoriteOffers;
+
+    #[ORM\ManyToOne(inversedBy: 'favoriteCandidates')]
+    private ?Company $favorite = null;
+
+    #[ORM\OneToMany(mappedBy: 'favorite', targetEntity: Company::class)]
+    private Collection $favoriteCompanies;
+
     public function __construct()
     {
         $this->skills = new ArrayCollection();
         $this->applications = new ArrayCollection();
+        $this->favoriteOffers = new ArrayCollection();
+        $this->favoriteCompanies = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -141,7 +153,7 @@ class Candidate
 
     public function getResume(): ?string
     {
-        return $this->resume;
+        return 'upload/resumees/' . $this->resume;
     }
 
     public function setResume(string $resume): self
@@ -201,7 +213,7 @@ class Candidate
 
     public function getPicture(): ?string
     {
-        return $this->picture;
+        return 'uploads/candidatPictures/' . $this->picture;
     }
 
     public function setPicture(string $picture): self
@@ -310,6 +322,75 @@ class Candidate
             // set the owning side to null (unless already changed)
             if ($application->getCandidate() === $this) {
                 $application->setCandidate(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Offer>
+     */
+    public function getFavoriteOffers(): Collection
+    {
+        return $this->favoriteOffers;
+    }
+
+    public function addFavoriteOffer(Offer $favoriteOffer): self
+    {
+        if (!$this->favoriteOffers->contains($favoriteOffer)) {
+            $this->favoriteOffers->add($favoriteOffer);
+            $favoriteOffer->addFavorite($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFavoriteOffer(Offer $favoriteOffer): self
+    {
+        if ($this->favoriteOffers->removeElement($favoriteOffer)) {
+            $favoriteOffer->removeFavorite($this);
+        }
+
+        return $this;
+    }
+
+    public function getFavorite(): ?Company
+    {
+        return $this->favorite;
+    }
+
+    public function setFavorite(?Company $favorite): self
+    {
+        $this->favorite = $favorite;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Company>
+     */
+    public function getFavoriteCompanies(): Collection
+    {
+        return $this->favoriteCompanies;
+    }
+
+    public function addFavoriteCompany(Company $favoriteCompany): self
+    {
+        if (!$this->favoriteCompanies->contains($favoriteCompany)) {
+            $this->favoriteCompanies->add($favoriteCompany);
+            $favoriteCompany->setFavorite($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFavoriteCompany(Company $favoriteCompany): self
+    {
+        if ($this->favoriteCompanies->removeElement($favoriteCompany)) {
+            // set the owning side to null (unless already changed)
+            if ($favoriteCompany->getFavorite() === $this) {
+                $favoriteCompany->setFavorite(null);
             }
         }
 

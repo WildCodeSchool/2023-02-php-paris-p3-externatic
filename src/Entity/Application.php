@@ -14,14 +14,11 @@ class Application
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column]
-    private ?bool $favorite = null;
-
     #[ORM\Column(length: 100)]
     private ?string $status = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $applicationDate = null;
+    private ?\DateTimeInterface $createdAt = null;
 
     #[ORM\ManyToOne(inversedBy: 'applications')]
     #[ORM\JoinColumn(nullable: false)]
@@ -36,18 +33,6 @@ class Application
         return $this->id;
     }
 
-    public function isFavorite(): ?bool
-    {
-        return $this->favorite;
-    }
-
-    public function setFavorite(bool $favorite): self
-    {
-        $this->favorite = $favorite;
-
-        return $this;
-    }
-
     public function getStatus(): ?string
     {
         return $this->status;
@@ -60,14 +45,14 @@ class Application
         return $this;
     }
 
-    public function getApplicationDate(): ?\DateTimeInterface
+    public function getCreatedAt(): ?\DateTimeInterface
     {
-        return $this->applicationDate;
+        return $this->createdAt;
     }
 
-    public function setApplicationDate(\DateTimeInterface $applicationDate): self
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $this->applicationDate = $applicationDate;
+        $this->createdAt = $createdAt;
 
         return $this;
     }
