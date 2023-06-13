@@ -31,12 +31,6 @@ class Company
     #[ORM\Column(length: 150)]
     private ?string $logo = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?int $salesRevenue = null;
-
-    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $creationYear = null;
-
     #[ORM\Column(length: 255)]
     private ?string $location = null;
 
@@ -120,30 +114,6 @@ class Company
     public function setLogo(string $logo): self
     {
         $this->logo = $logo;
-
-        return $this;
-    }
-
-    public function getSalesRevenue(): ?int
-    {
-        return $this->salesRevenue;
-    }
-
-    public function setSalesRevenue(int $salesRevenue): self
-    {
-        $this->salesRevenue = $salesRevenue;
-
-        return $this;
-    }
-
-    public function getCreationYear(): ?\DateTimeInterface
-    {
-        return $this->creationYear;
-    }
-
-    public function setCreationYear(\DateTimeInterface $creationYear): self
-    {
-        $this->creationYear = $creationYear;
 
         return $this;
     }

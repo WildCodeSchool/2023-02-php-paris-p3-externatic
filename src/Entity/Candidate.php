@@ -23,9 +23,6 @@ class Candidate
     #[ORM\Column(length: 100)]
     private ?string $lastname = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $birthdate = null;
-
     #[ORM\Column(length: 255)]
     private ?string $location = null;
 
@@ -39,22 +36,13 @@ class Candidate
     private ?string $introduction = null;
 
     #[ORM\Column(length: 150)]
-    private ?string $title = null;
+    private ?string $jobTitle = null;
 
     #[ORM\Column(length: 100, nullable: true)]
     private ?string $experience = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $linkedin = null;
-
     #[ORM\Column(length: 150, nullable: true)]
     private ?string $picture = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $portfolio = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $github = null;
 
     #[ORM\OneToOne(inversedBy: 'candidate', cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
@@ -78,12 +66,16 @@ class Candidate
     #[ORM\OneToMany(mappedBy: 'favorite', targetEntity: Company::class)]
     private Collection $favoriteCompanies;
 
+    #[ORM\OneToMany(mappedBy: 'candidate', targetEntity: CandidateMetadata::class)]
+    private Collection $metadata;
+
     public function __construct()
     {
         $this->skills = new ArrayCollection();
         $this->applications = new ArrayCollection();
         $this->favoriteOffers = new ArrayCollection();
         $this->favoriteCompanies = new ArrayCollection();
+        $this->metadata = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -111,18 +103,6 @@ class Candidate
     public function setLastname(string $lastname): self
     {
         $this->lastname = $lastname;
-
-        return $this;
-    }
-
-    public function getBirthdate(): ?\DateTimeInterface
-    {
-        return $this->birthdate;
-    }
-
-    public function setBirthdate(\DateTimeInterface $birthdate): self
-    {
-        $this->birthdate = $birthdate;
 
         return $this;
     }
@@ -175,14 +155,14 @@ class Candidate
         return $this;
     }
 
-    public function getTitle(): ?string
+    public function getJobTitle(): ?string
     {
-        return $this->title;
+        return $this->jobTitle;
     }
 
-    public function setTitle(string $title): self
+    public function setjobTitle(string $jobTitle): self
     {
-        $this->title = $title;
+        $this->jobTitle = $jobTitle;
 
         return $this;
     }
@@ -199,18 +179,6 @@ class Candidate
         return $this;
     }
 
-    public function getLinkedin(): ?string
-    {
-        return $this->linkedin;
-    }
-
-    public function setLinkedin(?string $linkedin): self
-    {
-        $this->linkedin = $linkedin;
-
-        return $this;
-    }
-
     public function getPicture(): ?string
     {
         return 'uploads/candidatPictures/' . $this->picture;
@@ -222,31 +190,6 @@ class Candidate
 
         return $this;
     }
-
-    public function getPortfolio(): ?string
-    {
-        return $this->portfolio;
-    }
-
-    public function setPortfolio(?string $portfolio): self
-    {
-        $this->portfolio = $portfolio;
-
-        return $this;
-    }
-
-    public function getGithub(): ?string
-    {
-        return $this->github;
-    }
-
-    public function setGithub(?string $github): self
-    {
-        $this->github = $github;
-
-        return $this;
-    }
-
     public function getUser(): ?User
     {
         return $this->user;
@@ -367,9 +310,6 @@ class Candidate
         return $this;
     }
 
-    /**
-     * @return Collection<int, Company>
-     */
     public function getFavoriteCompanies(): Collection
     {
         return $this->favoriteCompanies;
@@ -385,13 +325,16 @@ class Candidate
         return $this;
     }
 
-    public function removeFavoriteCompany(Company $favoriteCompany): self
+    public function getMetadata(): Collection
     {
-        if ($this->favoriteCompanies->removeElement($favoriteCompany)) {
-            // set the owning side to null (unless already changed)
-            if ($favoriteCompany->getFavorite() === $this) {
-                $favoriteCompany->setFavorite(null);
-            }
+        return $this->metadata;
+    }
+
+    public function addMetadata(CandidateMetadata $metadata): self
+    {
+        if (!$this->metadata->contains($metadata)) {
+            $this->metadata->add($metadata);
+            $metadata->setCandidate($this);
         }
 
         return $this;
