@@ -65,6 +65,9 @@ class Offer
     #[ORM\ManyToMany(targetEntity: Candidate::class, inversedBy: 'favoriteOffers')]
     private Collection $favorite;
 
+    #[ORM\Column]
+    private ?int $number = null;
+
     public function __construct()
     {
         $this->skills = new ArrayCollection();
@@ -310,6 +313,18 @@ class Offer
     public function removeFavorite(Candidate $favorite): self
     {
         $this->favorite->removeElement($favorite);
+
+        return $this;
+    }
+
+    public function getNumber(): ?int
+    {
+        return $this->number;
+    }
+
+    public function setNumber(int $number): self
+    {
+        $this->number = $number;
 
         return $this;
     }
