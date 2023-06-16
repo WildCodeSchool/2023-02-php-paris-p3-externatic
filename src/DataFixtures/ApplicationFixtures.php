@@ -15,10 +15,8 @@ class ApplicationFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager): void
     {
         $faker = Factory::create();
-
         for ($i = 0; $i < 4; $i++) {
-
-            $application = new Application;
+            $application = new Application();
 
             $application->setStatus(self::APPLICATION_STATUS[rand(0, count(self::APPLICATION_STATUS) - 1)])
                 ->setCreatedAt($faker->dateTime())

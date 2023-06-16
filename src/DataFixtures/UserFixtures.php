@@ -15,12 +15,24 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
 {
     private UserPasswordHasherInterface $passwordHasher;
     public const USER = [
-        ['firstname' => 'Erika', 'lastname' => 'Ikelempo', 'Role' => 'ROLE_CANDIDATE', 'Location' => 'Epinay', 'Phone' => '', 'Resume' => '', 'User_Id' => '', 'email' => 'erika@hotmail.fr'],
-        ['firstname' => 'Lionel', 'lastname' => 'Da Rosa', 'Role' => 'ROLE_CANDIDATE', 'Location' => 'Boulbi', 'Phone' => '', 'Resume' => '', 'User_Id' => '', 'email' => 'lio@hotmail.fr'],
-        ['firstname' => 'Ester', 'lastname' => 'Martinez', 'Role' => 'ROLE_CANDIDATE', 'Location' => 'Paris', 'Phone' => '', 'Resume' => '', 'User_Id' => '', 'email' => 'ester@hotmail.fr'],
-        ['firstname' => 'Lea', 'lastname' => 'Hadida', 'Role' => 'ROLE_CANDIDATE', 'Location' => 'Paris', 'Phone' => '', 'Resume' => '', 'User_Id' => '', 'email' => 'lea@hotmail.fr'],
-        ['Name' => 'Atos', 'Role' => 'ROLE_COMPANY', 'User_Id' => '', 'email' => 'atos@hotmail.fr'],
-        ['Name' => 'McDonalds', 'Role' => 'ROLE_COMPANY', 'User_Id' => '', 'email' => 'mcdo@hotmail.fr']
+        [
+            'firstname' => 'Erika', 'lastname' => 'Ikelempo', 'Role' => 'ROLE_CANDIDATE',
+            'Location' => 'Epinay', 'email' => 'erika@hotmail.fr'
+        ],
+        [
+            'firstname' => 'Lionel', 'lastname' => 'Da Rosa', 'Role' => 'ROLE_CANDIDATE',
+            'Location' => 'Boulbi', 'email' => 'lio@hotmail.fr'
+        ],
+        [
+            'firstname' => 'Ester', 'lastname' => 'Martinez', 'Role' => 'ROLE_CANDIDATE',
+            'Location' => 'Paris', 'email' => 'ester@hotmail.fr'
+        ],
+        [
+            'firstname' => 'Lea', 'lastname' => 'Hadida', 'Role' => 'ROLE_CANDIDATE',
+            'Location' => 'Paris', 'email' => 'lea@hotmail.fr'
+        ],
+        ['Name' => 'Atos', 'Role' => 'ROLE_COMPANY', 'email' => 'atos@hotmail.fr'],
+        ['Name' => 'McDonalds', 'Role' => 'ROLE_COMPANY', 'email' => 'mcdo@hotmail.fr']
     ];
 
     public function __construct(UserPasswordHasherInterface $passwordHasher)
@@ -31,9 +43,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager): void
     {
         $faker = Factory::create();
-
         foreach (self::USER as $person) {
-
             if ($person['Role'] == 'ROLE_CANDIDATE') {
                 $candidate = new Candidate();
 
