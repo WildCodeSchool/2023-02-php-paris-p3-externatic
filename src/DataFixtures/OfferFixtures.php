@@ -32,6 +32,7 @@ class OfferFixtures extends Fixture implements DependentFixtureInterface
 
             foreach (SkillFixtures::SKILLS as $key => $skill) {
                 $offer->addSkill($this->getReference('skill_' .  $key));
+                $skill = $skill;
             }
 
             if ($i < 3) {

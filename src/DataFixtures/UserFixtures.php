@@ -58,6 +58,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                     ->setVisible($faker->boolean());
                 foreach (SkillFixtures::SKILLS as $key => $skill) {
                     $candidate->addSkill($this->getReference('skill_' .  $key));
+                    $skill = $skill;
                 }
 
                 $user = new User();
