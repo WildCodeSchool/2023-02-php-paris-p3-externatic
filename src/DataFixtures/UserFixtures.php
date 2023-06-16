@@ -57,8 +57,10 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                     ->setExperience($faker->word())
                     ->setVisible($faker->boolean());
                 for ($i = 0; $i < 6; $i++) {
-                    $candidate->addSkill($this->getReference('skill_soft_' . $faker->unique(true)->numberBetween(0, 11)));
-                    $candidate->addSkill($this->getReference('skill_hard_' . $faker->unique(true)->numberBetween(0, 11)));
+                    $candidate->addSkill($this->getReference('skill_soft_' . $faker->unique(true)
+                        ->numberBetween(0, 11)));
+                    $candidate->addSkill($this->getReference('skill_hard_' . $faker->unique(true)
+                        ->numberBetween(0, 11)));
                 }
 
                 $user = new User();

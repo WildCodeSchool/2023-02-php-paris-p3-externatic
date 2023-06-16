@@ -42,9 +42,8 @@ class SkillFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
-        foreach (self::SKILLS as $key => $type) {
+        foreach (self::SKILLS as $type) {
             foreach ($type as $key => $oneSkill) {
-
                 $skill = new Skill();
 
                 $skill->setName($oneSkill['name'])
