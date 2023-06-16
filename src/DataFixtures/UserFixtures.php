@@ -56,9 +56,9 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                     ->setJobTitle($faker->word())
                     ->setExperience($faker->word())
                     ->setVisible($faker->boolean());
-                foreach (SkillFixtures::SKILLS as $key => $skill) {
-                    $candidate->addSkill($this->getReference('skill_' .  $key));
-                    $skill = $skill;
+                for ($i = 0; $i < 6; $i++) {
+                    $candidate->addSkill($this->getReference('skill_soft_' . $faker->unique(true)->numberBetween(0, 11)));
+                    $candidate->addSkill($this->getReference('skill_hard_' . $faker->unique(true)->numberBetween(0, 11)));
                 }
 
                 $user = new User();
@@ -71,7 +71,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                 $manager->persist($user);
 
                 $this->addReference('user_' . $user->getLogin(), $user);
-            } else {
+            } elseif ($person['Role'] == 'ROLE_COMPANY') {
                 $company = new Company();
 
                 $company->setName($person['Name'])
@@ -87,7 +87,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                     ->setPassword($this->passwordHasher->hashPassword($user, 'password'))
                     ->setCompany($company);
 
-                $manager->persist($company);
+                $manager->persist($user);
 
                 $this->addReference('user_' . $user->getLogin(), $user);
             }

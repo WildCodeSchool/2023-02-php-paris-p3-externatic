@@ -13,8 +13,7 @@ class OfferFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager): void
     {
         $faker = Factory::create();
-
-        for ($i = 1; $i <= 6; $i++) {
+        for ($i = 1; $i <= 60; $i++) {
             $offer = new Offer();
 
             $offer->setTitle($faker->word())
@@ -29,13 +28,12 @@ class OfferFixtures extends Fixture implements DependentFixtureInterface
                 ->setLocation($faker->city())
                 ->setInterviewProcess($faker->sentence())
                 ->setNumber($i);
-
-            foreach (SkillFixtures::SKILLS as $key => $skill) {
-                $offer->addSkill($this->getReference('skill_' .  $key));
-                $skill = $skill;
+            for ($j = 0; $j < 6; $j++) {
+                $offer->addSkill($this->getReference('skill_soft_' . $faker->unique(true)->numberBetween(0, 11)));
+                $offer->addSkill($this->getReference('skill_hard_' . $faker->unique(true)->numberBetween(0, 11)));
             }
 
-            if ($i < 3) {
+            if ($i < 31) {
                 $offer->setUser($this->getReference('user_' . 'atos@hotmail.fr')->getCompany());
             } else {
                 $offer->setUser($this->getReference('user_' . 'mcdo@hotmail.fr')->getCompany());
@@ -44,7 +42,6 @@ class OfferFixtures extends Fixture implements DependentFixtureInterface
             $manager->persist($offer);
             $this->addReference('offer_' . $offer->getNumber(), $offer);
         }
-
         $manager->flush();
     }
 

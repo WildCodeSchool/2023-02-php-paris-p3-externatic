@@ -16,7 +16,7 @@ class MetadataFixtures extends Fixture implements DependentFixtureInterface
     {
         $faker = Factory::create();
         foreach (UserFixtures::USER as $user) {
-            if ($user['Role'] == 'ROLE_CANDIDATE') {
+            if ($user['Role'] === 'ROLE_CANDIDATE') {
                 foreach (self::METADATA as $type) {
                     $metadata = new CandidateMetadata();
 
