@@ -1,8 +1,77 @@
 @import url('https://fonts.googleapis.com/css?family=Jost');
+$font-family-base: 'Jost', sans-serif;
+
 $primary:#851342;
 $secondary:#FED32C;
 $tertiary:#C1C5CF;
 
-$font-family-base: 'Jost', sans-serif;
+$card-border-color: $primary;
+$card-border-width: 2px;
+$card-border-radius: 0px 10px 0px 0px;
+
+$btn-font-weight: 700;
+$btn-font-size: 1rem;
+
+$input-bg:#ECEEF1;
+$input-line-height: 2.5;
+$input-border-color: rgba(0, 0, 0, 0.3);
+$input-placeholder-color: rgba(0, 0, 0, 0.5);
+$input-font-family: $font-family-base;
+
+$form-select-color: rgba(0, 0, 0, 0.5);
+$form-select-indicator-color: rgba(0, 0, 0, 0.5);
+
+.card {
+    box-shadow: 6px 6px 0px $primary;
+}
+
+.card:hover {
+    box-shadow: 6px 6px 0px $secondary;
+    border-color: $secondary;
+}
+
+.profile-blocks {
+border-radius: 5px;
+background-color: #F7F7F7;
+filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+padding: 1rem;
+}
+
+// Forms
+#glass {
+    position: absolute;
+    margin-top: -2.7rem;
+    margin-left: 1rem;
+}
+
+#job {
+    position: absolute;
+    margin-top: -2.7rem;
+    margin-left: 0.8rem;
+}
+
+#location {
+    position: absolute;
+    margin-top: -2.7rem;
+    margin-left: 0.8rem;
+}
+
+.form-control {
+    text-indent: 16%;
+}
+
+.form-select {
+    text-indent: 18%;
+}
+
+option:hover {
+    background-color: #FED32C;
+}
+
+.btn {
+    font-size: 1rem;
+}
 
 @import "~bootstrap/scss/bootstrap";
+
+
