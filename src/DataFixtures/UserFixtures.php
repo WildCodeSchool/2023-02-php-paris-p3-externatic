@@ -16,23 +16,23 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
     private UserPasswordHasherInterface $passwordHasher;
     public const USER = [
         [
-            'firstname' => 'Erika', 'lastname' => 'Ikelempo', 'Role' => 'ROLE_CANDIDATE',
-            'Location' => 'Epinay', 'email' => 'erika@hotmail.fr'
+            'Firstname' => 'Erika', 'Lastname' => 'Ikelempo', 'Role' => 'ROLE_CANDIDATE',
+            'Location' => 'Epinay', 'Email' => 'erika@hotmail.fr'
         ],
         [
-            'firstname' => 'Lionel', 'lastname' => 'Da Rosa', 'Role' => 'ROLE_CANDIDATE',
-            'Location' => 'Boulbi', 'email' => 'lio@hotmail.fr'
+            'Firstname' => 'Lionel', 'Lastname' => 'Da Rosa', 'Role' => 'ROLE_CANDIDATE',
+            'Location' => 'Boulbi', 'Email' => 'lio@hotmail.fr'
         ],
         [
-            'firstname' => 'Ester', 'lastname' => 'Martinez', 'Role' => 'ROLE_CANDIDATE',
-            'Location' => 'Paris', 'email' => 'ester@hotmail.fr'
+            'Firstname' => 'Ester', 'Lastname' => 'Martinez', 'Role' => 'ROLE_CANDIDATE',
+            'Location' => 'Paris', 'Email' => 'ester@hotmail.fr'
         ],
         [
-            'firstname' => 'Lea', 'lastname' => 'Hadida', 'Role' => 'ROLE_CANDIDATE',
-            'Location' => 'Paris', 'email' => 'lea@hotmail.fr'
+            'Firstname' => 'Lea', 'Lastname' => 'Hadida', 'Role' => 'ROLE_CANDIDATE',
+            'Location' => 'Paris', 'Email' => 'lea@hotmail.fr'
         ],
-        ['Name' => 'Atos', 'Role' => 'ROLE_COMPANY', 'email' => 'atos@hotmail.fr'],
-        ['Name' => 'McDonalds', 'Role' => 'ROLE_COMPANY', 'email' => 'mcdo@hotmail.fr']
+        ['Name' => 'Atos', 'Role' => 'ROLE_COMPANY', 'Email' => 'atos@hotmail.fr'],
+        ['Name' => 'McDonalds', 'Role' => 'ROLE_COMPANY', 'Email' => 'mcdo@hotmail.fr']
     ];
 
     public function __construct(UserPasswordHasherInterface $passwordHasher)
@@ -47,8 +47,8 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             if ($person['Role'] == 'ROLE_CANDIDATE') {
                 $candidate = new Candidate();
 
-                $candidate->setFirstname($person['firstname'])
-                    ->setLastname($person['lastname'])
+                $candidate->setFirstname($person['Firstname'])
+                    ->setLastname($person['Lastname'])
                     ->setLocation($faker->city())
                     ->setPhone($faker->phoneNumber())
                     ->setResume($faker->word())
@@ -66,7 +66,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                 $user = new User();
 
                 $user->setRoles([$person['Role']])
-                    ->setLogin($person['email'])
+                    ->setLogin($person['Email'])
                     ->setPassword($this->passwordHasher->hashPassword($user, 'password'))
                     ->setCandidate($candidate);
 
@@ -85,7 +85,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                 $user = new User();
 
                 $user->setRoles([$person['Role']])
-                    ->setLogin($person['email'])
+                    ->setLogin($person['Email'])
                     ->setPassword($this->passwordHasher->hashPassword($user, 'password'))
                     ->setCompany($company);
 

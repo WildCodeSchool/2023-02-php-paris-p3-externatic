@@ -22,7 +22,7 @@ class MetadataFixtures extends Fixture implements DependentFixtureInterface
 
                     $metadata->setType($type)
                         ->setMetadata($faker->url())
-                        ->setCandidate($this->getReference('user_' . $user['email'])->getCandidate());
+                        ->setCandidate($this->getReference('user_' . $user['Email'])->getCandidate());
 
                     $manager->persist($metadata);
                 }
