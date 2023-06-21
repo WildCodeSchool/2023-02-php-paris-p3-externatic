@@ -3,11 +3,7 @@ $font-family-base: 'Jost', sans-serif;
 
 $primary:#851342;
 $secondary:#FED32C;
-$tertiary:#C1C5CF;
-
-$card-border-color: $primary;
-$card-border-width: 2px;
-$card-border-radius: 0px 10px 0px 0px;
+$tertiary:#D9D9D9;
 
 $btn-font-weight: 700;
 $btn-font-size: 1rem;
@@ -21,13 +17,48 @@ $input-font-family: $font-family-base;
 $form-select-color: rgba(0, 0, 0, 0.5);
 $form-select-indicator-color: rgba(0, 0, 0, 0.5);
 
-.card {
-    box-shadow: 6px 6px 0px $primary;
+@mixin border($color) {
+    border: 2px solid $color;
+    box-shadow: 6px 6px 0px $color;
 }
 
-.card:hover {
-    box-shadow: 6px 6px 0px $secondary;
-    border-color: $secondary;
+@mixin cards($color, $radius) {
+    border-top-right-radius: $radius;
+
+    @if $color == $primary {
+        @include border($primary);
+
+        &:hover {
+        @include border($secondary);
+        }
+
+    } @else if $color == $secondary {
+        @include border($secondary);
+
+        &:hover {
+        @include border($primary);
+        }
+
+    } @else if $color == $tertiary {
+        border: 2px solid $tertiary;
+
+        &:hover, &:focus {
+            @include border($primary);
+            .header-offer, .header-offer:focus {
+                background-color: $primary;
+                color: white;
+            }
+        }
+    }
+}
+
+.header-offer {
+    background-color: $tertiary;
+    height: 3rem;
+}
+
+.cards {
+    @include cards($tertiary, 0px);
 }
 
 .profile-blocks {
@@ -64,9 +95,6 @@ padding: 1rem;
     text-indent: 18%;
 }
 
-option:hover {
-    background-color: #FED32C;
-}
 
 .btn {
     font-size: 1rem;

@@ -20,8 +20,11 @@
     </ol>
 
     <h3 class="mt-4"> Cards </h3>
-    <div class="card mt-2" style="width: 20rem;">
-        <div class="card-body">
+    <div class="cards mt-2" style="width: 20rem;" tabindex="1">
+        <div class="header-offer">
+            <p class="text-center pt-2">Candidatures</p>
+        </div>
+        <div class="card-body p-3">
             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
         </div>
     </div>
@@ -51,6 +54,36 @@
                 <input type="text" class="form-control" placeholder="Location">
                 <img id="location" src="{{ asset('build/images/location.svg') }}">
             </div>
+        </div>
+    </form>
+
+    <form action="" method="post" id="sorting">
+        <div class="grid">
+            <div class="multiselect">
+                <div class="selectBox" onclick="showCheckboxesPromo()">
+                    <select>
+                        <option>Select a promo</option>
+                    </select>
+                <div class="overSelect"></div>
+            </div>
+
+            <div id="checkboxesPromo">
+                {# {% for promo in promos %} #}
+                    <label for="option-A">
+                        <input type="checkbox" name="option-A" id="option-A" value="option-A"/>
+                        option A
+                    </label>
+                    <label for="option-B">
+                        <input type="checkbox" name="option-B" id="option-B" value="option-B"/>
+                        option B
+                    </label>
+                    <label for="option-C">
+                        <input type="checkbox" name="option-C" id="option-C" value="option-C"/>
+                        option C
+                    </label>
+                {# {% endfor %} #}
+            </div>
+
         </div>
     </form>
 
