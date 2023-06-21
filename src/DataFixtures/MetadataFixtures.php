@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\CandidateMetadata;
+use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
@@ -16,7 +17,7 @@ class MetadataFixtures extends Fixture implements DependentFixtureInterface
     {
         $faker = Factory::create();
         foreach (UserFixtures::USER as $user) {
-            if ($user['Role'] === 'ROLE_CANDIDATE') {
+            if ($user['Role'] === User::ROLE_CANDIDATE) {
                 foreach (self::METADATA as $type) {
                     $metadata = new CandidateMetadata();
 

@@ -14,25 +14,27 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 class UserFixtures extends Fixture implements DependentFixtureInterface
 {
     private UserPasswordHasherInterface $passwordHasher;
+
+
     public const USER = [
         [
-            'Firstname' => 'Erika', 'Lastname' => 'Ikelempo', 'Role' => 'ROLE_CANDIDATE',
+            'Firstname' => 'Erika', 'Lastname' => 'Ikelempo', 'Role' => User::ROLE_CANDIDATE,
             'Location' => 'Epinay', 'Email' => 'erika@hotmail.fr'
         ],
         [
-            'Firstname' => 'Lionel', 'Lastname' => 'Da Rosa', 'Role' => 'ROLE_CANDIDATE',
+            'Firstname' => 'Lionel', 'Lastname' => 'Da Rosa', 'Role' => User::ROLE_CANDIDATE,
             'Location' => 'Boulbi', 'Email' => 'lio@hotmail.fr'
         ],
         [
-            'Firstname' => 'Ester', 'Lastname' => 'Martinez', 'Role' => 'ROLE_CANDIDATE',
+            'Firstname' => 'Ester', 'Lastname' => 'Martinez', 'Role' => User::ROLE_CANDIDATE,
             'Location' => 'Paris', 'Email' => 'ester@hotmail.fr'
         ],
         [
-            'Firstname' => 'Lea', 'Lastname' => 'Hadida', 'Role' => 'ROLE_CANDIDATE',
+            'Firstname' => 'Lea', 'Lastname' => 'Hadida', 'Role' => User::ROLE_CANDIDATE,
             'Location' => 'Paris', 'Email' => 'lea@hotmail.fr'
         ],
-        ['Name' => 'Atos', 'Role' => 'ROLE_COMPANY', 'Email' => 'atos@hotmail.fr'],
-        ['Name' => 'McDonalds', 'Role' => 'ROLE_COMPANY', 'Email' => 'mcdo@hotmail.fr']
+        ['Name' => 'Atos', 'Role' => User::ROLE_COMPANY, 'Email' => 'atos@hotmail.fr'],
+        ['Name' => 'McDonalds', 'Role' => User::ROLE_COMPANY, 'Email' => 'mcdo@hotmail.fr']
     ];
 
     public function __construct(UserPasswordHasherInterface $passwordHasher)
@@ -44,7 +46,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
     {
         $faker = Factory::create();
         foreach (self::USER as $person) {
-            if ($person['Role'] == 'ROLE_CANDIDATE') {
+            if ($person['Role'] == User::ROLE_CANDIDATE) {
                 $candidate = new Candidate();
 
                 $candidate->setFirstname($person['Firstname'])
@@ -73,7 +75,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                 $manager->persist($user);
 
                 $this->addReference('user_' . $user->getLogin(), $user);
-            } elseif ($person['Role'] == 'ROLE_COMPANY') {
+            } elseif ($person['Role'] == User::ROLE_COMPANY) {
                 $company = new Company();
 
                 $company->setName($person['Name'])
