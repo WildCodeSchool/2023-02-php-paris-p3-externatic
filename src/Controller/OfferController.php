@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Candidate;
 use App\Entity\Offer;
 use App\Entity\User;
 use App\Entity\Company;
@@ -40,4 +41,11 @@ class OfferController extends AbstractController
             'dateInterval' => $dateInterval,
         ]);
     }
+
+    // #[Route('/apply/{id}', name: 'apply')]
+    // public function apply(Offer $offer, Candidate $candidate): Response
+    // {
+    //     $this->addSql('');
+    //     return $this->redirectToRoute('offer_index');
+    // }
 }
