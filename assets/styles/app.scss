@@ -1,22 +1,29 @@
 @import url('https://fonts.googleapis.com/css?family=Jost');
 $font-family-base: 'Jost', sans-serif;
 
-$primary:#851342;
-$secondary:#FED32C;
-$tertiary:#D9D9D9;
+$primary: #851342;
+$secondary: #FED32C;
+$tertiary: #D9D9D9;
+$info: #ECEEF1;
 
 $btn-font-weight: 700;
 $btn-font-size: 1rem;
+$btn-font-family: $font-family-base;
+$btn-padding-y: 0.8rem;
+$btn-padding-x: 2rem;
 
-$input-bg:#ECEEF1;
+
+$input-bg: $info;
 $input-line-height: 2.5;
 $input-border-color: rgba(0, 0, 0, 0.3);
 $input-placeholder-color: rgba(0, 0, 0, 0.5);
 $input-font-family: $font-family-base;
 
-$form-select-color: rgba(0, 0, 0, 0.5);
-$form-select-indicator-color: rgba(0, 0, 0, 0.5);
+$carousel-control-color: black;
 
+$paragraph-margin-bottom: 0;
+
+// Cards
 @mixin border($color) {
     border: 2px solid $color;
     box-shadow: 6px 6px 0px $color;
@@ -29,22 +36,28 @@ $form-select-indicator-color: rgba(0, 0, 0, 0.5);
         @include border($primary);
 
         &:hover {
-        @include border($secondary);
+            @include border($secondary);
         }
+    }
 
-    } @else if $color == $secondary {
+    @else if $color == $secondary {
         @include border($secondary);
 
         &:hover {
-        @include border($primary);
-        }
-
-    } @else if $color == $tertiary {
-        border: 2px solid $tertiary;
-
-        &:hover, &:focus {
             @include border($primary);
-            .header-offer, .header-offer:focus {
+        }
+    }
+
+    @else if $color == $tertiary {
+        border: 2px solid $tertiary;
+        box-shadow: 6px 6px 0px white;
+
+        &:hover,
+        &:focus {
+            @include border($primary);
+
+            .header-offer,
+            .header-offer:focus {
                 background-color: $primary;
                 color: white;
             }
@@ -62,44 +75,88 @@ $form-select-indicator-color: rgba(0, 0, 0, 0.5);
 }
 
 .profile-blocks {
-border-radius: 5px;
-background-color: #F7F7F7;
-filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-padding: 1rem;
+    border-radius: 5px;
+    background-color: #F7F7F7;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    padding: 1rem;
 }
 
 // Forms
+.form-control {
+    text-indent: 16%;
+}
+
+#dropdownMenuButton {
+    height: 54px;
+    color: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    font-weight: 400;
+    text-align: start;
+    text-indent: 13%;
+}
+
+.form-check label {
+    font-family: $font-family-base;
+}
+
 #glass {
-    position: absolute;
     margin-top: -2.7rem;
     margin-left: 1rem;
 }
 
 #job {
-    position: absolute;
-    margin-top: -2.7rem;
+    margin-top: -0.4rem;
     margin-left: 0.8rem;
 }
 
 #location {
-    position: absolute;
     margin-top: -2.7rem;
     margin-left: 0.8rem;
 }
 
-.form-control {
-    text-indent: 16%;
+// Navigation buttons
+@media (min-width: 480px) {
+
+    #carouselExampleControlsNoTouching {
+    display: none;
+    }
+
 }
 
-.form-select {
-    text-indent: 18%;
+@media (max-width: 480px) {
+
+    #navigationBtnDesktop {
+        display: none;
+    }
+
 }
 
+#navigationBtnDesktop button {
+    border-radius: 10px;
+    width: 269px;
+    height: 133px;
+    background-color: #F6F7F8;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
 
-.btn {
-    font-size: 1rem;
+#navigationBtnDesktop button p {
+    font-weight: 400;
+}
+
+#carouselExampleControlsNoTouching .btn {
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    background-color: #F6F7F8;
+    width: 8rem;
+}
+
+#carouselExampleControlsNoTouching .carousel-inner {
+    overflow: inherit;
+}
+
+#navigationBtnDesktop button:hover,
+#navigationBtnDesktop button:focus,
+#carouselExampleControlsNoTouching button:focus {
+    background-color: $secondary;
 }
 
 @import "~bootstrap/scss/bootstrap";
-
-
