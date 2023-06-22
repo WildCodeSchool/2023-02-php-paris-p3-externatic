@@ -34,9 +34,9 @@ class OfferFixtures extends Fixture implements DependentFixtureInterface
             }
 
             if ($i < 31) {
-                $offer->setUser($this->getReference('user_' . 'atos@hotmail.fr')->getCompany());
+                $offer->setCompany($this->getReference('user_' . 'atos@hotmail.fr')->getCompany());
             } else {
-                $offer->setUser($this->getReference('user_' . 'mcdo@hotmail.fr')->getCompany());
+                $offer->setCompany($this->getReference('user_' . 'mcdo@hotmail.fr')->getCompany());
             }
 
             $manager->persist($offer);

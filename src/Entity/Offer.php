@@ -18,7 +18,7 @@ class Offer
 
     #[ORM\ManyToOne(inversedBy: 'offers')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Company $user = null;
+    private ?Company $company = null;
 
     #[ORM\Column(length: 255)]
     private ?string $title = null;
@@ -80,14 +80,14 @@ class Offer
         return $this->id;
     }
 
-    public function getUser(): ?Company
+    public function getCompany(): ?Company
     {
-        return $this->user;
+        return $this->company;
     }
 
-    public function setUser(?Company $user): self
+    public function setCompany(?Company $company): self
     {
-        $this->user = $user;
+        $this->company = $company;
 
         return $this;
     }

@@ -36,17 +36,24 @@
 						{{ offer.maxSalary }}
 						</p>
 							<p>
-							il y a
-						{{ offer.createdAt|date_diff({'format': '[year]years[month]months[day]days[hour]hours[minute]minutes'}) }}
-							{# endDate and startDate are strings or DateTime objects #}
-							{# {% set difference = date(offer.createdAt).diff(date(now)) %}
-																												{% set leftDays = difference.days %}
-																													{% if leftDays == 1 %}
-																													1 day
-																												{% else %}
-																													{{ leftDays | date('Y year(s)  ')}}
-																													days
-																												{% endif %} #}
+							posted
+							{% set difference = date(offer.createdAt).diff(date(now)) %}
+							{% set leftDays = difference.days %}
+								{% if leftDays == 1 %}
+								1 day
+							{% else %}
+								{% set years = (leftDays // 365 )%}
+								{{ years }}
+								year(s)
+								{% set months = (leftDays % 365) // 30.5 %}
+								{{ months }}
+								month(s)
+
+								{% set days = ((leftDays % 365 ) % 30.5) %}
+								{{ days }}
+								day(s)
+																																								ago
+							{% endif %}
 						</p>
 					</article>
 				</div>

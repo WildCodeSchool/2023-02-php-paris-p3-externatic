@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Offer;
+use App\Entity\User;
+use App\Entity\Company;
 use App\Repository\OfferRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,13 +23,9 @@ class OfferController extends AbstractController
 
         $now = new DateTime();
 
-        // $interval = date_diff(new \DateTime(), $offerList->getCreatedAt());
-        // $dateInterval =  $interval->format('%R%y year(s) %m month(s) %d day(s) %h hour(s) : %i minute(s)');
-
-
         return $this->render('offer/index.html.twig', [
             'offers' => $offers,
-            'now'    => $now,
+            'now' => $now,
         ]);
     }
 

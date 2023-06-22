@@ -9,9 +9,11 @@
 {% block body %}
 	<head>
 		{#TO DO : ajouter une bg image pour la section head #}
+		{{ offer.company.name }}
 		<h3>
 			{{ offer.title }}
 		</h3>
+
 		<p>
 			{{ offer.location }}
 			{{ offer.contract }}
@@ -61,9 +63,14 @@ $('#myInput').trigger('focus')
 		</div>
 	</head>
 	<h2>Company</h2>
+	{{ offer.company.name }}
 	<h2>Job Description</h2>
 	<p>{{ offer.description }}</p>
 	<h2>Candidate Profil</h2>
+	{% for skill in offer.skills %}
+		{{ skill.type }}
+		{{ skill.name }}
+	{% endfor %}
 	<h2>Interview Process</h2>
 	<p>{{ offer.interviewProcess }}</p>
 	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
