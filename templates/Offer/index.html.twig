@@ -7,17 +7,56 @@
 
 {% block body %}
 
+	<div class="count mt-4">
+		<h4>Il y a
+			{{ offers.getTotalItemCount }}
+			offres au total</h4>
+	</div>
 
 	{% for offer in offers %}
-		<article>
-			<h3>{{ offer.title }}
-				<em>{{ offer.createdAt|date('d-m-Y') }}</em>
-			</h3>
-			<p>{{ offer.description }}</p>
-		</article>
+		<a class="OfferCard" href="{{ path('offer_show', { id : offer.id }) }}">
+			<div class="card">
+				<div class="card-body">
+					<article>
+						{# TO DO : ajouter le logo de l'entreprise #}
+						{# {{ offer.user }} #}
+							<h3>
+						{{ offer.title }}
+						</h3>
+							<p>
+						{{ offer.location }}
+						</p>
+							<p>
+							{{ offer.contract }}
 
+							{{ offer.workFromHome }}
 
+							{{ offer.minSalary }}
+							-
+						{{ offer.maxSalary }}
+						</p>
+							<p>
+							il y a
+						{{ offer.createdAt|date_diff({'format': '[year]years[month]months[day]days[hour]hours[minute]minutes'}) }}
+							{# endDate and startDate are strings or DateTime objects #}
+							{# {% set difference = date(offer.createdAt).diff(date(now)) %}
+																												{% set leftDays = difference.days %}
+																													{% if leftDays == 1 %}
+																													1 day
+																												{% else %}
+																													{{ leftDays | date('Y year(s)  ')}}
+																													days
+																												{% endif %} #}
+						</p>
+					</article>
+				</div>
+			</div>
+		</a>
 	{% endfor %}
+
+	<div class="navigation d-flex justify-content-center mt-4">
+		{{ knp_pagination_render(offers) }}
+	</div>
 
 
 {% endblock %}

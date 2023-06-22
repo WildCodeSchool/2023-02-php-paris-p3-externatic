@@ -7,15 +7,68 @@
 
 
 {% block body %}
-
-
-	<article>
-		<h3>{{ offer.title }}
-			<em>{{ offer.createdAt|date('d-m-Y') }}</em>
+	<head>
+		{#TO DO : ajouter une bg image pour la section head #}
+		<h3>
+			{{ offer.title }}
 		</h3>
-		<p>{{ offer.description }}</p>
-		<a href="{{ path("offer_index") }}">Postuler</a>
-	</article>
+		<p>
+			{{ offer.location }}
+			{{ offer.contract }}
+			{{ offer.minSalary }}
+			-
+			{{ offer.maxSalary }}
+		</p>
+		<p>offer posted
+			{{ dateInterval }}
+			ago</p>
+		<!-- Button trigger modal -->
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+			Apply
+		</button>
+
+		<script>
+			$('#myModal').on('shown.bs.modal', function () {
+$('#myInput').trigger('focus')
+})
+		</script>
+
+		<!-- Modal -->
+		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div
+						class="modal-body">
+						{#TO DO : à la place du "hey you", mettre une Vb' affichant le prénom du current user #}
+						<strong>Hey you!</strong>
+						You're about to apply for the following offer :
+						{{ offer.title}}
+						<br>
+						Are you sure ??
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-primary">Save changes</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</head>
+	<h2>Company</h2>
+	<h2>Job Description</h2>
+	<p>{{ offer.description }}</p>
+	<h2>Candidate Profil</h2>
+	<h2>Interview Process</h2>
+	<p>{{ offer.interviewProcess }}</p>
+	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+		Apply
+	</button>
 
 
 {% endblock %}

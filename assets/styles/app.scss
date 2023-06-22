@@ -1,8 +1,12 @@
 @import url('https://fonts.googleapis.com/css?family=Jost');
-$primary:#851342;
-$secondary:#FED32C;
-$tertiary:#C1C5CF;
+$primary: #851342;
+$secondary: #FED32C;
+$tertiary: #C1C5CF;
 
 $font-family-base: 'Jost', sans-serif;
 
 @import "~bootstrap/scss/bootstrap";
+
+.OfferCard {
+    text-decoration: none;
+}
