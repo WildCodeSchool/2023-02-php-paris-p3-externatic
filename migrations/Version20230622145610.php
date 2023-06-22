@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace DoctrineMigrations;
 
-use App\DataFixtures\SkillFixtures;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20230622130458 extends AbstractMigration
+final class Version20230622145610 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -25,7 +24,7 @@ final class Version20230622130458 extends AbstractMigration
         $this->addSql('CREATE TABLE candidate (id INT AUTO_INCREMENT NOT NULL, user_id INT NOT NULL, favorite_id INT DEFAULT NULL, firstname VARCHAR(100) NOT NULL, lastname VARCHAR(100) NOT NULL, location VARCHAR(255) NOT NULL, phone VARCHAR(100) DEFAULT NULL, resume VARCHAR(150) NOT NULL, introduction TEXT NOT NULL, job_title VARCHAR(150) NOT NULL, experience VARCHAR(100) DEFAULT NULL, picture VARCHAR(150) DEFAULT NULL, visible TINYINT(1) NOT NULL, UNIQUE INDEX UNIQ_C8B28E44A76ED395 (user_id), INDEX IDX_C8B28E44AA17481D (favorite_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE candidate_metadata (id INT AUTO_INCREMENT NOT NULL, candidate_id INT NOT NULL, type VARCHAR(100) NOT NULL, metadata VARCHAR(255) NOT NULL, INDEX IDX_EE4A76C791BD8781 (candidate_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE company (id INT AUTO_INCREMENT NOT NULL, user_id INT NOT NULL, favorite_id INT DEFAULT NULL, name VARCHAR(150) NOT NULL, type VARCHAR(100) NOT NULL, sector VARCHAR(150) NOT NULL, presentation TEXT NOT NULL, logo VARCHAR(150) DEFAULT NULL, location VARCHAR(255) NOT NULL, UNIQUE INDEX UNIQ_4FBF094FA76ED395 (user_id), INDEX IDX_4FBF094FAA17481D (favorite_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE offer (id INT AUTO_INCREMENT NOT NULL, user_id INT NOT NULL, title VARCHAR(255) NOT NULL, created_at DATETIME NOT NULL, start_at DATETIME NOT NULL, contract VARCHAR(150) NOT NULL, work_from_home VARCHAR(100) NOT NULL, description LONGTEXT NOT NULL, experience VARCHAR(150) NOT NULL, min_salary INT NOT NULL, max_salary INT DEFAULT NULL, location VARCHAR(255) NOT NULL, interview_process LONGTEXT NOT NULL, picture VARCHAR(255) DEFAULT NULL, number INT NOT NULL, INDEX IDX_29D6873EA76ED395 (user_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE offer (id INT AUTO_INCREMENT NOT NULL, company_id INT NOT NULL, title VARCHAR(255) NOT NULL, created_at DATETIME NOT NULL, start_at DATETIME NOT NULL, contract VARCHAR(150) NOT NULL, work_from_home VARCHAR(100) NOT NULL, description LONGTEXT NOT NULL, experience VARCHAR(150) NOT NULL, min_salary INT NOT NULL, max_salary INT DEFAULT NULL, location VARCHAR(255) NOT NULL, interview_process LONGTEXT NOT NULL, picture VARCHAR(255) DEFAULT NULL, number INT NOT NULL, INDEX IDX_29D6873E979B1AD6 (company_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE offer_candidate (offer_id INT NOT NULL, candidate_id INT NOT NULL, INDEX IDX_6B77F38053C674EE (offer_id), INDEX IDX_6B77F38091BD8781 (candidate_id), PRIMARY KEY(offer_id, candidate_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE skill (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(150) NOT NULL, type VARCHAR(100) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE skill_candidate (skill_id INT NOT NULL, candidate_id INT NOT NULL, INDEX IDX_9B43B5195585C142 (skill_id), INDEX IDX_9B43B51991BD8781 (candidate_id), PRIMARY KEY(skill_id, candidate_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
@@ -39,7 +38,7 @@ final class Version20230622130458 extends AbstractMigration
         $this->addSql('ALTER TABLE candidate_metadata ADD CONSTRAINT FK_EE4A76C791BD8781 FOREIGN KEY (candidate_id) REFERENCES candidate (id)');
         $this->addSql('ALTER TABLE company ADD CONSTRAINT FK_4FBF094FA76ED395 FOREIGN KEY (user_id) REFERENCES `user` (id)');
         $this->addSql('ALTER TABLE company ADD CONSTRAINT FK_4FBF094FAA17481D FOREIGN KEY (favorite_id) REFERENCES candidate (id)');
-        $this->addSql('ALTER TABLE offer ADD CONSTRAINT FK_29D6873EA76ED395 FOREIGN KEY (user_id) REFERENCES company (id)');
+        $this->addSql('ALTER TABLE offer ADD CONSTRAINT FK_29D6873E979B1AD6 FOREIGN KEY (company_id) REFERENCES company (id)');
         $this->addSql('ALTER TABLE offer_candidate ADD CONSTRAINT FK_6B77F38053C674EE FOREIGN KEY (offer_id) REFERENCES offer (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE offer_candidate ADD CONSTRAINT FK_6B77F38091BD8781 FOREIGN KEY (candidate_id) REFERENCES candidate (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE skill_candidate ADD CONSTRAINT FK_9B43B5195585C142 FOREIGN KEY (skill_id) REFERENCES skill (id) ON DELETE CASCADE');
@@ -60,7 +59,7 @@ final class Version20230622130458 extends AbstractMigration
         $this->addSql('ALTER TABLE candidate_metadata DROP FOREIGN KEY FK_EE4A76C791BD8781');
         $this->addSql('ALTER TABLE company DROP FOREIGN KEY FK_4FBF094FA76ED395');
         $this->addSql('ALTER TABLE company DROP FOREIGN KEY FK_4FBF094FAA17481D');
-        $this->addSql('ALTER TABLE offer DROP FOREIGN KEY FK_29D6873EA76ED395');
+        $this->addSql('ALTER TABLE offer DROP FOREIGN KEY FK_29D6873E979B1AD6');
         $this->addSql('ALTER TABLE offer_candidate DROP FOREIGN KEY FK_6B77F38053C674EE');
         $this->addSql('ALTER TABLE offer_candidate DROP FOREIGN KEY FK_6B77F38091BD8781');
         $this->addSql('ALTER TABLE skill_candidate DROP FOREIGN KEY FK_9B43B5195585C142');
