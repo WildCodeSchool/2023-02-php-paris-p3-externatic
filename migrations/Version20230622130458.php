@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace DoctrineMigrations;
 
+use App\DataFixtures\SkillFixtures;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20230616081104 extends AbstractMigration
+final class Version20230622130458 extends AbstractMigration
 {
     public function getDescription(): string
     {

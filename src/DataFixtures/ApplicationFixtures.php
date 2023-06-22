@@ -10,12 +10,10 @@ use Doctrine\Persistence\ObjectManager;
 
 class ApplicationFixtures extends Fixture implements DependentFixtureInterface
 {
-    public const APPLICATION_STATUS = ['received', 'in review', 'accepted', 'rejected'];
-
     public function load(ObjectManager $manager): void
     {
         $faker = Factory::create();
-        foreach (self::APPLICATION_STATUS as $status) {
+        foreach (Application::APPLICATION_STATUS as $status) {
             $application = new Application();
 
             $application->setStatus($status)

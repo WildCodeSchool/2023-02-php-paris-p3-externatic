@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Candidate;
 use App\Entity\CandidateMetadata;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -11,14 +12,12 @@ use Faker\Factory;
 
 class MetadataFixtures extends Fixture implements DependentFixtureInterface
 {
-    public const METADATA = ['linkedin', 'GitHub', 'portfolio'];
-
     public function load(ObjectManager $manager): void
     {
         $faker = Factory::create();
         foreach (UserFixtures::USER as $user) {
             if ($user['Role'] === User::ROLE_CANDIDATE) {
-                foreach (self::METADATA as $type) {
+                foreach (CandidateMetadata::METADATA as $type) {
                     $metadata = new CandidateMetadata();
 
                     $metadata->setType($type)
