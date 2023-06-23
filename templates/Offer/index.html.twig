@@ -1,9 +1,7 @@
 {% extends 'base.html.twig' %}
 
-
 {% block title %}Liste des annonces
 {% endblock %}
-
 
 {% block body %}
 
@@ -18,28 +16,27 @@
 			<div class="card">
 				<div class="card-body">
 					<article>
-						{# TO DO : ajouter le logo de l'entreprise #}
-						{# {{ offer.user }} #}
-							<h3>
-						{{ offer.title }}
+						{# TODO : ajouter le logo de l'entreprise #}
+						<h3>
+							{{ offer.title }}
 						</h3>
-							<p>
-						{{ offer.location }}
+						<p>
+							{{ offer.location }}
 						</p>
-							<p>
+						<p>
 							{{ offer.contract }}
 
 							{{ offer.workFromHome }}
 
 							{{ offer.minSalary }}
 							-
-						{{ offer.maxSalary }}
+							{{ offer.maxSalary }}
 						</p>
-							<p>
+						<p>
 							posted
 							{% set difference = date(offer.createdAt).diff(date(now)) %}
 							{% set leftDays = difference.days %}
-								{% if leftDays == 1 %}
+							{% if leftDays == 1 %}
 								1 day
 							{% else %}
 								{% set years = (leftDays // 365 )%}
@@ -51,8 +48,7 @@
 
 								{% set days = ((leftDays % 365 ) % 30.5) %}
 								{{ days }}
-								day(s)
-																																								ago
+								day(s) ago
 							{% endif %}
 						</p>
 					</article>
@@ -64,6 +60,5 @@
 	<div class="navigation d-flex justify-content-center mt-4">
 		{{ knp_pagination_render(offers) }}
 	</div>
-
 
 {% endblock %}
