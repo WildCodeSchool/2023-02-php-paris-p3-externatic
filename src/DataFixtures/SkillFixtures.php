@@ -24,27 +24,26 @@ class SkillFixtures extends Fixture
             ['name' => 'CSS1', 'type' => 'hard'],
         ],
         [
-            ['name' => 'force de proposition', 'type' => 'soft'],
-            ['name' => 'attentif', 'type' => 'soft'],
-            ['name' => 'souriant', 'type' => 'soft'],
-            ['name' => 'gentil', 'type' => 'soft'],
-            ['name' => 'inventif', 'type' => 'soft'],
-            ['name' => 'perfectioniste', 'type' => 'soft'],
-            ['name' => 'force de proposition1', 'type' => 'soft'],
-            ['name' => 'attentif1', 'type' => 'soft'],
-            ['name' => 'souriant1', 'type' => 'soft'],
-            ['name' => 'gentil1', 'type' => 'soft'],
-            ['name' => 'inventif1', 'type' => 'soft'],
-            ['name' => 'perfectioniste1', 'type' => 'soft'],
+            ['name' => 'full of idea', 'type' => 'soft'],
+            ['name' => 'alert', 'type' => 'soft'],
+            ['name' => 'smiling', 'type' => 'soft'],
+            ['name' => 'nice', 'type' => 'soft'],
+            ['name' => 'inventive', 'type' => 'soft'],
+            ['name' => 'perfectionist', 'type' => 'soft'],
+            ['name' => 'full of idea1', 'type' => 'soft'],
+            ['name' => 'alert1', 'type' => 'soft'],
+            ['name' => 'smiling1', 'type' => 'soft'],
+            ['name' => 'nice1', 'type' => 'soft'],
+            ['name' => 'inventive1', 'type' => 'soft'],
+            ['name' => 'perfectionist1', 'type' => 'soft'],
         ]
 
     ];
 
     public function load(ObjectManager $manager): void
     {
-        foreach (self::SKILLS as $key => $type) {
+        foreach (self::SKILLS as $type) {
             foreach ($type as $key => $oneSkill) {
-
                 $skill = new Skill();
 
                 $skill->setName($oneSkill['name'])

@@ -8,6 +8,11 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: CandidateMetadataRepository::class)]
 class CandidateMetadata
 {
+    public const METADATA_LINKEDIN = 'linkedin';
+    public const METADATA_GITHUB = 'GitHub';
+    public const METADATA_PORTFOLIO = 'portfolio';
+    public const METADATA = [self::METADATA_LINKEDIN, self::METADATA_GITHUB, self::METADATA_PORTFOLIO];
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]

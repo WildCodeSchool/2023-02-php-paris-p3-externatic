@@ -17,6 +17,7 @@ class Offer
     #[ORM\Column]
     private ?int $id = null;
 
+
     #[ORM\ManyToOne(inversedBy: 'offers')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Company $company = null;
@@ -24,50 +25,66 @@ class Offer
     #[ORM\Column(length: 255)]
     private ?string $title = null;
 
+
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $createdAt = null;
+
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $startAt = null;
 
+
     #[ORM\Column(length: 150)]
     private ?string $contract = null;
+
 
     #[ORM\Column(length: 100)]
     private ?string $workFromHome = null;
 
+
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
+
 
     #[ORM\Column(length: 150)]
     private ?string $experience = null;
 
+
     #[ORM\Column]
     private ?int $minSalary = null;
+
 
     #[ORM\Column(nullable: true)]
     private ?int $maxSalary = null;
 
+
     #[ORM\ManyToMany(targetEntity: Skill::class, mappedBy: 'offers')]
     private Collection $skills;
+
 
     #[ORM\Column(length: 255)]
     private ?string $location = null;
 
+
     #[ORM\OneToMany(mappedBy: 'offer', targetEntity: Application::class)]
     private Collection $applications;
+
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $interviewProcess = null;
 
+
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $picture = null;
+
 
     #[ORM\ManyToMany(targetEntity: Candidate::class, inversedBy: 'favoriteOffers')]
     private Collection $favorite;
 
+
     #[ORM\Column]
     private ?int $number = null;
+
 
     public function __construct()
     {
@@ -89,7 +106,6 @@ class Offer
     public function setCompany(?Company $company): self
     {
         $this->company = $company;
-
         return $this;
     }
 
@@ -101,7 +117,6 @@ class Offer
     public function setTitle(string $title): self
     {
         $this->title = $title;
-
         return $this;
     }
 
@@ -113,7 +128,6 @@ class Offer
     public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
-
         return $this;
     }
 
@@ -125,7 +139,6 @@ class Offer
     public function setStartAt(\DateTimeInterface $startAt): self
     {
         $this->startAt = $startAt;
-
         return $this;
     }
 
@@ -133,11 +146,9 @@ class Offer
     {
         return $this->contract;
     }
-
     public function setContract(string $contract): self
     {
         $this->contract = $contract;
-
         return $this;
     }
 
@@ -149,7 +160,6 @@ class Offer
     public function setWorkFromHome(string $workFromHome): self
     {
         $this->workFromHome = $workFromHome;
-
         return $this;
     }
 
@@ -161,7 +171,6 @@ class Offer
     public function setDescription(string $description): self
     {
         $this->description = $description;
-
         return $this;
     }
 
@@ -173,7 +182,6 @@ class Offer
     public function setExperience(string $experience): self
     {
         $this->experience = $experience;
-
         return $this;
     }
 
@@ -185,7 +193,6 @@ class Offer
     public function setMinSalary(?int $minSalary): self
     {
         $this->minSalary = $minSalary;
-
         return $this;
     }
 
@@ -197,7 +204,6 @@ class Offer
     public function setMaxSalary(int $maxSalary): self
     {
         $this->maxSalary = $maxSalary;
-
         return $this;
     }
 
@@ -219,6 +225,7 @@ class Offer
         return $this;
     }
 
+
     public function removeSkill(Skill $skill): self
     {
         if ($this->skills->removeElement($skill)) {
@@ -236,7 +243,6 @@ class Offer
     public function setLocation(?string $location): self
     {
         $this->location = $location;
-
         return $this;
     }
 
@@ -254,6 +260,7 @@ class Offer
             $this->applications->add($application);
             $application->setOffer($this);
         }
+
 
         return $this;
     }
@@ -278,7 +285,6 @@ class Offer
     public function setInterviewProcess(string $interviewProcess): self
     {
         $this->interviewProcess = $interviewProcess;
-
         return $this;
     }
 
@@ -290,7 +296,6 @@ class Offer
     public function setPicture(?string $picture): self
     {
         $this->picture = $picture;
-
         return $this;
     }
 
@@ -311,9 +316,11 @@ class Offer
         return $this;
     }
 
+
     public function removeFavorite(Candidate $favorite): self
     {
         $this->favorite->removeElement($favorite);
+
 
         return $this;
     }
@@ -326,7 +333,6 @@ class Offer
     public function setNumber(int $number): self
     {
         $this->number = $number;
-
         return $this;
     }
 }

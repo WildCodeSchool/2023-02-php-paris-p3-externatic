@@ -27,7 +27,8 @@ class OfferFixtures extends Fixture implements DependentFixtureInterface
                 ->setMaxSalary($faker->numberBetween(40000, 60000))
                 ->setLocation($faker->city())
                 ->setInterviewProcess($faker->sentence())
-                ->setNumber($i);
+                ->setNumber($i)
+                ->setPicture('offerPictures' . mt_rand(0, 5));
             for ($j = 0; $j < 6; $j++) {
                 $offer->addSkill($this->getReference('skill_soft_' . $faker->unique(true)->numberBetween(0, 11)));
                 $offer->addSkill($this->getReference('skill_hard_' . $faker->unique(true)->numberBetween(0, 11)));
