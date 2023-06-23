@@ -2,13 +2,10 @@
 
 namespace App\Controller;
 
-use App\Entity\Candidate;
 use App\Entity\Offer;
-use App\Entity\User;
-use App\Entity\Company;
 use App\Entity\Application;
+use App\Repository\ApplicationRepository;
 use App\Repository\OfferRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -43,27 +40,23 @@ class OfferController extends AbstractController
             'dateInterval' => $dateInterval,
         ]);
     }
+    // Méthode créée telle que demandée dans l'US mais pas testée parce
+    //que necessitant la gestion d'User(US de la semaine pro')
+    #[Route('/apply/{id}', name: 'apply', methods: ['GET', 'POST'])]
+    public function apply(Offer $offer, Application $application, ApplicationRepository $repository): Response
+    {
+        $application = new Application();
 
-    // #[Route('/apply/{id}', name: 'apply', methods: ['GET', 'POST'])]
-    // public function apply(Application $application, Request $request, EntityManagerInterface $manager): Response
-    // {
-    //     $application = new Application();
-    //     $form = $this->createForm(ApplicationType::class, $application);
+        $application->setStatus('received')
+            ->setOffer($offer)
+            ->setCandidate($this->getUser());
 
-    //     $form->handleRequest($request);
-    //     if ($form->isSubmitted() && $form->isValid()) {
-    //         $application = $form->getData();
-    //         //Pour le tuple de la table "application" nouvellement crée soit directement assignée à l'user courant
-    //         $application->setUser($this->getUser());
+        $repository->save($application, true);
 
-    //         $manager->persist($application);
-    //         $manager->flush();
-
-    //         $this->addFlash(
-    //             'success',
-    //             'Vous avez bien postulé à l\'offre'
-    //         );
-    //         return $this->redirectToRoute('offer_index');
-    //     }
-    // }
+        $this->addFlash(
+            'success',
+            'Vous avez bien postulé à cette offre '
+        );
+        return $this->redirectToRoute('offer_index');
+    }
 }

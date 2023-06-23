@@ -9,7 +9,7 @@
 			</div>
 			<div
 				class="modal-body">
-				{#TO DO : à la place du "hey you", mettre une Vb' affichant le prénom du current user #}
+				{#TODO : à la place du "hey you", mettre une Vb' affichant le prénom du current user #}
 				<strong>Hey you!</strong>
 				You're about to apply for the following offer :
 				{{ offer.title}}
@@ -17,7 +17,7 @@
 				Are you sure ?
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">All good</button>
+				<button href="{{ path('offer_apply', {'id': offer.id}) }}" type="button" class="btn btn-secondary" data-bs-dismiss="modal">All good</button>
 			</div>
 		</div>
 	</div>

@@ -10,13 +10,16 @@
 			{{ offers.getTotalItemCount }}
 			offres au total</h4>
 	</div>
-
 	{% for offer in offers %}
-		<a class="OfferCard" href="{{ path('offer_show', { id : offer.id }) }}">
+		<a class="OfferCard col-lg-2" href="{{ path('offer_show', { id : offer.id }) }}">
 			<div class="card">
+				<div class="cardHead">
+					<img src="{{ offer.picture }}">
+				</div>
 				<div class="card-body">
 					<article>
-						{# TODO : ajouter le logo de l'entreprise #}
+						{# <img src="{{ company.logo }}">
+																						<p>{{ company.name }}</p> #}
 						<h3>
 							{{ offer.title }}
 						</h3>
