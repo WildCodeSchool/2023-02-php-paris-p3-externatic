@@ -4,31 +4,14 @@
 {% endblock %}
 
 {% block body %}
+	<p>Visible by recruiters</p>
+	<a href="{{ path('candidate_visibility', {'id': candidate.id}) }}">
+		<i class="bi {{ candidate.isVisible ? 'bi-toggle-on' : 'bi-toggle-off' }}"></i>
+	</a>
 
-	{# REGLER ONCLICK CHNAGE IN BDD JS onclick listener? #}
-	<p>
-		Visible by recruiters
-	</p>
-	{# <input type="button" onclick="window.location.href='https://www.w3docs.com';" value="w3docs"/> #}
-
-	{% if candidate.visible %}
-		<div class="form-check form-switch">
-			<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
-			<label class="form-check-label" for="flexSwitchCheckChecked">Visible</label>
-		</div>
-	{% else %}
-		<div class="form-check form-switch">
-			<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-			<label class="form-check-label" for="flexSwitchCheckDefault">Non visible</label>
-		</div>
-	{% endif %}
-
-	{# FAIRE RECUP VIEWS #}
 	<p>Viewed by people</p>
-	<img
-	class="img_icon fa-border" src="{{ asset('build/images/profil_views.png') }}" alt="profil_views"/>
+	<img class="img_icon fa-border" src="{{ asset('build/images/profil_views.png') }}" alt="profil_views"/>
 
-	{# RECUP COMBIEN PROFIL REMPLI #}
 	<p>Profil completion</p>
 
 	<h1>YOUR PROFILE</h1>
@@ -38,13 +21,8 @@
 	<p>XP
 		{{ candidate.experience }}</p>
 
-
-	{# MANQUE SEE RESUME #}
-	{# MANQUE UPDATE RESUME #}
-	{# Falta liens gjggghgggjhjhh#}
-		<button type="submit"> <img class="img_icon fa-border" src="{{ asset('build/images/cv.png') }}" alt="curriculum"/>your resume</button>
+	<button type="submit"><img class="img_icon fa-border" src="{{ asset('build/images/cv.png') }}" alt="curriculum"/>your resume</button>
 	<button type="submit"><img class="img_icon fa-border" src="{{ asset('build/images/upload.png') }}" alt="upload"/>update your resume</button>
-
 
 	{% for metadata in candidate.metadata %}
 		{% if metadata.type == 'GitHub' %}
@@ -54,40 +32,32 @@
 		{% endif %}
 	{% endfor %}
 
-
 	<p>{{ candidate.introduction }}</p>
 
-
+	<p>HARD SKILLS</p>
 	{% for skill in candidate.skills %}
-		{{ dump(skill.type) }}
+		{% if skill.type == 'hard' %}
+			<div class="hard_skills">
+				<img class="img_icon fa-border" src="{{ asset('build/images/check.png') }}" alt="check"/>
+				<span>{{skill.name}}</span>
+			</div>
+		{% endif %}
 	{% endfor %}
-	{# <p>HARD SKILLS</p>
-															{% for skill in candidate.skills %}
-																{% if skill.type == 'hard' %}
-																	<div class="hard_skills">
-																		<img class="img_icon fa-border" src="{{ asset('build/images/check.png') }}" alt="check"/>
-																		<span>{{skill.name}}</span>
-																	</div>
-																{% endif %}
-															{% endfor %}
-															#}
 
-	{# <p>SOFT SKILLS</p>
-														{% for skill in candidate.skills %}
-															{% if skill.type == 'soft' %}
-																<div class="soft_skills">
-																	<img class="img_icon fa-border" src="{{ asset('build/images/check.png') }}" alt="check"/>
-																	<span>{{skill.name}}</span>
-																</div>
-															{% endif %}
-														{% endfor %} #}
-	<p>
-		PORTEFOLIO
-	</p>
+	<p>SOFT SKILLS</p>
+	{% for skill in candidate.skills %}
+		{% if skill.type == 'soft' %}
+			<div class="soft_skills">
+				<img class="img_icon fa-border" src="{{ asset('build/images/check.png') }}" alt="check"/>
+				<span>{{skill.name}}</span>
+			</div>
+		{% endif %}
+	{% endfor %}
+
+	<p>PORTEFOLIO</p>
 	{% for metadata in candidate.metadata %}
 		{% if metadata.type == 'portfolio' %}
-			<a href="{{ metadata.metadata }}">
-				Portfolio<img src="{{ asset('build/images/link.png') }}" alt="portfolio"/></a>
+			<a href="{{ metadata.metadata }}">Portfolio<img src="{{ asset('build/images/link.png') }}" alt="portfolio"/></a>
 		{% endif %}
 	{% endfor %}
 
