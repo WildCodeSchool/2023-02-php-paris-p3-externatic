@@ -28,7 +28,7 @@ class Company
     #[ORM\Column(type: Types::TEXT, length: 300)]
     private ?string $presentation = null;
 
-    #[ORM\Column(length: 150)]
+    #[ORM\Column(length: 150, nullable: true)]
     private ?string $logo = null;
 
     #[ORM\Column(length: 255)]
@@ -154,7 +154,7 @@ class Company
     {
         if (!$this->offers->contains($offer)) {
             $this->offers->add($offer);
-            $offer->setUser($this);
+            $offer->setCompany($this);
         }
 
         return $this;
@@ -164,8 +164,8 @@ class Company
     {
         if ($this->offers->removeElement($offer)) {
             // set the owning side to null (unless already changed)
-            if ($offer->getUser() === $this) {
-                $offer->setUser(null);
+            if ($offer->getCompany() === $this) {
+                $offer->setCompany(null);
             }
         }
 
