@@ -22,19 +22,19 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
     public const USER = [
         [
             'Firstname' => 'Erika', 'Lastname' => 'Ikelempo', 'Role' => User::ROLE_CANDIDATE,
-            'Location' => 'Epinay', 'Email' => 'erika@hotmail.fr', 'picture' => 'eri'
+            'Location' => 'Epinay', 'Email' => 'erika@hotmail.fr', 'picture' => 'eri.png'
         ],
         [
             'Firstname' => 'Lionel', 'Lastname' => 'Da Rosa', 'Role' => User::ROLE_CANDIDATE,
-            'Location' => 'Boulbi', 'Email' => 'lio@hotmail.fr', 'picture' => 'Lio'
+            'Location' => 'Boulbi', 'Email' => 'lio@hotmail.fr', 'picture' => 'Lio.png'
         ],
         [
             'Firstname' => 'Ester', 'Lastname' => 'Martinez', 'Role' => User::ROLE_CANDIDATE,
-            'Location' => 'Paris', 'Email' => 'ester@hotmail.fr', 'picture' => 'Ester'
+            'Location' => 'Paris', 'Email' => 'ester@hotmail.fr', 'picture' => 'Ester.png'
         ],
         [
             'Firstname' => 'Lea', 'Lastname' => 'Hadida', 'Role' => User::ROLE_CANDIDATE,
-            'Location' => 'Paris', 'Email' => 'lea@hotmail.fr', 'picture' => 'Lea'
+            'Location' => 'Paris', 'Email' => 'lea@hotmail.fr', 'picture' => 'Lea.png'
         ],
         ['Name' => 'Atos', 'Role' => User::ROLE_COMPANY, 'Email' => 'atos@hotmail.fr'],
         ['Name' => 'McDonalds', 'Role' => User::ROLE_COMPANY, 'Email' => 'mcdo@hotmail.fr']
