@@ -11,6 +11,16 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: CompanyRepository::class)]
 class Company
 {
+    public const COMPANY_SECTOR = [
+        'Software' => 'Software',
+        'Data' => 'Data',
+        'Cloud service' => 'Cloud service',
+        'Cyber Security' => 'Cyber Security',
+        'Mobile' => 'Mobile',
+        'AI / Machine Learning' => 'AI / Machine Learning',
+        'Connected Object' => 'Connected Object',
+    ];
+    
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]

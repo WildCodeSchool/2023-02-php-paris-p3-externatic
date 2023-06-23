@@ -38,4 +38,26 @@ class OfferRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+
+    public function findLikeTitle(string $title)
+    {
+        $queryBuilder = $this->createQueryBuilder('o')
+            ->where('o.title LIKE :title')
+            ->setParameter('title', '%' . $title . '%')
+            ->orderBy('o.title', 'ASC')
+            ->getQuery();
+        
+        return $queryBuilder->getResult();
+    }
+
+    public function findLikeLocation(string $location)
+    {
+        $queryBuilder = $this->createQueryBuilder('o')
+            ->where('o.location LIKE :location')
+            ->setParameter('location', '%' . $location . '%')
+            ->orderBy('o.title', 'ASC')
+            ->getQuery();
+        
+        return $queryBuilder->getResult();
+    }
 }
