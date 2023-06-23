@@ -1,19 +1,17 @@
 {% extends "base.html.twig" %}
 
-
 {% block title %}Fiche d'une annonce -
 	{{ offer.title }}
 {% endblock %}
 
-
 {% block body %}
-	<head>
+	<head
+		class="OfferShowHeaderSection">
 		{#TO DO : ajouter une bg image pour la section head #}
 		{{ offer.company.name }}
 		<h3>
 			{{ offer.title }}
 		</h3>
-
 		<p>
 			{{ offer.location }}
 			{{ offer.contract }}
