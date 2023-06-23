@@ -20,7 +20,7 @@ class Company
         'AI / Machine Learning' => 'AI / Machine Learning',
         'Connected Object' => 'Connected Object',
     ];
-    
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]

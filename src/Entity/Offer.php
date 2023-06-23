@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Offer
 {
     public const JOB_TYPE = [
-        'permanent contract' =>'permanent contract',
+        'permanent contract' => 'permanent contract',
         'work study' => 'work study',
         'intership' => 'intership',
         'fixed-term / temporary' => 'fixed-term / temporary',
@@ -33,7 +33,7 @@ class Offer
         'Hybrid remote' => 'Hybrid remote',
         'Open to full remote' => 'Open to full remote',
     ];
-    
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
