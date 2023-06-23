@@ -15,6 +15,13 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
 {
     private UserPasswordHasherInterface $passwordHasher;
 
+    public const EXTERNATEAM = [
+        'eri', 'Ester', 'Lea', 'Lio'
+    ];
+
+    public const LOGO = [
+        'logoCompany', 'logoCompany1'
+    ];
 
     public const USER = [
         [
@@ -57,7 +64,8 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                     ->setIntroduction($faker->paragraph())
                     ->setJobTitle($faker->word())
                     ->setExperience($faker->word())
-                    ->setVisible($faker->boolean());
+                    ->setVisible($faker->boolean())
+                    ->setPicture(self::EXTERNATEAM[mt_rand(0, count(self::EXTERNATEAM) - 1)]);
                 for ($i = 0; $i < 6; $i++) {
                     $candidate->addSkill($this->getReference('skill_soft_' . $faker->unique(true)
                         ->numberBetween(0, 11)));
@@ -82,7 +90,8 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                     ->setType($faker->word())
                     ->setSector($faker->word())
                     ->setPresentation($faker->paragraph())
-                    ->setLocation($faker->city());
+                    ->setLocation($faker->city())
+                    ->setLogo(self::LOGO[mt_rand(0, count(self::LOGO) - 1)]);
 
                 $user = new User();
 
