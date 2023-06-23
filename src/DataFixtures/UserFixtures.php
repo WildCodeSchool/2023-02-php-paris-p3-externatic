@@ -16,7 +16,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
     private UserPasswordHasherInterface $passwordHasher;
 
     public const LOGO = [
-        'logoCompany', 'logoCompany1'
+        'logoCompany.jpg', 'logoCompany1.jpg'
     ];
 
     public const USER = [
