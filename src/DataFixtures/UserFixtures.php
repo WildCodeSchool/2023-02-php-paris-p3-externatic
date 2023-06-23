@@ -15,10 +15,6 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
 {
     private UserPasswordHasherInterface $passwordHasher;
 
-    public const EXTERNATEAM = [
-        'eri', 'Ester', 'Lea', 'Lio'
-    ];
-
     public const LOGO = [
         'logoCompany', 'logoCompany1'
     ];
@@ -26,19 +22,19 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
     public const USER = [
         [
             'Firstname' => 'Erika', 'Lastname' => 'Ikelempo', 'Role' => User::ROLE_CANDIDATE,
-            'Location' => 'Epinay', 'Email' => 'erika@hotmail.fr'
+            'Location' => 'Epinay', 'Email' => 'erika@hotmail.fr', 'picture' => 'eri'
         ],
         [
             'Firstname' => 'Lionel', 'Lastname' => 'Da Rosa', 'Role' => User::ROLE_CANDIDATE,
-            'Location' => 'Boulbi', 'Email' => 'lio@hotmail.fr'
+            'Location' => 'Boulbi', 'Email' => 'lio@hotmail.fr', 'picture' => 'Lio'
         ],
         [
             'Firstname' => 'Ester', 'Lastname' => 'Martinez', 'Role' => User::ROLE_CANDIDATE,
-            'Location' => 'Paris', 'Email' => 'ester@hotmail.fr'
+            'Location' => 'Paris', 'Email' => 'ester@hotmail.fr', 'picture' => 'Ester'
         ],
         [
             'Firstname' => 'Lea', 'Lastname' => 'Hadida', 'Role' => User::ROLE_CANDIDATE,
-            'Location' => 'Paris', 'Email' => 'lea@hotmail.fr'
+            'Location' => 'Paris', 'Email' => 'lea@hotmail.fr', 'picture' => 'Lea'
         ],
         ['Name' => 'Atos', 'Role' => User::ROLE_COMPANY, 'Email' => 'atos@hotmail.fr'],
         ['Name' => 'McDonalds', 'Role' => User::ROLE_COMPANY, 'Email' => 'mcdo@hotmail.fr']
@@ -65,7 +61,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                     ->setJobTitle($faker->word())
                     ->setExperience($faker->word())
                     ->setVisible($faker->boolean())
-                    ->setPicture(self::EXTERNATEAM[mt_rand(0, count(self::EXTERNATEAM) - 1)]);
+                    ->setPicture($person['picture']);
                 for ($i = 0; $i < 6; $i++) {
                     $candidate->addSkill($this->getReference('skill_soft_' . $faker->unique(true)
                         ->numberBetween(0, 11)));
