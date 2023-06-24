@@ -7,6 +7,76 @@ $font-family-base: 'Jost', sans-serif;
 
 @import "~bootstrap/scss/bootstrap";
 
+//Offer_index
 .OfferCard {
     text-decoration: none;
+    text-align: center;
+}
+
+.otherInfo {
+    display: flex;
+    justify-content: space-between;
+}
+
+.greyArea {
+    width: 30%;
+    background-color: $tertiary;
+    text-align: center;
+}
+
+.subHead {
+    display: flex;
+    justify-content: center;
+}
+
+.indexCompanyLogo {
+    width: 30px;
+    height: 28px;
+}
+
+//Offer_show
+
+h2 {
+    font-weight: 700;
+    font-size: 2.1875rem;
+}
+
+hr {
+    color: $primary;
+    width: 64.62513rem;
+    height: 0.125rem;
+    border: 1px solid;
+}
+
+.OfferShowHeaderSection {
+    text-align: center;
+    color: white;
+    background: url("../../public/uploads/candidatePictures/eri.png") 0 0 no-repeat fixed;
+    height: 100%;
+    overflow: hidden;
+    background-color: hsl(335, 75%, 30%);
+    background-blend-mode: multiply;
+}
+
+.btn {
+    background-color: $secondary;
+    border: $secondary;
+    --bs-btn-color: black;
+}
+
+.greyAreaInOfferShow {
+    width: 10%;
+    background-color: $tertiary;
+    text-align: center;
+    color: black;
+    border-radius: 5px;
+}
+
+.otherInfo {
+    justify-content: space-evenly;
+}
+
+.beforeFooterBtn {
+    display: flex;
+    justify-content: center;
 }

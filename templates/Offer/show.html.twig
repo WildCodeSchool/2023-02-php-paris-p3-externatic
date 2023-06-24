@@ -5,40 +5,61 @@
 {% endblock %}
 
 {% block body %}
-	<head
-		class="OfferShowHeaderSection">
-		{#TO DO : ajouter une bg image pour la section head #}
-		{{ offer.company.name }}
-		<h3>
-			{{ offer.title }}
+	<section class="OfferShowHeaderSection pt-4 pb-4" style="background-image: url(../../{{ offer.picture }})">
+		<img class="indexCompanyLogo" src="../../{{ offer.company.logo }}">
+		<p>{{ offer.company.name }}</p>
+		<h3 class="mb-4 mt-4">
+			<strong>{{ offer.title }}</strong>
 		</h3>
-		<p>
-			{{ offer.location }}
-			{{ offer.contract }}
-			{{ offer.minSalary }}
-			-
-			{{ offer.maxSalary }}
-		</p>
-		<p>offer posted
-			{{ dateInterval }}
-			ago</p>
+		<section class="otherInfo">
+			<div class="greyAreaInOfferShow">
+				{{ offer.location }}
+			</div>
+			<div class="greyAreaInOfferShow">
+				{{ offer.contract }}
+			</div>
+			<div class="greyAreaInOfferShow">
+				{{ offer.minSalary // 1000 }}K
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																				-
+				{{ offer.maxSalary // 1000 }}K
+			</section>
+			<p>offer posted
+				{{ dateInterval }}
+				ago</p>
+			<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+				Apply
+			</button>
+		</div>
+	</section>
+	<h2 class="mt-4">Company</h2><hr>
+	{{ offer.company.presentation }}
+	<h2 class="mt-4">Job Description</h2><hr>
+	<p>{{ offer.description }}</p>
+	<h2 class="mt-4">Candidate Profil</h2><hr>
+	{% for skill in offer.skills %}
+		<table>
+			{% if skill.type == 'hard' %}
+				<tr>
+					<td>{{ skill.name }}</td>
+				</tr>
+			{% endif %}
+			{% if skill.type == 'soft' %}
+				<tr>
+					<td>{{ skill.name }}</td>
+				</tr>
+			{% endif %}
+		</table>
+	{% endfor %}
+	<h2 class="mt-4">Interview Process</h2><hr>
+	<ol>
+		<li>
+			{{ offer.interviewProcess }}
+		</li>
+	</ol>
+	<section class="beforeFooterBtn">
 		<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
 			Apply
 		</button>
-	</head>
-	<h2>Company</h2>
-	{{ offer.company.name }}
-	<h2>Job Description</h2>
-	<p>{{ offer.description }}</p>
-	<h2>Candidate Profil</h2>
-	{% for skill in offer.skills %}
-		{{ skill.type }}
-		{{ skill.name }}
-	{% endfor %}
-	<h2>Interview Process</h2>
-	<p>{{ offer.interviewProcess }}</p>
-	<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-		Apply
-	</button>
+	</section>
 	{% include "offer/_modalApply.html.twig" %}
 {% endblock %}

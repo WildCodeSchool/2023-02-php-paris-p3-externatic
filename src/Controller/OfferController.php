@@ -19,7 +19,7 @@ class OfferController extends AbstractController
     #[Route('/index', name: 'index', methods: ['GET', 'POST'])]
     public function index(OfferRepository $offerRepository, PaginatorInterface $paginator, Request $request): Response
     {
-        $offers = $paginator->paginate($offerRepository->findAll(), $request->query->getInt('page', 1), 5);
+        $offers = $paginator->paginate($offerRepository->findAll(), $request->query->getInt('page', 1), 6);
 
         $now = new DateTime();
 
