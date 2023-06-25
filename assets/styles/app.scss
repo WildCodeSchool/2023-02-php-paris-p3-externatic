@@ -72,7 +72,6 @@ $paragraph-margin-bottom: 0;
                 background-color: $primary;
                 color: white;
                 }
-
         }
     }
 }
@@ -161,15 +160,12 @@ $paragraph-margin-bottom: 0;
 
 // Media queries
 @media (min-width: 600px) {
-
     #navigationBtnMobile {
     display: none;
     }
-
 }
 
 @media (max-width: 599px) {
-
     #navigationBtnDesktop {
         display: none;
     }
@@ -178,7 +174,6 @@ $paragraph-margin-bottom: 0;
         @include cards($primary, 10px);
         background-color: rgba(217, 217, 217, 0.2);
     }
-
 }
 
 @import "~bootstrap/scss/bootstrap";
