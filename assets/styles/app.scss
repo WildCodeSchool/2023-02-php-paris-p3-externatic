@@ -5,23 +5,35 @@ $primary: #851342;
 $secondary: #FED32C;
 $tertiary: #D9D9D9;
 $info: #ECEEF1;
+$light: #F6F7F8;
 
 $btn-font-weight: 700;
 $btn-font-size: 1rem;
-$btn-font-family: $font-family-base;
-$btn-padding-y: 0.8rem;
-$btn-padding-x: 2rem;
+$btn-padding-y: 0.7rem;
+$btn-padding-x: 2.5rem;
 
+$accordion-button-active-bg: $primary;
+$accordion-button-color: $primary;
+$accordion-button-active-color: white;
+$accordion-icon-active-color: white;
+$accordion-icon-color: #66002A;
+$accordion-button-bg: $tertiary;
 
 $input-bg: $info;
 $input-line-height: 2.5;
 $input-border-color: rgba(0, 0, 0, 0.3);
 $input-placeholder-color: rgba(0, 0, 0, 0.5);
-$input-font-family: $font-family-base;
 
 $carousel-control-color: black;
 
 $paragraph-margin-bottom: 0;
+
+.margin {
+    margin: 0 auto;
+    max-width: 1400px;
+    width: 100%;
+    padding: 1.5rem;
+}
 
 // Cards
 @mixin border($color) {
@@ -53,32 +65,38 @@ $paragraph-margin-bottom: 0;
         box-shadow: 6px 6px 0px white;
 
         &:hover,
-        &:focus {
+        &:focus-within {
             @include border($primary);
 
-            .header-offer,
-            .header-offer:focus {
+            .accordion-button {
                 background-color: $primary;
                 color: white;
-            }
+                }
+
         }
     }
 }
 
-.header-offer {
-    background-color: $tertiary;
-    height: 3rem;
+#application-card .accordion-button {
+    font-weight: 500;
 }
 
-.cards {
+#search-card {
+    @include cards($primary, 10px);
+}
+
+#application-card {
     @include cards($tertiary, 0px);
+}
+
+#profile-card {
+    @include cards($secondary, 10px);
 }
 
 .profile-blocks {
     border-radius: 5px;
     background-color: #F7F7F7;
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-    padding: 1rem;
 }
 
 // Forms
@@ -93,10 +111,6 @@ $paragraph-margin-bottom: 0;
     font-weight: 400;
     text-align: start;
     text-indent: 13%;
-}
-
-.form-check label {
-    font-family: $font-family-base;
 }
 
 #glass {
@@ -115,48 +129,57 @@ $paragraph-margin-bottom: 0;
 }
 
 // Navigation buttons
-@media (min-width: 480px) {
+#navigationBtnDesktop .btn {
+    border-radius: 10px;
+    width: 300px;
+    padding: 1rem;
+    background-color: $light;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
 
-    #carouselExampleControlsNoTouching {
+#navigationBtnDesktop .btn p {
+    font-weight: 400;
+}
+
+#navigationBtnMobile .btn {
+    border-radius: 10px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    background-color: $light;
+    font-size: 14px;
+    padding: 0.7rem;
+}
+
+#navigationBtnMobile .carousel-inner {
+    overflow: inherit;
+}
+
+#navigationBtnDesktop .btn:hover,
+#navigationBtnDesktop .btn:focus,
+#navigationBtnMobile .carousel-item .btn:focus {
+    background-color: $secondary;
+}
+
+// Media queries
+@media (min-width: 600px) {
+
+    #navigationBtnMobile {
     display: none;
     }
 
 }
 
-@media (max-width: 480px) {
+@media (max-width: 599px) {
 
     #navigationBtnDesktop {
         display: none;
     }
 
-}
+    #offer-description-card {
+        @include cards($primary, 10px);
+        background-color: rgba(217, 217, 217, 0.2);
+    }
 
-#navigationBtnDesktop button {
-    border-radius: 10px;
-    width: 269px;
-    height: 133px;
-    background-color: #F6F7F8;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-}
-
-#navigationBtnDesktop button p {
-    font-weight: 400;
-}
-
-#carouselExampleControlsNoTouching .btn {
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-    background-color: #F6F7F8;
-    width: 8rem;
-}
-
-#carouselExampleControlsNoTouching .carousel-inner {
-    overflow: inherit;
-}
-
-#navigationBtnDesktop button:hover,
-#navigationBtnDesktop button:focus,
-#carouselExampleControlsNoTouching button:focus {
-    background-color: $secondary;
 }
 
 @import "~bootstrap/scss/bootstrap";
+@import 'bootstrap-icons/font/bootstrap-icons.css';
