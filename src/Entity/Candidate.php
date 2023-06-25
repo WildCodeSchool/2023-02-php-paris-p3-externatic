@@ -160,7 +160,7 @@ class Candidate
         return $this->jobTitle;
     }
 
-    public function setjobTitle(string $jobTitle): self
+    public function setJobTitle(string $jobTitle): self
     {
         $this->jobTitle = $jobTitle;
 
