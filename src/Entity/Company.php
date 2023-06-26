@@ -48,7 +48,7 @@ class Company
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Offer::class)]
+    #[ORM\OneToMany(mappedBy: 'company', targetEntity: Offer::class)]
     private Collection $offers;
 
     #[ORM\OneToMany(mappedBy: 'favorite', targetEntity: Candidate::class)]

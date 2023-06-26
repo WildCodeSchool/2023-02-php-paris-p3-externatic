@@ -4,8 +4,9 @@ namespace App\Repository;
 
 use App\Entity\Offer;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Query\Parameter as Parameter;
 use Doctrine\Persistence\ManagerRegistry;
-
 /**
  * @extends ServiceEntityRepository<Offer>
  *
@@ -39,24 +40,57 @@ class OfferRepository extends ServiceEntityRepository
         }
     }
 
-    public function findLikeTitle(string $title): ?array
+    public function findwithFilter(array $data): ?array
     {
         $queryBuilder = $this->createQueryBuilder('o')
-            ->where('o.title LIKE :title')
-            ->setParameter('title', '%' . $title . '%')
-            ->orderBy('o.title', 'ASC')
-            ->getQuery();
+            ->select('o', 'c')
+            ->join('o.company', 'c');
 
-        return $queryBuilder->getResult();
-    }
+            if (!empty($data['searchTitle'])) {
+                $queryBuilder = $queryBuilder
+                    ->andWhere('o.title Like :title')
+                    ->setParameter('title', '%' . $data['searchTitle'] . '%');
+            }
 
-    public function findLikeLocation(string $location): ?array
-    {
-        $queryBuilder = $this->createQueryBuilder('o')
-            ->where('o.location LIKE :location')
-            ->setParameter('location', '%' . $location . '%')
-            ->orderBy('o.title', 'ASC')
-            ->getQuery();
+            if (!empty($data['searchLocation'])) {
+                $queryBuilder = $queryBuilder
+                    ->andWhere('o.location LIKE :location')
+                    ->setParameter('location', '%' . $data['searchLocation'] . '%');
+            }
+            
+            if (!empty($data['contract'])) {
+                $queryBuilder = $queryBuilder
+                    ->andWhere('o.contract = :contract')
+                    ->setParameter('contract', $data['contract']);
+            }
+
+            if (!empty($data['companySector'])) {
+                $queryBuilder = $queryBuilder
+                    ->andWhere('c.sector IN (:sector)')
+                    ->setParameter('sector', $data['companySector']);
+            }
+
+            if (!empty($data['experience'])) {
+                $queryBuilder = $queryBuilder
+                    ->andWhere('o.experience IN (:experience)')
+                    ->setParameter('experience', $data['experience']);
+            }
+
+            if (!empty($data['workFromHome'])) {
+                $queryBuilder = $queryBuilder
+                    ->andWhere('o.workFromHome IN (:workFromHome)')
+                    ->setParameter('workFromHome', $data['workFromHome']);
+            }
+
+            if (!empty($data['salary'])) {
+                $queryBuilder = $queryBuilder
+                    ->andWhere('o.minSalary < :salary AND o.maxSalary > :salary')
+                    ->setParameter('salary', $data['salary']);
+            }
+
+            $queryBuilder = $queryBuilder
+                ->orderBy('o.title', 'ASC')
+                ->getQuery();
 
         return $queryBuilder->getResult();
     }
