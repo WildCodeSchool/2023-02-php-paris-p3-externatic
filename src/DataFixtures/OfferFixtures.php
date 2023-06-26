@@ -16,7 +16,7 @@ class OfferFixtures extends Fixture implements DependentFixtureInterface
         for ($i = 1; $i <= 60; $i++) {
             $offer = new Offer();
 
-            $offer->setTitle($faker->word())
+            $offer->setTitle($faker->sentence())
                 ->setCreatedAt($faker->dateTime())
                 ->setStartAt($faker->dateTime())
                 ->setContract($faker->word())
