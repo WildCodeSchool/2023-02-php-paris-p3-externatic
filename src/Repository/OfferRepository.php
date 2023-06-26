@@ -7,6 +7,7 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Query\Parameter as Parameter;
 use Doctrine\Persistence\ManagerRegistry;
+
 /**
  * @extends ServiceEntityRepository<Offer>
  *
@@ -46,47 +47,47 @@ class OfferRepository extends ServiceEntityRepository
             ->select('o', 'c')
             ->join('o.company', 'c');
 
-            if (!empty($data['searchTitle'])) {
-                $queryBuilder = $queryBuilder
-                    ->andWhere('o.title Like :title')
-                    ->setParameter('title', '%' . $data['searchTitle'] . '%');
-            }
+        if (!empty($data['searchTitle'])) {
+            $queryBuilder = $queryBuilder
+                ->andWhere('o.title Like :title')
+                ->setParameter('title', '%' . $data['searchTitle'] . '%');
+        }
 
-            if (!empty($data['searchLocation'])) {
-                $queryBuilder = $queryBuilder
-                    ->andWhere('o.location LIKE :location')
-                    ->setParameter('location', '%' . $data['searchLocation'] . '%');
-            }
-            
-            if (!empty($data['contract'])) {
-                $queryBuilder = $queryBuilder
-                    ->andWhere('o.contract = :contract')
-                    ->setParameter('contract', $data['contract']);
-            }
+        if (!empty($data['searchLocation'])) {
+            $queryBuilder = $queryBuilder
+                ->andWhere('o.location LIKE :location')
+                ->setParameter('location', '%' . $data['searchLocation'] . '%');
+        }
 
-            if (!empty($data['companySector'])) {
-                $queryBuilder = $queryBuilder
-                    ->andWhere('c.sector IN (:sector)')
-                    ->setParameter('sector', $data['companySector']);
-            }
+        if (!empty($data['contract'])) {
+            $queryBuilder = $queryBuilder
+                ->andWhere('o.contract = :contract')
+                ->setParameter('contract', $data['contract']);
+        }
 
-            if (!empty($data['experience'])) {
-                $queryBuilder = $queryBuilder
-                    ->andWhere('o.experience IN (:experience)')
-                    ->setParameter('experience', $data['experience']);
-            }
+        if (!empty($data['companySector'])) {
+            $queryBuilder = $queryBuilder
+                ->andWhere('c.sector IN (:sector)')
+                ->setParameter('sector', $data['companySector']);
+        }
 
-            if (!empty($data['workFromHome'])) {
-                $queryBuilder = $queryBuilder
-                    ->andWhere('o.workFromHome IN (:workFromHome)')
-                    ->setParameter('workFromHome', $data['workFromHome']);
-            }
+        if (!empty($data['experience'])) {
+            $queryBuilder = $queryBuilder
+                ->andWhere('o.experience IN (:experience)')
+                ->setParameter('experience', $data['experience']);
+        }
 
-            if (!empty($data['salary'])) {
-                $queryBuilder = $queryBuilder
-                    ->andWhere('o.minSalary < :salary AND o.maxSalary > :salary')
-                    ->setParameter('salary', $data['salary']);
-            }
+        if (!empty($data['workFromHome'])) {
+            $queryBuilder = $queryBuilder
+                ->andWhere('o.workFromHome IN (:workFromHome)')
+                ->setParameter('workFromHome', $data['workFromHome']);
+        }
+
+        if (!empty($data['salary'])) {
+            $queryBuilder = $queryBuilder
+                ->andWhere('o.minSalary < :salary AND o.maxSalary > :salary')
+                ->setParameter('salary', $data['salary']);
+        }
 
             $queryBuilder = $queryBuilder
                 ->orderBy('o.title', 'ASC')

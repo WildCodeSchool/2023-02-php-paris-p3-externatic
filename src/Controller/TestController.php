@@ -6,16 +6,17 @@ use App\Form\SearchOfferFilterType;
 use App\Repository\OfferRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class TestController extends AbstractController
 {
     #[Route('/', name:'index')]
-    public function index(Request $request, OfferRepository $offerRepository)
+    public function index(Request $request, OfferRepository $offerRepository): Response
     {
         $form = $this->createForm(SearchOfferFilterType::class);
         $form->handleRequest($request);
-        
+
 
         if ($form->isSubmitted() && $form->isValid()) {
             var_dump($form->getData());
@@ -24,7 +25,7 @@ class TestController extends AbstractController
         } else {
             $offers = $offerRepository->findAll();
         }
-        
+
         return $this->render('test/index.html.twig', [
             'form' => $form,
             'offers' => $offers,
