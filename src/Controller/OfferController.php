@@ -20,6 +20,9 @@ class OfferController extends AbstractController
     public function index(OfferRepository $offerRepository, PaginatorInterface $paginator, Request $request): Response
     {
         $offers = $paginator->paginate($offerRepository->findAll(), $request->query->getInt('page', 1), 6);
+        $offers->setCustomParameters([
+            'rounded' => true,
+        ]);
 
         $now = new DateTime();
 

@@ -1,17 +1,205 @@
 @import url('https://fonts.googleapis.com/css?family=Jost');
-$primary: #851342;
-$secondary: #FED32C;
-$tertiary: #C1C5CF;
+@import '~bootstrap-icons/font/bootstrap-icons.css';
+@import "~bootstrap/scss/bootstrap";
 
 $font-family-base: 'Jost', sans-serif;
 
-@import "~bootstrap/scss/bootstrap";
+$primary: #851342;
+$secondary: #FED32C;
+$tertiary: #D9D9D9;
+$info: #ECEEF1;
+$light: #F6F7F8;
 
-//Offer_index
+$btn-font-weight: 700;
+$btn-font-size: 1rem;
+$btn-padding-y: 0.7rem;
+$btn-padding-x: 2.5rem;
+
+$accordion-button-active-bg: $primary;
+$accordion-button-color: $primary;
+$accordion-button-active-color: white;
+$accordion-icon-active-color: white;
+$accordion-icon-color: #66002A;
+$accordion-button-bg: $tertiary;
+
+$input-bg: $info;
+$input-line-height: 2.5;
+$input-border-color: rgba(0, 0, 0, 0.3);
+$input-placeholder-color: rgba(0, 0, 0, 0.5);
+
+$carousel-control-color: black;
+
+$paragraph-margin-bottom: 0;
+
+$pagination-color: $primary;
+
+.margin {
+    margin: 0 auto;
+    max-width: 1400px;
+    width: 100%;
+    padding: 1.5rem;
+}
+
+// Cards
+@mixin border($color) {
+    border: 2px solid $color;
+    box-shadow: 6px 6px 0px $color;
+}
+
+@mixin cards($color, $radius) {
+    border-top-right-radius: $radius;
+
+    @if $color ==$primary {
+        @include border($primary);
+
+        &:hover {
+            @include border($secondary);
+        }
+    }
+
+    @else if $color ==$secondary {
+        @include border($secondary);
+
+        &:hover {
+            @include border($primary);
+        }
+    }
+
+    @else if $color ==$tertiary {
+        border: 2px solid $tertiary;
+        box-shadow: 6px 6px 0px white;
+
+        &:hover,
+        &:focus-within {
+            @include border($primary);
+
+            .accordion-button {
+                background-color: $primary;
+                color: white;
+            }
+        }
+    }
+}
+
+#application-card .accordion-button {
+    font-weight: 500;
+}
+
+#search-card {
+    @include cards($primary, 10px);
+}
+
+#application-card {
+    @include cards($tertiary, 0px);
+}
+
+#profile-card {
+    @include cards($secondary, 10px);
+}
+
+.profile-blocks {
+    border-radius: 5px;
+    background-color: #F7F7F7;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+// Forms
+.form-control {
+    text-indent: 16%;
+}
+
+#dropdown-menu-btn {
+    height: 54px;
+    color: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    font-weight: 400;
+    text-align: start;
+    text-indent: 13%;
+}
+
+#glass {
+    margin-top: -2.7rem;
+    margin-left: 1rem;
+}
+
+#job {
+    margin-top: -0.4rem;
+    margin-left: 0.8rem;
+}
+
+#location {
+    margin-top: -2.7rem;
+    margin-left: 0.8rem;
+}
+
+.btn-primary:hover {
+    background-color: #851342;
+}
+
+// Navigation buttons
+#navigation-btn-desktop .btn {
+    border-radius: 10px;
+    width: 300px;
+    padding: 1rem;
+    background-color: $light;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+#navigation-btn-desktop .btn p {
+    font-weight: 400;
+}
+
+#navigation-btn-mobile .btn {
+    border-radius: 10px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    background-color: $light;
+    font-size: 14px;
+    padding: 0.7rem;
+}
+
+#navigation-btn-mobile .carousel-inner {
+    overflow: inherit;
+}
+
+#navigation-btn-desktop .btn:hover,
+#navigation-btn-desktop .btn:focus,
+#navigation-btn-mobile .carousel-item .btn:focus {
+    background-color: $secondary;
+}
+
+// Media queries
+@media (min-width: 600px) {
+    #navigation-btn-mobile {
+        display: none;
+    }
+}
+
+@media (max-width: 599px) {
+    #navigation-btn-desktop {
+        display: none;
+    }
+
+    #offer-description-card {
+        @include cards($primary, 10px);
+        background-color: rgba(217, 217, 217, 0.2);
+    }
+}
+
+// Page Offer_index
 
 .OfferCard {
     text-decoration: none;
     text-align: center;
+    position: relative;
+    top: -0.5rem;
+}
+
+.indexOfferPicture {
+    border-radius: 5px;
+}
+
+.card {
+    --bs-card-border-width: 100%;
 }
 
 .otherInfo {
@@ -35,7 +223,17 @@ $font-family-base: 'Jost', sans-serif;
     height: 28px;
 }
 
-//Offer_show
+.page-link.active,
+.active>.page-link {
+    background-color: $primary;
+    border-color: $primary;
+}
+
+.page-link {
+    color: $primary;
+}
+
+//Page Offer_show
 
 h2 {
     font-weight: 700;
@@ -44,7 +242,7 @@ h2 {
 
 hr {
     color: $primary;
-    width: 64.62513rem;
+    width: 100%;
     height: 0.125rem;
     border: 1px solid;
 }
@@ -55,7 +253,7 @@ hr {
     background: url("../images/headerBg.png") 0 0 no-repeat fixed;
     height: 100%;
     overflow: hidden;
-    background-color: hsl(335, 75%, 30%);
+    background-color: hsl(335, 42%, 54%);
     background-blend-mode: multiply;
 }
 
@@ -65,16 +263,14 @@ hr {
     --bs-btn-color: black;
 }
 
-.greyAreaInOfferShow {
+.grey-area-in-offer-show {
     width: 10%;
     background-color: $tertiary;
     text-align: center;
     color: black;
     border-radius: 5px;
-}
-
-.otherInfo {
-    justify-content: space-evenly;
+    padding: 0.4rem;
+    margin-right: 15px;
 }
 
 .beforeFooterBtn {
@@ -82,6 +278,17 @@ hr {
     justify-content: center;
 }
 
-.skillsTable {
+.skillsTab {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.offer-show-content {
+    margin-bottom: 6.25rem;
+}
+
+.other-info-in-offer-show {
     display: flex;
+    margin: auto;
+    justify-content: center;
 }

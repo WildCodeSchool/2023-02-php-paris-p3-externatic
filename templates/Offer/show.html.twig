@@ -3,25 +3,24 @@
 {% block title %}Fiche d'une annonce -
 	{{ offer.title }}
 {% endblock %}
-
-{% block body %}
+{% block OfferShowHeaderSection %}
 	<section class="OfferShowHeaderSection pt-4 pb-4" style="background-image: url(../../{{ offer.picture }})">
 		<img class="indexCompanyLogo" src="../../{{ offer.company.logo }}">
 		<p>{{ offer.company.name }}</p>
 		<h3 class="mb-4 mt-4">
 			<strong>{{ offer.title }}</strong>
 		</h3>
-		<section class="otherInfo">
-			<div class="greyAreaInOfferShow">
-				<img src="{{ asset('build/images/picto/location1.c5d41a07.svg') }}" alt="pictoLocation">
+		<section class="other-info-in-offer-show">
+			<div class="grey-area-in-offer-show">
+				<img src="{{ asset('build/images/picto/location1.4221a9ac.svg') }}" alt="pictoLocation">
 				{{ offer.location }}
 			</div>
-			<div class="greyAreaInOfferShow">
-				<img src="{{ asset('build/images/picto/job 3.2f5799e1.svg') }}" alt="pictoCartable">
+			<div class="grey-area-in-offer-show">
+				<img src="{{ asset('build/images/picto/job 3.1afd4455.svg') }}" alt="pictoCartable">
 				{{ offer.contract }}
 			</div>
-			<div class="greyAreaInOfferShow">
-				<img src="{{ asset('build/images/picto/piggy-bank 1.00856096.svg') }}" alt="pictoCochon">
+			<div class="grey-area-in-offer-show">
+				<img src="{{ asset('build/images/picto/piggy-bank 1.9a19ac5f.svg') }}" alt="pictoCochon">
 				{{ offer.minSalary // 1000 }}K																																							-
 				{{ offer.maxSalary // 1000 }}K
 			</section>
@@ -33,41 +32,45 @@
 			</button>
 		</div>
 	</section>
-	<h2 class="mt-4">
-		<img src="{{ asset('build/images/picto/immeuble-de-bureaux 2.02421ea4.svg') }}" alt="pictoImmeuble">
+{% endblock %}
+{% block body %}
+	<h2 class="mt-5">
+		<img src="{{ asset('build/images/picto/immeuble-de-bureaux 2.dfb8dfe9.svg') }}" alt="pictoImmeuble">
 		Company</h2><hr>
-	{{ offer.company.presentation }}
-	<h2 class="mt-4">
-		<img src="{{ asset('build/images/picto/job 3.2f5799e1.svg') }}" alt="pictoCartable">
+	<p class="offer-show-content">
+		{{ offer.company.presentation }}
+	</p>
+	<h2 class="mt-5">
+		<img src="{{ asset('build/images/picto/job 3.1afd4455.svg') }}" alt="pictoCartable">
 		Job Description</h2><hr>
-	<p>{{ offer.description }}</p>
-	<h2 class="mt-4">
-		<img src="{{ asset('build/images/picto/description-de-lemploi.224a23d1.svg') }}" alt="pictoPanneau">
+	<p class="offer-show-content">{{ offer.description }}</p>
+	<h2 class="mt-5">
+		<img src="{{ asset('build/images/picto/description-de-lemploi.981884f5.svg') }}" alt="pictoPanneau">
 		Candidate Profil</h2><hr>
-	<table class="table">
-		<thead>
-			<tr>
-				<th scope="col">Soft</th>
-				<th scope="col">Hard</th>
-			</tr>
-		</thead>
-		<tbody>
-			{% for skill in offer.skills %}
+	<div class="skillsTab offer-show-content">
+		{% for skill in offer.skills %}
+			<div>
 				{% if skill.type == 'hard' %}
 					<tr>
-						<th scope="row">{{ skill.name }}</th>
+						<th scope="row">
+							<img src="{{ asset('build/images/picto/checked 1.5d86e0d4.svg') }}" alt="pictoChecked">
+							{{ skill.name }}</th>
 					{% endif %}
+				</div>
+				<div>
 					{% if skill.type == 'soft' %}
-						<th scope="row">{{ skill.name }}</th>
+						<th scope="row">
+							<img src="{{ asset('build/images/picto/checked 1.5d86e0d4.svg') }}" alt="pictoChecked">
+							{{ skill.name }}</th>
 					</tr>
 				{% endif %}
-			{% endfor %}
-		</tbody>
-	</table>
-	<h2 class="mt-4">
-		<img src="{{ asset('build/images/picto/interview 2.a6d981fe.svg') }}" alt="pictoItvProcess">
+			</div>
+		{% endfor %}
+	</div>
+	<h2 class="mt-5">
+		<img src="{{ asset('build/images/picto/interview 2.57b3d3b7.svg') }}" alt="pictoItvProcess">
 		Interview Process</h2><hr><ol>
-		<li>
+		<li class="offer-show-content">
 			{{ offer.interviewProcess }}
 		</li>
 	</ol>

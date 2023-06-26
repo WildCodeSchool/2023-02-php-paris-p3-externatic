@@ -11,65 +11,69 @@
 			offers found</h4>
 	</div>
 	<div class="container">
-		<div class="row justify-content-between">
+		<div class="row justify-content-center">
 			{% for offer in offers %}
-				<div class="mt-4 mb-4 col-lg-4 col-md-12">
-					<a class="OfferCard" href="{{ path('offer_show', { id : offer.id }) }}">
-						<div class="card">
-							<div class="cardHead ratio ratio-21x9">
-								<img class="indexOfferPicture" src="../{{ offer.picture }}">
-							</div>
-							<div class="card-body">
-								<article>
-									<section class="subHead">
-										<img class="indexCompanyLogo me-1" src="../{{ offer.company.logo }}">
-										<p>{{ offer.company.name }}</p>
-									</section>
-									<h3>
-										<strong>{{ offer.title }}</strong>
-									</h3>
-									<p>
-										<img src="{{ asset('build/images/picto/location1.c5d41a07.svg') }}" alt="pictoLocation">
-										{{ offer.location }}
-									</p>
-									<p>
-										<section class="otherInfo">
-											<div class="greyArea">
-												{{ offer.contract }}
-											</div>
-											<div class="greyArea">
-												{{ offer.workFromHome }}
-											</div>
-											<div class="greyArea">
-												{{ offer.minSalary // 1000 }}K
-																																																																																																																																																																																																																																												-
-												{{ offer.maxSalary // 1000 }}K
-											</div>
-										</section>
-									</p>
-									<p>
-										<img src="{{ asset('build/images/picto/calendar1.7700a065.svg') }}" alt="pictoCalendar">
-										posted
-										{% set difference = date(offer.createdAt).diff(date(now)) %}
-										{% set leftDays = difference.days %}
-										{% if leftDays == 1 %}
-											1 day
-										{% else %}
-											{% set years = (leftDays // 365 )%}
-											{{ years }}
-											year(s)
-											{% set months = (leftDays % 365) // 30.5 %}
-											{{ months }}
-											month(s)
-											{% set days = ((leftDays % 365 ) % 30.5) %}
-											{{ days }}
-											day(s) ago
-										{% endif %}
-									</p>
-								</article>
-							</div>
+				<div class="col-12 col-md-6 col-lg-4 col-xl-4 mt-4">
+					<div id="search-card" class="text-center h-100">
+						<div class="card-body mt-2">
+							<a class="OfferCard" href="{{ path('offer_show', { id : offer.id }) }}">
+								<div class="card">
+									<div class="cardHead ratio ratio-21x9">
+										<img class="indexOfferPicture" src="../{{ offer.picture }}">
+									</div>
+									<div class="card-body">
+										<article>
+											<section class="subHead">
+												<img class="indexCompanyLogo me-1" src="../{{ offer.company.logo }}">
+												<p>{{ offer.company.name }}</p>
+											</section>
+											<h3>
+												<strong>{{ offer.title }}</strong>
+											</h3>
+											<p>
+												<img src="{{ asset('build/images/picto/location1.4221a9ac.svg') }}" alt="pictoLocation">
+												{{ offer.location }}
+											</p>
+											<p>
+												<section class="otherInfo">
+													<div class="greyArea">
+														{{ offer.contract }}
+													</div>
+													<div class="greyArea">
+														{{ offer.workFromHome }}
+													</div>
+													<div class="greyArea">
+														{{ offer.minSalary // 1000 }}K
+																																																																																																																																																																																																																																																																																																																																																																																																																																																							-
+														{{ offer.maxSalary // 1000 }}K
+													</div>
+												</section>
+											</p>
+											<p>
+												<img src="{{ asset('build/images/picto/calendar1.e79b1a6d.svg') }}" alt="pictoCalendar">
+												posted
+												{% set difference = date(offer.createdAt).diff(date(now)) %}
+												{% set leftDays = difference.days %}
+												{% if leftDays == 1 %}
+													1 day
+												{% else %}
+													{% set years = (leftDays // 365 )%}
+													{{ years }}
+													year(s)
+													{% set months = (leftDays % 365) // 30.5 %}
+													{{ months }}
+													month(s)
+													{% set days = ((leftDays % 365 ) % 30.5) %}
+													{{ days }}
+													day(s) ago
+												{% endif %}
+											</p>
+										</article>
+									</div>
+								</div>
+							</a>
 						</div>
-					</a>
+					</div>
 				</div>
 			{% endfor %}
 		</div>
