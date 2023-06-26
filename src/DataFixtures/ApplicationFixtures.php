@@ -14,12 +14,12 @@ class ApplicationFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager): void
     {
-        $faker = Factory::create();
+        // $faker = Factory::create();
         foreach (Application::APPLICATION_STATUS as $status) {
             $application = new Application();
 
             $application->setStatus($status)
-                ->setCreatedAt($faker->dateTime())
+                // ->setCreatedAt($faker->dateTime())
                 ->setOffer($this->getReference('offer_' . rand(1, 6)))
                 ->setCandidate($this->getReference('user_' . User::USER[rand(0, 3)]['Email'])->getCandidate());
 
