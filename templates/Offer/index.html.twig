@@ -29,6 +29,7 @@
 										<strong>{{ offer.title }}</strong>
 									</h3>
 									<p>
+										<img src="{{ asset('build/images/picto/location1.c5d41a07.svg') }}" alt="pictoLocation">
 										{{ offer.location }}
 									</p>
 									<p>
@@ -41,12 +42,13 @@
 											</div>
 											<div class="greyArea">
 												{{ offer.minSalary // 1000 }}K
-																																																																																																																																																																																																																																																																																																																																											-
+																																																																																																																																																																																																																																												-
 												{{ offer.maxSalary // 1000 }}K
 											</div>
 										</section>
 									</p>
 									<p>
+										<img src="{{ asset('build/images/picto/calendar1.7700a065.svg') }}" alt="pictoCalendar">
 										posted
 										{% set difference = date(offer.createdAt).diff(date(now)) %}
 										{% set leftDays = difference.days %}

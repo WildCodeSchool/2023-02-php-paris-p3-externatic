@@ -8,6 +8,7 @@ $font-family-base: 'Jost', sans-serif;
 @import "~bootstrap/scss/bootstrap";
 
 //Offer_index
+
 .OfferCard {
     text-decoration: none;
     text-align: center;
@@ -51,7 +52,7 @@ hr {
 .OfferShowHeaderSection {
     text-align: center;
     color: white;
-    background: url("../../public/uploads/candidatePictures/eri.png") 0 0 no-repeat fixed;
+    background: url("../images/headerBg.png") 0 0 no-repeat fixed;
     height: 100%;
     overflow: hidden;
     background-color: hsl(335, 75%, 30%);
@@ -79,4 +80,8 @@ hr {
 .beforeFooterBtn {
     display: flex;
     justify-content: center;
+}
+
+.skillsTable {
+    display: flex;
 }

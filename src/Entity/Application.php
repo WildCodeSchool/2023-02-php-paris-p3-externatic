@@ -3,8 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ApplicationRepository;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use DateTimeImmutable;
 
 #[ORM\Entity(repositoryClass: ApplicationRepository::class)]
 class Application
@@ -26,8 +26,8 @@ class Application
     #[ORM\Column(length: 100)]
     private ?string $status = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $createdAt = null;
+    #[ORM\Column]
+    private DateTimeImmutable $createdAt;
 
     #[ORM\ManyToOne(inversedBy: 'applications')]
     #[ORM\JoinColumn(nullable: false)]
@@ -37,10 +37,10 @@ class Application
     #[ORM\JoinColumn(nullable: false)]
     private ?Offer $offer = null;
 
-    // public function __construct()
-    // {
-    //     $this->createdAt = new \DateTimeImmutable;
-    // }
+    public function __construct()
+    {
+        $this->createdAt = new DateTimeImmutable();
+    }
 
     public function getId(): ?int
     {
@@ -59,12 +59,12 @@ class Application
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getCreatedAt(): DateTimeImmutable
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    public function setCreatedAt(DateTimeImmutable $createdAt): self
     {
         $this->createdAt = $createdAt;
 

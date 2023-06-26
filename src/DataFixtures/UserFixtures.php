@@ -15,30 +15,6 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
 {
     private UserPasswordHasherInterface $passwordHasher;
 
-    public const LOGO = [
-        'logoCompany.jpg', 'logoCompany1.jpg'
-    ];
-
-    public const USER = [
-        [
-            'Firstname' => 'Erika', 'Lastname' => 'Ikelempo', 'Role' => User::ROLE_CANDIDATE,
-            'Location' => 'Epinay', 'Email' => 'erika@hotmail.fr', 'picture' => 'eri.png'
-        ],
-        [
-            'Firstname' => 'Lionel', 'Lastname' => 'Da Rosa', 'Role' => User::ROLE_CANDIDATE,
-            'Location' => 'Boulbi', 'Email' => 'lio@hotmail.fr', 'picture' => 'Lio.png'
-        ],
-        [
-            'Firstname' => 'Ester', 'Lastname' => 'Martinez', 'Role' => User::ROLE_CANDIDATE,
-            'Location' => 'Paris', 'Email' => 'ester@hotmail.fr', 'picture' => 'Ester.png'
-        ],
-        [
-            'Firstname' => 'Lea', 'Lastname' => 'Hadida', 'Role' => User::ROLE_CANDIDATE,
-            'Location' => 'Paris', 'Email' => 'lea@hotmail.fr', 'picture' => 'Lea.png'
-        ],
-        ['Name' => 'Atos', 'Role' => User::ROLE_COMPANY, 'Email' => 'atos@hotmail.fr'],
-        ['Name' => 'McDonalds', 'Role' => User::ROLE_COMPANY, 'Email' => 'mcdo@hotmail.fr']
-    ];
 
     public function __construct(UserPasswordHasherInterface $passwordHasher)
     {
@@ -48,7 +24,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager): void
     {
         $faker = Factory::create();
-        foreach (self::USER as $person) {
+        foreach (User::USER as $person) {
             if ($person['Role'] == User::ROLE_CANDIDATE) {
                 $candidate = new Candidate();
 
@@ -87,7 +63,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                     ->setSector($faker->word())
                     ->setPresentation($faker->paragraph())
                     ->setLocation($faker->city())
-                    ->setLogo(self::LOGO[mt_rand(0, count(self::LOGO) - 1)]);
+                    ->setLogo(User::LOGO[mt_rand(0, count(User::LOGO) - 1)]);
 
                 $user = new User();
 
