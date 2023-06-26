@@ -103,7 +103,7 @@ $paragraph-margin-bottom: 0;
     text-indent: 16%;
 }
 
-#dropdownMenuButton {
+#dropdown-menu-btn {
     height: 54px;
     color: rgba(0, 0, 0, 0.5);
     border: 1px solid rgba(0, 0, 0, 0.3);
@@ -128,7 +128,7 @@ $paragraph-margin-bottom: 0;
 }
 
 // Navigation buttons
-#navigationBtnDesktop .btn {
+#navigation-btn-desktop .btn {
     border-radius: 10px;
     width: 300px;
     padding: 1rem;
@@ -136,11 +136,11 @@ $paragraph-margin-bottom: 0;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
-#navigationBtnDesktop .btn p {
+#navigation-btn-desktop .btn p {
     font-weight: 400;
 }
 
-#navigationBtnMobile .btn {
+#navigation-btn-mobile .btn {
     border-radius: 10px;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     background-color: $light;
@@ -148,25 +148,25 @@ $paragraph-margin-bottom: 0;
     padding: 0.7rem;
 }
 
-#navigationBtnMobile .carousel-inner {
+#navigation-btn-mobile .carousel-inner {
     overflow: inherit;
 }
 
-#navigationBtnDesktop .btn:hover,
-#navigationBtnDesktop .btn:focus,
-#navigationBtnMobile .carousel-item .btn:focus {
+#navigation-btn-desktop .btn:hover,
+#navigation-btn-desktop .btn:focus,
+#navigation-btn-mobile .carousel-item .btn:focus {
     background-color: $secondary;
 }
 
 // Media queries
 @media (min-width: 600px) {
-    #navigationBtnMobile {
+    #navigation-btn-mobile {
     display: none;
     }
 }
 
 @media (max-width: 599px) {
-    #navigationBtnDesktop {
+    #navigation-btn-desktop {
         display: none;
     }
 
