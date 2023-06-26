@@ -26,6 +26,7 @@
     },
     "dependencies": {
         "@popperjs/core": "^2.11.8",
+        "bootstrap-icons": "^1.10.5",
         "bootswatch": "^5.3.0"
     }
 }
