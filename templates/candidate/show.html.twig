@@ -4,62 +4,72 @@
 {% endblock %}
 
 {% block body %}
-	<p>Visible by recruiters</p>
-	<a href="{{ path('candidate_visibility', {'id': candidate.id}) }}">
-		<i class="bi {{ candidate.isVisible ? 'bi-toggle-on' : 'bi-toggle-off' }}"></i>
-	</a>
+	<div class="visibility">
+		<p>Visible by recruiters</p>
+		<a href="{{ path('candidate_visibility', {'id': candidate.id}) }}">
+			<i class="bi {{ candidate.isVisible ? 'bi-toggle-on' : 'bi-toggle-off' }}"></i>
+		</a>
 
-	<p>Viewed by people</p>
-	<img class="img_icon fa-border" src="{{ asset('build/images/profil_views.png') }}" alt="profil_views"/>
+		<p>Viewed by people</p>
+		<img class="img_icon fa-border" src="{{ asset('build/images/profil_views.svg') }}" alt="profil_views"/>
 
-	<p>Profil completion</p>
+		<p>Profil completion</p>
+	</div>
+	<div class="profile">
+		<h1>YOUR PROFILE</h1>
+		<img src="/uploads/{{ candidate.picture }}" alt="picture_profil"/>
+		<p class="name">{{ candidate.firstname }}
+			{{ candidate.lastname }}</p>
+		<p class="job_title">{{ candidate.jobTitle }}</p>
+		<p>XP
+			{{ candidate.experience }}</p>
 
-	<h1>YOUR PROFILE</h1>
-	<img src="/uploads/{{ candidate.picture }}" alt="picture_profil"/>
-	<p>{{ candidate.firstname }}
-		{{ candidate.lastname }}</p>
-	<p>XP
-		{{ candidate.experience }}</p>
 
-	<button type="submit"><img class="img_icon fa-border" src="{{ asset('build/images/cv.png') }}" alt="curriculum"/>your resume</button>
-	<button type="submit"><img class="img_icon fa-border" src="{{ asset('build/images/upload.png') }}" alt="upload"/>update your resume</button>
+		{% for metadata in candidate.metadata %}
+			{% if metadata.type == 'GitHub' %}
+				<a href="{{ metadata.metadata }}"><img src="{{ asset('build/images/github_black.svg') }}" alt="github"/></a>
+			{% elseif metadata.type == 'linkedin' %}
+				<a href="{{ metadata.metadata }}"><img src="{{ asset('build/images/linkedin_black.svg') }}" alt="linkedin"/></a>
+			{% endif %}
+		{% endfor %}
 
-	{% for metadata in candidate.metadata %}
-		{% if metadata.type == 'GitHub' %}
-			<a href="{{ metadata.metadata }}"><img src="{{ asset('build/images/github_black.png') }}" alt="github"/></a>
-		{% elseif metadata.type == 'linkedin' %}
-			<a href="{{ metadata.metadata }}"><img src="{{ asset('build/images/linkedin_black.png') }}" alt="linkedin"/></a>
-		{% endif %}
-	{% endfor %}
 
-	<p>{{ candidate.introduction }}</p>
+		<p>{{ candidate.introduction }}</p>
 
-	<p>HARD SKILLS</p>
-	{% for skill in candidate.skills %}
-		{% if skill.type == 'hard' %}
-			<div class="hard_skills">
-				<img class="img_icon fa-border" src="{{ asset('build/images/check.png') }}" alt="check"/>
-				<span>{{skill.name}}</span>
-			</div>
-		{% endif %}
-	{% endfor %}
+		<button type="submit"><img class="img_icon fa-border" src="{{ asset('build/images/cv.svg') }}" alt="curriculum"/>your resume</button>
+		<button type="submit"><img class="img_icon fa-border" src="{{ asset('build/images/upload.svg') }}" alt="upload"/>update your resume</button>
 
-	<p>SOFT SKILLS</p>
-	{% for skill in candidate.skills %}
-		{% if skill.type == 'soft' %}
-			<div class="soft_skills">
-				<img class="img_icon fa-border" src="{{ asset('build/images/check.png') }}" alt="check"/>
-				<span>{{skill.name}}</span>
-			</div>
-		{% endif %}
-	{% endfor %}
+	</div>
 
-	<p>PORTEFOLIO</p>
-	{% for metadata in candidate.metadata %}
-		{% if metadata.type == 'portfolio' %}
-			<a href="{{ metadata.metadata }}">Portfolio<img src="{{ asset('build/images/link.png') }}" alt="portfolio"/></a>
-		{% endif %}
-	{% endfor %}
+	<div class="skills">
+		<p>HARD SKILLS</p>
+		{% for skill in candidate.skills %}
+			{% if skill.type == 'hard' %}
+				<div class="hard_skills">
+					<img class="img_icon fa-border" src="{{ asset('build/images/checked.svg') }}" alt="check"/>
+					<span>{{ skill.name }}</span>
+				</div>
+			{% endif %}
+		{% endfor %}
+
+		<p>SOFT SKILLS</p>
+		{% for skill in candidate.skills %}
+			{% if skill.type == 'soft' %}
+				<div class="soft_skills">
+					<img class="img_icon fa-border" src="{{ asset('build/images/checked.svg') }}" alt="check"/>
+					<span>{{ skill.name }}</span>
+				</div>
+			{% endif %}
+		{% endfor %}
+	</div>
+	<div class="portfolio">
+		<p>PORTEFOLIO</p>
+		{% for metadata in candidate.metadata %}
+			{% if metadata.type == 'portfolio' %}
+				<a href="{{ metadata.metadata }}">Portfolio<img src="{{ asset('build/images/link.svg') }}" alt="portfolio"/></a>
+			{% endif %}
+		{% endfor %}
+	</div>
 
 	<a href="{{ path('candidate_edit', {'id': candidate.id}) }}">Edit</a>
 {% endblock %}
