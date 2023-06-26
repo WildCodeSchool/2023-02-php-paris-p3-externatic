@@ -4,72 +4,115 @@
 {% endblock %}
 
 {% block body %}
-	<div class="visibility">
-		<p>Visible by recruiters</p>
-		<a href="{{ path('candidate_visibility', {'id': candidate.id}) }}">
-			<i class="bi {{ candidate.isVisible ? 'bi-toggle-on' : 'bi-toggle-off' }}"></i>
-		</a>
+	{% include 'style/component/_navigationBtnMobile.html.twig' %}
+	{% include 'style/component/_navigationBtnDesktop.html.twig' %}
 
-		<p>Viewed by people</p>
-		<img class="img_icon fa-border" src="{{ asset('build/images/profil_views.svg') }}" alt="profil_views"/>
+	<div class="recap_info">
+		<div class="candidate_visibility">
+			<div>
+				<p>Visible by recruiters</p>
 
-		<p>Profil completion</p>
+				<a href="{{ path('candidate_visibility', {'id': candidate.id}) }}">
+					<i class="bi {{ candidate.isVisible ? 'bi-toggle-on' : 'bi-toggle-off' }}"></i>
+				</a>
+			</div>
+			<div>
+				<p>Viewed by X people</p>
+				<img class="img_icon fa-border" src="{{ asset('build/images/profil_views.svg') }}" alt="profil_views"/>
+			</div>
+		</div>
+		<div class="candidate_completion">
+			<span>Profil completion</span>
+		</div>
 	</div>
+
 	<div class="profile">
 		<h1>YOUR PROFILE</h1>
-		<img src="/uploads/{{ candidate.picture }}" alt="picture_profil"/>
-		<p class="name">{{ candidate.firstname }}
-			{{ candidate.lastname }}</p>
-		<p class="job_title">{{ candidate.jobTitle }}</p>
-		<p>XP
-			{{ candidate.experience }}</p>
 
+		<img id="picture_profile" src="/build/images/eri.f1493033.png" alt="picture_profile"/>
+		<div id="profile-card" class="p-3">
+			<div class="card-body mt-2">
+				<p class="name">{{ candidate.firstname }}
+					{{ candidate.lastname }}</p>
+				<p class="job_title">{{ candidate.jobTitle }}</p>
+				<p class="experience">XP
+					{{ candidate.experience }}</p>
 
-		{% for metadata in candidate.metadata %}
-			{% if metadata.type == 'GitHub' %}
-				<a href="{{ metadata.metadata }}"><img src="{{ asset('build/images/github_black.svg') }}" alt="github"/></a>
-			{% elseif metadata.type == 'linkedin' %}
-				<a href="{{ metadata.metadata }}"><img src="{{ asset('build/images/linkedin_black.svg') }}" alt="linkedin"/></a>
-			{% endif %}
-		{% endfor %}
+				{% for metadata in candidate.metadata %}
+					{% if metadata.type == 'GitHub' %}
+						<a href="{{ metadata.metadata }}"><img class="metadata" src="{{ asset('build/images/github_black.svg') }}" alt="github"/></a>
+					{% elseif metadata.type == 'linkedin' %}
+						<a href="{{ metadata.metadata }}"><img class="metadata" src="{{ asset('build/images/linkedin_black.svg') }}" alt="linkedin"/></a>
+					{% endif %}
+				{% endfor %}
+			</div>
+		</div>
 
+		<div class="profile-blocks mt-4">
+			<div class="card-body p-4 ">
+				<img class="quote_left" src="{{ asset('build/images/quoteopen.png') }}" alt="quote"/>
+				{{ candidate.introduction }}
+				<img class="quote_right" src="{{ asset('build/images/quoteclose.png') }}" alt="quote"/>
+			</div>
+		</div>
 
-		<p>{{ candidate.introduction }}</p>
-
-		<button type="submit"><img class="img_icon fa-border" src="{{ asset('build/images/cv.svg') }}" alt="curriculum"/>your resume</button>
-		<button type="submit"><img class="img_icon fa-border" src="{{ asset('build/images/upload.svg') }}" alt="upload"/>update your resume</button>
-
+		<div class="col text-center mt-4">
+			<button type="button" class="btn btn-secondary mt-2"><img class="img_icon fa-border" src=" {{ asset('build/images/cv.svg') }} " alt=" curriculum"/>your resume</button>
+		</div>
+		<div class="col text-center mt-4">
+			<button type="button" class="btn btn-secondary upload mt-2"><img class="img_icon fa-border" src="{{ asset('build/images/upload.svg') }}" alt="upload"/>update your resume</button>
+		</div>
 	</div>
 
 	<div class="skills">
-		<p>HARD SKILLS</p>
-		{% for skill in candidate.skills %}
-			{% if skill.type == 'hard' %}
+		<div class="profile-blocks mt-4">
+			<div class="card-body p-4 ">
 				<div class="hard_skills">
-					<img class="img_icon fa-border" src="{{ asset('build/images/checked.svg') }}" alt="check"/>
-					<span>{{ skill.name }}</span>
+					<p>HARD SKILLS</p>
+					{% for skill in candidate.skills %}
+						{% if skill.type == 'hard' %}
+							<div>
+								<img class="img_icon fa-border" src="{{ asset('build/images/checked.svg') }}" alt="check"/>
+								<span>{{ skill.name }}</span>
+							</div>
+						{% endif %}
+					{% endfor %}
 				</div>
-			{% endif %}
-		{% endfor %}
+			</div>
+		</div>
 
-		<p>SOFT SKILLS</p>
-		{% for skill in candidate.skills %}
-			{% if skill.type == 'soft' %}
+		<div class="profile-blocks mt-4">
+			<div class="card-body p-4 ">
 				<div class="soft_skills">
-					<img class="img_icon fa-border" src="{{ asset('build/images/checked.svg') }}" alt="check"/>
-					<span>{{ skill.name }}</span>
+					<p>SOFT SKILLS</p>
+					{% for skill in candidate.skills %}
+						{% if skill.type == 'soft' %}
+							<div>
+								<img class="img_icon fa-border" src="{{ asset('build/images/checked.svg') }}" alt="check"/>
+								<span>{{ skill.name }}</span>
+							</div>
+						{% endif %}
+					{% endfor %}
 				</div>
-			{% endif %}
-		{% endfor %}
-	</div>
-	<div class="portfolio">
-		<p>PORTEFOLIO</p>
-		{% for metadata in candidate.metadata %}
-			{% if metadata.type == 'portfolio' %}
-				<a href="{{ metadata.metadata }}">Portfolio<img src="{{ asset('build/images/link.svg') }}" alt="portfolio"/></a>
-			{% endif %}
-		{% endfor %}
+			</div>
+		</div>
 	</div>
 
-	<a href="{{ path('candidate_edit', {'id': candidate.id}) }}">Edit</a>
+	<div class="portfolio">
+		<div class="profile-blocks mt-4">
+			<div class="card-body p-4 ">
+				<p>PORTEFOLIO</p>
+				{% for metadata in candidate.metadata %}
+					{% if metadata.type == 'portfolio' %}
+						<a href="{{ metadata.metadata }}">Portfolio<img src="{{ asset('build/images/link.svg') }}" alt="portfolio"/></a>
+					{% endif %}
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+	<div class="col text-center mt-4">
+		<button type="button" class="btn btn-secondary mt-2">
+			<a href="{{ path('candidate_edit', {'id': candidate.id}) }}">Edit</a>
+		</button>
+	</div>
 {% endblock %}
