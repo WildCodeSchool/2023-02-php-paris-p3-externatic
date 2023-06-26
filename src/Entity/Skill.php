@@ -40,7 +40,6 @@ class Skill
             ['name' => 'inventive1', 'type' => 'soft'],
             ['name' => 'perfectionist1', 'type' => 'soft'],
         ]
-
     ];
 
     #[ORM\Id]

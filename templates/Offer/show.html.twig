@@ -4,8 +4,8 @@
 	{{ offer.title }}
 {% endblock %}
 {% block body %}
-	<section class="OfferShowHeaderSection pt-4 pb-4" style="background-image: url(../../{{ offer.picture }})">
-		<img class="indexCompanyLogo" src="../../{{ offer.company.logo }}">
+	<section class="offer-show-header-section pt-4 pb-4" style="background-image: url(../../{{ offer.picture }})">
+		<img class="index-company-logo" src="../../{{ offer.company.logo }}">
 		<p>{{ offer.company.name }}</p>
 		<h3 class="mb-4 mt-4">
 			<strong>{{ offer.title }}</strong>
@@ -23,58 +23,67 @@
 				<img src="{{ asset('build/images/picto/piggy-bank 1.9a19ac5f.svg') }}" alt="pictoCochon">
 				{{ offer.minSalary // 1000 }}K																																							-
 				{{ offer.maxSalary // 1000 }}K
-			</section>
-			<p>offer posted
-				{{ dateInterval }}
-				ago</p>
-			<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-				Apply
-			</button>
-		</div>
+			</div>
+		</section>
+		<p>offer posted
+			{{ dateInterval }}
+			ago
+		</p>
+		<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+			Apply
+		</button>
 	</section>
-
 	<div class="margin">
 		<h2 class="mt-5">
 			<img src="{{ asset('build/images/picto/immeuble-de-bureaux 2.dfb8dfe9.svg') }}" alt="pictoImmeuble">
-			Company</h2><hr>
+			Company
+		</h2><hr>
 		<p class="offer-show-content">
 			{{ offer.company.presentation }}
 		</p>
 		<h2 class="mt-5">
 			<img src="{{ asset('build/images/picto/job 3.1afd4455.svg') }}" alt="pictoCartable">
-			Job Description</h2><hr>
+			Job Description
+		</h2><hr>
 		<p class="offer-show-content">{{ offer.description }}</p>
 		<h2 class="mt-5">
 			<img src="{{ asset('build/images/picto/description-de-lemploi.981884f5.svg') }}" alt="pictoPanneau">
-			Candidate Profil</h2><hr>
-		<div class="skillsTab offer-show-content">
-			{% for skill in offer.skills %}
-				<div>
-					{% if skill.type == 'hard' %}
-						<tr>
-							<th scope="row">
-								<img src="{{ asset('build/images/picto/checked 1.5d86e0d4.svg') }}" alt="pictoChecked">
-								{{ skill.name }}</th>
+			Candidate Profil
+		</h2><hr>
+		<section class="skills-tab">
+			<table>
+				{% for skill in offer.skills %}
+					<tr>
+						{% if skill.type == 'hard' %}
+							<td>
+								<img src="{{ asset('build/images/picto/checked 1.5d86e0d4.svg') }}" alt="pictoChecked">{{ skill.name }}
+							</td>
 						{% endif %}
-					</div>
-					<div>
+					</tr>
+				{% endfor %}
+			</table>
+			<table>
+				{% for skill in offer.skills %}
+					<tr>
 						{% if skill.type == 'soft' %}
-							<th scope="row">
-								<img src="{{ asset('build/images/picto/checked 1.5d86e0d4.svg') }}" alt="pictoChecked">
-								{{ skill.name }}</th>
-						</tr>
-					{% endif %}
-				</div>
-			{% endfor %}
-		</div>
+							<td>
+								<img src="{{ asset('build/images/picto/checked 1.5d86e0d4.svg') }}" alt="pictoChecked">{{ skill.name }}
+							</td>
+						{% endif %}
+					</tr>
+				{% endfor %}
+			</table>
+		</section>
 		<h2 class="mt-5">
 			<img src="{{ asset('build/images/picto/interview 2.57b3d3b7.svg') }}" alt="pictoItvProcess">
-			Interview Process</h2><hr><ol>
+			Interview Process
+		</h2><hr>
+		<ol>
 			<li class="offer-show-content">
 				{{ offer.interviewProcess }}
 			</li>
 		</ol>
-		<section class="beforeFooterBtn">
+		<section class="before-footer-btn">
 			<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
 				Apply
 			</button>

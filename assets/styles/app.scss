@@ -187,14 +187,14 @@ $pagination-color: $primary;
 
 // Page Offer_index
 
-.OfferCard {
+.offer-card {
     text-decoration: none;
     text-align: center;
     position: relative;
     top: -0.5rem;
 }
 
-.indexOfferPicture {
+.index-offer-picture {
     border-radius: 5px;
 }
 
@@ -218,7 +218,7 @@ $pagination-color: $primary;
     justify-content: center;
 }
 
-.indexCompanyLogo {
+.index-company-logo {
     width: 30px;
     height: 28px;
 }
@@ -249,7 +249,7 @@ hr {
     border: 1px solid;
 }
 
-.OfferShowHeaderSection {
+.offer-show-header-section {
     text-align: center;
     color: white;
     background: url("../images/headerBg.png") 0 0 no-repeat fixed;
@@ -275,14 +275,14 @@ hr {
     margin-right: 15px;
 }
 
-.beforeFooterBtn {
+.before-footer-btn {
     display: flex;
     justify-content: center;
 }
 
-.skillsTab {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+.skills-tab {
+    display: flex;
+    justify-content: space-evenly;
 }
 
 .offer-show-content {
