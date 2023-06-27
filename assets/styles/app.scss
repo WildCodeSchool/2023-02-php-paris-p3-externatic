@@ -44,7 +44,7 @@ $paragraph-margin-bottom: 0;
 @mixin cards($color, $radius) {
     border-top-right-radius: $radius;
 
-    @if $color ==$primary {
+    @if $color == $primary {
         @include border($primary);
 
         &:hover {
@@ -52,7 +52,7 @@ $paragraph-margin-bottom: 0;
         }
     }
 
-    @else if $color ==$secondary {
+    @else if $color == $secondary {
         @include border($secondary);
 
         &:hover {
@@ -60,7 +60,7 @@ $paragraph-margin-bottom: 0;
         }
     }
 
-    @else if $color ==$tertiary {
+    @else if $color == $tertiary {
         border: 2px solid $tertiary;
         box-shadow: 6px 6px 0px white;
 
@@ -165,11 +165,11 @@ $paragraph-margin-bottom: 0;
     }
 
     //Show Candidate
-    div.visibility-profile div.profile h1 {
+    .visibility-profile .profile h1 {
         display: none;
     }
 
-    div.visibility-profile {
+    .visibility-profile {
         margin: auto;
         display: grid;
         grid-template-columns: 1fr 2fr;
@@ -180,7 +180,7 @@ $paragraph-margin-bottom: 0;
     }
 
     //Box grey
-    div.visibility-profile div.visibility {
+    .visibility-profile .visibility {
         background-color: $tertiary;
         margin-top: 2em;
         padding: 1em 0.9em;
@@ -188,56 +188,56 @@ $paragraph-margin-bottom: 0;
         margin-block: auto;
     }
 
-    div.visibility-profile div.profile img#picture_profile {
+    #picture_profile{
         margin-bottom: -9em;
         margin-right: 25em;
     }
 
-    div.visibility-profile div.profile div#profile-card.p-3 {
+    #profile-card.p-3{
         margin-bottom: 3em;
         font-size: 18px;
     }
 
-    div.visibility-profile div.visibility div.viewers {
+    .visibility-profile .visibility .viewers {
         display: flex;
         text-align: center;
         justify-content: space-between;
     }
 
-    div.visibility-profile div.profile div#profile-card.p-3 div.card-body.mt-2 {
+    #profile-card.p-3 .card-body.mt-2 {
         display: flex;
         margin-left: 11em;
     }
 
-    div.visibility-profile div.profile div#profile-card.p-3 div.card-body.mt-2 div.profile-informations {
+    #profile-card.p-3 .card-body.mt-2 .profile-informations {
         width: 50%;
         text-align: left;
     }
 
-    div#introduction.profile-blocks.mt-4 {
+    #introduction.profile-blocks.mt-4 {
         width: 70%;
         margin: auto;
     }
 
-    div.skills {
+    .skills {
         display: flex;
         justify-content: space-evenly;
         padding-top: 2em;
     }
 
-    div.skills div.profile-blocks.mt-4 {
+    .skills .profile-blocks.mt-4 {
         width: 25%;
     }
 
     //Position buttons resume, uload resume
-    div.resume-upload-resume {
+    .resume-upload-resume {
         display: grid;
         margin: auto;
         width: 40%;
         grid-template-columns: 1fr 1fr;
     }
 
-    div.portfolio {
+    .portfolio {
         margin: auto;
         width: 50%;
         padding-top: 2em;
@@ -255,155 +255,154 @@ $paragraph-margin-bottom: 0;
     }
 
     //Show Candidate
-    div#navigation-btn-mobile.carousel-slide {
+    #navigation-btn-mobile.carousel-slide {
         margin-top: 7em;
     }
 
-    div.visibility-profile div.profile {
+    .visibility-profile .profile {
         margin-top: 2em;
     }
 
-    div.visibility-profile div.profile h1 {
+    .visibility-profile .profile h1 {
         font-size: 18px;
         margin-bottom: 1.5em;
     }
 
-    div.visibility-profile div.profile img#picture_profile {
+    #picture_profile{
         margin-bottom: -3em;
     }
 
-    div.visibility-profile div.profile div#profile-card.p-3 {
+    #profile-card.p-3{
         margin-bottom: 3em;
         font-size: 18px;
     }
 
-    div.profile div#profile-card.p-3 div.card-body.mt-2 {
+    #profile-card.p-3 div.card-body.mt-2 {
         padding-top: 2em;
     }
 }
 
 //Title job , title exprience
-div.visibility-profile div.profile div.profile-informations p.job-title,
-div.visibility-profile div.profile div.profile-informations p.experience {
+.visibility-profile .profile .profile-informations .job-title,
+.visibility-profile .profile .profile-informations .experience {
     font-size: 14px;
 }
 
 //Titles and text bold 
-div.visibility-profile div.profile h1,
-div.visibility-profile div.profile p.job-title {
+.visibility-profile .profile h1,
+.visibility-profile .profile .job-title {
     font-weight: bold;
 }
 
 //Title skills, name
-div.skills div.hard-skills p,
-div.skills div.soft-skills p,
-div.visibility-profile div.profile div.profile-informations p.name,
-div.portfolio p {
+.skills .hard-skills p,
+.skills .soft-skills p,
+.visibility-profile .profile .profile-informations .name,
+.portfolio p {
     font-weight: bold;
     font-size: 15px;
     padding-bottom: 1em;
 }
 
-div.candidate-completion {
+.candidate-completion {
     margin-top: 0.5em;
     text-align: center;
 }
 
 //Boutton switch 
-div.visibility-profile a i.bi.bi-toggle-on:before,
-div.visibility-profile a i.bi.bi-toggle-off:before {
+.visibility-profile a i.bi.bi-toggle-on:before,
+.visibility-profile a i.bi.bi-toggle-off:before {
     font-size: xx-large;
     color: $secondary;
 }
 
-div.visibility-profile a i.bi.bi-toggle-on:before {
+.visibility-profile a i.bi.bi-toggle-on:before {
     padding-top: 0.2em;
 }
 
-div.visibility-profile div.profile {
-    // margin-top: 2em;
+.visibility-profile .profile {
     text-align: center;
 }
 
 //Icon loupe
-div.visibility-profile div.visibility div.viewers div img {
+.visibility-profile .visibility .viewers img {
     padding-top: 0.5em;
 }
 
 //Linkedin, github 
-div.visibility-profile div.profile div.metadata img {
+.visibility-profile .profile .metadata img {
     padding-top: 1.5em;
 }
 
-div.visibility-profile div.profile div.metadata a:link,
-div.visibility-profile div.profile div.metadata a:visited,
-div.visibility-profile div.profile div.metadata a:hover,
-div.visibility-profile div.profile div.metadata a:active {
+.visibility-profile .profile .metadata a:link,
+.visibility-profile .profile .metadata a:visited,
+.visibility-profile .profile .metadata a:hover,
+.visibility-profile .profile .metadata a:active {
     text-decoration: none;
 }
 
-div#introduction img.quote_left {
+#introduction img.quote_left {
     height: 1.5em;
     float: left;
 }
 
-div#introduction img.quote_right {
+#introduction img.quote_right {
     height: 1.5em;
     float: right;
 }
 
 //Button cv, update
-div.resume-upload-resume div#resume button img {
+#resume button img {
     padding-right: .5em;
 }
 
 //Button color upload
-div.resume-upload-resume div#upload-resume button.btn {
+#upload-resume button.btn {
     background-color: $tertiary;
     border-color: $tertiary;
 }
 
 //Skills
-div.skills div.hard-skills,
-div.skills div.soft-skills {
+.skills .hard-skills,
+.skills .soft-skills {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 0.5em
 }
 
-div.skills div.hard-skills p {
+.skills .hard-skills p {
     grid-column: 1/3;
 }
 
-div.skills div.soft-skills p {
+.skills .soft-skills p {
     grid-column: 2/3;
     text-align: right;
 }
 
-div.portfolio a {
+.portfolio a {
     display: flex;
     justify-content: space-between;
 }
 
-div.portfolio a:link,
-div.portfolio a:visited,
-div.portfolio a:hover,
-div.portfolio a:active {
+.portfolio a:link,
+.portfolio a:visited,
+.portfolio a:hover,
+.portfolio a:active {
     text-decoration: none;
     color: black;
 }
 
 //Button edit 
-button.btn.btn-secondary.mt-2 a:link,
-button.btn.btn-secondary.mt-2 a:visited,
-button.btn.btn-secondary.mt-2 a:hover,
-button.btn.btn-secondary.mt-2 a:active {
+.btn.btn-secondary.mt-2 a:link,
+.btn.btn-secondary.mt-2 a:visited,
+.btn.btn-secondary.mt-2 a:hover,
+.btn.btn-secondary.mt-2 a:active {
     text-decoration: none;
     color: black;
 }
 
 //Box grey
-div.visibility-profile div.visibility {
+.visibility-profile .visibility {
     background-color: $tertiary;
     margin-top: 2em;
     padding: 1em 0.9em;
@@ -411,7 +410,7 @@ div.visibility-profile div.visibility {
 }
 
 //Card resume candidate
-div.viewers {
+.viewers {
     display: flex;
     text-align: center;
     justify-content: space-between;
