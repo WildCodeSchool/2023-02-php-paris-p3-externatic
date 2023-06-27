@@ -17,7 +17,6 @@ class Offer
     #[ORM\Column]
     private ?int $id = null;
 
-
     #[ORM\ManyToOne(inversedBy: 'offers')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Company $company = null;
@@ -25,66 +24,50 @@ class Offer
     #[ORM\Column(length: 255)]
     private ?string $title = null;
 
-
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $createdAt = null;
-
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $startAt = null;
 
-
     #[ORM\Column(length: 150)]
     private ?string $contract = null;
-
 
     #[ORM\Column(length: 100)]
     private ?string $workFromHome = null;
 
-
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
-
 
     #[ORM\Column(length: 150)]
     private ?string $experience = null;
 
-
     #[ORM\Column]
     private ?int $minSalary = null;
-
 
     #[ORM\Column(nullable: true)]
     private ?int $maxSalary = null;
 
-
     #[ORM\ManyToMany(targetEntity: Skill::class, mappedBy: 'offers')]
     private Collection $skills;
-
 
     #[ORM\Column(length: 255)]
     private ?string $location = null;
 
-
     #[ORM\OneToMany(mappedBy: 'offer', targetEntity: Application::class)]
     private Collection $applications;
-
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $interviewProcess = null;
 
-
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $picture = null;
-
 
     #[ORM\ManyToMany(targetEntity: Candidate::class, inversedBy: 'favoriteOffers')]
     private Collection $favorite;
 
-
     #[ORM\Column]
     private ?int $number = null;
-
 
     public function __construct()
     {

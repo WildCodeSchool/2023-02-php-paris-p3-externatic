@@ -14,7 +14,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public const LOGO = [
         'logoCompany.jpg', 'logoCompany1.jpg'
     ];
-
     public const USER = [
         [
             'Firstname' => 'Erika', 'Lastname' => 'Ikelempo', 'Role' => User::ROLE_CANDIDATE,

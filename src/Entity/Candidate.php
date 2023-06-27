@@ -190,6 +190,7 @@ class Candidate
 
         return $this;
     }
+
     public function getUser(): ?User
     {
         return $this->user;

@@ -15,7 +15,6 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
 {
     private UserPasswordHasherInterface $passwordHasher;
 
-
     public function __construct(UserPasswordHasherInterface $passwordHasher)
     {
         $this->passwordHasher = $passwordHasher;
@@ -80,6 +79,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
 
         $manager->flush();
     }
+
     public function getDependencies()
     {
         return [

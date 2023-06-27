@@ -31,8 +31,6 @@ $carousel-control-color: black;
 
 $paragraph-margin-bottom: 0;
 
-$pagination-color: $primary;
-
 .margin {
     margin: 0 auto;
     max-width: 1400px;
@@ -172,6 +170,16 @@ svg {
     background-color: $secondary;
 }
 
+.grey-area-in-offer-show {
+    width: 10%;
+    background-color: $tertiary;
+    text-align: center;
+    color: black;
+    border-radius: 5px;
+    padding: 0.4rem;
+    margin-right: 15px;
+}
+
 // Media queries
 @media (min-width: 600px) {
     #navigation-btn-mobile {
@@ -183,9 +191,6 @@ svg {
         justify-content: space-evenly;
     }
 
-    .picto-in-mobile-view {
-        display: none;
-    }
 }
 
 @media (max-width: 599px) {
@@ -213,11 +218,15 @@ svg {
     }
 
     .grey-area-in-offer-show {
-        width: 10%;
-        text-align: center;
+        width: 25%;
         color: white;
         margin-right: 15px;
         font-weight: 500;
+        background-color: inherit;
+    }
+
+    .picto-in-header {
+        filter: invert(1);
     }
 }
 
@@ -276,7 +285,7 @@ svg {
 }
 
 .pagination {
-    --bs-pagination-hover-color: $secondary;
+    --bs-pagination-hover-color: #FED32C;
 }
 
 
@@ -319,14 +328,4 @@ hr {
     display: flex;
     margin: auto;
     justify-content: center;
-}
-
-.grey-area-in-offer-show {
-    width: 10%;
-    background-color: $tertiary;
-    text-align: center;
-    color: black;
-    border-radius: 5px;
-    padding: 0.4rem;
-    margin-right: 15px;
 }
