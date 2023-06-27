@@ -7,67 +7,73 @@
 	{% include 'style/component/_navigationBtnMobile.html.twig' %}
 	{% include 'style/component/_navigationBtnDesktop.html.twig' %}
 
-	<div class="recap_info">
-		<div class="candidate_visibility">
-			<div>
-				<p>Visible by recruiters</p>
+	<div class="visibility-profile">
+		<div class="visibility">
+			<div class="viewers">
+				<div>
+					<p>Visible by recruiters</p>
 
-				<a href="{{ path('candidate_visibility', {'id': candidate.id}) }}">
-					<i class="bi {{ candidate.isVisible ? 'bi-toggle-on' : 'bi-toggle-off' }}"></i>
-				</a>
+					<a href="{{ path('candidate_visibility', {'id': candidate.id}) }}">
+						<i class="bi {{ candidate.isVisible ? 'bi-toggle-on' : 'bi-toggle-off' }}"></i>
+					</a>
+				</div>
+				<div>
+					<p>Viewed by X people</p>
+					<img class="img_icon fa-border" src="{{ asset('build/images/profil_views.svg') }}" alt="profil_views"/>
+				</div>
 			</div>
-			<div>
-				<p>Viewed by X people</p>
-				<img class="img_icon fa-border" src="{{ asset('build/images/profil_views.svg') }}" alt="profil_views"/>
+			<div class="candidate-completion">
+				<span>Profil completion</span>
 			</div>
 		</div>
-		<div class="candidate_completion">
-			<span>Profil completion</span>
+		<div class="profile">
+			<h1>YOUR PROFILE</h1>
+			<img id="picture_profile" src="/build/images/eri.f1493033.png" alt="picture_profile"/>
+			<div id="profile-card" class="p-3">
+				<div class="card-body mt-2">
+					<div class="profile-informations">
+						<p class="name">{{ candidate.firstname }}
+							{{ candidate.lastname }}</p>
+						<p class="job-title">{{ candidate.jobTitle }}</p>
+						<p class="experience">XP
+							{{ candidate.experience }}</p>
+					</div>
+					<div class="metadata">
+						{% for metadata in candidate.metadata %}
+							{% if metadata.type == 'GitHub' %}
+								<a href="{{ metadata.metadata }}">
+									<img class="metadata" src="{{ asset('build/images/github_black.svg') }}" alt="github"/>
+								</a>
+							{% elseif metadata.type == 'linkedin' %}
+								<a href="{{ metadata.metadata }}">
+									<img class="metadata" src="{{ asset('build/images/linkedin_black.svg') }}" alt="linkedin"/>
+								</a>
+							{% endif %}
+						{% endfor %}
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
-
-	<div class="profile">
-		<h1>YOUR PROFILE</h1>
-
-		<img id="picture_profile" src="/build/images/eri.f1493033.png" alt="picture_profile"/>
-		<div id="profile-card" class="p-3">
-			<div class="card-body mt-2">
-				<p class="name">{{ candidate.firstname }}
-					{{ candidate.lastname }}</p>
-				<p class="job_title">{{ candidate.jobTitle }}</p>
-				<p class="experience">XP
-					{{ candidate.experience }}</p>
-
-				{% for metadata in candidate.metadata %}
-					{% if metadata.type == 'GitHub' %}
-						<a href="{{ metadata.metadata }}"><img class="metadata" src="{{ asset('build/images/github_black.svg') }}" alt="github"/></a>
-					{% elseif metadata.type == 'linkedin' %}
-						<a href="{{ metadata.metadata }}"><img class="metadata" src="{{ asset('build/images/linkedin_black.svg') }}" alt="linkedin"/></a>
-					{% endif %}
-				{% endfor %}
-			</div>
+	<div id="introduction" class="profile-blocks mt-4">
+		<div class="card-body p-4 ">
+			<img class="quote_left" src="{{ asset('build/images/quoteopen.png') }}" alt="quote"/>
+			{{ candidate.introduction }}
+			<img class="quote_right" src="{{ asset('build/images/quoteclose.png') }}" alt="quote"/>
 		</div>
-
-		<div class="profile-blocks mt-4">
-			<div class="card-body p-4 ">
-				<img class="quote_left" src="{{ asset('build/images/quoteopen.png') }}" alt="quote"/>
-				{{ candidate.introduction }}
-				<img class="quote_right" src="{{ asset('build/images/quoteclose.png') }}" alt="quote"/>
-			</div>
-		</div>
-
-		<div class="col text-center mt-4">
+	</div>
+	<div class="resume-upload-resume">
+		<div id="resume" class="col text-center mt-4">
 			<button type="button" class="btn btn-secondary mt-2"><img class="img_icon fa-border" src=" {{ asset('build/images/cv.svg') }} " alt=" curriculum"/>your resume</button>
 		</div>
-		<div class="col text-center mt-4">
+		<div id="upload-resume" class="col text-center mt-4">
 			<button type="button" class="btn btn-secondary upload mt-2"><img class="img_icon fa-border" src="{{ asset('build/images/upload.svg') }}" alt="upload"/>update your resume</button>
 		</div>
 	</div>
-
 	<div class="skills">
 		<div class="profile-blocks mt-4">
 			<div class="card-body p-4 ">
-				<div class="hard_skills">
+				<div class="hard-skills">
 					<p>HARD SKILLS</p>
 					{% for skill in candidate.skills %}
 						{% if skill.type == 'hard' %}
@@ -80,10 +86,9 @@
 				</div>
 			</div>
 		</div>
-
 		<div class="profile-blocks mt-4">
 			<div class="card-body p-4 ">
-				<div class="soft_skills">
+				<div class="soft-skills">
 					<p>SOFT SKILLS</p>
 					{% for skill in candidate.skills %}
 						{% if skill.type == 'soft' %}
@@ -97,7 +102,6 @@
 			</div>
 		</div>
 	</div>
-
 	<div class="portfolio">
 		<div class="profile-blocks mt-4">
 			<div class="card-body p-4 ">

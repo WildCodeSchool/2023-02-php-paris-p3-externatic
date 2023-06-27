@@ -163,6 +163,85 @@ $paragraph-margin-bottom: 0;
     #navigation-btn-mobile {
         display: none;
     }
+
+    //Show Candidate
+    div.visibility-profile div.profile h1 {
+        display: none;
+    }
+
+    div.visibility-profile {
+        margin: auto;
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        grid-template-rows: 1fr;
+        width: 80%;
+        grid-gap: 2em;
+        margin-top: 2em;
+    }
+
+    //Box grey
+    div.visibility-profile div.visibility {
+        background-color: $tertiary;
+        margin-top: 2em;
+        padding: 1em 0.9em;
+        border: 0.09em solid #FED32C;
+        margin-block: auto;
+    }
+
+    div.visibility-profile div.profile img#picture_profile {
+        margin-bottom: -9em;
+        margin-right: 25em;
+    }
+
+    div.visibility-profile div.profile div#profile-card.p-3 {
+        margin-bottom: 3em;
+        font-size: 18px;
+    }
+
+    div.visibility-profile div.visibility div.viewers {
+        display: flex;
+        text-align: center;
+        justify-content: space-between;
+    }
+
+    div.visibility-profile div.profile div#profile-card.p-3 div.card-body.mt-2 {
+        display: flex;
+        margin-left: 11em;
+    }
+
+    div.visibility-profile div.profile div#profile-card.p-3 div.card-body.mt-2 div.profile-informations {
+        width: 50%;
+        text-align: left;
+    }
+
+    div#introduction.profile-blocks.mt-4 {
+        width: 70%;
+        margin: auto;
+    }
+
+    div.skills {
+        display: flex;
+        justify-content: space-evenly;
+        padding-top: 2em;
+    }
+
+    div.skills div.profile-blocks.mt-4 {
+        width: 25%;
+    }
+
+    //Position buttons resume, uload resume
+    div.resume-upload-resume {
+        display: grid;
+        margin: auto;
+        width: 40%;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    div.portfolio {
+        margin: auto;
+        width: 50%;
+        padding-top: 2em;
+    }
 }
 
 @media (max-width: 599px) {
@@ -175,88 +254,25 @@ $paragraph-margin-bottom: 0;
         background-color: rgba(217, 217, 217, 0.2);
     }
 
-
-
-
-
-
-    //Candidate Show MOBILE
-
-
-    //carroussel top
+    //Show Candidate
     div#navigation-btn-mobile.carousel-slide {
         margin-top: 7em;
     }
 
-    //Titles and text bold
-    div.profile h1,
-    div.profile p.job_title {
-        font-weight: bold;
-    }
-
-    div.profile-blocks.mt-4 div.card-body.p-4 p,
-    div.profile div#profile-card.p-3 div.card-body.mt-2 p.name {
-        font-weight: 600;
-    }
-
-    div.profile-blocks.mt-4 div.card-body.p-4 p {
-        font-size: 15px;
-        padding-bottom: 1em;
-    }
-
-    //card resume candidat
-    div.candidate_visibility {
-        display: flex;
-        text-align: center;
-        justify-content: space-between;
-    }
-
-    //cadre gris
-    div.recap_info {
-        background-color: $tertiary;
+    div.visibility-profile div.profile {
         margin-top: 2em;
-        padding: 1em 0.9em;
-        border: 0.09em solid #FED32C;
     }
 
-    //boutton switch 
-    div.recap_info div.candidate_visibility div a i.bi.bi-toggle-on:before,
-    div.recap_info div.candidate_visibility div a i.bi.bi-toggle-off:before {
-        font-size: xx-large;
-        color: $secondary;
-    }
-
-    div.recap_info div.candidate_visibility div a i.bi.bi-toggle-on:before {
-        padding-top: 0.2em;
-    }
-
-    div.recap_info div.candidate_visibility div img.img_icon.fa-border {
-        padding-top: 0.5em;
-    }
-
-    div.recap_info div.candidate_completion {
-        margin-top: 0.5em;
-        text-align: center;
-    }
-
-    div.profile {
-        margin-top: 2em;
-        text-align: center;
-    }
-
-    //title h1 your profile
-    div.profile h1 {
+    div.visibility-profile div.profile h1 {
         font-size: 18px;
         margin-bottom: 1.5em;
     }
 
-    //image profil
-    div.profile img#picture_profile {
+    div.visibility-profile div.profile img#picture_profile {
         margin-bottom: -3em;
     }
 
-    //card profil
-    div.profile div#profile-card.p-3 {
+    div.visibility-profile div.profile div#profile-card.p-3 {
         margin-bottom: 3em;
         font-size: 18px;
     }
@@ -264,278 +280,141 @@ $paragraph-margin-bottom: 0;
     div.profile div#profile-card.p-3 div.card-body.mt-2 {
         padding-top: 2em;
     }
-
-    //linkedin et github
-    div.profile div#profile-card.p-3 div.card-body.mt-2 a img.metadata {
-        padding-top: 1.5em;
-    }
-
-    div.profile div#profile-card.p-3 div.card-body.mt-2 p.job_title,
-    div.profile div#profile-card.p-3 div.card-body.mt-2 p.experience {
-        font-size: 14px;
-    }
-
-    // Guillemets gauche et droite
-    div.profile div.profile-blocks.mt-4 div.card-body.p-4 img.quote_left {
-        height: 1.5em;
-        float: left;
-    }
-
-    div.profile div.profile-blocks.mt-4 div.card-body.p-4 img.quote_right {
-        height: 1.5em;
-        float: right;
-    }
-
-    //boutton cv et update cv
-    div.profile div.col.text-center.mt-4 button.btn.btn-secondary.mt-2 img {
-        padding-right: .5em;
-    }
-
-    div.profile div.col.text-center.mt-4 button.btn.btn-secondary.upload.mt-2 {
-        background-color: $tertiary;
-        border-color: $tertiary;
-    }
-
-    //skills
-    div.profile-blocks.mt-4 div.card-body.p-4 div.hard_skills,
-    div.profile-blocks.mt-4 div.card-body.p-4 div.soft_skills {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-gap: 0.5em
-    }
-
-    div.profile-blocks.mt-4 div.card-body.p-4 div.hard_skills p {
-        grid-column: 1/3;
-    }
-
-    div.profile-blocks.mt-4 div.card-body.p-4 div.soft_skills p {
-        grid-column: 2/3;
-        text-align: right;
-    }
-
-    //Portfolio
-    div.profile-blocks.mt-4 div.card-body.p-4 a {
-        display: flex;
-        justify-content: space-between;
-    }
-
-    div.profile-blocks.mt-4 div.card-body.p-4 a:link,
-    div.profile-blocks.mt-4 div.card-body.p-4 a:visited,
-    div.profile-blocks.mt-4 div.card-body.p-4 a:hover,
-    div.profile-blocks.mt-4 div.card-body.p-4 a:active {
-        text-decoration: none;
-        color: black;
-    }
-
-    //Boutton edit
-    div.col.text-center.mt-4 button.btn.btn-secondary.mt-2 a:link,
-    div.col.text-center.mt-4 button.btn.btn-secondary.mt-2 a:visited,
-    div.col.text-center.mt-4 button.btn.btn-secondary.mt-2 a:hover,
-    div.col.text-center.mt-4 button.btn.btn-secondary.mt-2 a:active {
-        text-decoration: none;
-        color: black;
-    }
-
 }
 
-@import "~bootstrap/scss/bootstrap";
+//Title job , title exprience
+div.visibility-profile div.profile div.profile-informations p.job-title,
+div.visibility-profile div.profile div.profile-informations p.experience {
+    font-size: 14px;
+}
 
-
-
-
-
-//CANDIDATE SHOW DESKTOP
-//carroussel top
-// div#navigation-btn-desktop.carousel-slide {
-//     margin-top: 7em;
-// }
-
-//Titles and text bold COOOOMUUUUUU
-div.profile h1,
-div.profile p.job_title {
+//Titles and text bold 
+div.visibility-profile div.profile h1,
+div.visibility-profile div.profile p.job-title {
     font-weight: bold;
 }
 
-//COMMMMUUUUU guardar aquest
-div.profile-blocks.mt-4 div.card-body.p-4 p,
-div.profile div#profile-card.p-3 div.card-body.mt-2 p.name {
+//Title skills, name
+div.skills div.hard-skills p,
+div.skills div.soft-skills p,
+div.visibility-profile div.profile div.profile-informations p.name,
+div.portfolio p {
     font-weight: bold;
-}
-
-div.profile-blocks.mt-4 div.card-body.p-4 p {
     font-size: 15px;
     padding-bottom: 1em;
 }
 
-
-
-//cadre gris
-div.recap_info {
-    background-color: $tertiary;
-    margin-top: 2em;
-    padding: 1em 0.9em;
-    border: 0.09em solid #FED32C;
-    width: 30%;
-}
-
-//card resume candidat COOOMMMUUUUUNNN
-div.candidate_visibility {
-    display: flex;
-    text-align: center;
-    justify-content: space-between;
-}
-
-//boutton switch COMUUUUUUUUUUUUUUUUUUUUUUUN
-div.recap_info div.candidate_visibility div a i.bi.bi-toggle-on:before,
-div.recap_info div.candidate_visibility div a i.bi.bi-toggle-off:before {
-    font-size: xx-large;
-    color: $secondary;
-}
-
-div.recap_info div.candidate_visibility div a i.bi.bi-toggle-on:before {
-    padding-top: 0.2em;
-}
-
-//COOMMMUUUUN
-div.recap_info div.candidate_completion {
+div.candidate-completion {
     margin-top: 0.5em;
     text-align: center;
 }
 
+//Boutton switch 
+div.visibility-profile a i.bi.bi-toggle-on:before,
+div.visibility-profile a i.bi.bi-toggle-off:before {
+    font-size: xx-large;
+    color: $secondary;
+}
 
+div.visibility-profile a i.bi.bi-toggle-on:before {
+    padding-top: 0.2em;
+}
 
-//linkedin et github COMMMUUUUUUUUUUUUUUUUUUUN
-div.profile div#profile-card.p-3 div.card-body.mt-2 a img.metadata {
+div.visibility-profile div.profile {
+    // margin-top: 2em;
+    text-align: center;
+}
+
+//Icon loupe
+div.visibility-profile div.visibility div.viewers div img {
+    padding-top: 0.5em;
+}
+
+//Linkedin, github 
+div.visibility-profile div.profile div.metadata img {
     padding-top: 1.5em;
 }
 
-//COOOOOMMMMMUN 
-div.profile div#profile-card.p-3 div.card-body.mt-2 p.job_title,
-div.profile div#profile-card.p-3 div.card-body.mt-2 p.experience {
-    font-size: 14px;
+div.visibility-profile div.profile div.metadata a:link,
+div.visibility-profile div.profile div.metadata a:visited,
+div.visibility-profile div.profile div.metadata a:hover,
+div.visibility-profile div.profile div.metadata a:active {
+    text-decoration: none;
 }
 
-
-
-//Title
-div.profile h1 {
-    display: none;
-}
-
-//card profil
-div.profile div#profile-card.p-3 {
-    margin-bottom: 3em;
-    font-size: 18px;
-    width: 60%;
-}
-
-//Bloc description
-div.profile div.profile-blocks.mt-4 {
-    width: 80%;
-    margin: auto;
-}
-
-// Guillemets gauche et droite   COMMMMMUUUUUUUUN
-div.profile div.profile-blocks.mt-4 div.card-body.p-4 img.quote_left {
+div#introduction img.quote_left {
     height: 1.5em;
     float: left;
 }
 
-div.profile div.profile-blocks.mt-4 div.card-body.p-4 img.quote_right {
+div#introduction img.quote_right {
     height: 1.5em;
     float: right;
 }
 
-//boutton cv et update cv   COOOOOOOOOOOOOMUUUUUUUUUUUUUUN
-div.profile div.col.text-center.mt-4 button.btn.btn-secondary.mt-2 img {
+//Button cv, update
+div.resume-upload-resume div#resume button img {
     padding-right: .5em;
 }
 
-div.profile div.col.text-center.mt-4 button.btn.btn-secondary.upload.mt-2 {
+//Button color upload
+div.resume-upload-resume div#upload-resume button.btn {
     background-color: $tertiary;
     border-color: $tertiary;
 }
 
-
-//skills
-div.skills {
-    display: flex;
-    justify-content: space-evenly;
-    padding-top: 2em;
-}
-
-div.skills div.profile-blocks.mt-4 {
-    width: 30%;
-}
-
-
-//skills COMUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUN
-div.profile-blocks.mt-4 div.card-body.p-4 div.hard_skills,
-div.profile-blocks.mt-4 div.card-body.p-4 div.soft_skills {
+//Skills
+div.skills div.hard-skills,
+div.skills div.soft-skills {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 0.5em
 }
 
-div.profile-blocks.mt-4 div.card-body.p-4 div.hard_skills p {
+div.skills div.hard-skills p {
     grid-column: 1/3;
 }
 
-div.profile-blocks.mt-4 div.card-body.p-4 div.soft_skills p {
+div.skills div.soft-skills p {
     grid-column: 2/3;
     text-align: right;
 }
 
-//portfolio
-div.portfolio {
-    margin: auto;
-    width: 50%;
-    padding-top: 2em;
-}
-
-//Portfolio COOOOMUUUUUUUUUUUUUUUUN
-div.profile-blocks.mt-4 div.card-body.p-4 a {
+div.portfolio a {
     display: flex;
     justify-content: space-between;
 }
 
-//COMUUUUUUUUUUUUUUUUUUUUU
-div.profile-blocks.mt-4 div.card-body.p-4 a:link,
-div.profile-blocks.mt-4 div.card-body.p-4 a:visited,
-div.profile-blocks.mt-4 div.card-body.p-4 a:hover,
-div.profile-blocks.mt-4 div.card-body.p-4 a:active {
+div.portfolio a:link,
+div.portfolio a:visited,
+div.portfolio a:hover,
+div.portfolio a:active {
     text-decoration: none;
     color: black;
 }
 
-
-
-//Boutton edit CCOOOOOOOOMMMUUUUUUUUNNNNn
-div.col.text-center.mt-4 button.btn.btn-secondary.mt-2 a:link,
-div.col.text-center.mt-4 button.btn.btn-secondary.mt-2 a:visited,
-div.col.text-center.mt-4 button.btn.btn-secondary.mt-2 a:hover,
-div.col.text-center.mt-4 button.btn.btn-secondary.mt-2 a:active {
+//Button edit 
+button.btn.btn-secondary.mt-2 a:link,
+button.btn.btn-secondary.mt-2 a:visited,
+button.btn.btn-secondary.mt-2 a:hover,
+button.btn.btn-secondary.mt-2 a:active {
     text-decoration: none;
     color: black;
 }
 
+//Box grey
+div.visibility-profile div.visibility {
+    background-color: $tertiary;
+    margin-top: 2em;
+    padding: 1em 0.9em;
+    border: 0.09em solid #FED32C;
+}
 
+//Card resume candidate
+div.viewers {
+    display: flex;
+    text-align: center;
+    justify-content: space-between;
+}
 
-// div.recap_info div.candidate_visibility div img.img_icon.fa-border {
-//     padding-top: 0.5em;
-// }
-
-// div.profile {
-//     margin-top: 2em;
-//     text-align: center;
-// }
-
-
-// //image profil
-// div.profile img#picture_profile {
-//     margin-bottom: -3em;
-// }
-
-// div.profile div#profile-card.p-3 div.card-body.mt-2 {
-//     padding-top: 2em;
-// }
+@import "~bootstrap/scss/bootstrap";
