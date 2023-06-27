@@ -40,6 +40,11 @@ $pagination-color: $primary;
     padding: 1.5rem;
 }
 
+img,
+svg {
+    margin-right: 0.563rem;
+}
+
 // Cards
 @mixin border($color) {
     border: 2px solid $color;
@@ -172,6 +177,15 @@ $pagination-color: $primary;
     #navigation-btn-mobile {
         display: none;
     }
+
+    .skills-tab {
+        display: flex;
+        justify-content: space-evenly;
+    }
+
+    .picto-in-mobile-view {
+        display: none;
+    }
 }
 
 @media (max-width: 599px) {
@@ -182,6 +196,28 @@ $pagination-color: $primary;
     #offer-description-card {
         @include cards($primary, 10px);
         background-color: rgba(217, 217, 217, 0.2);
+        margin-bottom: 5rem;
+    }
+
+    .company-in-desktop-view {
+        display: none;
+    }
+
+    .show-offer-single-section>hr {
+        display: none;
+    }
+
+    .skills-tab {
+        display: grid;
+        grid-template-rows: 1fr 1fr;
+    }
+
+    .grey-area-in-offer-show {
+        width: 10%;
+        text-align: center;
+        color: white;
+        margin-right: 15px;
+        font-weight: 500;
     }
 }
 
@@ -202,18 +238,18 @@ $pagination-color: $primary;
     --bs-card-border-width: 100%;
 }
 
-.otherInfo {
+.other-info {
     display: flex;
     justify-content: space-between;
 }
 
-.greyArea {
+.grey-area {
     width: 30%;
     background-color: $tertiary;
     text-align: center;
 }
 
-.subHead {
+.sub-head {
     display: flex;
     justify-content: center;
 }
@@ -221,6 +257,10 @@ $pagination-color: $primary;
 .index-company-logo {
     width: 30px;
     height: 28px;
+}
+
+.index-offer-title-section {
+    height: 6.25rem;
 }
 
 //(paginator)
@@ -234,6 +274,11 @@ $pagination-color: $primary;
 .page-link {
     color: $primary;
 }
+
+.pagination {
+    --bs-pagination-hover-color: $secondary;
+}
+
 
 //Page Offer_show
 
@@ -265,6 +310,17 @@ hr {
     --bs-btn-color: black;
 }
 
+.before-footer-btn {
+    display: flex;
+    justify-content: center;
+}
+
+.other-info-in-offer-show {
+    display: flex;
+    margin: auto;
+    justify-content: center;
+}
+
 .grey-area-in-offer-show {
     width: 10%;
     background-color: $tertiary;
@@ -273,24 +329,4 @@ hr {
     border-radius: 5px;
     padding: 0.4rem;
     margin-right: 15px;
-}
-
-.before-footer-btn {
-    display: flex;
-    justify-content: center;
-}
-
-.skills-tab {
-    display: flex;
-    justify-content: space-evenly;
-}
-
-.offer-show-content {
-    margin-bottom: 6.25rem;
-}
-
-.other-info-in-offer-show {
-    display: flex;
-    margin: auto;
-    justify-content: center;
 }
