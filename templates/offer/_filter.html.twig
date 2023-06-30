@@ -1,0 +1,58 @@
+{{ form_start(form) }}
+    <div class="row align-items-center mt-2">
+        <div class="col-md-4 mt-4">
+            <input type="text" class="form-control" placeholder="Find a job" name="{{ field_name(form.searchTitle) }}" value="{{ field_value(form.searchTitle) }}">
+            <img id="glass" class="position-absolute" src="{{ asset('build/images/glass.svg') }}">
+        </div>
+        <div class="col-md-4 mt-4">
+            <div class="dropdown">
+                <button class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown" type="button" id="dropdown-menu-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 100%;" >
+                    {{ field_label(form.contract) }}
+                    <img id="job" class="position-absolute start-0 " src="{{ asset('build/images/job.svg') }}">
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdown-menu-btn" style="width: 100%;">
+                    {% for value, label in field_choices(form.contract) %}
+                        <div class="dropdown-item">
+                            <input class="form-check-input" type="checkbox" name="{{ field_name(form.contract) }}[]" value="{{ value }}" id="flexCheckDefault" {{ value in field_value(form.contract) ? 'checked' : '' }}>
+                            <label class="form-check-label" for="flexCheckDefault"> {{ label }} </label>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mt-4">
+            <input type="text" class="form-control" placeholder="Location" name="{{ field_name(form.searchLocation) }}" value="{{ field_value(form.searchLocation) }}">
+            <img id="location" class="position-absolute" src="{{ asset('build/images/location.svg') }}">
+        </div>
+    </div>
+    <div class="row text-center mt-4">
+        <button type="button" class="btn btn-link btn-lg mt-2" data-bs-toggle="modal" data-bs-target="#filterModal">More filters</button>
+    </div>
+    <div class="row justify-content-center mt-4">
+        <button type="submit" class="btn btn-secondary mt-2">Save</button>
+    </div>
+
+    <!-- Modal -->
+    <div id="filterModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Filters</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div id="modal-body-search-form" class="modal-body">
+                    {{ form_row(form.salary, {'attr': {'class': 'modal-salary'}}) }}
+                    {{ form_row(form.companySector) }}
+                    {{ form_row(form.experience) }}
+                    {{ form_row(form.workFromHome) }}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-secondary">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{{ form_end(form) }}

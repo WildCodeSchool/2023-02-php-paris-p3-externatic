@@ -61,7 +61,7 @@ class OfferRepository extends ServiceEntityRepository
 
         if (!empty($data['contract'])) {
             $queryBuilder = $queryBuilder
-                ->andWhere('o.contract = :contract')
+                ->andWhere('o.contract IN (:contract)')
                 ->setParameter('contract', $data['contract']);
         }
 
@@ -90,7 +90,7 @@ class OfferRepository extends ServiceEntityRepository
         }
 
             $queryBuilder = $queryBuilder
-                ->orderBy('o.title', 'ASC')
+                ->orderBy('o.createdAt', 'DESC')
                 ->getQuery();
 
         return $queryBuilder->getResult();

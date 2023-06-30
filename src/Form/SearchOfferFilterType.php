@@ -7,6 +7,7 @@ use App\Entity\Offer;
 use PhpParser\Parser\Multiple;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\RangeType;
 use Symfony\Component\Form\Extension\Core\Type\SearchType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -29,13 +30,19 @@ class SearchOfferFilterType extends AbstractType
                 'choices' => Offer::JOB_TYPE,
                 'required' => false,
                 'label' => 'Type of job',
-            ])
-            ->add('salary', RangeType::class, [
+                'expanded' => true,
+                'multiple' => true,
                 'attr' => [
-                    'min' => 20000,
-                    'max' => 80000,
+                    'class' => 'dropdown-item form-check'
                 ],
-                'label' => 'Salary'
+                
+            ])
+            ->add('salary', IntegerType::class, [
+                'label' => 'Salary',
+                'required' => false,
+                'attr' => [
+                    'placeholder' => '30000',
+                ]
             ])
             ->add('companySector', ChoiceType::class, [
                 'choices' => Company::COMPANY_SECTOR,

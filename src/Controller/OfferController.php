@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class TestController extends AbstractController
+class OfferController extends AbstractController
 {
     #[Route('/', name:'index')]
     public function index(Request $request, OfferRepository $offerRepository): Response
@@ -17,16 +17,14 @@ class TestController extends AbstractController
         $form = $this->createForm(SearchOfferFilterType::class);
         $form->handleRequest($request);
 
-
         if ($form->isSubmitted() && $form->isValid()) {
-            var_dump($form->getData());
             $filters = $form->getData();
             $offers = $offerRepository->findwithFilter($filters);
         } else {
             $offers = $offerRepository->findAll();
         }
 
-        return $this->render('test/index.html.twig', [
+        return $this->render('offer/index.html.twig', [
             'form' => $form,
             'offers' => $offers,
         ]);
