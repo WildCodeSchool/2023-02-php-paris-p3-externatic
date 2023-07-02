@@ -89,9 +89,9 @@ class OfferRepository extends ServiceEntityRepository
                 ->setParameter('salary', $data['salary']);
         }
 
-            $queryBuilder = $queryBuilder
-                ->orderBy('o.createdAt', 'DESC')
-                ->getQuery();
+        $queryBuilder = $queryBuilder
+            ->orderBy('o.createdAt', 'DESC')
+            ->getQuery();
 
         return $queryBuilder->getResult();
     }

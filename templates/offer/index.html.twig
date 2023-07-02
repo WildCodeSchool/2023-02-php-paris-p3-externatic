@@ -6,20 +6,4 @@
 
 {% include 'offer/_filter.html.twig' %}
 
-{% for offer in offers %}
-    <div class="row">
-        <div class="col-sm-6">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">{{ offer.title }}</h5>
-                <p class="card-text">{{ offer.description }}</p>
-                <p class="card-text">{{ offer.location }}</p>
-                <p class="card-text">{{ offer.contract }}</p>
-                <p class="card-text">{{ offer.workFromHome }}</p>
-                <p class="card-text">{{ offer.company.name }}</p>
-            </div>
-        </div>
-    </div>
-    <div>
-{% endfor %}
 {% endblock %}

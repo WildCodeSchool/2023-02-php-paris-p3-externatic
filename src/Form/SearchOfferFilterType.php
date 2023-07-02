@@ -22,10 +22,12 @@ class SearchOfferFilterType extends AbstractType
                 'required' => false,
                 'label' => 'Find a job',
             ])
+
             ->add('searchLocation', SearchType::class, [
                 'required' => false,
                 'label' => 'Location',
             ])
+
             ->add('contract', ChoiceType::class, [
                 'choices' => Offer::JOB_TYPE,
                 'required' => false,
@@ -35,8 +37,8 @@ class SearchOfferFilterType extends AbstractType
                 'attr' => [
                     'class' => 'dropdown-item form-check'
                 ],
-                
             ])
+
             ->add('salary', IntegerType::class, [
                 'label' => 'Salary',
                 'required' => false,
@@ -44,6 +46,7 @@ class SearchOfferFilterType extends AbstractType
                     'placeholder' => '30000',
                 ]
             ])
+
             ->add('companySector', ChoiceType::class, [
                 'choices' => Company::COMPANY_SECTOR,
                 'required' => false,
@@ -51,6 +54,7 @@ class SearchOfferFilterType extends AbstractType
                 'expanded' => true,
                 'multiple' => true,
             ])
+
             ->add('experience', ChoiceType::class, [
                 'choices' => Offer::EXPERIENCE,
                 'required' => false,
@@ -58,6 +62,7 @@ class SearchOfferFilterType extends AbstractType
                 'expanded' => true,
                 'multiple' => true,
             ])
+
             ->add('workFromHome', ChoiceType::class, [
                 'choices' => Offer::WORK_FROM_HOME,
                 'required' => false,
