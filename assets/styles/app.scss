@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Jost');
+
 $font-family-base: 'Jost', sans-serif;
 
 $primary: #851342;
@@ -33,6 +34,10 @@ $paragraph-margin-bottom: 0;
     max-width: 1400px;
     width: 100%;
     padding: 1.5rem;
+}
+
+.picto {
+    margin-right: 0.563rem;
 }
 
 // Cards
@@ -158,6 +163,20 @@ $paragraph-margin-bottom: 0;
     background-color: $secondary;
 }
 
+.grey-area-in-offer-show {
+    width: 16.25rem;
+    background-color: $tertiary;
+    text-align: center;
+    color: black;
+    border-radius: 5px;
+    padding: 0.4rem;
+    margin-right: 15px;
+}
+
+.applicationbtn:hover {
+    background-color: $secondary;
+}
+
 // Media queries
 @media (min-width: 600px) {
     #navigation-btn-mobile {
@@ -242,6 +261,15 @@ $paragraph-margin-bottom: 0;
         width: 50%;
         padding-top: 2em;
     }
+    
+    .skills-tab > ul {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .picto-in-header {
+        justify-self: center;
+    }
 }
 
 @media (max-width: 599px) {
@@ -252,6 +280,27 @@ $paragraph-margin-bottom: 0;
     #offer-description-card {
         @include cards($primary, 10px);
         background-color: rgba(217, 217, 217, 0.2);
+        margin-bottom: 5rem;
+    }
+
+    .company-in-desktop-view {
+        display: none;
+    }
+
+    .show-offer-single-section>hr {
+        display: none;
+    }
+
+    .grey-area-in-offer-show {
+        width: 25%;
+        color: white;
+        margin-right: 15px;
+        font-weight: 500;
+        background-color: inherit;
+    }
+
+    .picto-in-header {
+        filter: invert(1);
     }
 
     //Show Candidate
@@ -394,6 +443,23 @@ $paragraph-margin-bottom: 0;
     justify-content: space-between;
 }
 
+// Page Offer_index
+.offer-card {
+    text-decoration: none;
+    text-align: center;
+    position: relative;
+    top: -0.5rem;
+}
+
+.index-offer-picture {
+    border-radius: 5px;
+}
+
+.other-info {
+    display: flex;
+    justify-content: space-between;
+}
+
 .portfolio a:link,
 .portfolio a:visited,
 .portfolio a:hover,
@@ -424,6 +490,88 @@ $paragraph-margin-bottom: 0;
     display: flex;
     text-align: center;
     justify-content: space-between;
+}
+
+.grey-area {
+    width: 30%;
+    background-color: $tertiary;
+    text-align: center;
+}
+
+.sub-head {
+    display: flex;
+    justify-content: center;
+}
+
+.index-company-logo {
+    width: 30px;
+    height: 28px;
+}
+
+.index-offer-title-section {
+    height: 6.25rem;
+}
+
+.picto-calendar {
+    filter: invert(1);
+}
+
+.card {
+    --bs-card-border-width: 100%;
+}
+
+//paginator
+.page-link.active,
+.active>.page-link {
+    background-color: $primary;
+    border-color: $primary;
+}
+
+.page-link {
+    color: $primary;
+}
+
+.pagination {
+    --bs-pagination-hover-color: #FED32C;
+}
+
+
+//Page Offer_show
+h2 {
+    font-weight: 700;
+    font-size: 2.1875rem;
+}
+
+hr {
+    color: $primary;
+    width: 100%;
+    height: 0.125rem;
+    border: 1px solid;
+}
+
+.offer-show-header-section {
+    text-align: center;
+    color: white;
+    background: url("../images/headerBg.png") 0 0 no-repeat fixed;
+    height: 100%;
+    overflow: hidden;
+    background-color: hsl(335, 42%, 54%);
+    background-blend-mode: multiply;
+}
+
+.before-footer-btn {
+    display: flex;
+    justify-content: center;
+}
+
+.other-info-in-offer-show {
+    display: flex;
+    margin: auto;
+    justify-content: center;
+}
+
+.skills-tab > ul {
+    list-style-type: none;
 }
 
 @import "~bootstrap/scss/bootstrap";

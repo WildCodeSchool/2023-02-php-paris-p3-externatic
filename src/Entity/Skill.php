@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\SkillRepository;
+use ArrayAccess;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -10,6 +11,38 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: SkillRepository::class)]
 class Skill
 {
+    public const HARD = [
+                ['name' => 'PHP', 'type' => 'hard'],
+                ['name' => 'JS', 'type' => 'hard'],
+                ['name' => 'JAVA', 'type' => 'hard'],
+                ['name' => 'Windev', 'type' => 'hard'],
+                ['name' => 'html', 'type' => 'hard'],
+                ['name' => 'CSS', 'type' => 'hard'],
+                ['name' => 'PHP1', 'type' => 'hard'],
+                ['name' => 'JS1', 'type' => 'hard'],
+                ['name' => 'JAVA1', 'type' => 'hard'],
+                ['name' => 'Windev1', 'type' => 'hard'],
+                ['name' => 'html1', 'type' => 'hard'],
+                ['name' => 'CSS1', 'type' => 'hard'],
+    ];
+
+    public const SOFT = [
+                ['name' => 'full of idea', 'type' => 'soft'],
+                ['name' => 'alert', 'type' => 'soft'],
+                ['name' => 'smiling', 'type' => 'soft'],
+                ['name' => 'nice', 'type' => 'soft'],
+                ['name' => 'inventive', 'type' => 'soft'],
+                ['name' => 'perfectionist', 'type' => 'soft'],
+                ['name' => 'full of idea1', 'type' => 'soft'],
+                ['name' => 'alert1', 'type' => 'soft'],
+                ['name' => 'smiling1', 'type' => 'soft'],
+                ['name' => 'nice1', 'type' => 'soft'],
+                ['name' => 'inventive1', 'type' => 'soft'],
+                ['name' => 'perfectionist1', 'type' => 'soft'],
+    ];
+
+    public const SKILLS = [self::HARD, self::SOFT];
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]

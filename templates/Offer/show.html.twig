@@ -1,0 +1,83 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Fiche d'une annonce -
+	{{ offer.title }}
+{% endblock %}
+{% block body %}
+	<section class="offer-show-header-section pt-4 pb-4" style="background-image: url(../../{{ offer.picture }})">
+		<img class="index-company-logo" src="{{ asset('/%s' | format(offer.company.logo)) }}">
+		<p>{{ offer.company.name }}</p>
+		<h3 class="mb-4 mt-4">
+			<strong>{{ offer.title }}</strong>
+		</h3>
+		<section class="other-info-in-offer-show">
+			<div class="grey-area-in-offer-show">
+				<img class="picto picto-in-header" src="{{ asset('build/images/picto/location1.4221a9ac.svg') }}" alt="pictoLocation">
+				{{ offer.location }}
+			</div>
+			<div class="grey-area-in-offer-show">
+				<img class="picto picto-in-header" src="{{ asset('build/images/picto/job 3.1afd4455.svg') }}" alt="pictoCartable">
+				{{ offer.contract }}
+			</div>
+			<div class="grey-area-in-offer-show">
+				<img class="picto picto-in-header" src="{{ asset('build/images/picto/piggy-bank 1.9a19ac5f.svg') }}" alt="pictoCochon">
+				{{ offer.minSalary // 1000 }}K																																							-
+				{{ offer.maxSalary // 1000 }}K
+			</div>
+		</section>
+		<p>
+		<img class="picto picto-calendar picto-in-header mt-2 mb-2" src="{{ asset('build/images/picto/calendar1.e79b1a6d.svg') }}" alt="pictoCalendar">
+		posted
+			{{ dateInterval }}
+			ago
+		</p>
+		<div class="col text-center mt-4">
+			<button type="button" class="btn btn-secondary mt-2 applicationbtn" data-bs-toggle="modal" data-bs-target="#exampleModal">Apply</button>
+		</div>
+	</section>
+	<div class="margin">
+		<div id="offer-description-card" class="show-offer-single-section p-3">
+			<h5 class="card-title mt-4"><img class="picto" src="{{ asset('build/images/picto/immeuble-de-bureaux 2.dfb8dfe9.svg') }}" alt="pictoImmeuble">Company
+			</h5><hr>
+			<div class="card-body mt-2 offer-show-content">
+				{{ offer.company.presentation }}
+			</div>
+		</div>
+		<div id="offer-description-card" class="show-offer-single-section p-3">
+			<h5 class="card-title mt-4"><img class="picto" src="{{ asset('build/images/picto/job 3.1afd4455.svg') }}" alt="pictoCartable">Job Description
+			</h5><hr>
+			<div class="card-body mt-2 offer-show-content">
+				{{ offer.description }}
+			</div>
+		</div>
+		<div id="offer-description-card" class="show-offer-single-section p-3">
+			<h5 class="card-title mt-4"><img class="picto" src="{{ asset('build/images/picto/description-de-lemploi.981884f5.svg') }}" alt="pictoPanneau">Candidate Profil
+			</h5><hr>
+			<div class="card-body mt-2 skills-tab offer-show-content">
+				<ul>
+					{% for skill in constant('App\\Entity\\Skill::HARD') %}
+						<li><img class="picto" src="{{ asset('build/images/picto/checked 1.5d86e0d4.svg') }}" alt="pictoChecked">{{ skill.name }}</li>
+					{% endfor %}
+				</ul>
+				<ul>
+					{% for skill in constant('App\\Entity\\Skill::SOFT') %}
+						<li><img class="picto" src="{{ asset('build/images/picto/checked 1.5d86e0d4.svg') }}" alt="pictoChecked">{{ skill.name }}</li>
+					{% endfor %}
+				</ul>
+			</div>
+		</div>
+		<div id="offer-description-card" class="show-offer-single-section p-3">
+			<h5 class="card-title mt-4"><img class="picto" src="{{ asset('build/images/picto/interview 2.57b3d3b7.svg') }}" alt="pictoItvProcess">Interview Process
+			</h5><hr>
+			<div class="card-body mt-2 offer-show-content">
+				{{ offer.interviewProcess }}
+			</div>
+		</div>
+		<section class="before-footer-btn mt-4">
+			<div class="col text-center mt-4">
+				<button type="button" class="btn btn-secondary mt-2 applicationbtn" data-bs-toggle="modal" data-bs-target="#exampleModal">Apply</button>
+			</div>
+		</section>
+		{% include "offer/_modalApply.html.twig" %}
+	</div>
+{% endblock %}

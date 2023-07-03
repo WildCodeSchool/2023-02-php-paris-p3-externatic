@@ -125,6 +125,9 @@
     "gitonomy/gitlib": {
         "version": "v1.3.4"
     },
+    "knplabs/knp-paginator-bundle": {
+        "version": "v6.2.0"
+    },
     "laravel/serializable-closure": {
         "version": "v1.1.1"
     },
