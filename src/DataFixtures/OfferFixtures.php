@@ -16,8 +16,8 @@ class OfferFixtures extends Fixture implements DependentFixtureInterface
         for ($i = 1; $i <= 60; $i++) {
             $offer = new Offer();
 
-            $offer->setTitle($faker->word())
-                ->setCreatedAt($faker->dateTime())
+            $offer->setTitle($faker->text(50))
+                ->setCreatedAt($faker->dateTimeBetween('-50 week', '-1 week'))
                 ->setStartAt($faker->dateTime())
                 ->setContract($faker->word())
                 ->setWorkFromHome($faker->word())
@@ -28,7 +28,7 @@ class OfferFixtures extends Fixture implements DependentFixtureInterface
                 ->setLocation($faker->city())
                 ->setInterviewProcess($faker->sentence())
                 ->setNumber($i)
-                ->setPicture('offerPictures' . mt_rand(0, 5));
+                ->setPicture('offerPictures' . mt_rand(1, 4) . '.jpg');
             for ($j = 0; $j < 6; $j++) {
                 $offer->addSkill($this->getReference('skill_soft_' . $faker->unique(true)->numberBetween(0, 11)));
                 $offer->addSkill($this->getReference('skill_hard_' . $faker->unique(true)->numberBetween(0, 11)));

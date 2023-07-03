@@ -2,7 +2,6 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Candidate;
 use App\Entity\CandidateMetadata;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
