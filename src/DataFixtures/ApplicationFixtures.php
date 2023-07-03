@@ -22,7 +22,7 @@ class ApplicationFixtures extends Fixture implements DependentFixtureInterface
                 //deviendra DateTimeImmutable avec de vraies données
                 // ->setCreatedAt($faker->dateTime())
                 ->setOffer($this->getReference('offer_' . rand(1, 6)))
-                ->setCandidate($this->getReference('user_' . User::USER[rand(0, 3)]['Email'])->getCandidate());
+                ->setCandidate($this->getReference('user_' . UserFixtures::USER[rand(0, 3)]['Email'])->getCandidate());
 
             $manager->persist($application);
         }

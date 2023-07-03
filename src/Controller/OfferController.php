@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Offer;
 use App\Entity\Application;
+use App\Entity\Skill;
 use App\Repository\ApplicationRepository;
 use App\Repository\OfferRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -33,30 +34,11 @@ class OfferController extends AbstractController
     public function show(Offer $offer): Response
     {
         $interval = date_diff(new DateTime(), $offer->getCreatedAt());
-        $dateInterval =  $interval->format('%R%y year(s) %m month(s) %d day(s) %h hour(s) : %i minute(s)');
+        $dateInterval = $interval->format('%R%y year(s) %m month(s) %d day(s) %h hour(s) : %i minute(s)');
 
         return $this->render('offer/show.html.twig', [
             'offer'        => $offer,
             'dateInterval' => $dateInterval,
         ]);
-    }
-    // Méthode créée telle que demandée dans l'US mais pas testée parce
-    //que necessitant la gestion d'User(US de la semaine pro')
-    #[Route('/apply/{id}', name: 'apply', methods: ['GET', 'POST'])]
-    public function apply(Offer $offer, Application $application, ApplicationRepository $repository): Response
-    {
-        $application = new Application();
-
-        $application->setStatus('received')
-            ->setOffer($offer)
-            ->setCandidate($this->getUser());
-
-        $repository->save($application, true);
-
-        $this->addFlash(
-            'success',
-            'Vous avez bien postulé à cette offre '
-        );
-        return $this->redirectToRoute('offer_index');
     }
 }

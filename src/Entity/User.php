@@ -11,32 +11,9 @@ use Symfony\Component\Security\Core\User\UserInterface;
 #[ORM\Table(name: '`user`')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
-    public const LOGO = [
-        'logoCompany.jpg', 'logoCompany1.jpg'
-    ];
-    public const USER = [
-        [
-            'Firstname' => 'Erika', 'Lastname' => 'Ikelempo', 'Role' => User::ROLE_CANDIDATE,
-            'Location' => 'Epinay', 'Email' => 'erika@hotmail.fr', 'picture' => 'eri.png'
-        ],
-        [
-            'Firstname' => 'Lionel', 'Lastname' => 'Da Rosa', 'Role' => User::ROLE_CANDIDATE,
-            'Location' => 'Boulbi', 'Email' => 'lio@hotmail.fr', 'picture' => 'Lio.png'
-        ],
-        [
-            'Firstname' => 'Ester', 'Lastname' => 'Martinez', 'Role' => User::ROLE_CANDIDATE,
-            'Location' => 'Paris', 'Email' => 'ester@hotmail.fr', 'picture' => 'Ester.png'
-        ],
-        [
-            'Firstname' => 'Lea', 'Lastname' => 'Hadida', 'Role' => User::ROLE_CANDIDATE,
-            'Location' => 'Paris', 'Email' => 'lea@hotmail.fr', 'picture' => 'Lea.png'
-        ],
-        ['Name' => 'Atos', 'Role' => User::ROLE_COMPANY, 'Email' => 'atos@hotmail.fr'],
-        ['Name' => 'McDonalds', 'Role' => User::ROLE_COMPANY, 'Email' => 'mcdo@hotmail.fr']
-    ];
-
     public const ROLE_COMPANY = 'ROLE_COMPANY';
     public const ROLE_CANDIDATE = 'ROLE_CANDIDATE';
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]

@@ -38,8 +38,7 @@ $paragraph-margin-bottom: 0;
     padding: 1.5rem;
 }
 
-img,
-svg {
+.picto {
     margin-right: 0.563rem;
 }
 
@@ -52,7 +51,7 @@ svg {
 @mixin cards($color, $radius) {
     border-top-right-radius: $radius;
 
-    @if $color ==$primary {
+    @if $color == $primary {
         @include border($primary);
 
         &:hover {
@@ -60,7 +59,7 @@ svg {
         }
     }
 
-    @else if $color ==$secondary {
+    @else if $color == $secondary {
         @include border($secondary);
 
         &:hover {
@@ -68,7 +67,7 @@ svg {
         }
     }
 
-    @else if $color ==$tertiary {
+    @else if $color == $tertiary {
         border: 2px solid $tertiary;
         box-shadow: 6px 6px 0px white;
 
@@ -135,8 +134,12 @@ svg {
     margin-left: 0.8rem;
 }
 
-.btn-primary:hover {
-    background-color: #851342;
+.btn-primary:hover, .btn-secondary:hover {
+    background-color: $primary;
+}
+
+.btn-primary:active, .btn-secondary:active {
+    background-color: $secondary;
 }
 
 // Navigation buttons
@@ -188,9 +191,16 @@ svg {
 
     .skills-tab {
         display: flex;
-        justify-content: space-evenly;
     }
 
+    .grey-area-in-offer-show {
+        display: grid;
+        grid-template-rows: 1fr 2fr;
+    }
+
+    .picto-in-header {
+        justify-self: center;
+    }
 }
 
 @media (max-width: 599px) {

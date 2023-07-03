@@ -19,19 +19,19 @@
 								<a class="offer-card" href="{{ path('offer_show', { id : offer.id }) }}">
 									<div class="card">
 										<div class="cardHead ratio ratio-21x9">
-											<img class="index-offer-picture" src="../{{ offer.picture }}">
+											<img class="index-offer-picture" src="{{ asset('/%s' | format(offer.picture)) }}">
 										</div>
 										<div class="card-body">
 											<article>
 												<section class="sub-head">
-													<img class="index-company-logo me-1" src="../{{ offer.company.logo }}">
+													<img class="index-company-logo me-1" src="{{ asset('/%s' | format(offer.company.logo)) }}">
 													<p>{{ offer.company.name }}</p>
 												</section>
 												<h3 class="index-offer-title-section">
-													<strong>{{ (offer.title | length > 50 ?  offer.title | slice(0,50) ~ '...' : offer.title )}}</strong>
+													<strong>{{ offer.title }}</strong>
 												</h3>
 												<p>
-													<img src="{{ asset('build/images/picto/location1.4221a9ac.svg') }}" alt="pictoLocation">
+													<img class="picto" src="{{ asset('build/images/picto/location1.4221a9ac.svg') }}" alt="pictoLocation">
 													{{ offer.location }}
 												</p>
 												<p>
@@ -50,7 +50,7 @@
 													</section>
 												</p>
 												<p>
-													<img src="{{ asset('build/images/picto/calendar1.e79b1a6d.svg') }}" alt="pictoCalendar">
+													<img class="picto" src="{{ asset('build/images/picto/calendar1.e79b1a6d.svg') }}" alt="pictoCalendar">
 													posted
 													{% set difference = date(offer.createdAt).diff(date(now)) %}
 													{% set leftDays = difference.days %}

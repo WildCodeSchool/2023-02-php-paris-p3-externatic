@@ -5,7 +5,7 @@
 {% endblock %}
 {% block body %}
 	<section class="offer-show-header-section pt-4 pb-4" style="background-image: url(../../{{ offer.picture }})">
-		<img class="index-company-logo" src="../../{{ offer.company.logo }}">
+		<img class="index-company-logo" src="{{ asset('/%s' | format(offer.company.logo)) }}">
 		<p>{{ offer.company.name }}</p>
 		<h3 class="mb-4 mt-4">
 			<strong>{{ offer.title }}</strong>
@@ -51,31 +51,19 @@
 		<div id="offer-description-card" class="show-offer-single-section p-3">
 			<h5 class="card-title mt-4"><img class="picto" src="{{ asset('build/images/picto/description-de-lemploi.981884f5.svg') }}" alt="pictoPanneau">Candidate Profil
 			</h5><hr>
-			<div class="card-body mt-2 offer-show-content">
-				<section class="skills-tab">
-					<table>
-						{% for skill in offer.skills %}
-							<tr>
-								{% if skill.type == 'hard' %}
-									<td class="mt-2">
-										<img class="picto" src="{{ asset('build/images/picto/checked 1.5d86e0d4.svg') }}" alt="pictoChecked">{{ skill.name }}
-									</td>
-								{% endif %}
-							</tr>
-						{% endfor %}
-					</table>
-					<table>
-						{% for skill in offer.skills %}
-							<tr>
-								{% if skill.type == 'soft' %}
-									<td class="mt-2">
-										<img class="picto" src="{{ asset('build/images/picto/checked 1.5d86e0d4.svg') }}" alt="pictoChecked">{{ skill.name }}
-									</td>
-								{% endif %}
-							</tr>
-						{% endfor %}
-					</table>
-				</section>
+			<div class="card-body mt-2 skills-tab offer-show-content">	
+				{% for skill in constant('App\\Entity\\skill::SKILLS') %}
+					<ul>
+						{% if skill.type == 'hard' %}
+							<li><img class="picto" src="{{ asset('build/images/picto/checked 1.5d86e0d4.svg') }}" alt="pictoChecked">{{ skill.name }}</li>
+						{% endif %}
+					</ul>
+					<ul>
+						{% if skill.type == 'soft' %}
+							<li><img class="picto" src="{{ asset('build/images/picto/checked 1.5d86e0d4.svg') }}" alt="pictoChecked">{{ skill.name }}</li>
+						{% endif %}
+					</ul>
+				{% endfor %}
 			</div>
 		</div>
 		<div id="offer-description-card" class="show-offer-single-section p-3">

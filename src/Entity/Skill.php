@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: SkillRepository::class)]
 class Skill
 {
-    public const SKILLS = [
+    public const SKILLS =
         [
             ['name' => 'PHP', 'type' => 'hard'],
             ['name' => 'JS', 'type' => 'hard'],
@@ -25,8 +25,6 @@ class Skill
             ['name' => 'Windev1', 'type' => 'hard'],
             ['name' => 'html1', 'type' => 'hard'],
             ['name' => 'CSS1', 'type' => 'hard'],
-        ],
-        [
             ['name' => 'full of idea', 'type' => 'soft'],
             ['name' => 'alert', 'type' => 'soft'],
             ['name' => 'smiling', 'type' => 'soft'],
@@ -39,7 +37,6 @@ class Skill
             ['name' => 'nice1', 'type' => 'soft'],
             ['name' => 'inventive1', 'type' => 'soft'],
             ['name' => 'perfectionist1', 'type' => 'soft'],
-        ]
     ];
 
     #[ORM\Id]
