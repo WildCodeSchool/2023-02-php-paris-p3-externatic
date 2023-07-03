@@ -6,17 +6,18 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Exception;
 
 class ConnectionController extends AbstractController
 {
     #[Route('/login', name: 'login')]
-    public function index(AuthenticationUtils $authenticationUtils): Response
+    public function login(AuthenticationUtils $authenticationUtils): Response
     {
         $error = $authenticationUtils->getLastAuthenticationError();
 
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        return $this->render('connection/index.html.twig', [
+        return $this->render('connection/login.html.twig', [
             'last_username' => $lastUsername,
             'error'         => $error,
         ]);
@@ -25,6 +26,6 @@ class ConnectionController extends AbstractController
     #[Route('/logout', name: 'logout')]
     public function logout(): never
     {
-        throw new \Exception('Don\'t forget to activate logout in security.yaml');
+        throw new Exception('Don\'t forget to activate logout in security.yaml');
     }
 }
