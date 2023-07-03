@@ -45,17 +45,6 @@ class CandidateController extends AbstractController
     #[Route('/{id}', name: 'show', methods: ['GET'])]
     public function show(Candidate $candidate, CandidateRepository $candidateRepository): Response
     {
-
-        $candidate = $candidateRepository->findOneById($candidate->getId());
-
-        if ($candidate->isVisible()) {
-            $candidate->setVisible(false);
-        } else {
-            $candidate->setVisible(true);
-        }
-        $candidateRepository->save($candidate, true);
-
-
         return $this->render('candidate/show.html.twig', [
             'candidate' => $candidate,
         ]);
@@ -77,6 +66,16 @@ class CandidateController extends AbstractController
             'candidate' => $candidate,
             'form' => $form,
         ]);
+    }
+
+    #[Route('/{id}/updateVisibility', name: 'visibility')]
+    public function updateVisibility(CandidateRepository $candidateRepository, Candidate $candidate): Response
+    {
+        $candidate = $candidateRepository->findOneById($candidate->getId());
+        $candidate->setVisible(!$candidate->isVisible());
+        $candidateRepository->save($candidate, true);
+
+        return $this->redirectToRoute('candidate_show', ['id' => $candidate->getId()], Response::HTTP_SEE_OTHER);
     }
 
     #[Route('/{id}', name: 'delete', methods: ['POST'])]

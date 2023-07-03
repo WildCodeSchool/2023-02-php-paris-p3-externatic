@@ -13,7 +13,7 @@
 				<div class="viewers">
 					<div>
 						<p>Visible by recruiters</p>
-						<a href="{{ path('candidate_show', {'id': candidate.id}) }}">
+						<a href="{{ path('candidate_visibility', {'id': candidate.id}) }}">
 							<i class="bi {{ candidate.isVisible ? 'bi-toggle-on' : 'bi-toggle-off' }}"></i>
 						</a>
 					</div>
