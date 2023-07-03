@@ -174,7 +174,7 @@ $paragraph-margin-bottom: 0;
 }
 
 .grey-area-in-offer-show {
-    width: 10%;
+    width: 16.25rem;
     background-color: $tertiary;
     text-align: center;
     color: black;
@@ -189,13 +189,9 @@ $paragraph-margin-bottom: 0;
         display: none;
     }
 
-    .skills-tab {
-        display: flex;
-    }
-
-    .grey-area-in-offer-show {
+    .skills-tab > ul {
         display: grid;
-        grid-template-rows: 1fr 2fr;
+        grid-template-columns: 1fr 1fr;
     }
 
     .picto-in-header {
@@ -220,11 +216,6 @@ $paragraph-margin-bottom: 0;
 
     .show-offer-single-section>hr {
         display: none;
-    }
-
-    .skills-tab {
-        display: grid;
-        grid-template-rows: 1fr 1fr;
     }
 
     .grey-area-in-offer-show {
@@ -338,4 +329,8 @@ hr {
     display: flex;
     margin: auto;
     justify-content: center;
+}
+
+.skills-tab > ul {
+    list-style-type: none;
 }

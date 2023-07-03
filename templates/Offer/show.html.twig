@@ -25,7 +25,9 @@
 				{{ offer.maxSalary // 1000 }}K
 			</div>
 		</section>
-		<p>offer posted
+		<p>
+		<img class="picto" src="{{ asset('build/images/picto/calendar1.e79b1a6d.svg') }}" alt="pictoCalendar">
+		posted
 			{{ dateInterval }}
 			ago
 		</p>
@@ -51,19 +53,17 @@
 		<div id="offer-description-card" class="show-offer-single-section p-3">
 			<h5 class="card-title mt-4"><img class="picto" src="{{ asset('build/images/picto/description-de-lemploi.981884f5.svg') }}" alt="pictoPanneau">Candidate Profil
 			</h5><hr>
-			<div class="card-body mt-2 skills-tab offer-show-content">	
-				{% for skill in constant('App\\Entity\\skill::SKILLS') %}
-					<ul>
-						{% if skill.type == 'hard' %}
-							<li><img class="picto" src="{{ asset('build/images/picto/checked 1.5d86e0d4.svg') }}" alt="pictoChecked">{{ skill.name }}</li>
-						{% endif %}
-					</ul>
-					<ul>
-						{% if skill.type == 'soft' %}
-							<li><img class="picto" src="{{ asset('build/images/picto/checked 1.5d86e0d4.svg') }}" alt="pictoChecked">{{ skill.name }}</li>
-						{% endif %}
-					</ul>
-				{% endfor %}
+			<div class="card-body mt-2 skills-tab offer-show-content">
+				<ul>
+					{% for skill in constant('App\\Entity\\skill::HARD') %}
+						<li><img class="picto" src="{{ asset('build/images/picto/checked 1.5d86e0d4.svg') }}" alt="pictoChecked">{{ skill.name }}</li>
+					{% endfor %}
+				</ul>
+				<ul>
+					{% for skill in constant('App\\Entity\\skill::SOFT') %}
+						<li><img class="picto" src="{{ asset('build/images/picto/checked 1.5d86e0d4.svg') }}" alt="pictoChecked">{{ skill.name }}</li>
+					{% endfor %}
+				</ul>
 			</div>
 		</div>
 		<div id="offer-description-card" class="show-offer-single-section p-3">

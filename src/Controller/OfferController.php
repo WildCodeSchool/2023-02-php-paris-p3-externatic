@@ -34,7 +34,7 @@ class OfferController extends AbstractController
     public function show(Offer $offer): Response
     {
         $interval = date_diff(new DateTime(), $offer->getCreatedAt());
-        $dateInterval = $interval->format('%R%y year(s) %m month(s) %d day(s) %h hour(s) : %i minute(s)');
+        $dateInterval = $interval->format('%R%y year(s) %m month(s) %d day(s)');
 
         return $this->render('offer/show.html.twig', [
             'offer'        => $offer,
