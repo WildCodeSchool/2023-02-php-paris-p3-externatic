@@ -11,7 +11,7 @@
                     <img id="job" class="position-absolute start-0 " src="{{ asset('build/images/job.svg') }}">
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdown-menu-btn" style="width: 100%;">
-                    {% for value, label in field_choices(form.contract) %}
+                    {% for label, value in field_choices(form.contract) %}
                         <div class="dropdown-item">
                             <input class="form-check-input" type="checkbox" name="{{ field_name(form.contract) }}[]" value="{{ value }}" id="flexCheckDefault" {{ value in field_value(form.contract) ? 'checked' : '' }}>
                             <label class="form-check-label" for="flexCheckDefault"> {{ label }} </label>
@@ -50,21 +50,21 @@
                     <div class="form-label-modal">
                         {{ form_label(form.companySector) }}
                     </div>
-                    {% for value, label in field_choices(form.companySector) %}
+                    {% for label, value in field_choices(form.companySector) %}
                         <input class="form-check-input" type="checkbox" name="{{ field_name(form.companySector) }}[]" value="{{ value }}" id="flexCheckDefault" {{ value in field_value(form.companySector) ? 'checked' : '' }}>
                         <label class="form-check-label" for="flexCheckDefault"> {{ label }} </label>
                     {% endfor %}
                     <div class="form-label-modal">
                         {{ form_label(form.experience) }}
                     </div>
-                    {% for value, label in field_choices(form.experience) %}
+                    {% for label, value  in field_choices(form.experience) %}
                         <input class="form-check-input" type="checkbox" name="{{ field_name(form.experience) }}[]" value="{{ value }}" id="flexCheckDefault" {{ value in field_value(form.experience) ? 'checked' : '' }}>
                         <label class="form-check-label" for="flexCheckDefault"> {{ label }} </label>
                     {% endfor %}
                     <div class="form-label-modal">
                         {{ form_label(form.workFromHome) }}
                     </div>
-                    {% for value, label in field_choices(form.workFromHome) %}
+                    {% for label, value in field_choices(form.workFromHome) %}
                         <input class="form-check-input" type="checkbox" name="{{ field_name(form.workFromHome) }}[]" value="{{ value }}" id="flexCheckDefault" {{ value in field_value(form.workFromHome) ? 'checked' : '' }}>
                         <label class="form-check-label" for="flexCheckDefault"> {{ label }} </label>
                     {% endfor %}

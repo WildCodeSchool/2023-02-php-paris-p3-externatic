@@ -12,13 +12,13 @@ use Doctrine\ORM\Mapping as ORM;
 class Company
 {
     public const COMPANY_SECTOR = [
-        'Software' => 'Software',
-        'Data' => 'Data',
-        'Cloud service' => 'Cloud service',
-        'Cyber Security' => 'Cyber Security',
-        'Mobile' => 'Mobile',
-        'AI / Machine Learning' => 'AI / Machine Learning',
-        'Connected Object' => 'Connected Object',
+        'Software' => 'software',
+        'Data' => 'data',
+        'Cloud service' => 'cloud-service',
+        'Cyber Security' => 'cyber-security',
+        'Mobile' => 'mobile',
+        'AI / Machine Learning' => 'ai-machine-learning',
+        'Connected Object' => 'connected-object',
     ];
 
     #[ORM\Id]
