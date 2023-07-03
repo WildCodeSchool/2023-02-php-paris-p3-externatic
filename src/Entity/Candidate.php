@@ -181,7 +181,7 @@ class Candidate
 
     public function getPicture(): ?string
     {
-        return 'uploads/candidatPictures/' . $this->picture;
+        return 'uploads/candidatePictures/' . $this->picture;
     }
 
     public function setPicture(string $picture): self
@@ -190,6 +190,7 @@ class Candidate
 
         return $this;
     }
+
     public function getUser(): ?User
     {
         return $this->user;
