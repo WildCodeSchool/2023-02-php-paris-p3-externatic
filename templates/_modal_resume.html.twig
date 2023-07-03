@@ -1,0 +1,31 @@
+{# 1. A metre le fichier _moda_resume.html.twig dans le bon dossier --> templates/candidate/
+   2. A mettre dans candidate/show.html.twig {{ include('device/_modal_resume.html.twig') }} 
+   3. Adapter ce boutton qui arrive, avec le boutton existant de 'your resume'. #}
+
+
+<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reg-modal">Register for updates</button>
+
+<div class="container">
+
+        <!-- Trigger the modal with a button -->
+        <div class="modal fade" id="reg-modal" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modal-title">{{ device.brand }}, this is your resume </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>  
+                    <div class="modal-body">
+                        <embed src="/images/uploads/{{ device.image }}" frameborder="0" width="100%" height="400vh"></embed>
+                        
+
+                    </div>
+                    {# <div class="modal-footer">
+                        <button class="btn btn-primary">Submitt</button>
+                    </div> #}
+                </div>
+            </div>
+        </div>
+</div>

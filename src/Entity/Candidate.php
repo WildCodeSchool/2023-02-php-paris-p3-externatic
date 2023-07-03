@@ -8,8 +8,12 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use phpDocumentor\Reflection\Types\Nullable;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CandidateRepository::class)]
+#[Vich\Uploadable]
 class Candidate
 {
     #[ORM\Id]
@@ -29,6 +33,10 @@ class Candidate
     #[ORM\Column(length: 100, nullable: true)]
     private ?string $phone = null;
 
+    #[Assert\File(maxSize: '2M', extensions: ['pdf'])]
+    #[Vich\UploadableField(mapping: 'resumes', fileNameProperty: 'resume')]
+    private ?File $resumeFile = null;
+
     #[ORM\Column(length: 150)]
     private ?string $resume = null;
 
@@ -40,6 +48,10 @@ class Candidate
 
     #[ORM\Column(length: 100, nullable: true)]
     private ?string $experience = null;
+
+    #[Assert\Image(maxSize: '1M', mimeTypes: ['jpeg', 'jpg', 'png'], maxWidth: 79, maxHeight: 79)]
+    #[Vich\UploadableField(mapping: 'candidates', fileNameProperty: 'picture')]
+    private ?File $pictureFile = null;
 
     #[ORM\Column(length: 150, nullable: true)]
     private ?string $picture = null;
@@ -131,6 +143,16 @@ class Candidate
         return $this;
     }
 
+    public function setResumeFile(?File $resumeFile = null): void
+    {
+        $this->resumeFile = $resumeFile;
+    }
+
+    public function getResumeFile(): ?File
+    {
+        return $this->resumeFile;
+    }
+
     public function getResume(): ?string
     {
         return 'upload/resumees/' . $this->resume;
@@ -177,6 +199,16 @@ class Candidate
         $this->experience = $experience;
 
         return $this;
+    }
+
+    public function setPictureFile(?File $pictureFile = null): void
+    {
+        $this->pictureFile = $pictureFile;
+    }
+
+    public function getPictureFile(): ?File
+    {
+        return $this->pictureFile;
     }
 
     public function getPicture(): ?string
