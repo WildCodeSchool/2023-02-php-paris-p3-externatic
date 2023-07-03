@@ -191,6 +191,9 @@ $paragraph-margin-bottom: 0;
     #picture_profile{
         margin-bottom: -9em;
         margin-right: 25em;
+        width: 79px;
+        height: 79px;
+        border-radius: 50%;
     }
 
     #profile-card.p-3{
@@ -314,11 +317,12 @@ $paragraph-margin-bottom: 0;
 .visibility-profile a i.bi.bi-toggle-off:before {
     font-size: xx-large;
     color: $secondary;
-}
-
-.visibility-profile a i.bi.bi-toggle-on:before {
     padding-top: 0.2em;
 }
+
+// .visibility-profile a i.bi.bi-toggle-on:before {
+    
+// }
 
 .visibility-profile .profile {
     text-align: center;
@@ -344,15 +348,22 @@ $paragraph-margin-bottom: 0;
 #introduction img.quote_left {
     height: 1.5em;
     float: left;
+    margin-left: -1.35em;
+    margin-top: -1.5em;
+    font-size: 2em;
 }
 
 #introduction img.quote_right {
     height: 1.5em;
     float: right;
+    margin-right: -1.35em;
+    margin-top: 0.7em;
+    font-size: 2em;
 }
 
 //Button cv, update
-#resume button img {
+#resume button img,
+#upload-resume button img {
     padding-right: .5em;
 }
 

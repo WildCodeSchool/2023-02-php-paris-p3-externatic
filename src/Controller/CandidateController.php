@@ -43,16 +43,9 @@ class CandidateController extends AbstractController
     }
 
     #[Route('/{id}', name: 'show', methods: ['GET'])]
-    public function show(Candidate $candidate): Response
+    public function show(Candidate $candidate, CandidateRepository $candidateRepository): Response
     {
-        return $this->render('candidate/show.html.twig', [
-            'candidate' => $candidate,
-        ]);
-    }
 
-    #[Route('/{id}/changeVisibility', name: 'visibility')]
-    public function changeVisibility(CandidateRepository $candidateRepository, Candidate $candidate): Response
-    {
         $candidate = $candidateRepository->findOneById($candidate->getId());
 
         if ($candidate->isVisible()) {
@@ -62,7 +55,10 @@ class CandidateController extends AbstractController
         }
         $candidateRepository->save($candidate, true);
 
-        return $this->redirectToRoute('candidate_show', ['id' => $candidate->getId()], Response::HTTP_SEE_OTHER);
+
+        return $this->render('candidate/show.html.twig', [
+            'candidate' => $candidate,
+        ]);
     }
 
     #[Route('/{id}/edit', name: 'edit', methods: ['GET', 'POST'])]
