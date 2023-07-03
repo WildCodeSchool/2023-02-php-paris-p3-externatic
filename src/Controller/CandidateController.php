@@ -71,8 +71,7 @@ class CandidateController extends AbstractController
     #[Route('/{id}/updateVisibility', name: 'visibility')]
     public function updateVisibility(CandidateRepository $candidateRepository, Candidate $candidate): Response
     {
-        $candidate = $candidateRepository->findOneById($candidate->getId());
-        $candidate->setVisible(!$candidate->isVisible());
+        $candidate->setVisible(!($candidateRepository->findOneById($candidate->getId()))->isVisible());
         $candidateRepository->save($candidate, true);
 
         return $this->redirectToRoute('candidate_show', ['id' => $candidate->getId()], Response::HTTP_SEE_OTHER);
