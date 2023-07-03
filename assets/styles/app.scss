@@ -23,6 +23,7 @@ $input-bg: $info;
 $input-line-height: 2.5;
 $input-border-color: rgba(0, 0, 0, 0.3);
 $input-placeholder-color: rgba(0, 0, 0, 0.5);
+$form-check-input-checked-bg-color: $primary;
 
 $carousel-control-color: black;
 
@@ -99,7 +100,7 @@ $paragraph-margin-bottom: 0;
 }
 
 // Forms
-.form-control {
+#search-input .form-control {
     text-indent: 16%;
 }
 
@@ -176,31 +177,13 @@ $paragraph-margin-bottom: 0;
     }
 }
 
-#search_offer_filter_companySector {
-    margin-bottom: 15px;
-}
-
-#search_offer_filter_companySector > label {
-    margin-right: 7px;
-    margin-left: 2px;
-}
-
-#search_offer_filter_experience {
-    margin-bottom: 15px;
-}
-
-#search_offer_filter_experience > label {
+#modal-body-search-form .form-check-label {
     margin-right: 10px;
-    margin-left: 2px;
+    margin-left: 3px;
 }
 
-#search_offer_filter_workFromHome > label {
-    margin-right: 10px;
-    margin-left: 2px;
-}
-
-.modal-salary {
-    margin-bottom: 15px;
+#modal-body-search-form .form-label-modal {
+    margin-top: 15px;
 }
 
 @import "~bootstrap/scss/bootstrap";

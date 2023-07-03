@@ -1,5 +1,5 @@
 {{ form_start(form) }}
-    <div class="row align-items-center mt-2">
+    <div class="row align-items-center mt-2" id="search-input">
         <div class="col-md-4 mt-4">
             <input type="text" class="form-control" placeholder="Find a job" name="{{ field_name(form.searchTitle) }}" value="{{ field_value(form.searchTitle) }}">
             <img id="glass" class="position-absolute" src="{{ asset('build/images/glass.svg') }}">
@@ -29,12 +29,12 @@
         <button type="button" class="btn btn-link btn-lg mt-1" data-bs-toggle="modal" data-bs-target="#filterModal">More filters</button>
     </div>
     <div class="row justify-content-center mt-4">
-        <button type="submit" class="btn btn-secondary col-md-auto mb-2 mt-1">Save</button>
+        <button type="submit" class="btn btn-secondary col-md-auto mb-2 mt-1">Search</button>
     </div>
 
     <!-- Modal -->
     <div id="filterModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Filters</h5>
@@ -43,14 +43,35 @@
                     </button>
                 </div>
                 <div id="modal-body-search-form" class="modal-body">
-                    {{ form_row(form.salary, {'attr': {'class': 'modal-salary'}}) }}
-                    {{ form_row(form.companySector) }}
-                    {{ form_row(form.experience) }}
-                    {{ form_row(form.workFromHome) }}
+                    <div class="row">
+                        <label>{{ form_label(form.salary) }}</label>
+                    </div>
+                    {{ form_widget(form.salary) }}
+                    <div class="form-label-modal">
+                        {{ form_label(form.companySector) }}
+                    </div>
+                    {% for value, label in field_choices(form.companySector) %}
+                        <input class="form-check-input" type="checkbox" name="{{ field_name(form.companySector) }}[]" value="{{ value }}" id="flexCheckDefault" {{ value in field_value(form.companySector) ? 'checked' : '' }}>
+                        <label class="form-check-label" for="flexCheckDefault"> {{ label }} </label>
+                    {% endfor %}
+                    <div class="form-label-modal">
+                        {{ form_label(form.experience) }}
+                    </div>
+                    {% for value, label in field_choices(form.experience) %}
+                        <input class="form-check-input" type="checkbox" name="{{ field_name(form.experience) }}[]" value="{{ value }}" id="flexCheckDefault" {{ value in field_value(form.experience) ? 'checked' : '' }}>
+                        <label class="form-check-label" for="flexCheckDefault"> {{ label }} </label>
+                    {% endfor %}
+                    <div class="form-label-modal">
+                        {{ form_label(form.workFromHome) }}
+                    </div>
+                    {% for value, label in field_choices(form.workFromHome) %}
+                        <input class="form-check-input" type="checkbox" name="{{ field_name(form.workFromHome) }}[]" value="{{ value }}" id="flexCheckDefault" {{ value in field_value(form.workFromHome) ? 'checked' : '' }}>
+                        <label class="form-check-label" for="flexCheckDefault"> {{ label }} </label>
+                    {% endfor %}
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-secondary">Save</button>
+                    <button type="submit" class="btn btn-secondary">Search</button>
                 </div>
             </div>
         </div>

@@ -58,7 +58,7 @@ class SearchOfferFilterType extends AbstractType
             ->add('experience', ChoiceType::class, [
                 'choices' => Offer::EXPERIENCE,
                 'required' => false,
-                'label' => 'Experience',
+                'label' => 'Years of experience',
                 'expanded' => true,
                 'multiple' => true,
             ])
@@ -69,8 +69,7 @@ class SearchOfferFilterType extends AbstractType
                 'label' => 'Work from home',
                 'expanded' => true,
                 'multiple' => true,
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
