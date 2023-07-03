@@ -188,20 +188,18 @@ $paragraph-margin-bottom: 0;
         display: none;
     }
 
-    .visibility-profile {
-        margin: auto;
+    .visibility-profile { 
+        margin: 3em auto 4em auto;
         display: grid;
         grid-template-columns: 1fr 2fr;
         grid-template-rows: 1fr;
         width: 80%;
         grid-gap: 2em;
-        margin-top: 2em;
     }
 
     //Box grey
     .visibility-profile .visibility {
         background-color: $tertiary;
-        // margin-top: 1.5em;
         padding: 1em 0.9em;
         border: 0.09em solid #FED32C;
         margin-block: auto;
@@ -210,11 +208,6 @@ $paragraph-margin-bottom: 0;
     #picture-profile{
         margin-bottom: -9em;
         margin-right: 25em;
-    }
-
-    #profile-card.p-3{
-        margin-bottom: 3em;
-        font-size: 18px;
     }
 
     .visibility-profile .visibility .viewers {
@@ -250,10 +243,11 @@ $paragraph-margin-bottom: 0;
 
     //Position buttons resume, uload resume
     .resume-upload-resume {
+        margin: 1.5em 0 0 24em;
         display: grid;
-        margin-left: 24em;
         width: 40%;
         grid-template-columns: 1fr 1fr;
+        align-items: center;
     }
 
     .portfolio {
@@ -320,14 +314,17 @@ $paragraph-margin-bottom: 0;
     #picture-profile{
         margin-bottom: -3em;
     }
-
+    
     #profile-card.p-3{
         margin-bottom: 3em;
-        font-size: 18px;
     }
 
     #profile-card.p-3 div.card-body.mt-2 {
         padding-top: 2em;
+    }
+
+    .resume-upload-resume {
+        margin: 3em 0;
     }
 }
 
@@ -391,6 +388,10 @@ $paragraph-margin-bottom: 0;
     width: 79px;
     height: 79px;
     border-radius: 50%;
+}
+
+#profile-card.p-3{
+    font-size: 18px;
 }
 
 #introduction img.quote-left {
@@ -535,7 +536,6 @@ $paragraph-margin-bottom: 0;
     --bs-pagination-hover-color: #FED32C;
 }
 
-
 //Page Offer_show
 h2 {
     font-weight: 700;
@@ -552,7 +552,7 @@ hr {
 .offer-show-header-section {
     text-align: center;
     color: white;
-    background: url("../images/headerBg.png") 0 0 no-repeat fixed;
+    background: url("../images/picto/headerBg.png") 0 0 no-repeat fixed;
     height: 100%;
     overflow: hidden;
     background-color: hsl(335, 42%, 54%);

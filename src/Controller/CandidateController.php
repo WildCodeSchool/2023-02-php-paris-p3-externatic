@@ -43,7 +43,7 @@ class CandidateController extends AbstractController
     }
 
     #[Route('/{id}', name: 'show', methods: ['GET'])]
-    public function show(Candidate $candidate, CandidateRepository $candidateRepository): Response
+    public function show(Candidate $candidate): Response
     {
         return $this->render('candidate/show.html.twig', [
             'candidate' => $candidate,

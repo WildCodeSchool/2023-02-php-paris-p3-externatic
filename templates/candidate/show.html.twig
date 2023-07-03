@@ -19,7 +19,7 @@
 					</div>
 					<div>
 						<p>Viewed by X people</p>
-						<img class="img_icon fa-border" src="{{ asset('build/images/profil_views.svg') }}" alt="profil_views"/>
+						<img class="img_icon fa-border" src="{{ asset('build/images/picto/profil_views.svg') }}" alt="profil_views"/>
 					</div>
 				</div>
 				<div class="candidate-completion">
@@ -42,11 +42,11 @@
 							{% for metadata in candidate.metadata %}
 								{% if metadata.type == 'GitHub' %}
 									<a href="{{ metadata.metadata }}">
-										<img class="metadata" src="{{ asset('build/images/github_black.svg') }}" alt="github"/>
+										<img class="metadata" src="{{ asset('build/images/picto/github_black.svg') }}" alt="github"/>
 									</a>
 								{% elseif metadata.type == 'linkedin' %}
 									<a href="{{ metadata.metadata }}">
-										<img class="metadata" src="{{ asset('build/images/linkedin_black.svg') }}" alt="linkedin"/>
+										<img class="metadata" src="{{ asset('build/images/picto/linkedin_black.svg') }}" alt="linkedin"/>
 									</a>
 								{% endif %}
 							{% endfor %}
@@ -57,17 +57,17 @@
 		</div>
 		<div id="introduction" class="profile-blocks mt-4">
 			<div class="card-body p-4 ">
-				<img class="quote-left" src="{{ asset('build/images/quoteopen.png') }}" alt="quote"/>
+				<img class="quote-left" src="{{ asset('build/images/picto/quoteopen.png') }}" alt="quote"/>
 				{{ candidate.introduction }}
-				<img class="quote-right" src="{{ asset('build/images/quoteclose.png') }}" alt="quote"/>
+				<img class="quote-right" src="{{ asset('build/images/picto/quoteclose.png') }}" alt="quote"/>
 			</div>
 		</div>
 		<div class="resume-upload-resume">
 			<div id="resume" class="col text-center mt-4">
-				<button type="button" class="btn btn-secondary mt-2"><img class="img_icon fa-border" src=" {{ asset('build/images/cv.svg') }} " alt=" curriculum"/>your resume</button>
+				<button type="button" class="btn btn-secondary mt-2"><img class="img_icon fa-border" src=" {{ asset('build/images/picto/cv.svg') }} " alt=" curriculum"/>your resume</button>
 			</div>
 			<div id="upload-resume" class="col text-center mt-4">
-				<button type="button" class="btn btn-secondary upload mt-2"><img class="img_icon fa-border" src="{{ asset('build/images/upload.svg') }}" alt="upload"/>update your resume</button>
+				<button type="button" class="btn btn-secondary upload mt-2"><img class="img_icon fa-border" src="{{ asset('build/images/picto/upload.svg') }}" alt="upload"/>update your resume</button>
 			</div>
 		</div>
 		<div class="skills">
@@ -78,7 +78,7 @@
 						{% for skill in candidate.skills %}
 							{% if skill.type == 'hard' %}
 								<div>
-									<img class="img_icon fa-border" src="{{ asset('build/images/checked.svg') }}" alt="check"/>
+									<img class="img_icon fa-border" src="{{ asset('build/images/picto/checked.svg') }}" alt="check"/>
 									<span>{{ skill.name }}</span>
 								</div>
 							{% endif %}
@@ -93,7 +93,7 @@
 						{% for skill in candidate.skills %}
 							{% if skill.type == 'soft' %}
 								<div>
-									<img class="img_icon fa-border" src="{{ asset('build/images/checked.svg') }}" alt="check"/>
+									<img class="img_icon fa-border" src="{{ asset('build/images/picto/checked.svg') }}" alt="check"/>
 									<span>{{ skill.name }}</span>
 								</div>
 							{% endif %}
@@ -108,7 +108,7 @@
 					<p>PORTEFOLIO</p>
 					{% for metadata in candidate.metadata %}
 						{% if metadata.type == 'portfolio' %}
-							<a href="{{ metadata.metadata }}">Portfolio<img src="{{ asset('build/images/link.svg') }}" alt="portfolio"/></a>
+							<a href="{{ metadata.metadata }}">Portfolio<img src="{{ asset('build/images/picto/link.svg') }}" alt="portfolio"/></a>
 						{% endif %}
 					{% endfor %}
 				</div>
