@@ -28,7 +28,7 @@
 			</div>
 			<div class="profile">
 				<h1>YOUR PROFILE</h1>
-				<img id="picture_profile" src="/build/images/eri2.8bf72f74.png" alt="picture_profile"/>
+				<img id="picture-profile"src="{{ asset(app.user.candidate.picture) }}" alt="profile-picture">
 				<div id="profile-card" class="p-3">
 					<div class="card-body mt-2">
 						<div class="profile-informations">
@@ -57,9 +57,9 @@
 		</div>
 		<div id="introduction" class="profile-blocks mt-4">
 			<div class="card-body p-4 ">
-				<img class="quote_left" src="{{ asset('build/images/quoteopen.png') }}" alt="quote"/>
+				<img class="quote-left" src="{{ asset('build/images/quoteopen.png') }}" alt="quote"/>
 				{{ candidate.introduction }}
-				<img class="quote_right" src="{{ asset('build/images/quoteclose.png') }}" alt="quote"/>
+				<img class="quote-right" src="{{ asset('build/images/quoteclose.png') }}" alt="quote"/>
 			</div>
 		</div>
 		<div class="resume-upload-resume">
