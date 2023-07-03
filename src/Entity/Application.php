@@ -4,7 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ApplicationRepository;
 use Doctrine\ORM\Mapping as ORM;
-use DateTimeImmutable;
+use DateTime;
 
 #[ORM\Entity(repositoryClass: ApplicationRepository::class)]
 class Application
@@ -27,7 +27,7 @@ class Application
     private ?string $status = null;
 
     #[ORM\Column]
-    private DateTimeImmutable $createdAt;
+    private DateTime $createdAt;
 
     #[ORM\ManyToOne(inversedBy: 'applications')]
     #[ORM\JoinColumn(nullable: false)]
@@ -39,7 +39,7 @@ class Application
 
     public function __construct()
     {
-        $this->createdAt = new DateTimeImmutable();
+        $this->createdAt = new DateTime();
     }
 
     public function getId(): ?int
@@ -59,12 +59,12 @@ class Application
         return $this;
     }
 
-    public function getCreatedAt(): DateTimeImmutable
+    public function getCreatedAt(): DateTime
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(DateTimeImmutable $createdAt): self
+    public function setCreatedAt(DateTime $createdAt): self
     {
         $this->createdAt = $createdAt;
 

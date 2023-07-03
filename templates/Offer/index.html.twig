@@ -21,7 +21,7 @@
 										<div class="cardHead ratio ratio-21x9">
 											<img class="index-offer-picture" src="{{ asset('/%s' | format(offer.picture)) }}">
 										</div>
-										<div class="card-body">
+										<div id="card-body" class="card-body">
 											<article>
 												<section class="sub-head">
 													<img class="index-company-logo me-1" src="{{ asset('/%s' | format(offer.company.logo)) }}">
@@ -35,7 +35,7 @@
 													{{ offer.location }}
 												</p>
 												<p>
-													<section class="other-info">
+													<section class="other-info mt-2 mb-2">
 														<div class="grey-area">
 															{{ offer.contract }}
 														</div>
@@ -58,11 +58,9 @@
 														1 day
 													{% else %}
 														{% set years = (leftDays // 365 )%}
-														{{ years }}
-														year(s)
 														{% set months = (leftDays % 365) // 30.5 %}
 														{{ months }}
-														month(s)
+														month(s) and
 														{% set days = ((leftDays % 365 ) % 30.5) %}
 														{{ days }}
 														day(s) ago

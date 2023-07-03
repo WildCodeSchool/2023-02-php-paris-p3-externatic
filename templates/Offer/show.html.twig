@@ -26,14 +26,14 @@
 			</div>
 		</section>
 		<p>
-		<img class="picto" src="{{ asset('build/images/picto/calendar1.e79b1a6d.svg') }}" alt="pictoCalendar">
+		<img class="picto picto-calendar picto-in-header mt-2 mb-2" src="{{ asset('build/images/picto/calendar1.e79b1a6d.svg') }}" alt="pictoCalendar">
 		posted
 			{{ dateInterval }}
 			ago
 		</p>
-		<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-			Apply
-		</button>
+		<div class="col text-center mt-4">
+			<button type="button" class="btn btn-secondary mt-2 applicationbtn" data-bs-toggle="modal" data-bs-target="#exampleModal">Apply</button>
+		</div>
 	</section>
 	<div class="margin">
 		<div id="offer-description-card" class="show-offer-single-section p-3">
@@ -74,9 +74,9 @@
 			</div>
 		</div>
 		<section class="before-footer-btn mt-4">
-			<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-				Apply
-			</button>
+			<div class="col text-center mt-4">
+				<button type="button" class="btn btn-secondary mt-2 applicationbtn" data-bs-toggle="modal" data-bs-target="#exampleModal">Apply</button>
+			</div>
 		</section>
 		{% include "offer/_modalApply.html.twig" %}
 	</div>

@@ -1,6 +1,4 @@
 @import url('https://fonts.googleapis.com/css?family=Jost');
-@import '~bootstrap-icons/font/bootstrap-icons.css';
-@import "~bootstrap/scss/bootstrap";
 
 $font-family-base: 'Jost', sans-serif;
 
@@ -134,14 +132,6 @@ $paragraph-margin-bottom: 0;
     margin-left: 0.8rem;
 }
 
-.btn-primary:hover, .btn-secondary:hover {
-    background-color: $primary;
-}
-
-.btn-primary:active, .btn-secondary:active {
-    background-color: $secondary;
-}
-
 // Navigation buttons
 #navigation-btn-desktop .btn {
     border-radius: 10px;
@@ -181,6 +171,10 @@ $paragraph-margin-bottom: 0;
     border-radius: 5px;
     padding: 0.4rem;
     margin-right: 15px;
+}
+
+.applicationbtn:hover {
+    background-color: $secondary;
 }
 
 // Media queries
@@ -232,7 +226,6 @@ $paragraph-margin-bottom: 0;
 }
 
 // Page Offer_index
-
 .offer-card {
     text-decoration: none;
     text-align: center;
@@ -242,10 +235,6 @@ $paragraph-margin-bottom: 0;
 
 .index-offer-picture {
     border-radius: 5px;
-}
-
-.card {
-    --bs-card-border-width: 100%;
 }
 
 .other-info {
@@ -273,8 +262,15 @@ $paragraph-margin-bottom: 0;
     height: 6.25rem;
 }
 
-//(paginator)
+.picto-calendar {
+    filter: invert(1);
+}
 
+.card {
+    --bs-card-border-width: 100%;
+}
+
+//paginator
 .page-link.active,
 .active>.page-link {
     background-color: $primary;
@@ -291,7 +287,6 @@ $paragraph-margin-bottom: 0;
 
 
 //Page Offer_show
-
 h2 {
     font-weight: 700;
     font-size: 2.1875rem;
@@ -314,12 +309,6 @@ hr {
     background-blend-mode: multiply;
 }
 
-.btn {
-    background-color: $secondary;
-    border: $secondary;
-    --bs-btn-color: black;
-}
-
 .before-footer-btn {
     display: flex;
     justify-content: center;
@@ -334,3 +323,6 @@ hr {
 .skills-tab > ul {
     list-style-type: none;
 }
+
+@import '~bootstrap-icons/font/bootstrap-icons.css';
+@import "~bootstrap/scss/bootstrap";

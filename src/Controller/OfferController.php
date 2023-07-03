@@ -22,11 +22,10 @@ class OfferController extends AbstractController
     {
         $offers = $paginator->paginate($offerRepository->findAll(), $request->query->getInt('page', 1), 6);
 
-        $now = new DateTime();
 
         return $this->render('offer/index.html.twig', [
             'offers' => $offers,
-            'now' => $now,
+            'now' => new DateTime(),
         ]);
     }
 
@@ -34,7 +33,7 @@ class OfferController extends AbstractController
     public function show(Offer $offer): Response
     {
         $interval = date_diff(new DateTime(), $offer->getCreatedAt());
-        $dateInterval = $interval->format('%R%y year(s) %m month(s) %d day(s)');
+        $dateInterval = $interval->format('%m month(s) and %d day(s)');
 
         return $this->render('offer/show.html.twig', [
             'offer'        => $offer,

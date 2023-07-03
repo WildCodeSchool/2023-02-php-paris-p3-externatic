@@ -17,7 +17,7 @@ class OfferFixtures extends Fixture implements DependentFixtureInterface
             $offer = new Offer();
 
             $offer->setTitle($faker->text(50))
-                ->setCreatedAt($faker->dateTime())
+                ->setCreatedAt($faker->dateTimeBetween('-50 week', '-1 week'))
                 ->setStartAt($faker->dateTime())
                 ->setContract($faker->word())
                 ->setWorkFromHome($faker->word())
