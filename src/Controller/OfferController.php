@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class OfferController extends AbstractController
 {
-    #[Route('/', name:'index')]
+    #[Route('/', name:'index', methods: ['GET', 'POST'])]
     public function index(Request $request, OfferRepository $offerRepository): Response
     {
         $form = $this->createForm(SearchOfferFilterType::class);
