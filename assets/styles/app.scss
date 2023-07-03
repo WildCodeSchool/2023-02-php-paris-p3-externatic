@@ -28,6 +28,15 @@ $carousel-control-color: black;
 
 $paragraph-margin-bottom: 0;
 
+$nav-tabs-link-active-bg: #F3E7EC;
+$nav-tabs-border-width: 0;
+
+$nav-link-font-size: 20px;
+$nav-link-font-weight: 600;
+$nav-link-color: white;
+$nav-link-hover-color: white;
+$nav-underline-link-active-color:$secondary;
+
 .margin {
     margin: 0 auto;
     max-width: 1400px;
@@ -99,7 +108,7 @@ $paragraph-margin-bottom: 0;
 }
 
 // Forms
-.form-control {
+#search-input .form-control {
     text-indent: 16%;
 }
 
@@ -125,6 +134,30 @@ $paragraph-margin-bottom: 0;
 #location {
     margin-top: -2.7rem;
     margin-left: 0.8rem;
+}
+
+#connection-header {
+    color: white;
+    background-color: $primary;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    padding: 1rem;
+}
+
+#connection-form {
+    background: rgba(133, 19, 66, 0.10);
+    padding:2rem;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+#create-account h5 {
+    font-weight: 600;
+}
+
+.bi-toggle-on {
+    font-size: xx-large;
+    color: $secondary;
 }
 
 // Navigation buttons
@@ -176,5 +209,10 @@ $paragraph-margin-bottom: 0;
     }
 }
 
+// Navbar
+#profile-picture-navbar {
+    border-radius: 50%;
+    width: 3rem;
+}
+
 @import "~bootstrap/scss/bootstrap";
-@import 'bootstrap-icons/font/bootstrap-icons.css';
