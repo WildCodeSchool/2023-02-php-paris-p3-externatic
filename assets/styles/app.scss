@@ -191,9 +191,6 @@ $paragraph-margin-bottom: 0;
     #picture_profile{
         margin-bottom: -9em;
         margin-right: 25em;
-        width: 79px;
-        height: 79px;
-        border-radius: 50%;
     }
 
     #profile-card.p-3{
@@ -339,6 +336,12 @@ $paragraph-margin-bottom: 0;
 .visibility-profile .profile .metadata a:hover,
 .visibility-profile .profile .metadata a:active {
     text-decoration: none;
+}
+
+#picture_profile {
+    width: 79px;
+    height: 79px;
+    border-radius: 50%;
 }
 
 #introduction img.quote_left {
