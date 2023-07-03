@@ -13,12 +13,9 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserFixtures extends Fixture implements DependentFixtureInterface
 {
-    private UserPasswordHasherInterface $passwordHasher;
-
     public const LOGO = [
         'logoCompany.jpg', 'logoCompany1.jpg'
     ];
-
     public const USER = [
         [
             'Firstname' => 'Erika', 'Lastname' => 'Ikelempo', 'Role' => User::ROLE_CANDIDATE,
@@ -39,6 +36,8 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
         ['Name' => 'Atos', 'Role' => User::ROLE_COMPANY, 'Email' => 'atos@hotmail.fr'],
         ['Name' => 'McDonalds', 'Role' => User::ROLE_COMPANY, 'Email' => 'mcdo@hotmail.fr']
     ];
+
+    private UserPasswordHasherInterface $passwordHasher;
 
     public function __construct(UserPasswordHasherInterface $passwordHasher)
     {
@@ -104,6 +103,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
 
         $manager->flush();
     }
+
     public function getDependencies()
     {
         return [
