@@ -24,6 +24,7 @@ $input-bg: $info;
 $input-line-height: 2.5;
 $input-border-color: rgba(0, 0, 0, 0.3);
 $input-placeholder-color: rgba(0, 0, 0, 0.5);
+$form-check-input-checked-bg-color: $primary;
 
 $carousel-control-color: black;
 
@@ -477,6 +478,15 @@ $nav-underline-link-active-color:$secondary;
     justify-content: space-between;
 }
 
+#modal-body-search-form .form-check-label {
+    margin-right: 10px;
+    margin-left: 3px;
+}
+
+#modal-body-search-form .form-label-modal {
+    margin-top: 15px;
+}
+
 // Navbar
 #profile-picture-navbar {
     border-radius: 50%;
@@ -591,7 +601,7 @@ hr {
 .offer-show-header-section {
     text-align: center;
     color: white;
-    background: url("../images/picto/headerBg.png") 0 0 no-repeat fixed;
+    background: url("../images/headerBg.png") 0 0 no-repeat fixed;
     height: 100%;
     overflow: hidden;
     background-color: hsl(335, 42%, 54%);
@@ -613,4 +623,5 @@ hr {
     list-style-type: none;
 }
 
+@import '~bootstrap-icons/font/bootstrap-icons.css';
 @import "~bootstrap/scss/bootstrap";

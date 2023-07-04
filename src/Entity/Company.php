@@ -11,6 +11,16 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: CompanyRepository::class)]
 class Company
 {
+    public const COMPANY_SECTOR = [
+        'Software' => 'software',
+        'Data' => 'data',
+        'Cloud service' => 'cloud-service',
+        'Cyber Security' => 'cyber-security',
+        'Mobile' => 'mobile',
+        'AI / Machine Learning' => 'ai-machine-learning',
+        'Connected Object' => 'connected-object',
+    ];
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -38,7 +48,7 @@ class Company
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Offer::class)]
+    #[ORM\OneToMany(mappedBy: 'company', targetEntity: Offer::class)]
     private Collection $offers;
 
     #[ORM\OneToMany(mappedBy: 'favorite', targetEntity: Candidate::class)]
