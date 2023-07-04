@@ -54,17 +54,35 @@
 			<h5 class="card-title mt-4"><img class="picto" src="{{ asset('build/images/picto/description-de-lemploi.981884f5.svg') }}" alt="pictoPanneau">Candidate Profil
 			</h5><hr>
 			<div class="card-body mt-2 skills-tab offer-show-content">
-				<ul>
-					{% for skill in constant('App\\Entity\\Skill::HARD') %}
-						<li><img class="picto" src="{{ asset('build/images/picto/checked 1.5d86e0d4.svg') }}" alt="pictoChecked">{{ skill.name }}</li>
-					{% endfor %}
-				</ul>
-				<ul>
-					{% for skill in constant('App\\Entity\\Skill::SOFT') %}
-						<li><img class="picto" src="{{ asset('build/images/picto/checked 1.5d86e0d4.svg') }}" alt="pictoChecked">{{ skill.name }}</li>
-					{% endfor %}
-				</ul>
-			</div>
+				<div class="skills">
+                <div class="card-body p-4 ">
+                    <div class="hard-skills">
+                        <p>HARD SKILLS</p>
+                        {% for skill in constant('App\\DataFixtures\\SkillFixtures::SKILLS') %}
+                            {% if skill.type == 'hard' %}
+                                <div>
+                                    <img class="img_icon fa-border" src="{{ asset('build/images/checked.svg') }}" alt="check"/>
+                                    <span>{{ skill.name }}</span>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="card-body p-4 ">
+                    <div class="soft-skills">
+                        <p>SOFT SKILLS</p>
+                        {% for skill in constant('App\\DataFixtures\\SkillFixtures::SKILLS') %}
+                            {% if skill.type == 'soft' %}
+                                <div>
+                                    <img class="img_icon fa-border" src="{{ asset('build/images/checked.svg') }}" alt="check"/>
+                                    <span>{{ skill.name }}</span>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+        	</div>
+		</div>
 		</div>
 		<div id="offer-description-card" class="show-offer-single-section p-3">
 			<h5 class="card-title mt-4"><img class="picto" src="{{ asset('build/images/picto/interview 2.57b3d3b7.svg') }}" alt="pictoItvProcess">Interview Process

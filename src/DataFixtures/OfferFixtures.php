@@ -30,8 +30,8 @@ class OfferFixtures extends Fixture implements DependentFixtureInterface
                 ->setNumber($i)
                 ->setPicture('offerPictures' . mt_rand(1, 4) . '.jpg');
             for ($j = 0; $j < 6; $j++) {
-                $offer->addSkill($this->getReference('skill_soft_' . $faker->unique(true)->numberBetween(0, 11)));
-                $offer->addSkill($this->getReference('skill_hard_' . $faker->unique(true)->numberBetween(0, 11)));
+                $offer->addSkill($this->getReference('skill_soft_' . $faker->unique(true)->numberBetween(1, 8)));
+                $offer->addSkill($this->getReference('skill_hard_' . $faker->unique(true)->numberBetween(1, 8)));
             }
 
             if ($i < 31) {
