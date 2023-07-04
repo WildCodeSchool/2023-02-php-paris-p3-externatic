@@ -29,6 +29,8 @@ $carousel-control-color: black;
 
 $paragraph-margin-bottom: 0;
 
+$card-border-width: 0;
+
 .margin {
     margin: 0 auto;
     max-width: 1400px;
@@ -234,7 +236,7 @@ $paragraph-margin-bottom: 0;
 }
 
 .index-offer-picture {
-    border-radius: 5px;
+    border-top-right-radius: 6px;
 }
 
 .other-info {
@@ -254,8 +256,8 @@ $paragraph-margin-bottom: 0;
 }
 
 .index-company-logo {
-    width: 30px;
-    height: 28px;
+    width: 4rem;
+    // height: 28px;
 }
 
 .index-offer-title-section {

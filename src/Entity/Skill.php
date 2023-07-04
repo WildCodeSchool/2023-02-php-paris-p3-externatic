@@ -19,11 +19,6 @@ class Skill
                 ['name' => 'html', 'type' => 'hard'],
                 ['name' => 'CSS', 'type' => 'hard'],
                 ['name' => 'PHP1', 'type' => 'hard'],
-                ['name' => 'JS1', 'type' => 'hard'],
-                ['name' => 'JAVA1', 'type' => 'hard'],
-                ['name' => 'Windev1', 'type' => 'hard'],
-                ['name' => 'html1', 'type' => 'hard'],
-                ['name' => 'CSS1', 'type' => 'hard'],
     ];
 
     public const SOFT = [
@@ -34,11 +29,6 @@ class Skill
                 ['name' => 'inventive', 'type' => 'soft'],
                 ['name' => 'perfectionist', 'type' => 'soft'],
                 ['name' => 'full of idea1', 'type' => 'soft'],
-                ['name' => 'alert1', 'type' => 'soft'],
-                ['name' => 'smiling1', 'type' => 'soft'],
-                ['name' => 'nice1', 'type' => 'soft'],
-                ['name' => 'inventive1', 'type' => 'soft'],
-                ['name' => 'perfectionist1', 'type' => 'soft'],
     ];
 
     public const SKILLS = [self::HARD, self::SOFT];

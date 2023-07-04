@@ -18,20 +18,20 @@
 							<div class="card-body mt-2">
 								<a class="offer-card" href="{{ path('offer_show', { id : offer.id }) }}">
 									<div class="card">
-										<div class="cardHead ratio ratio-21x9">
+										<div class="cardHead ratio ratio-16x9">
 											<img class="index-offer-picture" src="{{ asset('/%s' | format(offer.picture)) }}">
 										</div>
 										<div id="card-body" class="card-body">
 											<article>
 												<section class="sub-head">
-													<img class="index-company-logo me-1" src="{{ asset('/%s' | format(offer.company.logo)) }}">
+													<img class="index-company-logo" src="{{ asset(offer.company.logo) }}">
 													<p>{{ offer.company.name }}</p>
 												</section>
 												<h3 class="index-offer-title-section">
 													<strong>{{ offer.title }}</strong>
 												</h3>
 												<p>
-													<img class="picto" src="{{ asset('build/images/picto/location1.4221a9ac.svg') }}" alt="pictoLocation">
+													<img class="picto" src="{{ asset('build/images/picto/location-offer.svg') }}" alt="location-icon">
 													{{ offer.location }}
 												</p>
 												<p>
@@ -44,13 +44,13 @@
 														</div>
 														<div class="grey-area">
 															{{ offer.minSalary // 1000 }}K
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																			-
+
 															{{ offer.maxSalary // 1000 }}K
 														</div>
 													</section>
 												</p>
 												<p>
-													<img class="picto" src="{{ asset('build/images/picto/calendar.e79b1a6d.svg') }}" alt="pictoCalendar">
+													<img class="picto" src="{{ asset('build/images/picto/calendar.svg') }}" alt="calendar-icon">
 													posted
 													{% set difference = date(offer.createdAt).diff(date(now)) %}
 													{% set leftDays = difference.days %}
