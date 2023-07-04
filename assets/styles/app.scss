@@ -185,6 +185,79 @@ $card-border-width: 0;
         display: none;
     }
 
+    //Show Candidate
+    .visibility-profile .profile h1 {
+        display: none;
+    }
+
+    .visibility-profile {
+        margin: 3em auto 4em auto;
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        grid-template-rows: 1fr;
+        width: 80%;
+        grid-gap: 2em;
+    }
+
+    //Box grey
+    .visibility-profile .visibility {
+        background-color: $tertiary;
+        padding: 1em 0.9em;
+        border: 0.09em solid #FED32C;
+        margin-block: auto;
+    }
+
+    #picture-profile{
+        margin-bottom: -9em;
+        margin-right: 25em;
+    }
+
+    .visibility-profile .visibility .viewers {
+        display: flex;
+        text-align: center;
+        justify-content: space-between;
+    }
+
+    #profile-card.p-3 .card-body.mt-2 {
+        display: flex;
+        margin-left: 11em;
+    }
+
+    #profile-card.p-3 .card-body.mt-2 .profile-informations {
+        width: 50%;
+        text-align: left;
+    }
+
+    #introduction.profile-blocks.mt-4 {
+        width: 70%;
+        margin: auto;
+    }
+
+    .skills {
+        display: flex;
+        justify-content: space-evenly;
+        padding-top: 2em;
+    }
+
+    .skills .profile-blocks.mt-4 {
+        width: 25%;
+    }
+
+    //Position buttons resume, uload resume
+    .resume-upload-resume {
+        margin: 1.5em 0 0 24em;
+        display: grid;
+        width: 40%;
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+    }
+
+    .portfolio {
+        margin: auto;
+        width: 50%;
+        padding-top: 2em;
+    }
+
     .skills-tab > ul {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -225,6 +298,152 @@ $card-border-width: 0;
     .picto-in-header {
         filter: invert(1);
     }
+
+    //Show Candidate
+    #navigation-btn-mobile.carousel-slide {
+        margin-top: 7em;
+    }
+
+    .visibility-profile .visibility{
+        margin: 1.5em 0;
+    }
+
+    .visibility-profile .profile h1 {
+        font-size: 18px;
+        margin-bottom: 1.5em;
+    }
+
+    #picture-profile{
+        margin-bottom: -3em;
+    }
+
+    #profile-card.p-3{
+        margin-bottom: 3em;
+    }
+
+    #profile-card.p-3 div.card-body.mt-2 {
+        padding-top: 2em;
+    }
+
+    .resume-upload-resume {
+        margin: 3em 0;
+    }
+}
+
+//Title job , title exprience
+.visibility-profile .profile .profile-informations .job-title,
+.visibility-profile .profile .profile-informations .experience {
+    font-size: 14px;
+}
+
+//Titles and text bold
+.visibility-profile .profile h1,
+.visibility-profile .profile .job-title {
+    font-weight: bold;
+}
+
+//Title skills, name
+.skills .hard-skills p,
+.skills .soft-skills p,
+.visibility-profile .profile .profile-informations .name,
+.portfolio p {
+    font-weight: bold;
+    font-size: 15px;
+    padding-bottom: 1em;
+}
+
+.candidate-completion {
+    margin-top: 0.5em;
+    text-align: center;
+}
+
+//Boutton switch
+.visibility-profile a i.bi.bi-toggle-on:before,
+.visibility-profile a i.bi.bi-toggle-off:before {
+    font-size: xx-large;
+    color: $secondary;
+    padding-top: 0.2em;
+}
+
+.visibility-profile .profile {
+    text-align: center;
+}
+
+//Icon loupe
+.visibility-profile .visibility .viewers img {
+    padding-top: 0.5em;
+}
+
+//Linkedin, github
+.visibility-profile .profile .metadata img {
+    padding-top: 1.5em;
+}
+
+.visibility-profile .profile .metadata a:link,
+.visibility-profile .profile .metadata a:visited,
+.visibility-profile .profile .metadata a:hover,
+.visibility-profile .profile .metadata a:active {
+    text-decoration: none;
+}
+
+#picture-profile {
+    width: 79px;
+    height: 79px;
+    border-radius: 50%;
+}
+
+#profile-card.p-3{
+    font-size: 18px;
+}
+
+#introduction img.quote-left {
+    height: 1.5em;
+    float: left;
+    margin-left: -1.35em;
+    margin-top: -1.5em;
+    font-size: 2em;
+}
+
+#introduction img.quote-right {
+    height: 1.5em;
+    float: right;
+    margin-right: -1.35em;
+    margin-top: 0.7em;
+    font-size: 2em;
+}
+
+//Button cv, update
+#resume button img,
+#upload-resume button img {
+    padding-right: .5em;
+}
+
+//Button color upload
+#upload-resume button.btn {
+    background-color: $tertiary;
+    border-color: $tertiary;
+}
+
+//Skills
+.skills .hard-skills,
+.skills .soft-skills {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 0.5em
+}
+
+.skills .hard-skills p {
+    grid-column: 1/3;
+}
+
+.skills .soft-skills p {
+    grid-column: 2/3;
+    text-align: right;
+}
+
+.portfolio a {
+    display: flex;
+    justify-content: space-between;
 }
 
 // Page Offer_index
@@ -241,6 +460,38 @@ $card-border-width: 0;
 
 .other-info {
     display: flex;
+    justify-content: space-between;
+}
+
+.portfolio a:link,
+.portfolio a:visited,
+.portfolio a:hover,
+.portfolio a:active {
+    text-decoration: none;
+    color: black;
+}
+
+//Button edit
+.btn.btn-secondary.mt-2 a:link,
+.btn.btn-secondary.mt-2 a:visited,
+.btn.btn-secondary.mt-2 a:hover,
+.btn.btn-secondary.mt-2 a:active {
+    text-decoration: none;
+    color: black;
+}
+
+//Box grey
+.visibility-profile .visibility {
+    background-color: $tertiary;
+    margin-top: 1.5em;
+    padding: 1em 0.9em;
+    border: 0.09em solid #FED32C;
+}
+
+//Card resume candidate
+.viewers {
+    display: flex;
+    text-align: center;
     justify-content: space-between;
 }
 
@@ -287,7 +538,6 @@ $card-border-width: 0;
     --bs-pagination-hover-color: #FED32C;
 }
 
-
 //Page Offer_show
 h2 {
     font-weight: 700;
@@ -304,7 +554,7 @@ hr {
 .offer-show-header-section {
     text-align: center;
     color: white;
-    background: url("../images/headerBg.png") 0 0 no-repeat fixed;
+    background: url("../images/picto/headerBg.png") 0 0 no-repeat fixed;
     height: 100%;
     overflow: hidden;
     background-color: hsl(335, 42%, 54%);
@@ -326,5 +576,4 @@ hr {
     list-style-type: none;
 }
 
-@import '~bootstrap-icons/font/bootstrap-icons.css';
 @import "~bootstrap/scss/bootstrap";

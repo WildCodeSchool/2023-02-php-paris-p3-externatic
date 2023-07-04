@@ -48,7 +48,7 @@ class Candidate
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
-    #[ORM\ManyToMany(targetEntity: Skill::class, mappedBy: 'candidate')]
+    #[ORM\ManyToMany(targetEntity: Skill::class, mappedBy: 'candidates')]
     private Collection $skills;
 
     #[ORM\Column]
