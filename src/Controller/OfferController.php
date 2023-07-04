@@ -28,9 +28,9 @@ class OfferController extends AbstractController
             $filters = $form->getData();
             $offers = $offerRepository->findwithFilter($filters);
         } else {
-            $offers = $offerRepository->findAll();
+            // $offers = $offerRepository->findAll();
         }
-        
+
         $offers = $paginator->paginate($offerRepository->findAll(), $request->query->getInt('page', 1), 6);
 
         return $this->render('offer/index.html.twig', [
