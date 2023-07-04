@@ -19,13 +19,13 @@
 								<a class="offer-card" href="{{ path('offer_show', { id : offer.id }) }}">
 									<div class="card">
 										<div class="cardHead ratio ratio-16x9">
-											<img class="index-offer-picture" src="{{ asset('/%s' | format(offer.picture)) }}">
+											<img class="index-offer-picture" src="{{ asset(offer.picture) }}">
 										</div>
 										<div id="card-body" class="card-body">
 											<article>
 												<section class="sub-head">
 													<img class="index-company-logo" src="{{ asset(offer.company.logo) }}">
-													<p>{{ offer.company.name }}</p>
+													<h6 class="card-subtitle mt-2 text-body-secondary">{{ offer.company.name }}</h6>
 												</section>
 												<h3 class="index-offer-title-section">
 													<strong>{{ offer.title }}</strong>

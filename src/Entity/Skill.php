@@ -19,6 +19,7 @@ class Skill
                 ['name' => 'html', 'type' => 'hard'],
                 ['name' => 'CSS', 'type' => 'hard'],
                 ['name' => 'PHP1', 'type' => 'hard'],
+                ['name' => 'JS1', 'type' => 'hard'],
     ];
 
     public const SOFT = [
@@ -29,6 +30,7 @@ class Skill
                 ['name' => 'inventive', 'type' => 'soft'],
                 ['name' => 'perfectionist', 'type' => 'soft'],
                 ['name' => 'full of idea1', 'type' => 'soft'],
+                ['name' => 'alert1', 'type' => 'soft'],
     ];
 
     public const SKILLS = [self::HARD, self::SOFT];

@@ -4,29 +4,28 @@
 	{{ offer.title }}
 {% endblock %}
 {% block body %}
-	<section class="offer-show-header-section pt-4 pb-4" style="background-image: url(../../{{ offer.picture }})">
-		<img class="index-company-logo" src="{{ asset('/%s' | format(offer.company.logo)) }}">
+	<section class="offer-show-header-section" style="background-image: url(../../{{ offer.picture }}); background-size: cover;">
+        <img class="index-company-logo" src="{{ asset(offer.company.logo) }}">
 		<p>{{ offer.company.name }}</p>
 		<h3 class="mb-4 mt-4">
 			<strong>{{ offer.title }}</strong>
 		</h3>
 		<section class="other-info-in-offer-show">
 			<div class="grey-area-in-offer-show">
-				<img class="picto picto-in-header" src="{{ asset('build/images/picto/location-offer.svg') }}" alt="location-icon">
-				{{ offer.location }}
+				<img class="picto-in-header" src="{{ asset('build/images/picto/location-offer.svg') }}" alt="location-icon">
+				<p>{{ offer.location }}</p>
 			</div>
 			<div class="grey-area-in-offer-show">
-				<img class="picto picto-in-header" src="{{ asset('build/images/picto/contract.svg') }}" alt="briefcase-icon">
-				{{ offer.contract }}
+				<img class="picto-in-header" src="{{ asset('build/images/picto/contract.svg') }}" alt="briefcase-icon">
+				<p>{{ offer.contract }}</p>
 			</div>
 			<div class="grey-area-in-offer-show">
-				<img class="picto picto-in-header" src="{{ asset('build/images/picto/piggy-bank.svg') }}" alt="piggy-bank-icon">
-				{{ offer.minSalary // 1000 }}K																																							-
-				{{ offer.maxSalary // 1000 }}K
+				<img class="picto-in-header" src="{{ asset('build/images/picto/piggy-bank.svg') }}" alt="piggy-bank-icon">
+				<p>{{ offer.minSalary // 1000 }}K - {{ offer.maxSalary // 1000 }}K</p>
 			</div>
 		</section>
-		<p>
-		<img class="picto picto-calendar picto-in-header mt-2 mb-2" src="{{ asset('build/images/picto/calendar.svg') }}" alt="Calendar-icon">
+		<p class="mt-4 mb-2">
+		<img class="picto picto-calendar picto-in-header" src="{{ asset('build/images/picto/calendar.svg') }}" alt="Calendar-icon">
 		posted
 			{{ dateInterval }}
 			ago
@@ -37,22 +36,22 @@
 	</section>
 	<div class="margin">
 		<div id="offer-description-card" class="show-offer-single-section p-3">
-			<h5 class="card-title mt-4"><img class="picto" src="{{ asset('build/images/picto/building.svg') }}" alt="building-icon">Company
-			</h5><hr>
+			<h4 class="card-title"><img class="picto" src="{{ asset('build/images/picto/building.svg') }}" alt="building-icon">Company
+			</h4><hr>
 			<div class="card-body mt-2 offer-show-content">
 				{{ offer.company.presentation }}
 			</div>
 		</div>
 		<div id="offer-description-card" class="show-offer-single-section p-3">
-			<h5 class="card-title mt-4"><img class="picto" src="{{ asset('build/images/picto/contract.svg') }}" alt="briefcase-icon">Job Description
-			</h5><hr>
+			<h4 class="card-title"><img class="picto-briefcase" src="{{ asset('build/images/picto/contract.svg') }}" alt="briefcase-icon">Job Description
+			</h4><hr>
 			<div class="card-body mt-2 offer-show-content">
 				{{ offer.description }}
 			</div>
 		</div>
 		<div id="offer-description-card" class="show-offer-single-section p-3">
-			<h5 class="card-title mt-4"><img class="picto" src="{{ asset('build/images/picto/job-description.svg') }}" alt="job-description-icon">Candidate Profil
-			</h5><hr>
+			<h4 class="card-title"><img class="picto" src="{{ asset('build/images/picto/job-description.svg') }}" alt="job-description-icon">Candidate Profil
+			</h4><hr>
 			<div class="card-body mt-2 skills-tab offer-show-content">
 				<ul>
 					{% for skill in constant('App\\Entity\\Skill::HARD') %}
@@ -67,14 +66,14 @@
 			</div>
 		</div>
 		<div id="offer-description-card" class="show-offer-single-section p-3">
-			<h5 class="card-title mt-4"><img class="picto" src="{{ asset('build/images/picto/interview.svg') }}" alt="interview-process-icon">Interview Process
-			</h5><hr>
+			<h4 class="card-title"><img class="picto" src="{{ asset('build/images/picto/interview.svg') }}" alt="interview-process-icon">Interview Process
+			</h4><hr>
 			<div class="card-body mt-2 offer-show-content">
 				{{ offer.interviewProcess }}
 			</div>
 		</div>
-		<section class="before-footer-btn mt-4">
-			<div class="col text-center mt-4">
+		<section class="before-footer-btn mt-2">
+			<div class="col text-center mt-2">
 				<button type="button" class="btn btn-secondary mt-2 applicationbtn" data-bs-toggle="modal" data-bs-target="#exampleModal">Apply</button>
 			</div>
 		</section>
