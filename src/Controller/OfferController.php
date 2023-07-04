@@ -36,6 +36,7 @@ class OfferController extends AbstractController
         return $this->render('offer/index.html.twig', [
             'offers' => $offers,
             'now' => new DateTime(),
+            'form' => $form,
         ]);
     }
 

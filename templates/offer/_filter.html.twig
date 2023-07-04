@@ -2,13 +2,13 @@
     <div class="row align-items-center mt-2" id="search-input">
         <div class="col-md-4 mt-4">
             <input type="text" class="form-control" placeholder="Find a job" name="{{ field_name(form.searchTitle) }}" value="{{ field_value(form.searchTitle) }}">
-            <img id="glass" class="position-absolute" src="{{ asset('build/images/glass.svg') }}">
+            <img id="glass" class="position-absolute" src="{{ asset('build/images/picto/glass.svg') }}">
         </div>
         <div class="col-md-4 mt-4">
             <div class="dropdown">
                 <button class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown" type="button" id="dropdown-menu-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 100%;" >
                     {{ field_label(form.contract) }}
-                    <img id="job" class="position-absolute start-0 " src="{{ asset('build/images/job.svg') }}">
+                    <img id="job" class="position-absolute start-0 " src="{{ asset('build/images/picto/job.svg') }}">
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdown-menu-btn" style="width: 100%;">
                     {% for label, value in field_choices(form.contract) %}
@@ -22,7 +22,7 @@
         </div>
         <div class="col-md-4 mt-4">
             <input type="text" class="form-control" placeholder="Location" name="{{ field_name(form.searchLocation) }}" value="{{ field_value(form.searchLocation) }}">
-            <img id="location" class="position-absolute" src="{{ asset('build/images/location.svg') }}">
+            <img id="location" class="position-absolute" src="{{ asset('build/images/picto/location.svg') }}">
         </div>
     </div>
     <div class="row text-center mt-4">
