@@ -24,10 +24,20 @@ $input-bg: $info;
 $input-line-height: 2.5;
 $input-border-color: rgba(0, 0, 0, 0.3);
 $input-placeholder-color: rgba(0, 0, 0, 0.5);
+$form-check-input-checked-bg-color: $primary;
 
 $carousel-control-color: black;
 
 $paragraph-margin-bottom: 0;
+
+$nav-tabs-link-active-bg: #F3E7EC;
+$nav-tabs-border-width: 0;
+
+$nav-link-font-size: 20px;
+$nav-link-font-weight: 600;
+$nav-link-color: white;
+$nav-link-hover-color: white;
+$nav-underline-link-active-color:$secondary;
 
 .margin {
     margin: 0 auto;
@@ -104,7 +114,7 @@ $paragraph-margin-bottom: 0;
 }
 
 // Forms
-.form-control {
+#search-input .form-control {
     text-indent: 16%;
 }
 
@@ -130,6 +140,30 @@ $paragraph-margin-bottom: 0;
 #location {
     margin-top: -2.7rem;
     margin-left: 0.8rem;
+}
+
+#connection-header {
+    color: white;
+    background-color: $primary;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    padding: 1rem;
+}
+
+#connection-form {
+    background: rgba(133, 19, 66, 0.10);
+    padding:2rem;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+#create-account h5 {
+    font-weight: 600;
+}
+
+.bi-toggle-on {
+    font-size: xx-large;
+    color: $secondary;
 }
 
 // Navigation buttons
@@ -188,7 +222,7 @@ $paragraph-margin-bottom: 0;
         display: none;
     }
 
-    .visibility-profile { 
+    .visibility-profile {
         margin: 3em auto 4em auto;
         display: grid;
         grid-template-columns: 1fr 2fr;
@@ -255,7 +289,7 @@ $paragraph-margin-bottom: 0;
         width: 50%;
         padding-top: 2em;
     }
-    
+
     .skills-tab > ul {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -305,7 +339,7 @@ $paragraph-margin-bottom: 0;
     .visibility-profile .visibility{
         margin: 1.5em 0;
     }
-    
+
     .visibility-profile .profile h1 {
         font-size: 18px;
         margin-bottom: 1.5em;
@@ -314,7 +348,7 @@ $paragraph-margin-bottom: 0;
     #picture-profile{
         margin-bottom: -3em;
     }
-    
+
     #profile-card.p-3{
         margin-bottom: 3em;
     }
@@ -334,7 +368,7 @@ $paragraph-margin-bottom: 0;
     font-size: 14px;
 }
 
-//Titles and text bold 
+//Titles and text bold
 .visibility-profile .profile h1,
 .visibility-profile .profile .job-title {
     font-weight: bold;
@@ -355,7 +389,7 @@ $paragraph-margin-bottom: 0;
     text-align: center;
 }
 
-//Boutton switch 
+//Boutton switch
 .visibility-profile a i.bi.bi-toggle-on:before,
 .visibility-profile a i.bi.bi-toggle-off:before {
     font-size: xx-large;
@@ -372,7 +406,7 @@ $paragraph-margin-bottom: 0;
     padding-top: 0.5em;
 }
 
-//Linkedin, github 
+//Linkedin, github
 .visibility-profile .profile .metadata img {
     padding-top: 1.5em;
 }
@@ -444,6 +478,21 @@ $paragraph-margin-bottom: 0;
     justify-content: space-between;
 }
 
+#modal-body-search-form .form-check-label {
+    margin-right: 10px;
+    margin-left: 3px;
+}
+
+#modal-body-search-form .form-label-modal {
+    margin-top: 15px;
+}
+
+// Navbar
+#profile-picture-navbar {
+    border-radius: 50%;
+    width: 3rem;
+}
+
 // Page Offer_index
 .offer-card {
     text-decoration: none;
@@ -469,7 +518,7 @@ $paragraph-margin-bottom: 0;
     color: black;
 }
 
-//Button edit 
+//Button edit
 .btn.btn-secondary.mt-2 a:link,
 .btn.btn-secondary.mt-2 a:visited,
 .btn.btn-secondary.mt-2 a:hover,
@@ -552,7 +601,7 @@ hr {
 .offer-show-header-section {
     text-align: center;
     color: white;
-    background: url("../images/picto/headerBg.png") 0 0 no-repeat fixed;
+    background: url("../images/headerBg.png") 0 0 no-repeat fixed;
     height: 100%;
     overflow: hidden;
     background-color: hsl(335, 42%, 54%);
@@ -574,4 +623,5 @@ hr {
     list-style-type: none;
 }
 
+@import '~bootstrap-icons/font/bootstrap-icons.css';
 @import "~bootstrap/scss/bootstrap";

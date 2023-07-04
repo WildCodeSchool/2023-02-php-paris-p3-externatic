@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Form\SearchOfferFilterType;
 use App\Entity\Offer;
 use App\Entity\Application;
 use App\Entity\Skill;
@@ -20,12 +21,22 @@ class OfferController extends AbstractController
     #[Route('/index', name: 'index', methods: ['GET', 'POST'])]
     public function index(OfferRepository $offerRepository, PaginatorInterface $paginator, Request $request): Response
     {
-        $offers = $paginator->paginate($offerRepository->findAll(), $request->query->getInt('page', 1), 6);
+        $form = $this->createForm(SearchOfferFilterType::class);
+        $form->handleRequest($request);
 
+        if ($form->isSubmitted() && $form->isValid()) {
+            $filters = $form->getData();
+            $offers = $offerRepository->findwithFilter($filters);
+        } else {
+            // $offers = $offerRepository->findAll();
+        }
+
+        $offers = $paginator->paginate($offerRepository->findAll(), $request->query->getInt('page', 1), 6);
 
         return $this->render('offer/index.html.twig', [
             'offers' => $offers,
             'now' => new DateTime(),
+            'form' => $form,
         ]);
     }
 
