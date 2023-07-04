@@ -24,6 +24,7 @@ $input-bg: $info;
 $input-line-height: 2.5;
 $input-border-color: rgba(0, 0, 0, 0.3);
 $input-placeholder-color: rgba(0, 0, 0, 0.5);
+$form-check-input-checked-bg-color: $primary;
 
 $carousel-control-color: black;
 
@@ -33,6 +34,15 @@ $card-border-width: 0;
 
 $hr-color: $primary;
 $hr-opacity: 1;
+
+$nav-tabs-link-active-bg: #F3E7EC;
+$nav-tabs-border-width: 0;
+
+$nav-link-font-size: 20px;
+$nav-link-font-weight: 600;
+$nav-link-color: white;
+$nav-link-hover-color: white;
+$nav-underline-link-active-color:$secondary;
 
 .margin {
     margin: 0 auto;
@@ -105,7 +115,7 @@ $hr-opacity: 1;
 }
 
 // Forms
-.form-control {
+#search-input .form-control {
     text-indent: 16%;
 }
 
@@ -133,7 +143,31 @@ $hr-opacity: 1;
     margin-left: 0.8rem;
 }
 
-// Navigation buttons
+#connection-header {
+    color: white;
+    background-color: $primary;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    padding: 1rem;
+}
+
+#connection-form {
+    background: rgba(133, 19, 66, 0.10);
+    padding:2rem;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+#create-account h5 {
+    font-weight: 600;
+}
+
+.bi-toggle-on {
+    font-size: xx-large;
+    color: $secondary;
+}
+
+//Navigation buttons
 #navigation-btn-desktop .btn {
     border-radius: 10px;
     width: 300px;
@@ -280,6 +314,21 @@ $hr-opacity: 1;
     justify-content: space-between;
 }
 
+#modal-body-search-form .form-check-label {
+    margin-right: 10px;
+    margin-left: 3px;
+}
+
+#modal-body-search-form .form-label-modal {
+    margin-top: 15px;
+}
+
+//Navbar
+#profile-picture-navbar {
+    border-radius: 50%;
+    width: 3rem;
+}
+
 .portfolio a:link,
 .portfolio a:visited,
 .portfolio a:hover,
@@ -312,13 +361,8 @@ $hr-opacity: 1;
     justify-content: space-between;
 }
 
-.grey-area {
-    width: 30%;
-    background-color: $tertiary;
-    text-align: center;
-}
 
-// Offer index
+//Offer index
 .offer-card {
     text-decoration: none;
     text-align: center;
@@ -335,7 +379,21 @@ $hr-opacity: 1;
     justify-content: space-between;
 }
 
-//paginator
+.grey-area {
+    width: 30%;
+    background-color: $tertiary;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 0.3rem;
+}
+
+#offer-date {
+    font-size: 12px;
+    margin-top: 1.5rem;
+}
+
+//Paginator
 .page-link.active,
 .active>.page-link {
     background-color: $primary;
@@ -350,7 +408,7 @@ $hr-opacity: 1;
     --bs-pagination-hover-color: #FED32C;
 }
 
-// Offer show
+//Offer show
 .sub-head {
     display: flex;
     justify-content: center;
@@ -442,8 +500,7 @@ hr {
     list-style-type: none;
 }
 
-
-// Media queries
+//Media queries
 @media (min-width: 600px) {
     #navigation-btn-mobile {
         display: none;

@@ -12,6 +12,29 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: OfferRepository::class)]
 class Offer
 {
+    public const JOB_TYPE = [
+        'permanent contract' => 'permanent-contract',
+        'work study' => 'work-study',
+        'intership' => 'intership',
+        'fixed-term / temporary' => 'fixed-term-temporary',
+        'freelance' => 'freelance',
+    ];
+
+    public const EXPERIENCE = [
+        '0 - 1' => '0-1',
+        '1 - 3' => '1-3',
+        '3 - 5' => '3-5',
+        '5 - 10' => '5-10',
+        '10+' => '10+',
+    ];
+
+    public const WORK_FROM_HOME = [
+        'Unknown' => 'unknown',
+        'Occasional remote' => 'occasional-remote',
+        'Hybrid remote' => 'hybrid-remote',
+        'Open to full remote' => 'open-to-full-remote',
+    ];
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
