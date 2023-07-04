@@ -4,9 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Candidate;
 use App\Form\CandidateType;
+use App\Form\TestType;
 use App\Repository\CandidateRepository;
-use App\Service\Visibility;
-use Doctrine\DBAL\Schema\Visitor\Visitor;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -76,6 +75,38 @@ class CandidateController extends AbstractController
 
         return $this->redirectToRoute('candidate_show', ['id' => $candidate->getId()], Response::HTTP_SEE_OTHER);
     }
+
+
+
+
+
+
+
+    #[Route('/{id}/upload', name: 'upload', methods: ['GET', 'POST'])]
+    public function upload(Request $request, Candidate $candidate, CandidateRepository $candidateRepository): Response
+    {
+        $form = $this->createForm(TestType::class, $candidate);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $candidateRepository->save($candidate, true);
+
+            return $this->redirectToRoute('candidate_show', ['id' => $candidate->getId()], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('candidate/show.html.twig', [
+            'candidate' => $candidate,
+            'form' => $form,
+        ]);
+    }
+
+
+
+
+
+
+
+
 
     #[Route('/{id}', name: 'delete', methods: ['POST'])]
     public function delete(Request $request, Candidate $candidate, CandidateRepository $candidateRepository): Response

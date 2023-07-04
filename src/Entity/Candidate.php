@@ -9,6 +9,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use phpDocumentor\Reflection\Types\Nullable;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Vich\UploaderBundle\Form\Type\VichFileType;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -155,7 +156,8 @@ class Candidate
 
     public function getResume(): ?string
     {
-        return 'upload/resumees/' . $this->resume;
+        // return 'upload/resumees/' . $this->resume;
+        return $this->resume;
     }
 
     public function setResume(string $resume): self
@@ -213,7 +215,8 @@ class Candidate
 
     public function getPicture(): ?string
     {
-        return 'uploads/candidatePictures/' . $this->picture;
+        // return 'uploads/candidatePictures/' . $this->picture;
+        return $this->picture;
     }
 
     public function setPicture(string $picture): self

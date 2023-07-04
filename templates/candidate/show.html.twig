@@ -28,7 +28,7 @@
 			</div>
 			<div class="profile">
 				<h1>YOUR PROFILE</h1>
-				<img id="picture-profile"src="{{ asset(app.user.candidate.picture) }}" alt="profile-picture">
+				<img id="picture-profile" src="{{ vich_uploader_asset(candidate, 'pictureFile') }}" alt="profile-picture">
 				<div id="profile-card" class="p-3">
 					<div class="card-body mt-2">
 						<div class="profile-informations">
@@ -64,10 +64,26 @@
 		</div>
 		<div class="resume-upload-resume">
 			<div id="resume" class="col text-center mt-4">
-				<button type="button" class="btn btn-secondary mt-2"><img class="img_icon fa-border" src=" {{ asset('build/images/picto/cv.svg') }} " alt=" curriculum"/>your resume</button>
+				<button type="button" class="btn btn-secondary mt-2" data-bs-toggle="modal" data-bs-target="#reg-modal"><img class="img_icon fa-border" src=" {{ asset('build/images/picto/cv.svg') }} " alt=" curriculum"/>your resume</button>
+				{{ include('candidate/_modal_resume.html.twig') }}
 			</div>
 			<div id="upload-resume" class="col text-center mt-4">
-				<button type="button" class="btn btn-secondary upload mt-2"><img class="img_icon fa-border" src="{{ asset('build/images/picto/upload.svg') }}" alt="upload"/>update your resume</button>
+
+
+
+
+{# <div class="form-group mt-4">{{ form_row(form.resumeFile) }}</div> #}
+				<a href="{{ path('candidate_upload', {'id': candidate.id}) }}" class="btn btn-secondary upload mt-2"><img class="img_icon fa-border" src="{{ asset('build/images/picto/upload.svg') }}" alt="upload"/>update your resume</a>
+{# <input type="file" id="candidate_resumeFile_file" name="candidate[resumeFile][file]"> #}
+
+	{# {{ include('candidate/_form.html.twig') }} #}
+{# {{ form_row(form.candidate.resume) }} #}
+ 
+
+
+
+
+
 			</div>
 		</div>
 		<div class="skills">
