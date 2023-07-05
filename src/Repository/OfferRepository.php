@@ -4,6 +4,8 @@ namespace App\Repository;
 
 use App\Entity\Offer;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Query\Parameter as Parameter;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -37,5 +39,60 @@ class OfferRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    public function findwithFilter(array $data): ?array
+    {
+        $queryBuilder = $this->createQueryBuilder('o')
+            ->select('o', 'c')
+            ->join('o.company', 'c');
+
+        if (!empty($data['searchTitle'])) {
+            $queryBuilder = $queryBuilder
+                ->andWhere('o.title Like :title')
+                ->setParameter('title', '%' . $data['searchTitle'] . '%');
+        }
+
+        if (!empty($data['searchLocation'])) {
+            $queryBuilder = $queryBuilder
+                ->andWhere('o.location LIKE :location')
+                ->setParameter('location', '%' . $data['searchLocation'] . '%');
+        }
+
+        if (!empty($data['contract'])) {
+            $queryBuilder = $queryBuilder
+                ->andWhere('o.contract IN (:contract)')
+                ->setParameter('contract', $data['contract']);
+        }
+
+        if (!empty($data['companySector'])) {
+            $queryBuilder = $queryBuilder
+                ->andWhere('c.sector IN (:sector)')
+                ->setParameter('sector', $data['companySector']);
+        }
+
+        if (!empty($data['experience'])) {
+            $queryBuilder = $queryBuilder
+                ->andWhere('o.experience IN (:experience)')
+                ->setParameter('experience', $data['experience']);
+        }
+
+        if (!empty($data['workFromHome'])) {
+            $queryBuilder = $queryBuilder
+                ->andWhere('o.workFromHome IN (:workFromHome)')
+                ->setParameter('workFromHome', $data['workFromHome']);
+        }
+
+        if (!empty($data['salary'])) {
+            $queryBuilder = $queryBuilder
+                ->andWhere('o.minSalary < :salary AND o.maxSalary > :salary')
+                ->setParameter('salary', $data['salary']);
+        }
+
+        $queryBuilder = $queryBuilder
+            ->orderBy('o.createdAt', 'DESC')
+            ->getQuery();
+
+        return $queryBuilder->getResult();
     }
 }

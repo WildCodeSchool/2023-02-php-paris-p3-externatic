@@ -83,7 +83,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
 
                 $company->setName($person['Name'])
                     ->setType($faker->word())
-                    ->setSector($faker->word())
+                    ->setSector(Company::COMPANY_SECTOR[array_rand(Company::COMPANY_SECTOR)])
                     ->setPresentation($faker->paragraph())
                     ->setLocation($faker->city())
                     ->setLogo(self::LOGO[mt_rand(0, count(self::LOGO) - 1)]);
