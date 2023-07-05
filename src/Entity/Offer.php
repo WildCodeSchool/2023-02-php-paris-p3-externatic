@@ -2,12 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\OfferRepository;
 use ArrayAccess;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Entity\Skill;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\OfferRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: OfferRepository::class)]
 class Offer
@@ -89,7 +90,7 @@ class Offer
     #[ORM\ManyToMany(targetEntity: Candidate::class, inversedBy: 'favoriteOffers')]
     private Collection $favorite;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?int $number = null;
 
     public function __construct()
@@ -97,6 +98,7 @@ class Offer
         $this->skills = new ArrayCollection();
         $this->applications = new ArrayCollection();
         $this->favorite = new ArrayCollection();
+        $this->createdAt = new \DateTimeImmutable();
     }
 
     public function getId(): ?int
