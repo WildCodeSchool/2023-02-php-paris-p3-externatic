@@ -68,9 +68,9 @@ class CandidateController extends AbstractController
             return $this->redirectToRoute('candidate_show', ['id' => $candidate->getId()], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('candidate/new.html.twig', [
+        return $this->render('candidate/edit.html.twig', [
             'candidate' => $candidate,
-            'form' => $form
+            'form'      => $form
         ]);
     }
 
@@ -78,7 +78,9 @@ class CandidateController extends AbstractController
     public function editUpload(Request $request, Candidate $candidate, CandidateRepository $candidateRepository): Response
     {
         //Form edit/upload picture
+        // $formUploadResume = $this->createForm(UploadResumeType::class, $candidate);
         $formUploadResume = $this->createForm(UploadResumeType::class, $candidate);
+
 
         if ($request->isMethod('POST')) {
             $formUploadResume->handleRequest($request);
@@ -103,9 +105,8 @@ class CandidateController extends AbstractController
             }
         }
 
-        return $this->render('candidate/edit.html.twig', [
+        return $this->render('candidate/show.html.twig', [
             'candidate' => $candidate,
-
         ]);
     }
 

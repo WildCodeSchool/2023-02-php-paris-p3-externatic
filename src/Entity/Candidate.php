@@ -37,6 +37,7 @@ class Candidate
     // #[Assert\Regex(pattern: '^.*\.(pdf|PDF)$')]
     //     maxSize: '2M',
     // )]
+    // #[Assert\File(maxSize: '1k')]
     #[ORM\Column(length: 150)]
     private ?string $resume = null;
 
