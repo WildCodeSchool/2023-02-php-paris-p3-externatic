@@ -21,6 +21,7 @@ class OfferController extends AbstractController
     #[Route('/index', name: 'index', methods: ['GET', 'POST'])]
     public function index(OfferRepository $offerRepository, PaginatorInterface $paginator, Request $request): Response
     {
+        // dd($this->getUser());
         $form = $this->createForm(SearchOfferFilterType::class);
         $form->handleRequest($request);
 

@@ -21,10 +21,10 @@
                 <div id="connection-form">
                     <div class="tab-content">
 
-                        <button type="button" class="btn btn-primary btn-lg mt-2">connect with Linkedin</button>
-                        <button type="button" class="btn btn-secondary btn-lg mt-2 mb-4">connect with Google</button>
+                        <button type="button" class="btn btn-primary btn-lg mt-2 mb-2">connect with Linkedin</button>
+                        <button type="button" class="btn btn-secondary btn-lg mt-2 mb-2">connect with Google</button>
 
-                                <div class="d-flex flex-row justify-content-evenly mb-2">
+                                {# <div class="d-flex flex-row justify-content-evenly mb-2">
                                     <div class="p-2">
                                         <h5>Candidate</h5>
                                     </div>
@@ -34,10 +34,13 @@
                                     <div class="p-2">
                                         <h5>Company</h5>
                                     </div>
-                                </div>
+                                </div> #}
 
 
                                 {{ form_start(registrationForm) }}
+                                    <div class="form-check form-switch">
+                                    {{ form_row(registrationForm.roles) }}
+                                    </div>
                                     <div class="col mt-4">
                                         {{ form_row(registrationForm.login) }}
                                     </div>

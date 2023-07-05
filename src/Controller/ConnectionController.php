@@ -51,10 +51,17 @@ class ConnectionController extends AbstractController
                 )
             );
 
+            // if ($user->getRoles() === User::ROLE_CANDIDATE) {
+            //     $user->setCandidate(new Candidate());
+            // } else {
+            //     $user->setCompany(new Company());
+            // }
             $entityManager->persist($user);
             $entityManager->flush();
 
-            return $this->redirectToRoute('offer_index');
+            // dd($user);
+
+            return $this->redirectToRoute('candidate_new');
         }
 
         return $this->render('connection/register.html.twig', [

@@ -22,6 +22,11 @@ security:
                 enable_csrf: true
             logout:
                 path: logout
+            custom_authenticators:
+                - App\Security\SecurityAuthenticator
+            remember_me:
+                secret: '%kernel.secret%'
+                always_remember_me: true
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall

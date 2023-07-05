@@ -27,13 +27,14 @@ class CandidateController extends AbstractController
     #[Route('/new', name: 'new', methods: ['GET', 'POST'])]
     public function new(Request $request, CandidateRepository $candidateRepository): Response
     {
+        $user = $this->getUser();
+        // dd($user);
         $candidate = new Candidate();
         $form = $this->createForm(CandidateType::class, $candidate);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $user = new User();
-
+            $candidate->setUser($user);
             $candidateRepository->save($candidate, true);
 
             return $this->redirectToRoute('candidate_index', [], Response::HTTP_SEE_OTHER);
