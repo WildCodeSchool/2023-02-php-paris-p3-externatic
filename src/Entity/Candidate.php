@@ -7,7 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use phpDocumentor\Reflection\Types\Nullable;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CandidateRepository::class)]
 class Candidate
@@ -18,30 +18,45 @@ class Candidate
     private ?int $id = null;
 
     #[ORM\Column(length: 100)]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 2, max:100)]
     private ?string $firstname = null;
 
     #[ORM\Column(length: 100)]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 2, max:100)]
     private ?string $lastname = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 2, max:255)]
     private ?string $location = null;
 
     #[ORM\Column(length: 100, nullable: true)]
+    #[Assert\Length(min: 2, max:100)]
     private ?string $phone = null;
 
-    #[ORM\Column(length: 150)]
+    #[ORM\Column(length: 150, nullable: true)]
+    #[Assert\Length(min: 2, max:150)]
     private ?string $resume = null;
 
     #[ORM\Column(type: Types::TEXT, length: 300)]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 10, max:300)]
     private ?string $introduction = null;
 
     #[ORM\Column(length: 150)]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 5, max:150)]
     private ?string $jobTitle = null;
 
-    #[ORM\Column(length: 100, nullable: true)]
+    #[ORM\Column(length: 100)]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 2, max:100)]
     private ?string $experience = null;
 
     #[ORM\Column(length: 150, nullable: true)]
+    #[Assert\Length(min: 2, max:100)]
     private ?string $picture = null;
 
     #[ORM\OneToOne(inversedBy: 'candidate', cascade: ['persist', 'remove'])]

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Candidate;
+use App\Entity\User;
 use App\Form\CandidateType;
 use App\Repository\CandidateRepository;
 use App\Service\Visibility;
@@ -31,6 +32,8 @@ class CandidateController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $user = new User();
+
             $candidateRepository->save($candidate, true);
 
             return $this->redirectToRoute('candidate_index', [], Response::HTTP_SEE_OTHER);
