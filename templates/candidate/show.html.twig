@@ -72,12 +72,15 @@
 
 
 
-{# <div class="form-group mt-4">{{ form_row(form.resumeFile) }}</div> #}
-				<a href="{{ path('candidate_upload', {'id': candidate.id}) }}" class="btn btn-secondary upload mt-2"><img class="img_icon fa-border" src="{{ asset('build/images/picto/upload.svg') }}" alt="upload"/>update your resume</a>
-{# <input type="file" id="candidate_resumeFile_file" name="candidate[resumeFile][file]"> #}
 
-	{# {{ include('candidate/_form.html.twig') }} #}
-{# {{ form_row(form.candidate.resume) }} #}
+{# <button type="button" class="btn btn-secondary upload mt-2"><img class="img_icon fa-border" src="{{ asset('build/images/picto/upload.svg') }}" alt="upload"/>update your resume</button> #}
+
+{{ form_start(form) }}
+{{ form_widget(form) }}
+	<div class="text-center">
+		<button class="btn btn-primary mt-2 mb-2">{{ button_label|default('Sauvegarder') }}</button>
+	</div>
+{{ form_end(form) }}
  
 
 

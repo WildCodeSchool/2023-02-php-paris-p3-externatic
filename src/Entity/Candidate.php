@@ -34,10 +34,6 @@ class Candidate
     #[ORM\Column(length: 100, nullable: true)]
     private ?string $phone = null;
 
-    #[Assert\File(maxSize: '2M', extensions: ['pdf'])]
-    #[Vich\UploadableField(mapping: 'resumes', fileNameProperty: 'resume')]
-    private ?File $resumeFile = null;
-
     #[ORM\Column(length: 150)]
     private ?string $resume = null;
 
@@ -81,6 +77,8 @@ class Candidate
 
     #[ORM\OneToMany(mappedBy: 'candidate', targetEntity: CandidateMetadata::class)]
     private Collection $metadata;
+
+    public const UPLOAD_REPOSITORY = '/public/uploads/resumes';
 
     public function __construct()
     {
