@@ -37,7 +37,11 @@ class SkillFixtures extends Fixture
                 $skill->setName($key['name'])
                     ->setType($key['type']);
 
-            if ($key['type'] == 'hard' || $key['type'] == 'soft') {
+            if ($key['type'] == 'hard') {
+                $counter++;
+                $counter = ($counter > 8) ? 1 : $counter;
+            }
+            if ($key['type'] == 'soft') {
                 $counter++;
                 $counter = ($counter > 8) ? 1 : $counter;
             }
