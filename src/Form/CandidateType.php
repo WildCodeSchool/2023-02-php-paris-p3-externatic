@@ -17,15 +17,11 @@ class CandidateType extends AbstractType
             ->add('lastname')
             ->add('location')
             ->add('phone')
-            ->add('resumeFile', DropzoneType::class, [
-                'label' => 'Candidate\'s resume',
-            ])
+            ->add('resume')
             ->add('introduction')
             ->add('jobTitle')
             ->add('experience')
-            ->add('pictureFile', DropzoneType::class, [
-                'label' => 'Candidate\'s picture',
-            ])
+            ->add('picture')
             ->add('visible')
             ->add('user')
             ->add('skills')
