@@ -64,29 +64,18 @@
 		</div>
 		<div class="resume-upload-resume">
 			<div id="resume" class="col text-center mt-4">
-				<button type="button" class="btn btn-secondary mt-2" data-bs-toggle="modal" data-bs-target="#reg-modal"><img class="img_icon fa-border" src=" {{ asset('build/images/picto/cv.svg') }} " alt=" curriculum"/>your resume</button>
 				{{ include('candidate/_modal_resume.html.twig') }}
 			</div>
 			<div id="upload-resume" class="col text-center mt-4">
-
-
-
-
-
-{# <button type="button" class="btn btn-secondary upload mt-2"><img class="img_icon fa-border" src="{{ asset('build/images/picto/upload.svg') }}" alt="upload"/>update your resume</button> #}
-
-{{ form_start(form) }}
-{{ form_widget(form) }}
-	<div class="text-center">
-		<button class="btn btn-primary mt-2 mb-2">{{ button_label|default('Sauvegarder') }}</button>
-	</div>
-{{ form_end(form) }}
- 
-
-
-
-
-
+				{{ form_start(form) }}
+				{{ form_widget(form) }}
+					<div class="text-center">
+						<button class="btn btn-primary mt-2 mb-2">
+							<img class="img_icon fa-border" src=" {{ asset('build/images/picto/upload.svg') }} " alt="upload-resume"/>
+							{{ button_label|default('upload your resume') }}
+						</button>
+					</div>
+				{{ form_end(form) }}
 			</div>
 		</div>
 		<div class="skills">

@@ -34,6 +34,9 @@ class Candidate
     #[ORM\Column(length: 100, nullable: true)]
     private ?string $phone = null;
 
+    // #[Assert\Regex(pattern: '^.*\.(pdf|PDF)$')]
+    //     maxSize: '2M',
+    // )]
     #[ORM\Column(length: 150)]
     private ?string $resume = null;
 
@@ -142,19 +145,8 @@ class Candidate
         return $this;
     }
 
-    public function setResumeFile(?File $resumeFile = null): void
-    {
-        $this->resumeFile = $resumeFile;
-    }
-
-    public function getResumeFile(): ?File
-    {
-        return $this->resumeFile;
-    }
-
     public function getResume(): ?string
     {
-        // return 'upload/resumees/' . $this->resume;
         return $this->resume;
     }
 

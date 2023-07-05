@@ -6,6 +6,7 @@ use App\Entity\Candidate;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\UX\Dropzone\Form\DropzoneType;
 
 class CandidateType extends AbstractType
 {
@@ -17,7 +18,7 @@ class CandidateType extends AbstractType
             ->add('location')
             ->add('phone')
             // ->add('resume')
-            ->add('resumeFile', DropzoneType::class, [
+            ->add('file', DropzoneType::class, [
                 'label' => 'Candidate\'s resume',
             ])
             ->add('introduction')
