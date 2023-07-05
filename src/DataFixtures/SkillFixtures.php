@@ -30,15 +30,13 @@ class SkillFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
-        $faker = Factory::create();
         $counter = 0;
-        foreach(self::SKILLS as $key) {
-
+        foreach (self::SKILLS as $key) {
                 $skill = new Skill();
 
                 $skill->setName($key['name'])
                     ->setType($key['type']);
-                
+
             if ($key['type'] == 'hard' || $key['type'] == 'soft') {
                 $counter++;
                 $counter = ($counter > 8) ? 1 : $counter;
