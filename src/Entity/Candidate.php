@@ -38,6 +38,13 @@ class Candidate
     //     maxSize: '2M',
     // )]
     // #[Assert\File(maxSize: '1k')]
+
+
+    #[Assert\File(maxSize: '2M', mimeTypes: ['jpeg', 'jpg', 'png'])]
+    #[Vich\UploadableField(mapping: 'candidates', fileNameProperty: 'resume')]
+    private ?File $resumeFile = null;
+
+
     #[ORM\Column(length: 150)]
     private ?string $resume = null;
 
@@ -144,6 +151,16 @@ class Candidate
         $this->phone = $phone;
 
         return $this;
+    }
+
+    public function setResumeFile(?File $resumeFile = null): void
+    {
+        $this->resumeFile = $resumeFile;
+    }
+
+    public function getResumeFile(): ?File
+    {
+        return $this->resumeFile;
     }
 
     public function getResume(): ?string

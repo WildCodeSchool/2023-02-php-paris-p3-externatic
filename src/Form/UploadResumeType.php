@@ -12,6 +12,7 @@ class UploadResumeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            // ->add('file', DropzoneType::class, [
             ->add('file', DropzoneType::class, [
                 'mapped' => false,
             ])

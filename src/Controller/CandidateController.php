@@ -78,9 +78,7 @@ class CandidateController extends AbstractController
     public function editUpload(Request $request, Candidate $candidate, CandidateRepository $candidateRepository): Response
     {
         //Form edit/upload picture
-        // $formUploadResume = $this->createForm(UploadResumeType::class, $candidate);
         $formUploadResume = $this->createForm(UploadResumeType::class, $candidate);
-
 
         if ($request->isMethod('POST')) {
             $formUploadResume->handleRequest($request);

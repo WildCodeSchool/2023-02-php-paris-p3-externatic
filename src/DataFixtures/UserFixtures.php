@@ -63,9 +63,9 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                     ->setPicture($person['picture']);
                 for ($i = 0; $i < 6; $i++) {
                     $candidate->addSkill($this->getReference('skill_soft_' . $faker->unique(true)
-                        ->numberBetween(0, 11)));
+                        ->numberBetween(0, 7)));
                     $candidate->addSkill($this->getReference('skill_hard_' . $faker->unique(true)
-                        ->numberBetween(0, 11)));
+                        ->numberBetween(0, 7)));
                 }
 
                 $user = new User();
