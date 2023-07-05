@@ -34,16 +34,9 @@ class Candidate
     #[ORM\Column(length: 100, nullable: true)]
     private ?string $phone = null;
 
-    // #[Assert\Regex(pattern: '^.*\.(pdf|PDF)$')]
-    //     maxSize: '2M',
-    // )]
-    // #[Assert\File(maxSize: '1k')]
-
-
     #[Assert\File(maxSize: '2M', mimeTypes: ['jpeg', 'jpg', 'png'])]
     #[Vich\UploadableField(mapping: 'candidates', fileNameProperty: 'resume')]
     private ?File $resumeFile = null;
-
 
     #[ORM\Column(length: 150)]
     private ?string $resume = null;
@@ -223,7 +216,6 @@ class Candidate
 
     public function getPicture(): ?string
     {
-        // return 'uploads/candidatePictures/' . $this->picture;
         return $this->picture;
     }
 

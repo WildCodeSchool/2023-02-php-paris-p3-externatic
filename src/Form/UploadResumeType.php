@@ -14,7 +14,6 @@ class UploadResumeType extends AbstractType
         $builder
             ->add('file', DropzoneType::class, [
                 'mapped' => false,
-            ])
-        ;
+        ]);
     }
 }

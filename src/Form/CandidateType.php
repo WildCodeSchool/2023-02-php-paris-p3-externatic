@@ -27,10 +27,10 @@ class CandidateType extends AbstractType
                 'label' => 'Candidate\'s picture',
             ])
             ->add('visible')
-            // ->add('user')
-            // ->add('skills')
-            // ->add('favoriteOffers')
-            // ->add('favorite')
+            ->add('user')
+            ->add('skills')
+            ->add('favoriteOffers')
+            ->add('favorite')
         ;
     }
 
