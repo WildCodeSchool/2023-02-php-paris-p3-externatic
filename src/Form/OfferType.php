@@ -43,20 +43,8 @@ class OfferType extends AbstractType
                 'required' => true,
                 'label' => 'Level of experience (in years)',
             ])
-            ->add('minSalary', IntegerType::class, [
-                'constraints' => [
-                    new Assert\LessThan([
-                        'maxSalary'
-                    ]),
-                ]
-            ])
-            ->add('maxSalary', IntegerType::class, [
-                'constraints' => [
-                    new Assert\GreaterThan([
-                        'minSalary'
-                    ]),
-                ]
-            ])
+            ->add('minSalary', IntegerType::class)
+            ->add('maxSalary', IntegerType::class)
             ->add('location', TextType::class)
             ->add('interviewProcess', TextareaType::class)
             ->add('picture', TextType::class)
