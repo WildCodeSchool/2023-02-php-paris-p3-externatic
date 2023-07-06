@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Entity\User;
+use App\Security\UserAuthenticator;
 use Exception;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,12 +13,17 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use App\Form\RegistrationFormType;
+use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 
 class ConnectionController extends AbstractController
 {
     #[Route('/login', name: 'login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
+        // if ($this->getUser()) {
+        //     return $this->redirectToRoute('target_path');
+        // }
+
             $error = $authenticationUtils->getLastAuthenticationError();
             $lastUsername = $authenticationUtils->getLastUsername();
 
@@ -36,7 +42,9 @@ class ConnectionController extends AbstractController
     #[Route('/register', name: 'register')]
     public function register(
         Request $request,
-        UserPasswordHasherInterface $passwordHasher,
+        UserPasswordHasherInterface $userPasswordHasher,
+        UserAuthenticatorInterface $userAuthenticator,
+        UserAuthenticator $authenticator,
         EntityManagerInterface $entityManager
     ): Response {
         $user = new User();
@@ -45,7 +53,7 @@ class ConnectionController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $user->setPassword(
-                $passwordHasher->hashPassword(
+                $userPasswordHasher->hashPassword(
                     $user,
                     $form->get('plainPassword')->getData()
                 )
@@ -59,7 +67,11 @@ class ConnectionController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            // dd($user);
+            $userAuthenticator->authenticateUser(
+                $user,
+                $authenticator,
+                $request
+            );
 
             return $this->redirectToRoute('candidate_new');
         }

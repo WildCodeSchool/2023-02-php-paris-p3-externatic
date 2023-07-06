@@ -1,4 +1,49 @@
+<div id="profile-candidate-form">
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+    <div class="col mt-4">
+        {{ form_row(form.picture) }}
+    </div>
+
+    <h3>My information</h3>
+    <div class="col mt-4">
+    {{ form_row(form.firstname) }}
+    </div>
+    <div class="col mt-4">
+        {{ form_row(form.lastname) }}
+    </div>
+    <div class="col mt-4">
+        {{ form_row(form.location) }}
+    </div>
+    <div class="col mt-4">
+        {{ form_row(form.phone) }}
+    </div>
+
+    <h3 class="m-4">My journey</h3>
+    <div class="col mt-4">
+        {{ form_row(form.jobTitle) }}
+    </div>
+    <div class="col mt-4">
+        {{ form_row(form.experience) }}
+    </div>
+    <div class="col mt-4">
+        {{ form_row(form.introduction) }}
+    </div>
+    <div class="col mt-4">
+        {{ form_row(form.resume) }}
+    </div>
+    {# <div class="col mt-4">
+        {{ form_row(skills) }}
+    </div> #}
+
+    <h3> My web presence</h3>
+
+    <div class="form-check form-switch">
+        <div class="col mt-4">
+            {{ form_row(form.visible) }}
+        </div>
+    </div>
+
+        {{ form_errors(form) }}
+        <button type="submit" class="btn btn-secondary mt-4">{{ button_label|default('Save') }}</button>
+    {{ form_end(form) }}
+</div>

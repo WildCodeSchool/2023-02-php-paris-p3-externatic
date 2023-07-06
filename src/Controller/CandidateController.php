@@ -6,6 +6,7 @@ use App\Entity\Candidate;
 use App\Entity\User;
 use App\Form\CandidateType;
 use App\Repository\CandidateRepository;
+use App\Repository\UserRepository;
 use App\Service\Visibility;
 use Doctrine\DBAL\Schema\Visitor\Visitor;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -25,17 +26,24 @@ class CandidateController extends AbstractController
     }
 
     #[Route('/new', name: 'new', methods: ['GET', 'POST'])]
-    public function new(Request $request, CandidateRepository $candidateRepository): Response
-    {
+    public function new(
+        Request $request,
+        CandidateRepository $candidateRepository,
+        UserRepository $userRepository
+    ): Response {
         $user = $this->getUser();
-        // dd($user);
+
         $candidate = new Candidate();
+
         $form = $this->createForm(CandidateType::class, $candidate);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $candidate->setUser($user);
             $candidateRepository->save($candidate, true);
+
+            $user->setCandidate($candidate);
+            $userRepository->save($user, true);
 
             return $this->redirectToRoute('candidate_index', [], Response::HTTP_SEE_OTHER);
         }

@@ -41,8 +41,9 @@ class RegistrationFormType extends AbstractType
                 'placeholder' => 'Email',
                 ],
             ])
-            ->add('agreeTerms', CheckboxType::class, [
+            ->add('RGPDconsent', CheckboxType::class, [
                 'mapped' => false,
+                'label' => 'I agree to the terms and conditions as set out by the user agreement',
                 'attr' => [
                     'class' => 'form-check-input',
                     'class-label' => 'form-check-label',
