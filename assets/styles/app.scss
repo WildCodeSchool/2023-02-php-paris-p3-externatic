@@ -527,6 +527,7 @@ hr {
         padding: 1em 0.9em;
         border: 0.09em solid #FED32C;
         margin-block: auto;
+        margin-top: 1.5em;
     }
 
     #picture-profile{
@@ -571,7 +572,7 @@ hr {
         display: grid;
         width: 40%;
         grid-template-columns: 1fr 1fr;
-        align-items: center;
+        align-items: end;
     }
 
     .portfolio {
