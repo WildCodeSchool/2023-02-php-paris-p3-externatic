@@ -18,7 +18,7 @@
 	</head>
 
     {# lien vers la page login - affiche l'image de l'user quand il est connecté => à mettre dans la navebar #}
-    {% if app.user %}
+    {# {% if app.user %}
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <img src="{{ asset(app.user.candidate.picture) }}" id="profile-picture-navbar" alt="profile-picture">
             </a>
@@ -27,9 +27,11 @@
             </ul>
     {% else %}
         <a href="{{ path('login') }}">LOGIN</a>
-    {% endif %}
+    {% endif %} #}
 
     <body>
+		{% include "_navbar.html.twig" %}
         {% block body %}{% endblock %}
+		{% include "_footer.html.twig" %}
     </body>
 </html>

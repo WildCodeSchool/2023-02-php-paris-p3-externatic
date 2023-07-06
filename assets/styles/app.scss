@@ -478,6 +478,7 @@ $nav-underline-link-active-color:$secondary;
     justify-content: space-between;
 }
 
+// Search-form
 #modal-body-search-form .form-check-label {
     margin-right: 10px;
     margin-left: 3px;
@@ -487,10 +488,56 @@ $nav-underline-link-active-color:$secondary;
     margin-top: 15px;
 }
 
+#search-input {
+    width: 90vw;
+    margin: auto;
+}
+
 // Navbar
 #profile-picture-navbar {
     border-radius: 50%;
     width: 3rem;
+}
+
+$navbar-nav-link-padding-x: 2.5rem;
+$navbar-nav-link-padding-y: 0.5rem;
+$navbar-padding-y: 0;
+
+#navbarSupportedContent {
+    height: 60px;
+}
+
+.navbar-nav {
+    height: 60px;
+}
+
+#navbarSupportedContent ul li a {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+#navbarSupportedContent ul li:hover {
+    background-color: $primary;
+}
+
+#navbarSupportedContent ul li a:hover {
+    color: $info;
+}
+
+// footer
+
+#main-footer {
+    background-color: $primary;
+    min-width: 100%;
+}
+
+#main-footer span {
+    color: $info;
+}
+
+#main-footer footer {
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 // Page Offer_index
@@ -621,6 +668,18 @@ hr {
 
 .skills-tab > ul {
     list-style-type: none;
+}
+
+//Home Page
+#about-header {
+    background-color: $primary;
+    padding: 20px;
+    padding-top: 50px;
+}
+
+#about-header p,
+#about-header h5 {
+    color: $light;
 }
 
 @import '~bootstrap-icons/font/bootstrap-icons.css';
