@@ -17,7 +17,6 @@
     <div class="col mt-4">
         {{ form_row(form.phone) }}
     </div>
-
     <h3 class="m-4">My journey</h3>
     <div class="col mt-4">
         {{ form_row(form.jobTitle) }}
@@ -29,14 +28,15 @@
         {{ form_row(form.introduction) }}
     </div>
     <div class="col mt-4">
+        {{ form_row(form.skills) }}
+    </div>
+    <div class="col mt-4">
         {{ form_row(form.resume) }}
     </div>
-    {# <div class="col mt-4">
-        {{ form_row(skills) }}
-    </div> #}
-
-    <h3> My web presence</h3>
-
+    <h3 class="m-4"> My web presence</h3>
+    <div class="col mt-4">
+        {{ form_row(form.metadata) }}
+    </div>
     <div class="form-check form-switch">
         <div class="col mt-4">
             {{ form_row(form.visible) }}

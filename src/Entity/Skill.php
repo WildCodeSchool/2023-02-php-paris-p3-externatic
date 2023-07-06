@@ -11,6 +11,25 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: SkillRepository::class)]
 class Skill
 {
+    public const SKILLS = [
+        ['name' => 'PHP', 'type' => 'hard'],
+        ['name' => 'JS', 'type' => 'hard'],
+        ['name' => 'JAVA', 'type' => 'hard'],
+        ['name' => 'Windev', 'type' => 'hard'],
+        ['name' => 'html', 'type' => 'hard'],
+        ['name' => 'CSS', 'type' => 'hard'],
+        ['name' => 'React', 'type' => 'hard'],
+        ['name' => 'SQL', 'type' => 'hard'],
+        ['name' => 'creativity', 'type' => 'soft'],
+        ['name' => 'communication', 'type' => 'soft'],
+        ['name' => 'smiling', 'type' => 'soft'],
+        ['name' => 'critical thinking', 'type' => 'soft'],
+        ['name' => 'adaptability', 'type' => 'soft'],
+        ['name' => 'perfectionist', 'type' => 'soft'],
+        ['name' => 'teamwork', 'type' => 'soft'],
+        ['name' => 'problem-solving', 'type' => 'soft'],
+    ];
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
