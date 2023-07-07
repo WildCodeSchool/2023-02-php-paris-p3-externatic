@@ -53,15 +53,15 @@ class OfferTypeController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_offer_type_show', methods: ['GET'])]
-    public function show(Offer $offer): Response
-    {
-        return $this->render('offer_type/show.html.twig', [
-            'offer' => $offer,
-        ]);
-    }
+    // #[Route('/{id}', name: 'app_offer_type_show', methods: ['GET'])]
+    // public function show(Offer $offer): Response
+    // {
+    //     return $this->render('offer_type/show.html.twig', [
+    //         'offer' => $offer,
+    //     ]);
+    // }
 
-    #[Route('/{id}/edit', name: 'app_offer_type_edit', methods: ['GET', 'POST'])]
+    #[Route('/{id}/edit', name: 'edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Offer $offer, OfferRepository $offerRepository): Response
     {
         $form = $this->createForm(OfferType::class, $offer);
@@ -70,10 +70,10 @@ class OfferTypeController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $offerRepository->save($offer, true);
 
-            return $this->redirectToRoute('app_offer_type_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('offer_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('offer_type/edit.html.twig', [
+        return $this->render('offer_type/edit.html.twig', [
             'offer' => $offer,
             'form' => $form,
         ]);

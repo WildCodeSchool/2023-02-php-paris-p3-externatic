@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block body %}
+ {# {{ include('_navigationBtnDesktopCompany.html.twig') }} #}
 <div class="header-menu-for-desktop">
 	<div class="container text-center">
 		<div class="row justify-content-center mt-2 mb-4" id="navigation-btn-desktop">
@@ -95,7 +96,7 @@
 		</p>
 		{% if app.user.company is same as offer.getCompany %}
 			<div class="col text-center mt-4">
-				<button type="button" class="btn btn-secondary mt-2 applicationbtn">Edit</button>
+				<button type="button" class="btn btn-secondary mt-2 applicationbtn" href="{{path('offer_form_edit', {id: offer.id}) }}">Edit</button>
 				<button type="button" class="btn btn-secondary mt-2 applicationbtn">Archive</button>
 			</div>
 		{% else %}
@@ -149,7 +150,7 @@
 		<section class="before-footer-btn mt-4">
 			{% if app.user.company is same as offer.getCompany %}
 				<div class="col text-center mt-4">
-					<button type="button" class="btn btn-secondary mt-2 applicationbtn">Edit</button>
+					<button type="button" class="btn btn-secondary mt-2 applicationbtn" href="{{path('offer_form_edit', {id: offer.id}) }}">Edit</button>
 					<button type="button" class="btn btn-secondary mt-2 applicationbtn">Archive</button>
 				</div>
 			{% else %}
