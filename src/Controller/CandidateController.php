@@ -6,9 +6,11 @@ use App\Entity\Candidate;
 use App\Entity\User;
 use App\Form\CandidateType;
 use App\Repository\CandidateRepository;
+use App\Repository\CandidateMetadataRepository;
 use App\Repository\UserRepository;
 use App\Service\Visibility;
 use Doctrine\DBAL\Schema\Visitor\Visitor;
+use GrumPHP\Task\Config\Metadata;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,24 +28,20 @@ class CandidateController extends AbstractController
     }
 
     #[Route('/new', name: 'new', methods: ['GET', 'POST'])]
-    public function new(
-        Request $request,
-        CandidateRepository $candidateRepository,
-        UserRepository $userRepository
-    ): Response {
+    public function new(Request $request, CandidateRepository $candidateRepository): Response
+    {
         $user = $this->getUser();
-
-        $candidate = new Candidate();
+        $candidate = $user->getCandidate();
 
         $form = $this->createForm(CandidateType::class, $candidate);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $candidate->setUser($user);
-            $candidateRepository->save($candidate, true);
+            foreach ($candidate->getMetadata() as $data) {
+                $data->setCandidate($candidate);
+            }
 
-            $user->setCandidate($candidate);
-            $userRepository->save($user, true);
+            $candidateRepository->save($candidate, true);
 
             return $this->redirectToRoute('candidate_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -73,7 +71,6 @@ class CandidateController extends AbstractController
 
             return $this->redirectToRoute('candidate_index', [], Response::HTTP_SEE_OTHER);
         }
-
         return $this->render('candidate/edit.html.twig', [
             'candidate' => $candidate,
             'form' => $form,

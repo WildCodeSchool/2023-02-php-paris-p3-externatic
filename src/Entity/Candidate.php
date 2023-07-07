@@ -17,17 +17,17 @@ class Candidate
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 100)]
+    #[ORM\Column(length: 100, nullable: true)]
     #[Assert\NotBlank]
     #[Assert\Length(min: 2, max:100)]
     private ?string $firstname = null;
 
-    #[ORM\Column(length: 100)]
+    #[ORM\Column(length: 100, nullable: true)]
     #[Assert\NotBlank]
     #[Assert\Length(min: 2, max:100)]
     private ?string $lastname = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     #[Assert\NotBlank]
     #[Assert\Length(min: 2, max:255)]
     private ?string $location = null;
@@ -40,17 +40,17 @@ class Candidate
     #[Assert\Length(min: 2, max:150)]
     private ?string $resume = null;
 
-    #[ORM\Column(type: Types::TEXT, length: 300)]
+    #[ORM\Column(type: Types::TEXT, length: 300, nullable: true)]
     #[Assert\NotBlank]
     #[Assert\Length(min: 10, max:300)]
     private ?string $introduction = null;
 
-    #[ORM\Column(length: 150)]
+    #[ORM\Column(length: 150, nullable: true)]
     #[Assert\NotBlank]
     #[Assert\Length(min: 5, max:150)]
     private ?string $jobTitle = null;
 
-    #[ORM\Column(length: 100)]
+    #[ORM\Column(length: 100, nullable: true)]
     #[Assert\NotBlank]
     #[Assert\Length(min: 2, max:100)]
     private ?string $experience = null;
@@ -66,7 +66,7 @@ class Candidate
     #[ORM\ManyToMany(targetEntity: Skill::class, mappedBy: 'candidates')]
     private Collection $skills;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?bool $visible = null;
 
     #[ORM\OneToMany(mappedBy: 'candidate', targetEntity: Application::class)]
@@ -81,8 +81,8 @@ class Candidate
     #[ORM\OneToMany(mappedBy: 'favorite', targetEntity: Company::class)]
     private Collection $favoriteCompanies;
 
-    #[ORM\OneToMany(mappedBy: 'candidate', targetEntity: CandidateMetadata::class)]
-    private Collection $metadata;
+    #[ORM\OneToMany(mappedBy: 'candidate', targetEntity: CandidateMetadata::class, cascade:['persist'])]
+    protected Collection $metadata;
 
     public function __construct()
     {
@@ -341,6 +341,13 @@ class Candidate
         return $this;
     }
 
+    public function setMetadata(collection $metadata): self
+    {
+        $this->metadata = $metadata;
+
+        return $this;
+    }
+
     public function getMetadata(): Collection
     {
         return $this->metadata;
@@ -355,4 +362,9 @@ class Candidate
 
         return $this;
     }
+
+    // public function removeMetadata(CandidateMetadata $metadata): void
+    // {
+    //     $this->metadata->removeElement($metadata);
+    // }
 }

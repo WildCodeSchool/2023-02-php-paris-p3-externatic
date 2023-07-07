@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Candidate;
+use App\Entity\Company;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Entity\User;
 use App\Security\UserAuthenticator;
@@ -13,6 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use App\Form\RegistrationFormType;
+use App\Repository\UserRepository;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 
 class ConnectionController extends AbstractController
@@ -45,6 +48,7 @@ class ConnectionController extends AbstractController
         UserPasswordHasherInterface $userPasswordHasher,
         UserAuthenticatorInterface $userAuthenticator,
         UserAuthenticator $authenticator,
+        UserRepository $userRepository,
         EntityManagerInterface $entityManager
     ): Response {
         $user = new User();
@@ -59,11 +63,6 @@ class ConnectionController extends AbstractController
                 )
             );
 
-            // if ($user->getRoles() === User::ROLE_CANDIDATE) {
-            //     $user->setCandidate(new Candidate());
-            // } else {
-            //     $user->setCompany(new Company());
-            // }
             $entityManager->persist($user);
             $entityManager->flush();
 
@@ -73,7 +72,17 @@ class ConnectionController extends AbstractController
                 $request
             );
 
-            return $this->redirectToRoute('candidate_new');
+            if ($user->getRoles()[0] === 'ROLE_CANDIDATE') {
+                $user->setCandidate(new Candidate());
+                $userRepository->save($user, true);
+
+                return $this->redirectToRoute('candidate_new');
+            } elseif ($user->getRoles()[0] === 'ROLE_COMPANY') {
+                $user->setCompany(new Company());
+                $userRepository->save($user, true);
+
+                return $this->redirectToRoute('company_new');
+            }
         }
 
         return $this->render('connection/register.html.twig', [

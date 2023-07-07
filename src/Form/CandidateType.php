@@ -82,11 +82,16 @@ class CandidateType extends AbstractType
                 'multiple' => true,
                 'by_reference' => false,
             ])
-            ->add('resume')
+            ->add('resume', TextType::class, [
+                'required' => false,
+            ])
             ->add('metadata', CollectionType::class, [
                 'entry_type' => MetadataType::class,
                 'entry_options' => ['label' => false],
                 'allow_add' => true,
+                'allow_delete' => true,
+                'label' => false,
+                'by_reference' => false,
             ])
             ->add('visible', CheckboxType::class, [
                 'label' => "I want my profile to be visible by recruiter",

@@ -35,7 +35,21 @@
     </div>
     <h3 class="m-4"> My web presence</h3>
     <div class="col mt-4">
-        {{ form_row(form.metadata) }}
+        {# {% for metadata in form.metadata %}
+        <div class="mt-4">
+            {{ form_row(metadata.type) }}
+        </div>
+        <div class="mt-4">
+            {{ form_row(metadata.metadata) }}
+        </div>
+        {% endfor %} #}
+        <div {{ stimulus_controller('form-collection') }}
+        data-form-collection-index-value="{{ form.metadata|length > 0 ? form.metadata|last.vars.name + 1 : 0 }}"
+        data-form-collection-prototype-value="{{ form_widget(form.metadata.vars.prototype)|e('html_attr') }}"
+        >
+        <div {{ stimulus_target('form-collection', 'collectionContainer') }}></div>
+        <button type="button" {{ stimulus_action('form-collection', 'addCollectionElement') }}>Add a website</button>
+        </div>
     </div>
     <div class="form-check form-switch">
         <div class="col mt-4">
