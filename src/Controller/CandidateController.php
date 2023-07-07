@@ -4,8 +4,12 @@ namespace App\Controller;
 
 use App\Entity\Candidate;
 use App\Form\CandidateType;
+use App\Form\SearchApplicationFilterType;
 use App\Repository\CandidateRepository;
+use App\Repository\OfferRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use App\Service\Visibility;
+use DateTime;
 use Doctrine\DBAL\Schema\Visitor\Visitor;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -85,5 +89,33 @@ class CandidateController extends AbstractController
         }
 
         return $this->redirectToRoute('candidate_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/{id}/applications', name: 'applications', methods: ['GET'])]
+    public function applications(
+        Request $request,
+        Candidate $candidate,
+        OfferRepository $offerRepository,
+        PaginatorInterface $paginator
+    ): Response {
+
+        $form = $this->createForm(SearchApplicationFilterType::class, null, ['method' => 'GET']);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $search = $form->getData();
+            $applications = $offerRepository->findApplication($search);
+        } else {
+            $applications = $offerRepository->findAll();
+        }
+
+        $applications = $paginator->paginate($applications, $request->query->getInt('page', 1), 6);
+
+        return $this->render('candidate/applications.html.twig', [
+            'candidate' => $candidate,
+            'now' => new DateTime(),
+            'applications' => $applications,
+            'form' => $form,
+        ]);
     }
 }

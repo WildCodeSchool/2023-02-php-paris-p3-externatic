@@ -95,4 +95,29 @@ class OfferRepository extends ServiceEntityRepository
 
         return $queryBuilder->getResult();
     }
+
+    public function findApplication(array $data): ?array
+    {
+        $queryBuilder = $this->createQueryBuilder('a')
+            ->select('a', 'o')
+            ->join('a.offer', 'o');
+
+        if (!empty($data['searchTitleApplication'])) {
+            $queryBuilder = $queryBuilder
+                ->andWhere('o.title LIKE :title')
+                ->setParameter('title', '%' . $data['searchTitleApplication'] . '%');
+        }
+
+        if (!empty($data['statusApplication'])) {
+            $queryBuilder = $queryBuilder
+                ->andWhere('a.status IN (:status)')
+                ->setParameter('status', $data['status']);
+        }
+
+        $queryBuilder = $queryBuilder
+            ->orderBy('o.createdAt', 'ASC')
+            ->getQuery();
+
+        return $queryBuilder->getResult();
+    }
 }
