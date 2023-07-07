@@ -69,6 +69,31 @@
                                                         day(s) ago
                                                     {% endif %}
                                                 </p>
+                                                {% if application.status == "received" %}
+                                                    <div class="status-application-area" style="background: rgba(254, 211, 44, .5);">
+                                                        <p ><img class="picto" src="{{ asset('build/images/picto/received.svg') }}" alt="pictoReceivedApplication">
+                                                            {{ application.status }}
+                                                        </p>
+                                                    </div>
+                                                    {% elseif application.status == "in review" %}
+                                                        <div class="status-application-area" style="background: rgba(254, 211, 44, .5);">
+                                                            <p><img class="picto" src="{{ asset('build/images/picto/in-review.svg') }}" alt="pictoInReviewApplication">
+                                                                {{ application.status }}
+                                                            </p>
+                                                        </div>
+                                                    {% elseif application.status == "accepted" %}
+                                                        <div class="status-application-area" style="background: rgba(133, 19, 66, .5);">
+                                                            <p><img class="picto" src="{{ asset('build/images/picto/accepted.svg') }}" alt="pictoAcceptedApplication">
+                                                                {{ application.status }}
+                                                            </p>
+                                                        </div>
+                                                    {% elseif application.status == "rejected" %}
+                                                        <div class="status-application-area" style="background: rgba(217, 217, 217, .5);">
+                                                            <p><img class="picto" src="{{ asset('build/images/picto/rejected.svg') }}" alt="pictoRejectedApplication">
+                                                                {{ application.status }}
+                                                            </p>
+                                                        </div>
+                                                {% endif %}
                                             </article>
                                         </div>
                                     </div>

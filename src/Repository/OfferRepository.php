@@ -98,26 +98,37 @@ class OfferRepository extends ServiceEntityRepository
 
     public function findApplication(array $data): ?array
     {
-        $queryBuilder = $this->createQueryBuilder('a')
-            ->select('a', 'o')
-            ->join('a.offer', 'o');
+        $queryBuilder = $this->createQueryBuilder('o')
+        ->where('o.title LIKE :title')
+        ->setParameter('title', '%' . $data['searchTitleApplication'] . '%')
 
-        if (!empty($data['searchTitleApplication'])) {
-            $queryBuilder = $queryBuilder
-                ->andWhere('o.title LIKE :title')
-                ->setParameter('title', '%' . $data['searchTitleApplication'] . '%');
-        }
-
-        if (!empty($data['statusApplication'])) {
-            $queryBuilder = $queryBuilder
-                ->andWhere('a.status IN (:status)')
-                ->setParameter('status', $data['status']);
-        }
-
-        $queryBuilder = $queryBuilder
-            ->orderBy('o.createdAt', 'ASC')
+        ->orderBy('o.createdAt', 'ASC')
             ->getQuery();
 
         return $queryBuilder->getResult();
+
+
+
+        // $queryBuilder = $this->createQueryBuilder('a')
+        //     ->select('a', 'o')
+        //     ->join('a.offer', 'o')
+
+        // if (!empty($data['searchTitleApplication'])) {
+        //     $queryBuilder = $queryBuilder
+        //         ->andWhere('o.title LIKE :title')
+        //         ->setParameter('title', '%' . $data['searchTitleApplication'] . '%');
+        // }
+
+        // if (!empty($data['statusApplication'])) {
+        //     $queryBuilder = $queryBuilder
+        //         ->andWhere('a.status IN (:status)')
+        //         ->setParameter('status', $data['status']);
+        // }
+
+        // $queryBuilder = $queryBuilder
+        //     ->orderBy('o.createdAt', 'ASC')
+        //     ->getQuery();
+
+        // return $queryBuilder->getResult();
     }
 }

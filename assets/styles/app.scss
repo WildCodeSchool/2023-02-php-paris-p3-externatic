@@ -506,6 +506,15 @@ hr {
     margin-left: 0.5em;
 }
 
+//Status application
+.status-application-area {
+    width: 40%;
+    margin: auto;
+    border-radius: 5px;
+    margin-top: 1em;
+    padding: 0.5em;
+}
+
 //Media queries
 @media (min-width: 600px) {
     #navigation-btn-mobile {

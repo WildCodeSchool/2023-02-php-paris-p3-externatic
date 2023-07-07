@@ -9,10 +9,10 @@ use DateTime;
 #[ORM\Entity(repositoryClass: ApplicationRepository::class)]
 class Application
 {
-    public const STATUS_RECEIVED = "Received";
-    public const STATUS_INREVIEW = "In review";
-    public const STATUS_ACCEPTED = "Accepted";
-    public const STATUS_REJECTED = "Rejected";
+    public const STATUS_RECEIVED = "received";
+    public const STATUS_INREVIEW = "in review";
+    public const STATUS_ACCEPTED = "accepted";
+    public const STATUS_REJECTED = "rejected";
 
     public const APPLICATION_STATUS = [
         self::STATUS_RECEIVED => self::STATUS_RECEIVED,
