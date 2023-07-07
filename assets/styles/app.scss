@@ -298,10 +298,6 @@ $nav-underline-link-active-color:$secondary;
     .picto-in-header {
         justify-self: center;
     }
-
-    .header-menu-for-mobile {
-        display: none;
-    }
 }
 
 @media (max-width: 599px) {
@@ -363,10 +359,6 @@ $nav-underline-link-active-color:$secondary;
 
     .resume-upload-resume {
         margin: 3em 0;
-    }
-
-    .header-menu-for-desktop {
-        display: none;
     }
 }
 

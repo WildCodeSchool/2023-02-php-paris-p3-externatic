@@ -8,5 +8,7 @@
     {{ form_start(form) }}
     {{ form_widget(form) }}
     <button type="submit">Edit my offer</button>
+    <button type="submit" data-bs-toggle="modal" data-bs-target="#exampleModal">Delete my offer</button>
     {{ form_end(form) }}
+    {% include "offer_type/_modalDeleteOffer.html.twig" %}
 {% endblock %}

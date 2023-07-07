@@ -79,13 +79,13 @@ class OfferTypeController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_offer_type_delete', methods: ['POST'])]
+    #[Route('/{id}/edit', name: 'delete', methods: ['POST'])]
     public function delete(Request $request, Offer $offer, OfferRepository $offerRepository): Response
     {
         if ($this->isCsrfTokenValid('delete' . $offer->getId(), $request->request->get('_token'))) {
             $offerRepository->remove($offer, true);
         }
 
-        return $this->redirectToRoute('app_offer_type_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('offer_index', [], Response::HTTP_SEE_OTHER);
     }
 }
