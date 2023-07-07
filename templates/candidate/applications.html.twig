@@ -18,7 +18,7 @@
         </div>
         <div class="container">
             <div class="row justify-content-center">
-                {% for application in candidate.applications %}
+                {% for application in applications %}
                     {% if app.user.id == application.candidate.id %}
                         <div class="col-12 col-md-6 col-lg-4 col-xl-4 mt-4">
                             <div id="search-card" class="text-center h-100">

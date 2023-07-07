@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Candidate;
 use App\Form\CandidateType;
 use App\Form\SearchApplicationFilterType;
+use App\Repository\ApplicationRepository;
 use App\Repository\CandidateRepository;
 use App\Repository\OfferRepository;
 use Knp\Component\Pager\PaginatorInterface;
@@ -95,18 +96,17 @@ class CandidateController extends AbstractController
     public function applications(
         Request $request,
         Candidate $candidate,
-        OfferRepository $offerRepository,
+        ApplicationRepository $applicationRepo,
         PaginatorInterface $paginator
     ): Response {
 
         $form = $this->createForm(SearchApplicationFilterType::class, null, ['method' => 'GET']);
         $form->handleRequest($request);
+        $applications = $applicationRepo->findByCandidate($this->getUser());
 
         if ($form->isSubmitted() && $form->isValid()) {
             $search = $form->getData();
-            $applications = $offerRepository->findApplication($search);
-        } else {
-            $applications = $offerRepository->findAll();
+            $applications = $applicationRepo->findApplication($search, $candidate);
         }
 
         $applications = $paginator->paginate($applications, $request->query->getInt('page', 1), 6);
