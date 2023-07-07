@@ -41,7 +41,7 @@
 													<strong>{{ offer.title }}</strong>
 												</h3>
 												<p>
-													<img class="picto" src="{{ asset('build/images/picto/location1.svg') }}" alt="pictoLocation">
+													<img class="picto" src="{{ asset('build/images/picto/location.svg') }}" alt="pictoLocation">
 													{{ offer.location }}
 												</p>
 												<p>
@@ -60,7 +60,7 @@
 													</section>
 												</p>
 												<p>
-													<img class="picto" src="{{ asset('build/images/picto/calendar1.svg') }}" alt="pictoCalendar">
+													<img class="picto" src="{{ asset('build/images/picto/calendar.svg') }}" alt="pictoCalendar">
 													posted
 													{% set difference = date(offer.createdAt).diff(date(now)) %}
 													{% set leftDays = difference.days %}
