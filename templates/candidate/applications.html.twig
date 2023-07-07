@@ -13,7 +13,7 @@
         <div class="count mt-4">
             <h4>
                 {{ applications.getTotalItemCount }}
-                offers found
+                applications found
             </h4><hr>
         </div>
         <div class="container">
@@ -69,25 +69,25 @@
                                                         day(s) ago
                                                     {% endif %}
                                                 </p>
-                                                {% if application.status == "received" %}
+                                                {% if application.status == constant('App\\Entity\\Application::STATUS_RECEIVED') %}
                                                     <div class="status-application-area" style="background: rgba(254, 211, 44, .5);">
                                                         <p ><img class="picto" src="{{ asset('build/images/picto/received.svg') }}" alt="pictoReceivedApplication">
                                                             {{ application.status }}
                                                         </p>
                                                     </div>
-                                                    {% elseif application.status == "in review" %}
+                                                    {% elseif application.status == constant('App\\Entity\\Application::STATUS_INREVIEW') %}
                                                         <div class="status-application-area" style="background: rgba(254, 211, 44, .5);">
                                                             <p><img class="picto" src="{{ asset('build/images/picto/in-review.svg') }}" alt="pictoInReviewApplication">
                                                                 {{ application.status }}
                                                             </p>
                                                         </div>
-                                                    {% elseif application.status == "accepted" %}
+                                                    {% elseif application.status == constant('App\\Entity\\Application::STATUS_ACCEPTED') %}
                                                         <div class="status-application-area" style="background: rgba(133, 19, 66, .5);">
                                                             <p><img class="picto" src="{{ asset('build/images/picto/accepted.svg') }}" alt="pictoAcceptedApplication">
                                                                 {{ application.status }}
                                                             </p>
                                                         </div>
-                                                    {% elseif application.status == "rejected" %}
+                                                    {% elseif application.status == constant('App\\Entity\\Application::STATUS_REJECTED') %}
                                                         <div class="status-application-area" style="background: rgba(217, 217, 217, .5);">
                                                             <p><img class="picto" src="{{ asset('build/images/picto/rejected.svg') }}" alt="pictoRejectedApplication">
                                                                 {{ application.status }}
