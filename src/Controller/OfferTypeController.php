@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Offer;
+use App\Entity\Company;
+use App\Entity\Skill;
 use App\Form\OfferType;
 use App\Repository\OfferRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -22,6 +24,7 @@ class OfferTypeController extends AbstractController
         ]);
     }
 
+
     #[Route('/new', name: 'new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $manager): Response
     {
@@ -31,7 +34,7 @@ class OfferTypeController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $offer = $form->getData();
-            $offer->setCompany($offer->getCompany());
+            $offer->setCompany($this->getUser()->getCompany());
 
             $manager->persist($offer);
             $manager->flush();

@@ -3,15 +3,18 @@
 namespace App\Form;
 
 use App\Entity\Offer;
+use App\Entity\Skill;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Doctrine\ORM\EntityRepository;
 
 class OfferType extends AbstractType
 {
@@ -47,8 +50,14 @@ class OfferType extends AbstractType
             ->add('maxSalary', IntegerType::class)
             ->add('location', TextType::class)
             ->add('interviewProcess', TextareaType::class)
-            ->add('picture', TextType::class)
-            // ->add('skills', TextType::class)
+            ->add('skills', EntityType::class, [
+                'label' => 'Required skills',
+                'class' => Skill::class,
+                'choice_label' => 'name',
+                'multiple' => true,
+                'expanded' => true,
+                'by_reference' => false,
+            ])
         ;
     }
 

@@ -10,18 +10,27 @@ class SkillFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        foreach (skill::SKILLS as $type) {
-            foreach ($type as $key => $oneSkill) {
+        $counter = 0;
+        foreach (Skill::SKILLS as $key) {
                 $skill = new Skill();
 
-                $skill->setName($oneSkill['name'])
-                    ->setType($oneSkill['type']);
+                $skill->setName($key['name'])
+                    ->setType($key['type']);
+
+            if ($key['type'] == 'hard') {
+                $counter++;
+                $counter = ($counter > 8) ? 1 : $counter;
+            }
+            if ($key['type'] == 'soft') {
+                $counter++;
+                $counter = ($counter > 8) ? 1 : $counter;
+            }
 
                 $manager->persist($skill);
 
-                $this->addReference('skill_' . $skill->getType() . '_' .  $key, $skill);
-            }
+                $this->addReference('skill_' . $skill->getType() . '_' . $counter, $skill);
         }
+
         $manager->flush();
     }
 }
