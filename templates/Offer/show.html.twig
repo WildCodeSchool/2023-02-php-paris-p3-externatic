@@ -3,7 +3,69 @@
 {% block title %}Fiche d'une annonce -
 	{{ offer.title }}
 {% endblock %}
+
 {% block body %}
+<div class="header-menu-for-desktop">
+	<div class="container text-center">
+		<div class="row justify-content-center mt-2 mb-4" id="navigation-btn-desktop">
+			<div class="col mt-4">
+				<a class="btn" role="button" href="#">
+					<h4>RESEARCH</h4>
+					<p>Tell us about your expectations so we can find the perfect candidate!</p>
+				</a>
+			</div>
+			<div class="col mt-4">
+				<a class="btn" role="button" href="#">
+					<h4>JOB OFFERS</h4>
+					<p>Create new offers, find candidates list by offer and update the offers status.</p>
+				</a>
+			</div>
+			<div class="col mt-4">
+				<a class="btn" role="button" href="#">
+					<h4>PROFILE</h4>
+					<p>Update your information to increase your chances to increase applications.</p>
+				</a>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="header-menu-for-mobile">
+	<div id="navigation-btn-mobile" class="carousel slide" data-bs-touch="true" data-bs-interval="false">
+		<div class="carousel-inner mb-4">
+			<div class="carousel-item active">
+				<div class="row">
+					<div class="btn-group justify-content-center gap-4">
+						<div class="col-4">
+							<a class="btn d-block w-100" role="button" href="#">RESEARCH</a>
+						</div>
+						<div class="col-4">
+							<a class="btn d-block w-100" role="button" href="#">JOB OFFERS</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="carousel-item">
+				<div class="row">
+					<div class="btn-group justify-content-center gap-4">
+						<div class="col-4">
+							<a class="btn d-block w-100" role="button" href="#">PROFILE</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<button class="carousel-control-prev" type="button" data-bs-target="#navigation-btn-mobile" data-bs-slide="prev">
+			<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+			<span class="visually-hidden">Previous</span>
+		</button>
+		<button class="carousel-control-next" type="button" data-bs-target="#navigation-btn-mobile" data-bs-slide="next">
+			<span class="carousel-control-next-icon" aria-hidden="true"></span>
+			<span class="visually-hidden">Next</span>
+		</button>
+	</div>
+</div>
+
+
 	<section class="offer-show-header-section pt-4 pb-4" style="background-image: url(../../{{ offer.picture }})">
 		<img class="index-company-logo" src="{{ asset('/%s' | format(offer.company.logo)) }}">
 		<p>{{ offer.company.name }}</p>
@@ -31,9 +93,16 @@
 			{{ dateInterval }}
 			ago
 		</p>
-		<div class="col text-center mt-4">
-			<button type="button" class="btn btn-secondary mt-2 applicationbtn" data-bs-toggle="modal" data-bs-target="#exampleModal">Apply</button>
-		</div>
+		{% if app.user.company is same as offer.getCompany %}
+			<div class="col text-center mt-4">
+				<button type="button" class="btn btn-secondary mt-2 applicationbtn">Edit</button>
+				<button type="button" class="btn btn-secondary mt-2 applicationbtn">Archive</button>
+			</div>
+		{% else %}
+			<div class="col text-center mt-4">
+				<button type="button" class="btn btn-secondary mt-2 applicationbtn" data-bs-toggle="modal" data-bs-target="#exampleModal">Apply</button>
+			</div>
+		{% endif %}
 	</section>
 	<div class="margin">
 		<div id="offer-description-card" class="show-offer-single-section p-3">
@@ -55,13 +124,17 @@
 			</h5><hr>
 			<div class="card-body mt-2 skills-tab offer-show-content">
 				<ul>
-					{% for skill in constant('App\\Entity\\Skill::HARD') %}
-						<li><img class="picto" src="{{ asset('build/images/picto/checked 1.5d86e0d4.svg') }}" alt="pictoChecked">{{ skill.name }}</li>
+					{% for skill in constant('App\\Entity\\Skill::SKILLS') %}
+						{% if skill.type == 'hard' %}
+							<li><img class="picto" src="{{ asset('build/images/picto/checked 1.5d86e0d4.svg') }}" alt="pictoChecked">{{ skill.name }}</li>
+						{% endif %}
 					{% endfor %}
 				</ul>
 				<ul>
-					{% for skill in constant('App\\Entity\\Skill::SOFT') %}
-						<li><img class="picto" src="{{ asset('build/images/picto/checked 1.5d86e0d4.svg') }}" alt="pictoChecked">{{ skill.name }}</li>
+					{% for skill in constant('App\\Entity\\Skill::SKILLS') %}
+						{% if skill.type == 'soft' %}
+							<li><img class="picto" src="{{ asset('build/images/picto/checked 1.5d86e0d4.svg') }}" alt="pictoChecked">{{ skill.name }}</li>
+						{% endif %}
 					{% endfor %}
 				</ul>
 			</div>
@@ -74,9 +147,16 @@
 			</div>
 		</div>
 		<section class="before-footer-btn mt-4">
-			<div class="col text-center mt-4">
-				<button type="button" class="btn btn-secondary mt-2 applicationbtn" data-bs-toggle="modal" data-bs-target="#exampleModal">Apply</button>
-			</div>
+			{% if app.user.company is same as offer.getCompany %}
+				<div class="col text-center mt-4">
+					<button type="button" class="btn btn-secondary mt-2 applicationbtn">Edit</button>
+					<button type="button" class="btn btn-secondary mt-2 applicationbtn">Archive</button>
+				</div>
+			{% else %}
+				<div class="col text-center mt-4">
+					<button type="button" class="btn btn-secondary mt-2 applicationbtn" data-bs-toggle="modal" data-bs-target="#exampleModal">Apply</button>
+				</div>
+			{% endif %}
 		</section>
 		{% include "offer/_modalApply.html.twig" %}
 	</div>
