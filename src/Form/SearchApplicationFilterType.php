@@ -28,14 +28,6 @@ class SearchApplicationFilterType extends AbstractType
                 'attr' => [
                     'class' => 'dropdown-item form-check'
                 ],
-            ])
-        ;
-    }
-
-    public function configureOptions(OptionsResolver $resolver): void
-    {
-        $resolver->setDefaults([
-            // Configure your form options here
-        ]);
+            ]);
     }
 }
