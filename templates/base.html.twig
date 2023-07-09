@@ -16,19 +16,6 @@
 			{{ encore_entry_script_tags('app') }}
 		{% endblock %}
 	</head>
-
-    {# lien vers la page login - affiche l'image de l'user quand il est connecté => à mettre dans la navebar #}
-    {# {% if app.user %}
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="{{ asset(app.user.candidate.picture) }}" id="profile-picture-navbar" alt="profile-picture">
-            </a>
-            <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="{{ path('logout') }}">Logout</a></li>
-            </ul>
-    {% else %}
-        <a href="{{ path('login') }}">LOGIN</a>
-    {% endif %} #}
-
     <body>
 		{% include "_navbar.html.twig" %}
         {% block body %}{% endblock %}
