@@ -30,9 +30,41 @@
 			{{ dateInterval }}
 			ago
 		</p>
-		<div class="col text-center mt-4">
-			<button type="button" class="btn btn-secondary mt-2 applicationbtn" data-bs-toggle="modal" data-bs-target="#exampleModal">Apply</button>
-		</div>
+		{% if app.user %}
+			{% for application in offer.applications %}
+				{% if app.user.id == application.candidate.id %}
+					{% if application.status == constant('App\\Entity\\Application::STATUS_RECEIVED') %}
+						<div class="status-application-area" style="background: rgba(254, 211, 44, .5);">
+							<p ><img class="picto" src="{{ asset('build/images/picto/received.svg') }}" alt="pictoReceivedApplication">
+								{{ application.status }}
+							</p>
+						</div>
+						{% elseif application.status == constant('App\\Entity\\Application::STATUS_INREVIEW') %}
+							<div class="status-application-area" style="background: rgba(254, 211, 44, .5);">
+								<p><img class="picto" src="{{ asset('build/images/picto/in-review.svg') }}" alt="pictoInReviewApplication">
+									{{ application.status }}
+								</p>
+							</div>
+						{% elseif application.status == constant('App\\Entity\\Application::STATUS_ACCEPTED') %}
+							<div class="status-application-area" style="background: rgba(133, 19, 66, .5);">
+								<p><img class="picto" src="{{ asset('build/images/picto/accepted.svg') }}" alt="pictoAcceptedApplication">
+									{{ application.status }}
+								</p>
+							</div>
+						{% elseif application.status == constant('App\\Entity\\Application::STATUS_REJECTED') %}
+							<div class="status-application-area" style="background: rgba(217, 217, 217, .5);">
+								<p><img class="picto" src="{{ asset('build/images/picto/rejected.svg') }}" alt="pictoRejectedApplication">
+									{{ application.status }}
+								</p>
+							</div>
+					{% endif %}
+				{% endif %}
+			{% endfor %}
+		{% else %}
+			<div class="col text-center mt-4">
+				<button type="button" class="btn btn-secondary mt-2 applicationbtn" data-bs-toggle="modal" data-bs-target="#exampleModal">Apply</button>
+			</div>
+		{% endif %}					
 	</section>
 	<div class="margin">
 		<div id="offer-description-card" class="show-offer-single-section p-3">
@@ -91,9 +123,11 @@
 			</div>
 		</div>
 		<section class="before-footer-btn mt-2">
-			<div class="col text-center mt-2">
-				<button type="button" class="btn btn-secondary mt-2 applicationbtn" data-bs-toggle="modal" data-bs-target="#exampleModal">Apply</button>
-			</div>
+			{% if not app.user %}
+				<div class="col text-center mt-4">
+					<button type="button" class="btn btn-secondary mt-2 applicationbtn" data-bs-toggle="modal" data-bs-target="#exampleModal">Apply</button>
+				</div>
+			{% endif %}	
 		</section>
 		{% include "offer/_modalApply.html.twig" %}
 	</div>
