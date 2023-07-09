@@ -42,8 +42,11 @@ class OfferController extends AbstractController
     }
 
     #[Route('/show/{id}', name: 'show', methods: ['GET', 'POST'])]
-    public function show(Offer $offer, ApplicationRepository $applicationRepository, Request $request): Response
-    {
+    public function show(
+        Offer $offer,
+        ApplicationRepository $applyRepository,
+        Request $request
+    ): Response {
         $interval = date_diff(new DateTime(), $offer->getCreatedAt());
         $dateInterval = $interval->format('%m month(s) and %d day(s)');
 
@@ -60,10 +63,10 @@ class OfferController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $application = new Application();
             $application->setStatus("received")
-                ->setCreatedAt(new \DateTime('now'))
+                ->setCreatedAt(new DateTime('now'))
                 ->setCandidate($this->getUser()->getCandidate())
                 ->setOffer($offer);
-            $applicationRepository->save($application, true);
+            $applyRepository->save($application, true);
             return $this->redirectToRoute('offer_show', ['id' => $offer->getId()]);
         }
 
