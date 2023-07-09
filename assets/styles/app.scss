@@ -220,9 +220,17 @@ $nav-underline-link-active-color:$secondary;
     padding-bottom: 1em;
 }
 
+ //Completion profile candidate
 .candidate-completion {
     margin-top: 0.5em;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.candidate-completion img {
+    width: 60px;
 }
 
 //Boutton switch
@@ -280,7 +288,7 @@ $nav-underline-link-active-color:$secondary;
     font-size: 2em;
 }
 
-//Button cv, update
+//Button cv, upload
 #resume button img,
 #upload-resume button img {
     padding-right: .5em;
@@ -291,6 +299,11 @@ $nav-underline-link-active-color:$secondary;
     background-color: $tertiary;
     border-color: $tertiary;
     color: #828282;
+}
+
+//Button upload error
+form #upload_resume div ul li {
+    color: red;
 }
 
 //Skills
@@ -531,7 +544,7 @@ hr {
     }
 
     #picture-profile{
-        margin-bottom: -9em;
+        margin-bottom: -12.5em;
         margin-right: 25em;
     }
 
@@ -544,6 +557,7 @@ hr {
     #profile-card.p-3 .card-body.mt-2 {
         display: flex;
         margin-left: 11em;
+        padding: 1.5em 0;
     }
 
     #profile-card.p-3 .card-body.mt-2 .profile-informations {

@@ -18,12 +18,13 @@
 						</a>
 					</div>
 					<div>
-						<p>Viewed by X people</p>
+						<p>Viewed by 54 people</p>
 						<img class="img_icon fa-border" src="{{ asset('build/images/picto/profil_views.svg') }}" alt="profil_views"/>
 					</div>
 				</div>
 				<div class="candidate-completion">
 					<span>Profil completion</span>
+					<img class="img_icon fa-border" src="{{ asset('build/images/picto/completion.svg') }}" alt="profil_completion"/>
 				</div>
 			</div>
 			<div class="profile">
@@ -67,7 +68,7 @@
 				{{ include('candidate/_modal_resume.html.twig') }}
 			</div>
 			<div id="upload-resume" class="col text-center mt-4">
-				{{ form_start(form) }}
+				{{ form_start(form, {'action': path('candidate_edit_upload', { 'id': candidate.id })}) }} 
 				{{ form_widget(form) }}
 					<div class="text-center">
 						<button class="btn btn-primary mt-2 mb-2">

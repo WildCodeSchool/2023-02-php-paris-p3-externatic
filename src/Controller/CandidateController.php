@@ -45,10 +45,7 @@ class CandidateController extends AbstractController
     #[Route('/{id}', name: 'show', methods: ['GET', 'POST'])]
     public function show(Candidate $candidate): Response
     {
-        $form = $this->createForm(UploadResumeType::class, $candidate, [
-            'action' => $this->generateUrl('candidate_edit_upload', ['id' => $candidate->getId()]),
-            'method' => 'POST',
-        ]);
+        $form = $this->createForm(UploadResumeType::class, $candidate);
 
         return $this->render('candidate/show.html.twig', [
             'candidate' => $candidate,
@@ -75,35 +72,25 @@ class CandidateController extends AbstractController
     }
 
     #[Route('/{id}/edit/upload', name: 'edit_upload', methods: ['GET', 'POST'])]
-    public function editUpload(Request $request, Candidate $candidate, CandidateRepository $candidateRepository): Response
-    {
-        $formUploadResume = $this->createForm(UploadResumeType::class, $candidate);
+    public function editUpload(
+        Request $request,
+        Candidate $candidate,
+        CandidateRepository $candidateRepository
+    ): Response {
+        $form = $this->createForm(UploadResumeType::class, $candidate);
+        $form->handleRequest($request);
 
-        if ($request->isMethod('POST')) {
-            $formUploadResume->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $candidateRepository->save($candidate, true);
 
-            if ($formUploadResume->isSubmitted() && $formUploadResume->isValid()) {
-                $uploadedFile = $formUploadResume['file']->getData();
+            $this->addFlash('success', 'Your resume has been updated! :)');
 
-                if ($uploadedFile) {
-                    $destination = $this->getParameter("kernel.project_dir") . Candidate::UPLOAD_REPOSITORY;
-                    $pathinfo = $uploadedFile->getClientOriginalName();
-                    $extension = $uploadedFile->guessExtension();
-                    $newFileName = Urlizer::urlize(pathinfo($pathinfo, PATHINFO_FILENAME)) . "-" . uniqid() . "." . $extension;
-
-                    $uploadedFile->move($destination, $newFileName);
-
-                    $candidate->setResume($newFileName);
-                }
-
-                $candidateRepository->save($candidate, true);
-
-                return $this->redirectToRoute('candidate_show', ['id' => $candidate->getId()], Response::HTTP_SEE_OTHER);
-            }
+            return $this->redirectToRoute('candidate_show', ['id' => $candidate->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('candidate/show.html.twig', [
             'candidate' => $candidate,
+            'form'      => $form
         ]);
     }
 
