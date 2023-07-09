@@ -329,7 +329,6 @@ $nav-underline-link-active-color:$secondary;
     margin: auto;
 }
 
-
 //Navbar
 #profile-picture-navbar {
     border-radius: 50%;
@@ -361,11 +360,11 @@ $navbar-padding-y: 0;
     color: $info;
 }
 
-#navbarSupportedContent{
+#navbarSupportedContent {
     justify-content: space-between;
 }
-// footer
 
+// footer
 #main-footer {
     background-color: $primary;
     min-width: 100%;
@@ -739,5 +738,4 @@ hr {
     }
 }
 
-@import '~bootstrap-icons/font/bootstrap-icons.css';
 @import "~bootstrap/scss/bootstrap";
