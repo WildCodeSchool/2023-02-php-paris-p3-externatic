@@ -6,6 +6,7 @@ use App\Form\SearchOfferFilterType;
 use App\Entity\Offer;
 use App\Entity\Application;
 use App\Entity\Skill;
+use App\Form\ApplicationType;
 use App\Repository\ApplicationRepository;
 use App\Repository\OfferRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -28,7 +29,7 @@ class OfferController extends AbstractController
             $filters = $form->getData();
             $offers = $offerRepository->findwithFilter($filters);
         } else {
-            // $offers = $offerRepository->findAll();
+            $offers = $offerRepository->findAll();
         }
 
         $offers = $paginator->paginate($offerRepository->findAll(), $request->query->getInt('page', 1), 6);
@@ -41,14 +42,36 @@ class OfferController extends AbstractController
     }
 
     #[Route('/show/{id}', name: 'show', methods: ['GET', 'POST'])]
-    public function show(Offer $offer): Response
+    public function show(Offer $offer, ApplicationRepository $applicationRepository, Request $request): Response
     {
         $interval = date_diff(new DateTime(), $offer->getCreatedAt());
         $dateInterval = $interval->format('%m month(s) and %d day(s)');
 
+        $form = $this->createForm(ApplicationType::class);
+        $form->handleRequest($request);
+
+        $applied = false;
+        foreach ($this->getUser()->getCandidate()->getApplications() as $application) {
+            if ($application->getOffer() == $offer) {
+                $applied = true;
+            }
+        }
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $application = new Application();
+            $application->setStatus("received")
+                ->setCreatedAt(new \DateTime('now'))
+                ->setCandidate($this->getUser()->getCandidate())
+                ->setOffer($offer);
+            $applicationRepository->save($application, true);
+            return $this->redirectToRoute('offer_show', ['id' => $offer->getId()]);
+        }
+
         return $this->render('offer/show.html.twig', [
             'offer'        => $offer,
             'dateInterval' => $dateInterval,
+            'form'         => $form,
+            'applied'      => $applied,
         ]);
     }
 }

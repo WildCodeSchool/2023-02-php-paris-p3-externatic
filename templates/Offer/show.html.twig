@@ -30,9 +30,17 @@
 			{{ dateInterval }}
 			ago
 		</p>
-		<div class="col text-center mt-4">
-			<button type="button" class="btn btn-secondary mt-2 applicationbtn" data-bs-toggle="modal" data-bs-target="#exampleModal">Apply</button>
-		</div>
+		{% if app.user %}
+			{% if app.user.roles[0] == "ROLE_CANDIDATE" and not applied %}
+				<div class="col text-center mt-4">
+					<button type="button" class="btn btn-secondary mt-2 applicationbtn" data-bs-toggle="modal" data-bs-target="#exampleModal">Apply</button>
+				</div>
+			{% elseif app.user.roles[0] == "ROLE_CANDIDATE" and applied %}
+				<div class="col text-center mt-4">
+					<button type="button" class="btn btn-success mt-2 applicationbtn">Applied !</button>
+				</div>
+			{% endif %}
+		{% endif %}
 	</section>
 	<div class="margin">
 		<div id="offer-description-card" class="show-offer-single-section p-3">
@@ -91,9 +99,17 @@
 			</div>
 		</div>
 		<section class="before-footer-btn mt-2">
-			<div class="col text-center mt-2">
-				<button type="button" class="btn btn-secondary mt-2 applicationbtn" data-bs-toggle="modal" data-bs-target="#exampleModal">Apply</button>
-			</div>
+			{% if app.user %}
+				{% if app.user.roles[0] == "ROLE_CANDIDATE" and not applied %}
+					<div class="col text-center mt-4">
+						<button type="button" class="btn btn-secondary mt-2 applicationbtn" data-bs-toggle="modal" data-bs-target="#exampleModal">Apply</button>
+					</div>
+				{% elseif app.user.roles[0] == "ROLE_CANDIDATE" and applied %}
+					<div class="col text-center mt-4">
+						<button type="button" class="btn btn-success mt-2 applicationbtn">Applied !</button>
+					</div>
+				{% endif %}
+			{% endif %}
 		</section>
 		{% include "offer/_modalApply.html.twig" %}
 	</div>
