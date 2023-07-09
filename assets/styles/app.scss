@@ -353,6 +353,17 @@ $navbar-padding-y: 0;
     color: $info;
 }
 
+#navbarSupportedContent ul li:focus-within {
+    background-color: $primary;
+}
+
+#navbarSupportedContent ul li a:focus-within {
+    color: $info;
+}
+
+#navbarSupportedContent{
+    justify-content: space-between;
+}
 // footer
 
 #main-footer {
