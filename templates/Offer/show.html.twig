@@ -5,6 +5,7 @@
 {% endblock %}
 {% block body %}
 	<section class="offer-show-header-section pt-4 pb-4" style="background-image: url(../../{{ offer.picture }})">
+	{# <img src="{{ vich_uploader_asset(offer) }}" alt="{{ offer.title }}"> #}
 		<img class="index-company-logo" src="{{ asset('/%s' | format(offer.company.logo)) }}">
 		<p>{{ offer.company.name }}</p>
 		<h3 class="mb-4 mt-4">
@@ -55,13 +56,17 @@
 			</h5><hr>
 			<div class="card-body mt-2 skills-tab offer-show-content">
 				<ul>
-					{% for skill in constant('App\\Entity\\Skill::HARD') %}
-						<li><img class="picto" src="{{ asset('build/images/picto/checked 1.5d86e0d4.svg') }}" alt="pictoChecked">{{ skill.name }}</li>
+					{% for skill in constant('App\\Entity\\Skill::SKILLS') %}
+						{% if skill.type == 'hard' %}
+							<li><img class="picto" src="{{ asset('build/images/picto/checked 1.5d86e0d4.svg') }}" alt="pictoChecked">{{ skill.name }}</li>
+						{% endif %}
 					{% endfor %}
 				</ul>
 				<ul>
-					{% for skill in constant('App\\Entity\\Skill::SOFT') %}
-						<li><img class="picto" src="{{ asset('build/images/picto/checked 1.5d86e0d4.svg') }}" alt="pictoChecked">{{ skill.name }}</li>
+					{% for skill in constant('App\\Entity\\Skill::SKILLS') %}
+						{% if skill.type == 'soft' %}
+							<li><img class="picto" src="{{ asset('build/images/picto/checked 1.5d86e0d4.svg') }}" alt="pictoChecked">{{ skill.name }}</li>
+						{% endif %}
 					{% endfor %}
 				</ul>
 			</div>
