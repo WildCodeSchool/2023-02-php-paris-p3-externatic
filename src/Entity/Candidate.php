@@ -38,7 +38,7 @@ class Candidate implements \Serializable
     #[ORM\Column(length: 150)]
     private ?string $resume = null;
 
-    #[Assert\File(maxSize: '2M', mimeTypes: ['resume/pdf'], mimeTypesMessage: 'This is not a pdf file.')]
+    #[Assert\File(maxSize: '2M', extensions: 'pdf', extensionsMessage: 'This is not a pdf file.')]
     #[Vich\UploadableField(mapping: 'resumes', fileNameProperty: 'resume')]
     private ?File $resumeFile = null;
 
