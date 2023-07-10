@@ -19,12 +19,8 @@ class HomeController extends AbstractController
     {
         $form = $this->createForm(SearchOfferFilterType::class, null, ['method' => 'GET']);
         $form->handleRequest($request);
-        $offers = $offerRepository->findAll();
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $filters = $form->getData();
-            $offers = $offerRepository->findwithFilter($filters);
-        }
+        $filters = $form->getData();
+        $offers = $offerRepository->findwithFilter($filters);
 
         $offers = $paginator->paginate($offers, $request->query->getInt('page', 1), 6);
 
