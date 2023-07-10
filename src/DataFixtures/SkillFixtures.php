@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Skill;
+use Faker\Factory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
@@ -11,6 +12,7 @@ class SkillFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         $counter = 0;
+
         foreach (Skill::SKILLS as $key) {
                 $skill = new Skill();
 
