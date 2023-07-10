@@ -43,7 +43,7 @@ class OfferController extends AbstractController
     }
 
     #[Route('/show/{id}', name: 'show', methods: ['GET', 'POST'])]
-    public function show(Offer $offer): Response 
+    public function show(Offer $offer): Response
     {
         $interval = date_diff(new DateTime(), $offer->getCreatedAt());
         $dateInterval = $interval->format('%m month(s) and %d day(s)');
@@ -66,7 +66,7 @@ class OfferController extends AbstractController
 
     #[Route('/apply/{id}', name: 'apply', methods: ['GET'])]
     #[IsGranted('ROLE_CANDIDATE')]
-    public function applyOffer (Offer $offer, ApplicationRepository $applyRepository)
+    public function applyOffer(Offer $offer, ApplicationRepository $applyRepository): Response
     {
         $application = new Application();
         $application->setStatus("received")
