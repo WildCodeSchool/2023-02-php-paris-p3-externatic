@@ -364,6 +364,10 @@ $navbar-padding-y: 0;
     justify-content: space-between;
 }
 
+.navbar-toggler {
+    height: 60px;
+}
+
 // footer
 #main-footer {
     background-color: $primary;
