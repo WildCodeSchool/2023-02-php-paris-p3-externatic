@@ -500,6 +500,11 @@ hr {
     list-style-type: none;
 }
 
+.status-application-area {
+    padding: 0.5em;
+    border-radius: 5px;
+}
+
 //Media queries
 @media (min-width: 600px) {
     #navigation-btn-mobile {

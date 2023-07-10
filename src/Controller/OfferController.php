@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Knp\Component\Pager\PaginatorInterface;
 use DateTime;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 #[Route('/offer', name: 'offer_')]
 class OfferController extends AbstractController
@@ -42,39 +43,37 @@ class OfferController extends AbstractController
     }
 
     #[Route('/show/{id}', name: 'show', methods: ['GET', 'POST'])]
-    public function show(
-        Offer $offer,
-        ApplicationRepository $applyRepository,
-        Request $request
-    ): Response {
+    public function show(Offer $offer): Response 
+    {
         $interval = date_diff(new DateTime(), $offer->getCreatedAt());
         $dateInterval = $interval->format('%m month(s) and %d day(s)');
 
-        $form = $this->createForm(ApplicationType::class);
-        $form->handleRequest($request);
-
         $applied = false;
-        foreach ($this->getUser()->getCandidate()->getApplications() as $application) {
-            if ($application->getOffer() == $offer) {
-                $applied = true;
+        if ($this->getUser()) {
+            foreach ($this->getUser()->getCandidate()->getApplications() as $application) {
+                if ($application->getOffer() == $offer) {
+                    $applied = true;
+                }
             }
-        }
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $application = new Application();
-            $application->setStatus("received")
-                ->setCreatedAt(new DateTime('now'))
-                ->setCandidate($this->getUser()->getCandidate())
-                ->setOffer($offer);
-            $applyRepository->save($application, true);
-            return $this->redirectToRoute('offer_show', ['id' => $offer->getId()]);
         }
 
         return $this->render('offer/show.html.twig', [
             'offer'        => $offer,
             'dateInterval' => $dateInterval,
-            'form'         => $form,
             'applied'      => $applied,
         ]);
+    }
+
+    #[Route('/apply/{id}', name: 'apply', methods: ['GET'])]
+    #[IsGranted('ROLE_CANDIDATE')]
+    public function applyOffer (Offer $offer, ApplicationRepository $applyRepository)
+    {
+        $application = new Application();
+        $application->setStatus("received")
+            ->setCreatedAt(new DateTime('now'))
+            ->setCandidate($this->getUser()->getCandidate())
+            ->setOffer($offer);
+        $applyRepository->save($application, true);
+        return $this->redirectToRoute('offer_show', ['id' => $offer->getId()]);
     }
 }
