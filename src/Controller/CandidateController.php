@@ -45,9 +45,8 @@ class CandidateController extends AbstractController
     #[Route('/{id}', name: 'show', methods: ['GET', 'POST'])]
     public function show(Candidate $candidate): Response
     {
-        // $form = $this->createForm(UploadResumeType::class, $candidate);
         $form = $this->createForm(UploadResumeType::class, $candidate, [
-            'action' => $this->generateUrl('candidate_edit_upload', ['id' => $candidate->getId()]),
+            'action' => $this->generateUrl('candidate_edit', ['id' => $candidate->getId()]),
             'method' => 'POST',
         ]);
 
@@ -60,52 +59,28 @@ class CandidateController extends AbstractController
     #[Route('/{id}/edit', name: 'edit', methods: ['GET', 'POST'])]
     public function edit(Candidate $candidate, Request $request, CandidateRepository $candidateRepository): Response
     {
-        // $formUpload = $this->createForm(UploadResumeType::class, $candidate);     
-        
         $form = $this->createForm(CandidateType::class, $candidate);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        $formUpload = $this->createForm(UploadResumeType::class, $candidate);
+        $formUpload->handleRequest($request);
+
+        if ($formUpload->isSubmitted() && $formUpload->isValid()) {
             $candidateRepository->save($candidate, true);
+
+            $this->addFlash('success', 'Your resume has been upload! :)');
 
             return $this->redirectToRoute('candidate_show', ['id' => $candidate->getId()], Response::HTTP_SEE_OTHER);
-
-        } 
-        // elseif ($formUpload->isSubmitted() && $formUpload->isValid()) {
-        //     $candidateRepository->save($candidate, true);
-
-        //     $this->addFlash('success', 'Your resume has been updated! :)');
-
-        //     return $this->redirectToRoute('candidate_show', ['id' => $candidate->getId()], Response::HTTP_SEE_OTHER);
-        // }
-
-        return $this->render('candidate/edit.html.twig', [
-            'candidate' => $candidate,
-            'form'      => $form,
-        ]);
-    }
-
-    #[Route('/{id}/edit/upload', name: 'edit_upload', methods: ['GET', 'POST'])]
-    public function editUpload(
-        Request $request,
-        Candidate $candidate,
-        CandidateRepository $candidateRepository
-    ): Response {
-        
-        $form = $this->createForm(UploadResumeType::class, $candidate);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
+        } elseif ($form->isSubmitted() && $form->isValid()) {
             $candidateRepository->save($candidate, true);
-
-            $this->addFlash('success', 'Your resume has been updated! :)');
 
             return $this->redirectToRoute('candidate_show', ['id' => $candidate->getId()], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('candidate/show.html.twig', [
-            'candidate' => $candidate,
-            'form'      => $form
+        return $this->render('candidate/edit.html.twig', [
+            'candidate'  => $candidate,
+            'formUpload' => $formUpload,
+            'form'       => $form,
         ]);
     }
 
