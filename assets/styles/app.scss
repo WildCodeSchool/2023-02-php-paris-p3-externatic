@@ -514,6 +514,21 @@ hr {
     list-style-type: none;
 }
 
+//Filter candidate application
+#status-application {
+    margin-top: -0.25em; 
+    margin-left: 0.5em;
+}
+
+//Status application
+.status-application-area {
+    width: 40%;
+    margin: auto;
+    border-radius: 5px;
+    margin-top: 1em;
+    padding: 0.5em;
+}
+
 //Media queries
 @media (min-width: 600px) {
     #navigation-btn-mobile {
@@ -603,6 +618,11 @@ hr {
     .picto-in-header {
         justify-self: center;
     }
+
+    //Filter candidate applications
+    #search-bar-application {
+        margin-left: 5.5em;
+    }
 }
 
 @media (max-width: 599px) {
@@ -671,6 +691,16 @@ hr {
 
     .resume-upload-resume {
         margin: 3em 0;
+    }
+
+    //Filter candidate applications
+    #search-bar-application {
+        width: 92%;
+        margin: auto;
+    }
+
+    #submit-search-application {
+        width: 85%;
     }
 }
 

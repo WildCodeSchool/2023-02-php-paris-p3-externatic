@@ -15,7 +15,10 @@ class Application
     public const STATUS_REJECTED = "rejected";
 
     public const APPLICATION_STATUS = [
-        self::STATUS_RECEIVED, self::STATUS_INREVIEW, self::STATUS_ACCEPTED, self::STATUS_REJECTED
+        self::STATUS_RECEIVED => self::STATUS_RECEIVED,
+        self::STATUS_INREVIEW => self::STATUS_INREVIEW,
+        self::STATUS_ACCEPTED => self::STATUS_ACCEPTED,
+        self::STATUS_REJECTED => self::STATUS_REJECTED
     ];
 
     #[ORM\Id]
