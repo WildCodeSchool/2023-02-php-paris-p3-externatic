@@ -23,38 +23,72 @@ class OfferType extends AbstractType
     {
         $builder
             ->add('title', TextType::class, [
+                'label' => 'Job offer title',
+                'attr' => [
+                    'class' => 'form-control mb-4',
+                    'placeholder' => 'Job offer title',
+                ],
                 'constraints' => [
                     new Assert\Length(['min' => 2, 'max' => 50]),
                     new Assert\NotBlank()
-                ]
+                ],
             ])
             ->add('startAt', DateType::class, [
                 'widget' => 'single_text',
+                'attr' => ['class' => 'mb-2',],
             ])
             ->add('contract', ChoiceType::class, [
+                'label' => 'Contract',
                 'choices' => Offer::JOB_TYPE,
                 'required' => true,
-                'label' => 'Contract',
+                'attr' => ['class' => 'mb-2',],
             ])
             ->add('workFromHome', ChoiceType::class, [
+                'label' => 'Telework',
                 'choices' => Offer::WORK_FROM_HOME,
                 'required' => true,
-                'label' => 'Telework',
+                'attr' => ['class' => 'mb-2',],
             ])
-            ->add('description', TextareaType::class)
+            ->add('description', TextareaType::class, [
+                'label' => 'Description',
+                'attr' => [
+                    'class' => 'form-control mb-2',
+                    'placeholder' => 'Job offer description',
+                ],
+            ])
             ->add('experience', ChoiceType::class, [
                 'choices' => Offer::EXPERIENCE,
                 'required' => true,
                 'label' => 'Level of experience (in years)',
+                'attr' => ['class' => 'mb-2',],
             ])
             ->add('offerPicture', VichFileType::class, [
                 'required'      => false,
                 'allow_delete'  => true,
+                'attr' => ['class' => 'mb-2',],
             ])
-            ->add('minSalary', IntegerType::class)
-            ->add('maxSalary', IntegerType::class)
-            ->add('location', TextType::class)
-            ->add('interviewProcess', TextareaType::class)
+            ->add('minSalary', IntegerType::class, [
+                'attr' => ['class' => 'mb-2',],
+            ])
+            ->add('maxSalary', IntegerType::class, [
+                'attr' => ['class' => 'mb-2',],
+            ])
+            ->add('location', TextType::class, [
+                'label' => 'Location',
+                'required' => false,
+                'attr' => [
+                    'class' => 'form-control mb-2',
+                    'placeholder' => 'Job Location',
+                ],
+            ])
+            ->add('interviewProcess', TextareaType::class, [
+                'label' => 'Recrutement Process',
+                'required' => false,
+                'attr' => [
+                    'class' => 'form-control mb-2',
+                    'placeholder' => 'Recrutement Process',
+                ],
+            ])
             ->add('skills', EntityType::class, [
                 'label' => 'Required skills',
                 'class' => Skill::class,
@@ -62,6 +96,7 @@ class OfferType extends AbstractType
                 'multiple' => true,
                 'expanded' => true,
                 'by_reference' => false,
+                'attr' => ['class' => 'mb-4',],
             ])
         ;
     }
