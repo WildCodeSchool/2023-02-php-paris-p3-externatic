@@ -14,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Vich\UploaderBundle\Form\Type\VichFileType;
 use Doctrine\ORM\EntityRepository;
 
 class OfferType extends AbstractType
@@ -45,6 +46,10 @@ class OfferType extends AbstractType
                 'choices' => Offer::EXPERIENCE,
                 'required' => true,
                 'label' => 'Level of experience (in years)',
+            ])
+            ->add('offerPicture', VichFileType::class, [
+                'required'      => false,
+                'allow_delete'  => true,
             ])
             ->add('minSalary', IntegerType::class)
             ->add('maxSalary', IntegerType::class)

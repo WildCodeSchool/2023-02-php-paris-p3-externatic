@@ -9,8 +9,13 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\OfferRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+// use Vich\UploaderBundle\Entity\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\File;
 
 #[ORM\Entity(repositoryClass: OfferRepository::class)]
+#[Vich\Uploadable]
 class Offer
 {
     public const JOB_TYPE = [
@@ -87,11 +92,21 @@ class Offer
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $picture = null;
 
+    #[Vich\UploadableField(mapping: 'offer_pictures', fileNameProperty: 'picture')]
+    #[Assert\File(
+        maxSize:'1M',
+        mimeTypes: ['image/jpeg', 'image/png','image/jpg'],
+    )]
+    private ?File $offerPicture = null;
+
     #[ORM\ManyToMany(targetEntity: Candidate::class, inversedBy: 'favoriteOffers')]
     private Collection $favorite;
 
     #[ORM\Column(nullable: true)]
     private ?int $number = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $updatedAt = null;
 
     public function __construct()
     {
@@ -341,6 +356,33 @@ class Offer
     public function setNumber(int $number): self
     {
         $this->number = $number;
+        return $this;
+    }
+
+    public function setOfferPicture(File $image = null): Offer
+    {
+        $this->offerPicture = $image;
+        if ($image) {
+            $this->updatedAt = new \DateTime('now');
+        }
+
+        return $this;
+    }
+
+    public function getOfferPicture(): ?File
+    {
+        return $this->offerPicture;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): static
+    {
+        $this->updatedAt = $updatedAt;
+
         return $this;
     }
 }
