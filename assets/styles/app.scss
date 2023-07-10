@@ -30,6 +30,11 @@ $carousel-control-color: black;
 
 $paragraph-margin-bottom: 0;
 
+$card-border-width: 0;
+
+$hr-color: $primary;
+$hr-opacity: 1;
+
 $nav-tabs-link-active-bg: #F3E7EC;
 $nav-tabs-border-width: 0;
 
@@ -44,10 +49,6 @@ $nav-underline-link-active-color:$secondary;
     max-width: 1400px;
     width: 100%;
     padding: 1.5rem;
-}
-
-.picto {
-    margin-right: 0.563rem;
 }
 
 // Cards
@@ -166,7 +167,7 @@ $nav-underline-link-active-color:$secondary;
     color: $secondary;
 }
 
-// Navigation buttons
+//Navigation buttons
 #navigation-btn-desktop .btn {
     border-radius: 10px;
     width: 300px;
@@ -195,171 +196,6 @@ $nav-underline-link-active-color:$secondary;
 #navigation-btn-desktop .btn:focus,
 #navigation-btn-mobile .carousel-item .btn:focus {
     background-color: $secondary;
-}
-
-.grey-area-in-offer-show {
-    width: 16.25rem;
-    background-color: $tertiary;
-    text-align: center;
-    color: black;
-    border-radius: 5px;
-    padding: 0.4rem;
-    margin-right: 15px;
-}
-
-.applicationbtn:hover {
-    background-color: $secondary;
-}
-
-// Media queries
-@media (min-width: 600px) {
-    #navigation-btn-mobile {
-        display: none;
-    }
-
-    //Show Candidate
-    .visibility-profile .profile h1 {
-        display: none;
-    }
-
-    .visibility-profile {
-        margin: 3em auto 4em auto;
-        display: grid;
-        grid-template-columns: 1fr 2fr;
-        grid-template-rows: 1fr;
-        width: 80%;
-        grid-gap: 2em;
-    }
-
-    //Box grey
-    .visibility-profile .visibility {
-        background-color: $tertiary;
-        padding: 1em 0.9em;
-        border: 0.09em solid #FED32C;
-        margin-block: auto;
-    }
-
-    #picture-profile{
-        margin-bottom: -9em;
-        margin-right: 25em;
-    }
-
-    .visibility-profile .visibility .viewers {
-        display: flex;
-        text-align: center;
-        justify-content: space-between;
-    }
-
-    #profile-card.p-3 .card-body.mt-2 {
-        display: flex;
-        margin-left: 11em;
-    }
-
-    #profile-card.p-3 .card-body.mt-2 .profile-informations {
-        width: 50%;
-        text-align: left;
-    }
-
-    #introduction.profile-blocks.mt-4 {
-        width: 70%;
-        margin: auto;
-    }
-
-    .skills {
-        display: flex;
-        justify-content: space-evenly;
-        padding-top: 2em;
-    }
-
-    .skills .profile-blocks.mt-4 {
-        width: 25%;
-    }
-
-    //Position buttons resume, uload resume
-    .resume-upload-resume {
-        margin: 1.5em 0 0 24em;
-        display: grid;
-        width: 40%;
-        grid-template-columns: 1fr 1fr;
-        align-items: center;
-    }
-
-    .portfolio {
-        margin: auto;
-        width: 50%;
-        padding-top: 2em;
-    }
-
-    .skills-tab > ul {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-    }
-
-    .picto-in-header {
-        justify-self: center;
-    }
-}
-
-@media (max-width: 599px) {
-    #navigation-btn-desktop {
-        display: none;
-    }
-
-    #offer-description-card {
-        @include cards($primary, 10px);
-        background-color: rgba(217, 217, 217, 0.2);
-        margin-bottom: 5rem;
-    }
-
-    .company-in-desktop-view {
-        display: none;
-    }
-
-    .show-offer-single-section>hr {
-        display: none;
-    }
-
-    .grey-area-in-offer-show {
-        width: 25%;
-        color: white;
-        margin-right: 15px;
-        font-weight: 500;
-        background-color: inherit;
-    }
-
-    .picto-in-header {
-        filter: invert(1);
-    }
-
-    //Show Candidate
-    #navigation-btn-mobile.carousel-slide {
-        margin-top: 7em;
-    }
-
-    .visibility-profile .visibility{
-        margin: 1.5em 0;
-    }
-
-    .visibility-profile .profile h1 {
-        font-size: 18px;
-        margin-bottom: 1.5em;
-    }
-
-    #picture-profile{
-        margin-bottom: -3em;
-    }
-
-    #profile-card.p-3{
-        margin-bottom: 3em;
-    }
-
-    #profile-card.p-3 div.card-body.mt-2 {
-        padding-top: 2em;
-    }
-
-    .resume-upload-resume {
-        margin: 3em 0;
-    }
 }
 
 //Title job , title exprience
@@ -487,27 +323,10 @@ $nav-underline-link-active-color:$secondary;
     margin-top: 15px;
 }
 
-// Navbar
+//Navbar
 #profile-picture-navbar {
     border-radius: 50%;
     width: 3rem;
-}
-
-// Page Offer_index
-.offer-card {
-    text-decoration: none;
-    text-align: center;
-    position: relative;
-    top: -0.5rem;
-}
-
-.index-offer-picture {
-    border-radius: 5px;
-}
-
-.other-info {
-    display: flex;
-    justify-content: space-between;
 }
 
 .portfolio a:link,
@@ -542,35 +361,39 @@ $nav-underline-link-active-color:$secondary;
     justify-content: space-between;
 }
 
+
+//Offer index
+.offer-card {
+    text-decoration: none;
+    text-align: center;
+    position: relative;
+    top: -0.5rem;
+}
+
+.index-offer-picture {
+    border-top-right-radius: 6px;
+}
+
+.other-info {
+    display: flex;
+    justify-content: space-between;
+}
+
 .grey-area {
     width: 30%;
     background-color: $tertiary;
     text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 0.3rem;
 }
 
-.sub-head {
-    display: flex;
-    justify-content: center;
+#offer-date {
+    font-size: 12px;
+    margin-top: 1.5rem;
 }
 
-.index-company-logo {
-    width: 30px;
-    height: 28px;
-}
-
-.index-offer-title-section {
-    height: 6.25rem;
-}
-
-.picto-calendar {
-    filter: invert(1);
-}
-
-.card {
-    --bs-card-border-width: 100%;
-}
-
-//paginator
+//Paginator
 .page-link.active,
 .active>.page-link {
     background-color: $primary;
@@ -585,14 +408,44 @@ $nav-underline-link-active-color:$secondary;
     --bs-pagination-hover-color: #FED32C;
 }
 
-//Page Offer_show
+//Offer show
+.sub-head {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.index-company-logo {
+    width: 4rem;
+}
+
+.index-offer-title-section {
+    height: 6.25rem;
+}
+
+.picto-calendar {
+    filter: invert(1);
+}
+
+.card {
+    --bs-card-border-width: 100%;
+}
+
+.applicationbtn:hover {
+    background-color: $secondary;
+}
+
+#offer-description-card h4 {
+    font-weight: 600;
+}
+
 h2 {
     font-weight: 700;
     font-size: 2.1875rem;
 }
 
 hr {
-    color: $primary;
     width: 100%;
     height: 0.125rem;
     border: 1px solid;
@@ -606,7 +459,31 @@ hr {
     overflow: hidden;
     background-color: hsl(335, 42%, 54%);
     background-blend-mode: multiply;
+    padding:8%;
 }
+
+.grey-area-in-offer-show {
+    width: 16.25rem;
+    background-color: $tertiary;
+    text-align: center;
+    color: black;
+    border-radius: 5px;
+    padding: 0.4rem;
+    margin-right: 15px;
+}
+
+.picto-in-header {
+    margin:0;
+}
+
+.picto {
+    margin-right: 0.563rem;
+}
+
+.picto-briefcase {
+    margin-right: 0.8rem;
+}
+
 
 .before-footer-btn {
     display: flex;
@@ -623,5 +500,192 @@ hr {
     list-style-type: none;
 }
 
-@import '~bootstrap-icons/font/bootstrap-icons.css';
+//Filter candidate application
+#status-application {
+    margin-top: -0.25em; 
+    margin-left: 0.5em;
+}
+
+//Status application
+.status-application-area {
+    width: 40%;
+    margin: auto;
+    border-radius: 5px;
+    margin-top: 1em;
+    padding: 0.5em;
+}
+
+//Media queries
+@media (min-width: 600px) {
+    #navigation-btn-mobile {
+        display: none;
+    }
+
+    //Show Candidate
+    .visibility-profile .profile h1 {
+        display: none;
+    }
+
+    .visibility-profile {
+        margin: 3em auto 4em auto;
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        grid-template-rows: 1fr;
+        width: 80%;
+        grid-gap: 2em;
+    }
+
+    //Box grey
+    .visibility-profile .visibility {
+        background-color: $tertiary;
+        padding: 1em 0.9em;
+        border: 0.09em solid #FED32C;
+        margin-block: auto;
+    }
+
+    #picture-profile{
+        margin-bottom: -9em;
+        margin-right: 25em;
+    }
+
+    .visibility-profile .visibility .viewers {
+        display: flex;
+        text-align: center;
+        justify-content: space-between;
+    }
+
+    #profile-card.p-3 .card-body.mt-2 {
+        display: flex;
+        margin-left: 11em;
+    }
+
+    #profile-card.p-3 .card-body.mt-2 .profile-informations {
+        width: 50%;
+        text-align: left;
+    }
+
+    #introduction.profile-blocks.mt-4 {
+        width: 70%;
+        margin: auto;
+    }
+
+    .skills {
+        display: flex;
+        justify-content: space-evenly;
+        padding-top: 2em;
+    }
+
+    .skills .profile-blocks.mt-4 {
+        width: 25%;
+    }
+
+    //Position buttons resume, upload resume
+    .resume-upload-resume {
+        margin: 1.5em 0 0 24em;
+        display: grid;
+        width: 40%;
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+    }
+
+    .portfolio {
+        margin: auto;
+        width: 50%;
+        padding-top: 2em;
+    }
+
+    .skills-tab > ul {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .picto-in-header {
+        justify-self: center;
+    }
+
+    //Filter candidate applications
+    #search-bar-application {
+        margin-left: 5.5em;
+    }
+}
+
+@media (max-width: 599px) {
+    #navigation-btn-desktop {
+        display: none;
+    }
+
+    #offer-description-card {
+        @include cards($primary, 10px);
+        background-color: rgba(217, 217, 217, 0.2);
+        margin-bottom: 3rem;
+    }
+
+    .offer-show-header-section {
+        background: url("../images/headerBg.png");
+        background-color: hsl(335, 42%, 38%);
+    }
+
+    .company-in-desktop-view {
+        display: none;
+    }
+
+    .show-offer-single-section>hr {
+        display: none;
+    }
+
+    .grey-area-in-offer-show {
+        color: white;
+        margin-right: 15px;
+        font-weight: 500;
+        background-color: inherit;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .picto-in-header {
+        filter: invert(1);
+    }
+
+    //Show Candidate
+    #navigation-btn-mobile.carousel-slide {
+        margin-top: 7em;
+    }
+
+    .visibility-profile .visibility{
+        margin: 1.5em 0;
+    }
+
+    .visibility-profile .profile h1 {
+        font-size: 18px;
+        margin-bottom: 1.5em;
+    }
+
+    #picture-profile{
+        margin-bottom: -3em;
+    }
+
+    #profile-card.p-3{
+        margin-bottom: 3em;
+    }
+
+    #profile-card.p-3 div.card-body.mt-2 {
+        padding-top: 2em;
+    }
+
+    .resume-upload-resume {
+        margin: 3em 0;
+    }
+
+    //Filter candidate applications
+    #search-bar-application {
+        width: 92%;
+        margin: auto;
+    }
+
+    #submit-search-application {
+        width: 85%;
+    }
+}
+
 @import "~bootstrap/scss/bootstrap";

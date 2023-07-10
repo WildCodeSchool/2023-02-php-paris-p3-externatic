@@ -1,0 +1,27 @@
+{{ form_start(form) }}
+    <div id="search-bar-application" class="row align-items-center mt-2" id="search-input">
+        <div class="col-md-4 mt-4">
+            <input type="text" class="form-control" placeholder="Find an application" name="{{ field_name(form.searchTitleApplication) }}" value="{{ field_value(form.searchTitleApplication) }}" style="padding: 0.375rem 3.75rem;">
+            <img id="glass" class="position-absolute" src="{{ asset('build/images/picto/glass.svg') }}">
+        </div>
+        <div class="col-md-4 mt-4">
+            <div class="dropdown">
+                <button class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown" type="button" id="dropdown-menu-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{ field_label(form.statusApplication) }}
+                    <img id="status-application" class="position-absolute start-0 " src="{{ asset('build/images/picto/status-application.svg') }}">
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdown-menu-btn" style="width: 100%;">
+                    {% for label, value in field_choices(form.statusApplication) %}
+                        <div class="dropdown-item">
+                            <input class="form-check-input" type="checkbox" name="{{ field_name(form.statusApplication) }}[]" value="{{ value }}" id="flexCheckDefault" {{ value in field_value(form.statusApplication) ? 'checked' : '' }}>
+                            <label class="form-check-label" for="flexCheckDefault"> {{ label }} </label>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-4">
+        <button type="submit" class="btn btn-secondary col-auto mb-2 mt-1">Search</button>
+    </div>
+{{ form_end(form) }}
