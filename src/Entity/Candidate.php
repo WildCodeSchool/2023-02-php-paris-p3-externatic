@@ -255,7 +255,7 @@ class Candidate implements \Serializable
 
     public function getPicture(): ?string
     {
-        return $this->picture;
+        return 'uploads/candidatePictures/' . $this->picture;
     }
 
     public function setPicture(string $picture): self
