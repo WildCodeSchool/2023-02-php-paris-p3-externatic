@@ -1,11 +1,11 @@
 {% extends "base.html.twig" %}
 
-{% block title %}Fiche d'une annonce -
+{% block title %}Job Offer -
 	{{ offer.title }}
 {% endblock %}
+
 {% block body %}
 	<section class="offer-show-header-section pt-4 pb-4" style="background-image: url(../../{{ offer.picture }})">
-	{# <img src="{{ vich_uploader_asset(offer) }}" alt="{{ offer.title }}"> #}
 		<img class="index-company-logo" src="{{ asset('/%s' | format(offer.company.logo)) }}">
 		<p>{{ offer.company.name }}</p>
 		<h3 class="mb-4 mt-4">

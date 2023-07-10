@@ -69,9 +69,16 @@ class OfferType extends AbstractType
             ])
             ->add('minSalary', IntegerType::class, [
                 'attr' => ['class' => 'mb-2',],
+                'constraints' => [
+                    new Assert\GreaterThan(1000),
+                    new Assert\NotBlank()
+                ],
             ])
             ->add('maxSalary', IntegerType::class, [
                 'attr' => ['class' => 'mb-2',],
+                'constraints' => [
+                    new Assert\GreaterThan(1000)
+                ],
             ])
             ->add('location', TextType::class, [
                 'label' => 'Location',
