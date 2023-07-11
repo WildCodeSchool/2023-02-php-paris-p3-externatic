@@ -40,10 +40,10 @@
 				<button type="button" class="btn btn-secondary mt-2 applicationbtn">Edit</button>
 				<button type="button" class="btn btn-secondary mt-2 applicationbtn">Archive</button>
 			</div>
-		{% else %}
-			{# <div class="col text-center mt-4">
+		{% elseif app.user.candidate %}
+			<div class="col text-center mt-4">
 				<button type="button" class="btn btn-secondary mt-2 applicationbtn d-none" data-bs-toggle="modal" data-bs-target="#exampleModal">Apply</button>
-			</div> #}
+			</div>
 		{% endif %}
 	</section>
 	<div class="margin">
@@ -68,12 +68,12 @@
 				<ul>
 				{% for offerSkill in offer.getSkills %}
 					{% if offerSkill.type == 'hard' %}
-						<li><img class="picto" src="{{ asset('build/images/picto/checked 1.5d86e0d4.svg') }}" alt="pictoChecked">{{ offerSkill.name }}</li>
+						<li><img class="picto" src="{{ asset('build/images/picto/checked.svg') }}" alt="pictoChecked">{{ offerSkill.name }}</li>
 					{% endif %}
 				{% endfor %}
 				{% for offerSkill in offer.getSkills %}
 					{% if offerSkill.type == 'soft' %}
-						<li><img class="picto" src="{{ asset('build/images/picto/checked 1.5d86e0d4.svg') }}" alt="pictoChecked">{{ offerSkill.name }}</li>
+						<li><img class="picto" src="{{ asset('build/images/picto/checked.svg') }}" alt="pictoChecked">{{ offerSkill.name }}</li>
 					{% endif %}
 				{% endfor %}
 				</ul>
@@ -93,9 +93,9 @@
 					<button type="button" class="btn btn-secondary mt-2 applicationbtn">Archive</button>
 				</div>
 			{% else %}
-				{# <div class="col text-center mt-4">
+				<div class="col text-center mt-4">
 					<button type="button" class="btn btn-secondary mt-2 applicationbtn" data-bs-toggle="modal" data-bs-target="#exampleModal">Apply</button>
-				</div> #}
+				</div>
 			{% endif %}
 		</section>
 		{% include "offer/_modalApply.html.twig" %}
