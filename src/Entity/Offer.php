@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\OfferRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use DateTimeImmutable;
 
 #[ORM\Entity(repositoryClass: OfferRepository::class)]
 class Offer
@@ -98,7 +99,7 @@ class Offer
         $this->skills = new ArrayCollection();
         $this->applications = new ArrayCollection();
         $this->favorite = new ArrayCollection();
-        $this->createdAt = new \DateTimeImmutable();
+        $this->createdAt = new DateTimeImmutable();
     }
 
     public function getId(): ?int
