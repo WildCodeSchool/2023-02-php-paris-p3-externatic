@@ -41,7 +41,7 @@ class OfferRepository extends ServiceEntityRepository
         }
     }
 
-    public function findwithFilter(array $data): ?array
+    public function findwithFilter(?array $data): ?array
     {
         $queryBuilder = $this->createQueryBuilder('o')
             ->select('o', 'c')
