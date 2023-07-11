@@ -220,9 +220,17 @@ $nav-underline-link-active-color:$secondary;
     padding-bottom: 1em;
 }
 
+ //Completion profile candidate
 .candidate-completion {
     margin-top: 0.5em;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.candidate-completion img {
+    width: 60px;
 }
 
 //Boutton switch
@@ -280,7 +288,7 @@ $nav-underline-link-active-color:$secondary;
     font-size: 2em;
 }
 
-//Button cv, update
+//Button cv, upload
 #resume button img,
 #upload-resume button img {
     padding-right: .5em;
@@ -291,6 +299,11 @@ $nav-underline-link-active-color:$secondary;
     background-color: $tertiary;
     border-color: $tertiary;
     color: #828282;
+}
+
+//Button upload error
+form #upload_resume div ul li {
+    color: red;
 }
 
 //Skills
@@ -315,6 +328,7 @@ $nav-underline-link-active-color:$secondary;
     justify-content: space-between;
 }
 
+// Search-form
 #modal-body-search-form .form-check-label {
     margin-right: 10px;
     margin-left: 3px;
@@ -324,10 +338,80 @@ $nav-underline-link-active-color:$secondary;
     margin-top: 15px;
 }
 
+#search-input {
+    width: 90vw;
+    margin: auto;
+}
+
 //Navbar
 #profile-picture-navbar {
     border-radius: 50%;
     width: 3rem;
+}
+
+$navbar-nav-link-padding-x: 2.5rem;
+$navbar-nav-link-padding-y: 0.5rem;
+$navbar-padding-y: 0;
+
+#navbarSupportedContent ul li a {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+#navbarSupportedContent ul li:hover {
+    background-color: $primary;
+}
+
+#navbarSupportedContent ul li a:hover {
+    color: $info;
+}
+
+#navbarSupportedContent ul li:focus-within {
+    background-color: $primary;
+}
+
+#navbarSupportedContent ul li a:focus-within {
+    color: $info;
+}
+
+#navbarSupportedContent {
+    justify-content: space-between;
+}
+
+.navbar-toggler {
+    height: 60px;
+}
+
+// footer
+#main-footer {
+    background-color: $primary;
+    min-width: 100%;
+}
+
+#main-footer span {
+    color: $info;
+}
+
+#main-footer footer {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+// Page Offer_index
+.offer-card {
+    text-decoration: none;
+    text-align: center;
+    position: relative;
+    top: -0.5rem;
+}
+
+.index-offer-picture {
+    border-radius: 5px;
+}
+
+.other-info {
+    display: flex;
+    justify-content: space-between;
 }
 
 .portfolio a:link,
@@ -500,21 +584,26 @@ hr {
     list-style-type: none;
 }
 
-//Register Form
+//Create account
+#upload-candidate-picture-form {
+    background-color: $primary;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
 
-.dropzone-placeholder,
-.dropzone-preview-filename,
-.dropzone-preview-button::before {
+#upload-candidate-picture-form .dropzone-placeholder,
+#upload-candidate-picture-form .dropzone-preview-filename,
+#upload-candidate-picture-form .dropzone-preview-button::before {
     color: white;
 }
 
-.dropzone-container {
+#upload-candidate-picture-form .dropzone-container {
     border: 2px dashed #fff;
     justify-content: center;
     min-height: 195px;
 }
 
-.dropzone-preview-image {
+#upload-candidate-picture-form .dropzone-preview-image {
     min-width: 130px;
     height: 130px;
 }
@@ -526,12 +615,21 @@ hr {
     border-bottom-left-radius: 10px;
 }
 
-#upload-picture {
-    background-color: $primary;
-    border-top-right-radius: 10px;
-    border-top-left-radius: 10px;
+#upload-resume-new {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
 }
 
+#upload-resume-new input[type=file] {
+    font-size: 100px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+}
+
+//Register form
 #radio-button-roles input {
     margin: 12px;
 }
@@ -544,23 +642,32 @@ hr {
     accent-color: $primary;
 }
 
-#website-button button.btn {
-    background-color: $tertiary;
-    border-color: $tertiary;
+//Home Page
+#about-header {
+    background-color: $primary;
+    padding: 20px;
+    padding-top: 50px;
 }
 
-.upload-btn-wrapper {
-    position: relative;
-    overflow: hidden;
-    display: inline-block;
+#about-header p,
+#about-header h5 {
+    color: $light;
 }
 
-.upload-btn-wrapper input[type=file] {
-    font-size: 100px;
-    position: absolute;
-    left: 0;
-    top: 0;
-    opacity: 0;
+
+//Filter candidate application
+#status-application {
+    margin-top: -0.25em;
+    margin-left: 0.5em;
+}
+
+//Status application
+.status-application-area {
+    width: 40%;
+    margin: auto;
+    border-radius: 5px;
+    margin-top: 1em;
+    padding: 0.5em;
 }
 
 //Media queries
@@ -589,10 +696,11 @@ hr {
         padding: 1em 0.9em;
         border: 0.09em solid #FED32C;
         margin-block: auto;
+        margin-top: 1.5em;
     }
 
     #picture-profile{
-        margin-bottom: -9em;
+        margin-bottom: -12.5em;
         margin-right: 25em;
     }
 
@@ -605,6 +713,7 @@ hr {
     #profile-card.p-3 .card-body.mt-2 {
         display: flex;
         margin-left: 11em;
+        padding: 1.5em 0;
     }
 
     #profile-card.p-3 .card-body.mt-2 .profile-informations {
@@ -633,7 +742,7 @@ hr {
         display: grid;
         width: 40%;
         grid-template-columns: 1fr 1fr;
-        align-items: center;
+        align-items: end;
     }
 
     .portfolio {
@@ -649,6 +758,11 @@ hr {
 
     .picto-in-header {
         justify-self: center;
+    }
+
+    //Filter candidate applications
+    #search-bar-application {
+        margin-left: 5.5em;
     }
 }
 
@@ -718,6 +832,16 @@ hr {
 
     .resume-upload-resume {
         margin: 3em 0;
+    }
+
+    //Filter candidate applications
+    #search-bar-application {
+        width: 92%;
+        margin: auto;
+    }
+
+    #submit-search-application {
+        width: 85%;
     }
 }
 

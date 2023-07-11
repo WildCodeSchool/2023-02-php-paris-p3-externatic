@@ -5,12 +5,17 @@ namespace App\Controller;
 use App\Entity\Candidate;
 use App\Entity\User;
 use App\Form\CandidateType;
+use App\Form\UploadResumeType;
 use App\Repository\CandidateRepository;
 use App\Repository\CandidateMetadataRepository;
 use App\Repository\UserRepository;
 use App\Service\Visibility;
 use Doctrine\DBAL\Schema\Visitor\Visitor;
 use GrumPHP\Task\Config\Metadata;
+use App\Form\SearchApplicationFilterType;
+use App\Repository\ApplicationRepository;
+use Knp\Component\Pager\PaginatorInterface;
+use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -52,28 +57,44 @@ class CandidateController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'show', methods: ['GET'])]
+    #[Route('/{id}', name: 'show', methods: ['GET', 'POST'])]
     public function show(Candidate $candidate): Response
     {
+        $form = $this->createForm(UploadResumeType::class, $candidate, [
+            'action' => $this->generateUrl('candidate_edit', ['id' => $candidate->getId()]),
+            'method' => 'POST',
+        ]);
+
         return $this->render('candidate/show.html.twig', [
             'candidate' => $candidate,
+            'form' => $form,
         ]);
     }
 
     #[Route('/{id}/edit', name: 'edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Candidate $candidate, CandidateRepository $candidateRepository): Response
+    public function edit(Candidate $candidate, Request $request, CandidateRepository $candidateRepository): Response
     {
         $form = $this->createForm(CandidateType::class, $candidate);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        $formUpload = $this->createForm(UploadResumeType::class, $candidate);
+        $formUpload->handleRequest($request);
+
+        if ($formUpload->isSubmitted() && $formUpload->isValid()) {
             $candidateRepository->save($candidate, true);
 
-            return $this->redirectToRoute('candidate_index', [], Response::HTTP_SEE_OTHER);
+            $this->addFlash('success', 'Your resume has been upload! :)');
+
+            return $this->redirectToRoute('candidate_show', ['id' => $candidate->getId()], Response::HTTP_SEE_OTHER);
+        } elseif ($form->isSubmitted() && $form->isValid()) {
+            $candidateRepository->save($candidate, true);
+
+            return $this->redirectToRoute('candidate_show', ['id' => $candidate->getId()], Response::HTTP_SEE_OTHER);
         }
         return $this->render('candidate/edit.html.twig', [
-            'candidate' => $candidate,
-            'form' => $form,
+            'candidate'  => $candidate,
+            'formUpload' => $formUpload,
+            'form'       => $form,
         ]);
     }
 
@@ -94,5 +115,32 @@ class CandidateController extends AbstractController
         }
 
         return $this->redirectToRoute('candidate_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/{id}/applications', name: 'applications', methods: ['GET'])]
+    public function applications(
+        Request $request,
+        Candidate $candidate,
+        ApplicationRepository $applicationRepo,
+        PaginatorInterface $paginator
+    ): Response {
+
+        $form = $this->createForm(SearchApplicationFilterType::class, null, ['method' => 'GET']);
+        $form->handleRequest($request);
+        $applications = $applicationRepo->findByCandidate($this->getUser());
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $search = $form->getData();
+            $applications = $applicationRepo->findApplication($search, $candidate);
+        }
+
+        $applications = $paginator->paginate($applications, $request->query->getInt('page', 1), 6);
+
+        return $this->render('candidate/applications.html.twig', [
+            'candidate' => $candidate,
+            'now' => new DateTime(),
+            'applications' => $applications,
+            'form' => $form,
+        ]);
     }
 }
