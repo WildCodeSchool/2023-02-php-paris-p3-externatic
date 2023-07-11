@@ -1,0 +1,112 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ candidate.firstname }}'s applications
+{% endblock %}
+
+{% block body %}
+	{% include 'style/component/_navigationBtnMobile.html.twig' %}
+	{% include 'style/component/_navigationBtnDesktop.html.twig' %}
+    {% include "application/_filter_application.html.twig" %}
+
+    <div class="margin">
+        <div class="count mt-4">
+            <h4>
+                {{ applications.getTotalItemCount }}
+                applications found
+            </h4><hr>
+        </div>
+        <div class="container">
+            <div class="row justify-content-center">
+                {% for application in applications %}
+                    {% if app.user.id == application.candidate.id %}
+                        <div class="col-12 col-md-6 col-lg-4 col-xl-4 mt-4">
+                            <div id="search-card" class="text-center h-100">
+                                <div class="card-body mt-2">
+                                    <a class="offer-card" href="{{ path('offer_show', { id : application.offer.id }) }}">
+                                        <div class="card">
+                                            <div id="card-body" class="card-body">
+                                                <article>
+                                                    <section class="sub-head">
+                                                        <img class="index-company-logo me-1" src="{{ asset(application.offer.company.logo) }}" style="width:40%; margin-bottom: 1.5em;">
+                                                        <p>{{ application.offer.company.name }}</p>
+                                                    </section>
+                                                    <h4 class="index-offer-title-section">
+                                                        <strong>{{ application.offer.title }}</strong>
+                                                    </h4>
+                                                    <p class="mb-4">
+                                                        <img class="picto" src="{{ asset('build/images/picto/location-offer.svg') }}" alt="pictoLocation">
+                                                        {{ application.offer.location }}
+                                                    </p>
+                                                    <p>
+                                                        <section class="other-info mt-2 mb-2">
+                                                            <div class="grey-area">
+                                                                {{ application.offer.contract }}
+                                                            </div>
+                                                            <div class="grey-area">
+                                                                {{ application.offer.workFromHome }}
+                                                            </div>
+                                                            <div class="grey-area">
+                                                                    {{ application.offer.minSalary // 1000 }}K
+                                                                        -
+                                                                    {{ application.offer.maxSalary // 1000 }}K
+                                                            </div>
+                                                        </section>
+                                                    </p>
+                                                    <p>
+                                                        <img class="picto" src="{{ asset('build/images/picto/calendar.svg') }}" alt="pictoCalendar">
+                                                        posted
+                                                        {% set difference = date(application.offer.createdAt).diff(date(now)) %}
+                                                        {% set leftDays = difference.days %}
+                                                        {% if leftDays == 1 %}
+                                                            1 day
+                                                        {% else %}
+                                                            {% set years = (leftDays // 365 )%}
+                                                            {% set months = (leftDays % 365) // 30.5 %}
+                                                            {{ months }}
+                                                            month(s) and
+                                                            {% set days = ((leftDays % 365 ) % 30.5) %}
+                                                            {{ days }}
+                                                            day(s) ago
+                                                        {% endif %}
+                                                    </p>
+                                                    {% if application.status == constant('App\\Entity\\Application::STATUS_RECEIVED') %}
+                                                        <div class="status-application-area" style="background: rgba(254, 211, 44, .5);">
+                                                            <p ><img class="picto" src="{{ asset('build/images/picto/received.svg') }}" alt="pictoReceivedApplication">
+                                                                {{ application.status }}
+                                                            </p>
+                                                        </div>
+                                                        {% elseif application.status == constant('App\\Entity\\Application::STATUS_INREVIEW') %}
+                                                            <div class="status-application-area" style="background: rgba(254, 211, 44, .5);">
+                                                                <p><img class="picto" src="{{ asset('build/images/picto/in-review.svg') }}" alt="pictoInReviewApplication">
+                                                                    {{ application.status }}
+                                                                </p>
+                                                            </div>
+                                                        {% elseif application.status == constant('App\\Entity\\Application::STATUS_ACCEPTED') %}
+                                                            <div class="status-application-area" style="background: rgba(133, 19, 66, .5);">
+                                                                <p><img class="picto" src="{{ asset('build/images/picto/accepted.svg') }}" alt="pictoAcceptedApplication">
+                                                                    {{ application.status }}
+                                                                </p>
+                                                            </div>
+                                                        {% elseif application.status == constant('App\\Entity\\Application::STATUS_REJECTED') %}
+                                                            <div class="status-application-area" style="background: rgba(217, 217, 217, .5);">
+                                                                <p><img class="picto" src="{{ asset('build/images/picto/rejected.svg') }}" alt="pictoRejectedApplication">
+                                                                    {{ application.status }}
+                                                                </p>
+                                                            </div>
+                                                    {% endif %}
+                                                </article>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="navigation d-flex justify-content-center mt-4">
+        {{ knp_pagination_render(applications) }}
+    </div>
+{% endblock %}
