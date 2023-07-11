@@ -9,8 +9,8 @@
 		{% include "style/component/_navigationBtnMobileCompany.html.twig" %}
 		{% include "style/component/_navigationBtnDesktopCompany.html.twig" %}
 	</div>
-	<section class="offer-show-header-section pt-4 pb-4" style="background-image: url(../../{{ offer.picture }})">
-		<img class="index-company-logo" src="{{ asset('/%s' | format(offer.company.logo)) }}">
+	<section class="offer-show-header-section pt-4 pb-4" style="background-image: url( {{ asset(offer.picture) }} )">
+		<img class="index-company-logo" src="{{ asset(offer.company.logo) }}">
 		<p>{{ offer.company.name }}</p>
 		<h3 class="mb-4 mt-4">
 			<strong>{{ offer.title }}</strong>
@@ -35,14 +35,16 @@
 			{{ dateInterval }}
 			ago
 		</p>
-		{% if app.user.company is same as offer.getCompany %}
+		{% if app.user.company is defined and app.user.company is not null %}
+			{% if app.user.company is same as offer.getCompany %}
+				<div class="col text-center mt-4">
+					<button type="button" class="btn btn-secondary mt-2 applicationbtn" href="{{ path('offer_form_edit') }}">Edit</button>
+					<button type="button" class="btn btn-secondary mt-2 applicationbtn">Archive</button>
+				</div>
+			{% endif %}
+		{% elseif app.user.candidate is defined and app.user.candidate is not null %}
 			<div class="col text-center mt-4">
-				<button type="button" class="btn btn-secondary mt-2 applicationbtn">Edit</button>
-				<button type="button" class="btn btn-secondary mt-2 applicationbtn">Archive</button>
-			</div>
-		{% elseif app.user.candidate %}
-			<div class="col text-center mt-4">
-				<button type="button" class="btn btn-secondary mt-2 applicationbtn d-none" data-bs-toggle="modal" data-bs-target="#exampleModal">Apply</button>
+				<button type="button" class="btn btn-secondary mt-2 applicationbtn" data-bs-toggle="modal" data-bs-target="#exampleModal">Apply</button>
 			</div>
 		{% endif %}
 	</section>
@@ -71,6 +73,8 @@
 						<li><img class="picto" src="{{ asset('build/images/picto/checked.svg') }}" alt="pictoChecked">{{ offerSkill.name }}</li>
 					{% endif %}
 				{% endfor %}
+				</ul>
+				<ul>
 				{% for offerSkill in offer.getSkills %}
 					{% if offerSkill.type == 'soft' %}
 						<li><img class="picto" src="{{ asset('build/images/picto/checked.svg') }}" alt="pictoChecked">{{ offerSkill.name }}</li>
@@ -87,16 +91,18 @@
 			</div>
 		</div>
 		<section class="before-footer-btn mt-4">
+		{% if app.user.company is defined and app.user.company is not null %}
 			{% if app.user.company is same as offer.getCompany %}
 				<div class="col text-center mt-4">
 					<button type="button" class="btn btn-secondary mt-2 applicationbtn">Edit</button>
 					<button type="button" class="btn btn-secondary mt-2 applicationbtn">Archive</button>
 				</div>
-			{% else %}
+			{% endif %}
+			{% elseif app.user.candidate is defined and app.user.candidate is not null %}
 				<div class="col text-center mt-4">
 					<button type="button" class="btn btn-secondary mt-2 applicationbtn" data-bs-toggle="modal" data-bs-target="#exampleModal">Apply</button>
 				</div>
-			{% endif %}
+		{% endif %}
 		</section>
 		{% include "offer/_modalApply.html.twig" %}
 	</div>

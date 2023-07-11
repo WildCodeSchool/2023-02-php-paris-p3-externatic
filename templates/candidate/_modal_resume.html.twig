@@ -1,0 +1,16 @@
+<button type="button" class="btn btn-secondary mt-2" data-bs-toggle="modal" data-bs-target="#reg-modal"><img class="img_icon fa-border" src=" {{ asset('build/images/picto/cv.svg') }} " alt=" curriculum"/>your resume</button>
+<div class="container">
+        <div class="modal fade" id="reg-modal" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modal-title">{{ candidate.firstname }}, this is your resume </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>  
+                    <div class="modal-body">
+                        <embed src="/uploads/resumes/{{ candidate.resume }}" frameborder="0" width="100%" height="400vh"></embed>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
