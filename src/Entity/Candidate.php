@@ -3,14 +3,20 @@
 namespace App\Entity;
 
 use App\Repository\CandidateRepository;
+use DateTime;
+use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Serializable;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: CandidateRepository::class)]
-class Candidate
+#[Vich\Uploadable]
+class Candidate implements Serializable
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -19,26 +25,34 @@ class Candidate
 
     #[ORM\Column(length: 100, nullable: true)]
     #[Assert\NotBlank]
-    #[Assert\Length(min: 2, max:100)]
+    #[Assert\Length(min: 2, max:50)]
     private ?string $firstname = null;
 
     #[ORM\Column(length: 100, nullable: true)]
     #[Assert\NotBlank]
-    #[Assert\Length(min: 2, max:100)]
+    #[Assert\Length(min: 2, max:50)]
     private ?string $lastname = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     #[Assert\NotBlank]
-    #[Assert\Length(min: 2, max:255)]
+    #[Assert\Length(min: 2, max:30)]
     private ?string $location = null;
 
     #[ORM\Column(length: 100, nullable: true)]
-    #[Assert\Length(min: 2, max:100)]
+    #[Assert\Length(min: 2, max:20)]
     private ?string $phone = null;
 
     #[ORM\Column(length: 150, nullable: true)]
     #[Assert\Length(min: 2, max:150)]
     private ?string $resume = null;
+
+    #[Vich\UploadableField(mapping: 'resume_file', fileNameProperty: 'resume')]
+    #[Assert\File(
+        maxSize: '1024k',
+        extensions: ['pdf'],
+        extensionsMessage: 'Please upload a valid PDF',
+    )]
+    private ?File $resumeFile = null;
 
     #[ORM\Column(type: Types::TEXT, length: 300, nullable: true)]
     #[Assert\NotBlank]
@@ -47,17 +61,23 @@ class Candidate
 
     #[ORM\Column(length: 150, nullable: true)]
     #[Assert\NotBlank]
-    #[Assert\Length(min: 5, max:150)]
+    #[Assert\Length(min: 5, max:100)]
     private ?string $jobTitle = null;
 
     #[ORM\Column(length: 100, nullable: true)]
     #[Assert\NotBlank]
-    #[Assert\Length(min: 2, max:100)]
     private ?string $experience = null;
 
     #[ORM\Column(length: 150, nullable: true)]
     #[Assert\Length(min: 2, max:100)]
     private ?string $picture = null;
+
+    #[Vich\UploadableField(mapping: 'picture_file', fileNameProperty: 'picture')]
+    #[Assert\File(
+        maxSize: '2M',
+        mimeTypes: ['image/jpeg', 'image/png', 'image/webp'],
+    )]
+    private ?File $pictureFile = null;
 
     #[ORM\OneToOne(inversedBy: 'candidate', cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
@@ -83,6 +103,9 @@ class Candidate
 
     #[ORM\OneToMany(mappedBy: 'candidate', targetEntity: CandidateMetadata::class, cascade:['persist'])]
     protected Collection $metadata;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?DateTimeInterface $updatedAt = null;
 
     public function __construct()
     {
@@ -148,7 +171,7 @@ class Candidate
 
     public function getResume(): ?string
     {
-        return 'upload/resumees/' . $this->resume;
+        return $this->resume;
     }
 
     public function setResume(string $resume): self
@@ -156,6 +179,20 @@ class Candidate
         $this->resume = $resume;
 
         return $this;
+    }
+
+    public function setResumeFile(File $image = null): Candidate
+    {
+        $this->resumeFile = $image;
+        if ($image) {
+            $this->updatedAt = new DateTime('now');
+        }
+        return $this;
+    }
+
+    public function getResumeFile(): ?File
+    {
+        return $this->resumeFile;
     }
 
     public function getIntroduction(): ?string
@@ -196,7 +233,7 @@ class Candidate
 
     public function getPicture(): ?string
     {
-        return 'uploads/candidatePictures/' . $this->picture;
+        return $this->picture;
     }
 
     public function setPicture(string $picture): self
@@ -204,6 +241,20 @@ class Candidate
         $this->picture = $picture;
 
         return $this;
+    }
+
+    public function setPictureFile(File $image = null): Candidate
+    {
+        $this->pictureFile = $image;
+        if ($image) {
+            $this->updatedAt = new DateTime('now');
+        }
+        return $this;
+    }
+
+    public function getPictureFile(): ?File
+    {
+        return $this->pictureFile;
     }
 
     public function getUser(): ?User
@@ -367,4 +418,34 @@ class Candidate
     // {
     //     $this->metadata->removeElement($metadata);
     // }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->picture,
+            $this->resume,
+        ));
+    }
+
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->picture,
+            $this->resume,
+            ) = unserialize($serialized, array('allowed_classes' => false));
+    }
 }

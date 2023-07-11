@@ -20,43 +20,26 @@
                 </div>
                 <div id="connection-form">
                     <div class="tab-content">
-
                         <button type="button" class="btn btn-primary btn-lg mt-2 mb-2">connect with Linkedin</button>
                         <button type="button" class="btn btn-secondary btn-lg mt-2 mb-2">connect with Google</button>
-
-                                {# <div class="d-flex flex-row justify-content-evenly mb-2">
-                                    <div class="p-2">
-                                        <h5>Candidate</h5>
-                                    </div>
-                                    <div class="d-flex align-items-center">
-                                        <i class="bi-toggle-on"></i>
-                                    </div>
-                                    <div class="p-2">
-                                        <h5>Company</h5>
-                                    </div>
-                                </div> #}
-
-
-                                {{ form_start(registrationForm) }}
-                                    <div class="form-check form-switch">
-                                    {{ form_row(registrationForm.roles) }}
-                                    </div>
-                                    <div class="col mt-4">
-                                        {{ form_row(registrationForm.login) }}
-                                    </div>
-                                    <div class="col mt-4">
-                                        {{ form_row(registrationForm.plainPassword) }}
-                                    </div>
-                                    <div class="col mt-4">
-                                        {{ form_row(registrationForm.RGPDconsent) }}
-                                    </div>
-
-                                        {{ form_errors(registrationForm) }}
-                                        <button type="submit" class="btn btn-secondary mt-4">Register</button>
-                                {{ form_end(registrationForm) }}
-
+                            {{ form_start(registrationForm) }}
+                            <div class="col mt-4" id="radio-button-roles">
+                                <h6>You are...</h6>
+                                {{ form_row(registrationForm.roles) }}
+                            </div>
+                            <div class="col mt-4">
+                                {{ form_row(registrationForm.login) }}
+                            </div>
+                            <div class="col mt-4">
+                                {{ form_row(registrationForm.plainPassword) }}
+                            </div>
+                            <div class="col mt-4">
+                                {{ form_row(registrationForm.RGPDconsent) }}
+                            </div>
+                                {{ form_errors(registrationForm) }}
+                                <button type="submit" class="btn btn-secondary mt-4">Register</button>
+                            {{ form_end(registrationForm) }}
                         </div>
-
                     </div>
                 </div>
             </div>

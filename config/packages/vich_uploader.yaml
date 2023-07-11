@@ -1,0 +1,24 @@
+vich_uploader:
+    db_driver: orm
+
+    metadata:
+        type: attribute
+
+    mappings:
+        picture_file:
+            uri_prefix: /uploads/images
+            upload_destination: '%kernel.project_dir%/public/uploads/images'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+            
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true
+
+        resume_file:
+            uri_prefix: /uploads/resumes
+            upload_destination: '%kernel.project_dir%/public/uploads/resumes'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+            
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true

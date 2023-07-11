@@ -1,18 +1,18 @@
-// import { Controller } from '@hotwired/stimulus';
+import { Controller } from '@hotwired/stimulus';
 
-// export default class extends Controller {
-//     static targets = ["collectionContainer"]
+export default class extends Controller {
+    static targets = ["collectionContainer"];
 
-//     static values = {
-//         index: Number,
-//         prototype: String,
-//     }
+    static values = {
+        index: Number,
+        prototype: String,
+    }
 
-//     addCollectionElement(event)
-//     {
-//         const item = document.createElement('div');
-//         item.innerHTML = this.prototypeValue.replace(/__name__/g, this.indexValue);
-//         this.collectionContainerTarget.appendChild(item);
-//         this.indexValue++;
-//     }
-// }
+    addCollectionElement(event)
+    {
+        const item = document.createElement('div');
+        item.innerHTML = this.prototypeValue.replace(/__name__/g, this.indexValue);
+        this.collectionContainerTarget.appendChild(item);
+        this.indexValue++;
+    }
+}

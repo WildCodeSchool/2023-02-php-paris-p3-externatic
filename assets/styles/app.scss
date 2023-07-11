@@ -290,6 +290,7 @@ $nav-underline-link-active-color:$secondary;
 #upload-resume button.btn {
     background-color: $tertiary;
     border-color: $tertiary;
+    color: #828282;
 }
 
 //Skills
@@ -497,6 +498,69 @@ hr {
 
 .skills-tab > ul {
     list-style-type: none;
+}
+
+//Register Form
+
+.dropzone-placeholder,
+.dropzone-preview-filename,
+.dropzone-preview-button::before {
+    color: white;
+}
+
+.dropzone-container {
+    border: 2px dashed #fff;
+    justify-content: center;
+    min-height: 195px;
+}
+
+.dropzone-preview-image {
+    min-width: 130px;
+    height: 130px;
+}
+
+#profile-candidate-form {
+    background-color: rgba(243, 231, 236, 1);
+    border-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+#upload-picture {
+    background-color: $primary;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
+
+#radio-button-roles input {
+    margin: 12px;
+}
+
+#radio-button-roles h6 {
+    font-weight: 600;
+}
+
+#radio-button-roles input[type='radio'] {
+    accent-color: $primary;
+}
+
+#website-button button.btn {
+    background-color: $tertiary;
+    border-color: $tertiary;
+}
+
+.upload-btn-wrapper {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+}
+
+.upload-btn-wrapper input[type=file] {
+    font-size: 100px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
 }
 
 //Media queries

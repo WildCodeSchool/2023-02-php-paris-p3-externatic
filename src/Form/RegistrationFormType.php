@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -20,20 +21,6 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-        ->add('roles', ChoiceType::class, [
-            'label' => false,
-            'choices' => [
-                'Candidate' => User::ROLE_CANDIDATE,
-                'Company' => User::ROLE_COMPANY,
-            ],
-            'attr' => [
-                'class' => 'switch-custom',
-                'class-label' => 'form-check-label',
-            ],
-            'label_attr' => ['class' => 'switch-custom'],
-            'expanded' => true,
-            'multiple' => true,
-        ])
             ->add('login', EmailType::class, [
                 'label' => false,
                 'attr' => [
@@ -75,7 +62,27 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
+            ->add('roles', ChoiceType::class, [
+                'label' => false,
+                    'choices' => [
+                    'a Candidate' => User::ROLE_CANDIDATE,
+                    'a Company' => User::ROLE_COMPANY,
+                ],
+                'expanded' => true,
+                'multiple' => false,
+            ])
         ;
+        $builder->get('roles')
+        ->addModelTransformer(new CallbackTransformer(
+            function ($rolesAsArray): string {
+                // transform the array to a string
+                return implode(', ', $rolesAsArray);
+            },
+            function ($rolesAsString): array {
+                // transform the string back to an array
+                return explode(', ', $rolesAsString);
+            }
+        ));
     }
 
     public function configureOptions(OptionsResolver $resolver): void

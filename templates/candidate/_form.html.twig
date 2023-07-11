@@ -1,63 +1,89 @@
-<div id="profile-candidate-form">
 {{ form_start(form) }}
-    <div class="col mt-4">
-        {{ form_row(form.picture) }}
-    </div>
-
-    <h3>My information</h3>
-    <div class="col mt-4">
-    {{ form_row(form.firstname) }}
-    </div>
-    <div class="col mt-4">
-        {{ form_row(form.lastname) }}
-    </div>
-    <div class="col mt-4">
-        {{ form_row(form.location) }}
-    </div>
-    <div class="col mt-4">
-        {{ form_row(form.phone) }}
-    </div>
-    <h3 class="m-4">My journey</h3>
-    <div class="col mt-4">
-        {{ form_row(form.jobTitle) }}
-    </div>
-    <div class="col mt-4">
-        {{ form_row(form.experience) }}
-    </div>
-    <div class="col mt-4">
-        {{ form_row(form.introduction) }}
-    </div>
-    <div class="col mt-4">
-        {{ form_row(form.skills) }}
-    </div>
-    <div class="col mt-4">
-        {{ form_row(form.resume) }}
-    </div>
-    <h3 class="m-4"> My web presence</h3>
-    <div class="col mt-4">
-        {# {% for metadata in form.metadata %}
-        <div class="mt-4">
-            {{ form_row(metadata.type) }}
-        </div>
-        <div class="mt-4">
-            {{ form_row(metadata.metadata) }}
-        </div>
-        {% endfor %} #}
-        <div {{ stimulus_controller('form-collection') }}
-        data-form-collection-index-value="{{ form.metadata|length > 0 ? form.metadata|last.vars.name + 1 : 0 }}"
-        data-form-collection-prototype-value="{{ form_widget(form.metadata.vars.prototype)|e('html_attr') }}"
-        >
-        <div {{ stimulus_target('form-collection', 'collectionContainer') }}></div>
-        <button type="button" {{ stimulus_action('form-collection', 'addCollectionElement') }}>Add a website</button>
+    <div id="upload-picture"class="p-4">
+        <div class="col mt-4" >
+            {{ form_row(form.pictureFile) }}
         </div>
     </div>
-    <div class="form-check form-switch">
+    <div id="profile-candidate-form" class="p-4">
         <div class="col mt-4">
-            {{ form_row(form.visible) }}
+            <div class="form-check form-switch form-check-reverse">
+                {{ form_row(form.visible) }}
+            </div>
         </div>
-    </div>
-
+        <h3 class="mt-4">My information</h3>
+        <div class="col mt-4">
+            {{ form_row(form.firstname) }}
+        </div>
+        <div class="col mt-4">
+            {{ form_row(form.lastname) }}
+        </div>
+        <div class="col mt-4">
+            {{ form_row(form.location) }}
+        </div>
+        <div class="col mt-4">
+            {{ form_row(form.phone) }}
+        </div>
+        <h3 class="mt-4">My journey</h3>
+        <div class="col mt-4">
+            {{ form_row(form.jobTitle) }}
+        </div>
+        <div class="col mt-4">
+            {{ form_row(form.experience) }}
+        </div>
+        <div class="col mt-4">
+            {{ form_row(form.introduction) }}
+        </div>
+        <div class="col mt-4">
+        <h3 class="mt-2 mb-4"> My Hard skills</h3>
+            {% for label, value in field_choices(form.skills) %}
+                {% if label in constant('App\\Entity\\Skill::HARD')[0] %}
+                    <input class="form-check-input border-primary" type="checkbox" name="{{ field_name(form.skills) }}[]" value="{{ value }}" id="flexCheckDefault" {{ value in field_value(form.skills) ? 'checked' : '' }}>
+                    <label class="form-check-label" for="flexCheckDefault"> {{ label }} </label>
+                    {{ form_errors(form.skills) }}
+                {% endif %}
+            {% endfor %}
+        <h3 class="mt-4 mb-4">My Soft skills</h3>
+            {% for label, value in field_choices(form.skills) %}
+                {% if label in constant('App\\Entity\\Skill::SOFT')[0] %}
+                    <input class="form-check-input border-primary" type="checkbox" name="{{ field_name(form.skills) }}[]" value="{{ value }}" id="flexCheckDefault" {{ value in field_value(form.skills) ? 'checked' : '' }}>
+                    <label class="form-check-label" for="flexCheckDefault"> {{ label }} </label>
+                    {{ form_errors(form.skills) }}
+                {% endif %}
+            {% endfor %}
+        </div>
+        <div class="col mt-4">
+            <h3 class="mt-4 mb-4">My resume</h3>
+            <div class="upload-btn-wrapper" id="upload-resume-new">
+                <button class="btn btn-primary" id="button">
+                <img class="img_icon fa-border" src=" {{ asset('build/images/picto/upload-white.svg') }} " alt="upload-resume"/>
+                Upload your resume</button>
+                <span id="file-selected"></span>
+                <input type="file" name="{{ field_name(form.resumeFile) }}" id="file-upload" onchange="showname()">
+                {{ form_errors(form.resumeFile) }}
+            </div>
+        </div>
+        <h3 class="mt-4"> My web presence</h3>
+        <div class="row">
+            <div class="col">
+                <div {{ stimulus_controller('form-collection') }}
+                data-form-collection-index-value="{{ form.metadata|length > 0 ? form.metadata|last.vars.name + 1 : 0 }}"
+                data-form-collection-prototype-value="{{ form_widget(form.metadata.vars.prototype)|e('html_attr') }}"
+                >
+                <div {{ stimulus_target('form-collection', 'collectionContainer') }}></div>
+                    <button type="button" class="btn btn-primary mt-2" {{ stimulus_action('form-collection', 'addCollectionElement') }}>Add a link</button>
+                </div>
+            </div>
+        </div>
         {{ form_errors(form) }}
-        <button type="submit" class="btn btn-secondary mt-4">{{ button_label|default('Save') }}</button>
+    </div>
+    <div class="text-center">
+        <button type="submit" class="btn btn-secondary mt-4 bt-4">{{ button_label|default('Save') }}</button>
+    </div>
     {{ form_end(form) }}
-</div>
+
+    <script>
+    function showname() {
+        const name = document.getElementById("file-upload");
+        document.getElementById("file-selected").innerHTML = name.files.item(0).name;
+    };
+    </script>

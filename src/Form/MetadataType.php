@@ -18,7 +18,7 @@ class MetadataType extends AbstractType
         $builder
             ->add('type', ChoiceType::class, [
                 'placeholder' => 'Site',
-                'attr' => ['class' => 'form-select'],
+                'attr' => ['class' => 'form-select border-primary mt-2'],
                 'label' => false,
                 'choices' => [
                     'Linkedin' => CandidateMetadata::METADATA_LINKEDIN,
@@ -30,7 +30,7 @@ class MetadataType extends AbstractType
             ->add('metadata', UrlType::class, [
                 'label' => false,
                 'attr' => [
-                    'class' => 'form-control',
+                    'class' => 'form-control border-primary mt-2',
                     'placeholder' => 'http://...',
                 ],
                 'by_reference' => false,

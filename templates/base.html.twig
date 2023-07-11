@@ -11,19 +11,15 @@
 		{% block stylesheets %}
 			{{ encore_entry_link_tags('app') }}
 		{% endblock %}
-
-		{% block javascripts %}
-			{{ encore_entry_script_tags('app') }}
-		{% endblock %}
 	</head>
 
     {# lien vers la page login - affiche l'image de l'user quand il est connecté => à mettre dans la navebar #}
     {% if app.user %}
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 {% if app.user.candidate %}
-                    <img src="{{ asset(app.user.candidate.picture) }}" id="profile-picture-navbar" alt="profile-picture">
+                    <img src="{{ vich_uploader_asset(app.user.candidate, 'pictureFile') }}" id="profile-picture-navbar" alt="profile-picture">
                 {% else %}
-                    <img src="{{ asset('uploads/candidatePictures/user.png') }}" id="profile-picture-navbar" alt="profile-picture">
+                    <img src="{{ vich_uploader_asset(candidate) }}" id="profile-picture-navbar" alt="profile-picture">
                 {% endif %}
             </a>
             <ul class="dropdown-menu">
@@ -35,5 +31,9 @@
 
     <body>
         {% block body %}{% endblock %}
+
+        {% block javascripts %}
+			{{ encore_entry_script_tags('app') }}
+		{% endblock %}
     </body>
 </html>

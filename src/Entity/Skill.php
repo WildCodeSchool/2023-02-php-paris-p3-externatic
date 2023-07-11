@@ -13,7 +13,7 @@ class Skill
 {
     public const SKILLS = [
         ['name' => 'PHP', 'type' => 'hard'],
-        ['name' => 'JS', 'type' => 'hard'],
+        ['name' => 'JavaScript', 'type' => 'hard'],
         ['name' => 'JAVA', 'type' => 'hard'],
         ['name' => 'Windev', 'type' => 'hard'],
         ['name' => 'html', 'type' => 'hard'],
@@ -28,6 +28,15 @@ class Skill
         ['name' => 'perfectionist', 'type' => 'soft'],
         ['name' => 'teamwork', 'type' => 'soft'],
         ['name' => 'problem-solving', 'type' => 'soft'],
+    ];
+
+    public const HARD = [
+        ['PHP', 'JavaScript', 'JAVA','Windev', 'html', 'CSS', 'React', 'SQL'],
+    ];
+
+    public const SOFT = [
+        ['creativity', 'communication','smiling','critical thinking',
+        'adaptability', 'perfectionist', 'teamwork', 'problem-solving'],
     ];
 
     #[ORM\Id]
