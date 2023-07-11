@@ -74,6 +74,9 @@ class Candidate implements \Serializable
     #[ORM\ManyToMany(targetEntity: Offer::class, mappedBy: 'favorite')]
     private Collection $favoriteOffers;
 
+    #[ORM\ManyToOne(inversedBy: 'favoriteCandidates')]
+    private ?Company $favorite = null;
+
     #[ORM\OneToMany(mappedBy: 'favorite', targetEntity: Company::class)]
     private Collection $favoriteCompanies;
 

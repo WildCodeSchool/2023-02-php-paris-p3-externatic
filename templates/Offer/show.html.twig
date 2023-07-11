@@ -39,25 +39,25 @@
 			{% elseif app.user.roles[0] == "ROLE_CANDIDATE" and applied %}
 				{% for application in app.user.candidate.applications %}
 					{% if application.status == constant('App\\Entity\\Application::STATUS_RECEIVED') and application.offer.id == offer.id %}
-						<div class="status-application-area" style="background: rgba(254, 211, 44, .5);">
+						<div class="status-application-offer" style="background: rgba(254, 211, 44, .8);">
 							<p ><img class="picto" src="{{ asset('build/images/picto/received.svg') }}" alt="pictoReceivedApplication">
 								{{ application.status }}
 							</p>
 						</div>
 					{% elseif application.status == constant('App\\Entity\\Application::STATUS_INREVIEW') and application.offer.id == offer.id %}
-						<div class="status-application-area" style="background: rgba(254, 211, 44, .5);">
+						<div class="status-application-offer" style="background: rgba(254, 211, 44, .8);">
 							<p><img class="picto" src="{{ asset('build/images/picto/in-review.svg') }}" alt="pictoInReviewApplication">
 								{{ application.status }}
 							</p>
 						</div>
 					{% elseif application.status == constant('App\\Entity\\Application::STATUS_ACCEPTED') and application.offer.id == offer.id %}
-						<div class="status-application-area" style="background: rgba(133, 19, 66, .5);">
+						<div class="status-application-offer" style="background: rgba(254, 211, 44, .8);">
 							<p><img class="picto" src="{{ asset('build/images/picto/accepted.svg') }}" alt="pictoAcceptedApplication">
 								{{ application.status }}
 							</p>
 						</div>
 					{% elseif application.status == constant('App\\Entity\\Application::STATUS_REJECTED') and application.offer.id == offer.id %}
-						<div class="status-application-area" style="background: rgba(217, 217, 217, .5);">
+						<div class="status-application-offer" style="background: rgba(254, 211, 44, .8);">
 							<p><img class="picto" src="{{ asset('build/images/picto/rejected.svg') }}" alt="pictoRejectedApplication">
 								{{ application.status }}
 							</p>
@@ -134,34 +134,6 @@
 					<div class="col text-center mt-4">
 						<button type="button" class="btn btn-secondary mt-2 applicationbtn" data-bs-toggle="modal" data-bs-target="#exampleModal">Apply</button>
 					</div>
-				{% elseif app.user.roles[0] == "ROLE_CANDIDATE" and applied %}
-					{% for application in app.user.candidate.applications %}
-						{% if application.status == constant('App\\Entity\\Application::STATUS_RECEIVED') and application.offer.id == offer.id %}
-							<div class="status-application-area" style="background: rgba(254, 211, 44, .5);">
-								<p><img class="picto" src="{{ asset('build/images/picto/received.svg') }}" alt="pictoReceivedApplication">
-									{{ application.status }}
-								</p>
-							</div>
-						{% elseif application.status == constant('App\\Entity\\Application::STATUS_INREVIEW') and application.offer.id == offer.id %}
-							<div class="status-application-area" style="background: rgba(254, 211, 44, .5);">
-								<p><img class="picto" src="{{ asset('build/images/picto/in-review.svg') }}" alt="pictoInReviewApplication">
-									{{ application.status }}
-								</p>
-							</div>
-						{% elseif application.status == constant('App\\Entity\\Application::STATUS_ACCEPTED') and application.offer.id == offer.id %}
-							<div class="status-application-area" style="background: rgba(133, 19, 66, .5);">
-								<p><img class="picto" src="{{ asset('build/images/picto/accepted.svg') }}" alt="pictoAcceptedApplication">
-									{{ application.status }}
-								</p>
-							</div>
-						{% elseif application.status == constant('App\\Entity\\Application::STATUS_REJECTED') and application.offer.id == offer.id %}
-							<div class="status-application-area" style="background: rgba(217, 217, 217, .5);">
-								<p><img class="picto" src="{{ asset('build/images/picto/rejected.svg') }}" alt="pictoRejectedApplication">
-									{{ application.status }}
-								</p>
-							</div>
-						{% endif %}
-					{% endfor %}
 				{% endif %}
 			{% else %}
 				<div class="col text-center mt-4">
