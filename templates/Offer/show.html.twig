@@ -38,7 +38,7 @@
 		{% if app.user.company is defined and app.user.company is not null %}
 			{% if app.user.company is same as offer.getCompany %}
 				<div class="col text-center mt-4">
-					<button type="button" class="btn btn-secondary mt-2 applicationbtn" href="{{ path('offer_form_edit') }}">Edit</button>
+					<button type="button" class="btn btn-secondary mt-2 applicationbtn" href="{{ path('offer_form_edit', {'id': offer.id}) }}">Edit</button>
 					<button type="button" class="btn btn-secondary mt-2 applicationbtn">Archive</button>
 				</div>
 			{% endif %}
@@ -94,7 +94,7 @@
 		{% if app.user.company is defined and app.user.company is not null %}
 			{% if app.user.company is same as offer.getCompany %}
 				<div class="col text-center mt-4">
-					<button type="button" class="btn btn-secondary mt-2 applicationbtn">Edit</button>
+					<button type="button" class="btn btn-secondary mt-2 applicationbtn" href="{{ path('offer_form_edit', {'id': offer.id}) }}">Edit</button>
 					<button type="button" class="btn btn-secondary mt-2 applicationbtn">Archive</button>
 				</div>
 			{% endif %}
