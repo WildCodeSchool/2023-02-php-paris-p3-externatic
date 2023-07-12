@@ -220,9 +220,17 @@ $nav-underline-link-active-color:$secondary;
     padding-bottom: 1em;
 }
 
+ //Completion profile candidate
 .candidate-completion {
     margin-top: 0.5em;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.candidate-completion img {
+    width: 60px;
 }
 
 //Boutton switch
@@ -280,7 +288,7 @@ $nav-underline-link-active-color:$secondary;
     font-size: 2em;
 }
 
-//Button cv, update
+//Button cv, upload
 #resume button img,
 #upload-resume button img {
     padding-right: .5em;
@@ -290,6 +298,12 @@ $nav-underline-link-active-color:$secondary;
 #upload-resume button.btn {
     background-color: $tertiary;
     border-color: $tertiary;
+    color: #828282;
+}
+
+//Button upload error
+form #upload_resume div ul li {
+    color: red;
 }
 
 //Skills
@@ -314,6 +328,7 @@ $nav-underline-link-active-color:$secondary;
     justify-content: space-between;
 }
 
+// Search-form
 #modal-body-search-form .form-check-label {
     margin-right: 10px;
     margin-left: 3px;
@@ -323,10 +338,80 @@ $nav-underline-link-active-color:$secondary;
     margin-top: 15px;
 }
 
+#search-input {
+    width: 90vw;
+    margin: auto;
+}
+
 //Navbar
 #profile-picture-navbar {
     border-radius: 50%;
     width: 3rem;
+}
+
+$navbar-nav-link-padding-x: 2.5rem;
+$navbar-nav-link-padding-y: 0.5rem;
+$navbar-padding-y: 0;
+
+#navbarSupportedContent ul li a {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+#navbarSupportedContent ul li:hover {
+    background-color: $primary;
+}
+
+#navbarSupportedContent ul li a:hover {
+    color: $info;
+}
+
+#navbarSupportedContent ul li:focus-within {
+    background-color: $primary;
+}
+
+#navbarSupportedContent ul li a:focus-within {
+    color: $info;
+}
+
+#navbarSupportedContent {
+    justify-content: space-between;
+}
+
+.navbar-toggler {
+    height: 60px;
+}
+
+// footer
+#main-footer {
+    background-color: $primary;
+    min-width: 100%;
+}
+
+#main-footer span {
+    color: $info;
+}
+
+#main-footer footer {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+// Page Offer_index
+.offer-card {
+    text-decoration: none;
+    text-align: center;
+    position: relative;
+    top: -0.5rem;
+}
+
+.index-offer-picture {
+    border-radius: 5px;
+}
+
+.other-info {
+    display: flex;
+    justify-content: space-between;
 }
 
 .portfolio a:link,
@@ -500,6 +585,19 @@ hr {
     list-style-type: none;
 }
 
+//Home Page
+#about-header {
+    background-color: $primary;
+    padding: 20px;
+    padding-top: 50px;
+}
+
+#about-header p,
+#about-header h5 {
+    color: $light;
+}
+
+
 //Filter candidate application
 #status-application {
     margin-top: -0.25em; 
@@ -541,10 +639,11 @@ hr {
         padding: 1em 0.9em;
         border: 0.09em solid #FED32C;
         margin-block: auto;
+        margin-top: 1.5em;
     }
 
     #picture-profile{
-        margin-bottom: -9em;
+        margin-bottom: -12.5em;
         margin-right: 25em;
     }
 
@@ -557,6 +656,7 @@ hr {
     #profile-card.p-3 .card-body.mt-2 {
         display: flex;
         margin-left: 11em;
+        padding: 1.5em 0;
     }
 
     #profile-card.p-3 .card-body.mt-2 .profile-informations {
@@ -585,7 +685,7 @@ hr {
         display: grid;
         width: 40%;
         grid-template-columns: 1fr 1fr;
-        align-items: center;
+        align-items: end;
     }
 
     .portfolio {

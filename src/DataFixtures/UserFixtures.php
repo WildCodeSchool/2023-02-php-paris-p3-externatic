@@ -13,9 +13,6 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserFixtures extends Fixture implements DependentFixtureInterface
 {
-    public const LOGO = [
-        'logoCompany.jpg', 'logoCompany1.jpg'
-    ];
     public const USER = [
         [
             'Firstname' => 'Erika', 'Lastname' => 'Ikelempo', 'Role' => User::ROLE_CANDIDATE,
@@ -33,8 +30,8 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             'Firstname' => 'Lea', 'Lastname' => 'Hadida', 'Role' => User::ROLE_CANDIDATE,
             'Location' => 'Paris', 'Email' => 'lea@hotmail.fr', 'picture' => 'Lea.png'
         ],
-        ['Name' => 'Atos', 'Role' => User::ROLE_COMPANY, 'Email' => 'atos@hotmail.fr'],
-        ['Name' => 'McDonalds', 'Role' => User::ROLE_COMPANY, 'Email' => 'mcdo@hotmail.fr']
+        ['Name' => 'Atos', 'Role' => User::ROLE_COMPANY, 'Email' => 'atos@hotmail.fr', 'Logo' => 'logoCompany1.jpg'],
+        ['Name' => 'McDonalds', 'Role' => User::ROLE_COMPANY, 'Email' => 'mcdo@hotmail.fr', 'Logo' => 'logoCompany.jpg']
     ];
 
     private UserPasswordHasherInterface $passwordHasher;
@@ -86,7 +83,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                     ->setSector(Company::COMPANY_SECTOR[array_rand(Company::COMPANY_SECTOR)])
                     ->setPresentation($faker->paragraph())
                     ->setLocation($faker->city())
-                    ->setLogo(self::LOGO[mt_rand(0, count(self::LOGO) - 1)]);
+                    ->setLogo($person['Logo']);
 
                 $user = new User();
 

@@ -4,14 +4,12 @@ namespace App\Controller;
 
 use App\Entity\Candidate;
 use App\Form\CandidateType;
+use App\Form\UploadResumeType;
+use App\Repository\CandidateRepository;
 use App\Form\SearchApplicationFilterType;
 use App\Repository\ApplicationRepository;
-use App\Repository\CandidateRepository;
-use App\Repository\OfferRepository;
 use Knp\Component\Pager\PaginatorInterface;
-use App\Service\Visibility;
 use DateTime;
-use Doctrine\DBAL\Schema\Visitor\Visitor;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -47,29 +45,45 @@ class CandidateController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'show', methods: ['GET'])]
+    #[Route('/{id}', name: 'show', methods: ['GET', 'POST'])]
     public function show(Candidate $candidate): Response
     {
+        $form = $this->createForm(UploadResumeType::class, $candidate, [
+            'action' => $this->generateUrl('candidate_edit', ['id' => $candidate->getId()]),
+            'method' => 'POST',
+        ]);
+
         return $this->render('candidate/show.html.twig', [
             'candidate' => $candidate,
+            'form' => $form,
         ]);
     }
 
     #[Route('/{id}/edit', name: 'edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Candidate $candidate, CandidateRepository $candidateRepository): Response
+    public function edit(Candidate $candidate, Request $request, CandidateRepository $candidateRepository): Response
     {
         $form = $this->createForm(CandidateType::class, $candidate);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        $formUpload = $this->createForm(UploadResumeType::class, $candidate);
+        $formUpload->handleRequest($request);
+
+        if ($formUpload->isSubmitted() && $formUpload->isValid()) {
             $candidateRepository->save($candidate, true);
 
-            return $this->redirectToRoute('candidate_index', [], Response::HTTP_SEE_OTHER);
+            $this->addFlash('success', 'Your resume has been upload! :)');
+
+            return $this->redirectToRoute('candidate_show', ['id' => $candidate->getId()], Response::HTTP_SEE_OTHER);
+        } elseif ($form->isSubmitted() && $form->isValid()) {
+            $candidateRepository->save($candidate, true);
+
+            return $this->redirectToRoute('candidate_show', ['id' => $candidate->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('candidate/edit.html.twig', [
-            'candidate' => $candidate,
-            'form' => $form,
+            'candidate'  => $candidate,
+            'formUpload' => $formUpload,
+            'form'       => $form,
         ]);
     }
 
