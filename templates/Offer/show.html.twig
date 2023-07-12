@@ -39,25 +39,25 @@
 			{% elseif app.user.roles[0] == "ROLE_CANDIDATE" and applied %}
 				{% for application in app.user.candidate.applications %}
 					{% if application.status == constant('App\\Entity\\Application::STATUS_RECEIVED') and application.offer.id == offer.id %}
-						<div class="status-application-offer" style="background: rgba(254, 211, 44, .8);">
+						<div class="status-application-offer">
 							<p ><img class="picto" src="{{ asset('build/images/picto/received.svg') }}" alt="pictoReceivedApplication">
 								{{ application.status }}
 							</p>
 						</div>
 					{% elseif application.status == constant('App\\Entity\\Application::STATUS_INREVIEW') and application.offer.id == offer.id %}
-						<div class="status-application-offer" style="background: rgba(254, 211, 44, .8);">
+						<div class="status-application-offer">
 							<p><img class="picto" src="{{ asset('build/images/picto/in-review.svg') }}" alt="pictoInReviewApplication">
 								{{ application.status }}
 							</p>
 						</div>
 					{% elseif application.status == constant('App\\Entity\\Application::STATUS_ACCEPTED') and application.offer.id == offer.id %}
-						<div class="status-application-offer" style="background: rgba(254, 211, 44, .8);">
+						<div class="status-application-offer">
 							<p><img class="picto" src="{{ asset('build/images/picto/accepted.svg') }}" alt="pictoAcceptedApplication">
 								{{ application.status }}
 							</p>
 						</div>
 					{% elseif application.status == constant('App\\Entity\\Application::STATUS_REJECTED') and application.offer.id == offer.id %}
-						<div class="status-application-offer" style="background: rgba(254, 211, 44, .8);">
+						<div class="status-application-offer">
 							<p><img class="picto" src="{{ asset('build/images/picto/rejected.svg') }}" alt="pictoRejectedApplication">
 								{{ application.status }}
 							</p>
