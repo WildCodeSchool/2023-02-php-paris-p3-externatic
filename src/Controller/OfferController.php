@@ -4,9 +4,7 @@ namespace App\Controller;
 
 use App\Form\SearchOfferFilterType;
 use App\Entity\Offer;
-use App\Entity\Application;
-use App\Entity\Skill;
-use App\Repository\ApplicationRepository;
+use App\Form\OfferType;
 use App\Repository\OfferRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -49,6 +47,24 @@ class OfferController extends AbstractController
         return $this->render('offer/show.html.twig', [
             'offer'        => $offer,
             'dateInterval' => $dateInterval,
+        ]);
+    }
+
+    #[Route('/{id}/edit', name: '_form_edit', methods: ['GET', 'POST'])]
+    public function edit(Request $request, Offer $offer, OfferRepository $offerRepository): Response
+    {
+        $form = $this->createForm(OfferType::class, $offer);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $offerRepository->save($offer, true);
+
+            return $this->redirectToRoute('offer_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('offer_type/edit.html.twig', [
+            'offer' => $offer,
+            'form' => $form,
         ]);
     }
 }
