@@ -26,7 +26,7 @@ class OfferType extends AbstractType
             ->add('title', TextType::class, [
                 'label' => false,
                 'attr' => [
-                    'class' => 'form-control',
+                    'class' => 'form-control border-primary',
                     'placeholder' => 'Title',
                 ],
                 'constraints' => [
@@ -39,34 +39,39 @@ class OfferType extends AbstractType
                 'widget' => 'single_text',
             ])
             ->add('contract', ChoiceType::class, [
-                'label' => 'Contract',
+                'placeholder' => 'Contract',
+                'label' => false,
                 'choices' => Offer::JOB_TYPE,
                 'attr' => [
-                    'class' => 'form-select',
+                    'class' => 'form-select border-primary',
                     'aria-label' => 'Default select example',
                 ]
             ])
             ->add('workFromHome', ChoiceType::class, [
-                'label' => 'Telework',
+                'placeholder' => 'work from home',
+                'label' => false,
                 'choices' => Offer::WORK_FROM_HOME,
                 'attr' => [
-                    'class' => 'form-select',
+                    'class' => 'form-select border-primary',
                     'aria-label' => 'Default select example',
+
                 ]
             ])
             ->add('description', TextareaType::class, [
-                'label' => 'Description',
+                'label' => false,
                 'attr' => [
-                    'class' => 'form-control',
+                    'class' => 'form-control border-primary',
                     'placeholder' => 'Description',
                 ],
             ])
             ->add('experience', ChoiceType::class, [
+                'placeholder' => 'Years of experience',
                 'choices' => Offer::EXPERIENCE,
-                'label' => 'Level of experience (in years)',
+                'label' => false,
                 'attr' => [
-                    'class' => 'form-select',
+                    'class' => 'form-select border-primary',
                     'aria-label' => 'Default select example',
+                    'placeholder' => 'Level of experience (in years)',
                 ]
             ])
             ->add('offerPicture', VichFileType::class, [
@@ -80,7 +85,7 @@ class OfferType extends AbstractType
                     new Assert\NotBlank()
                 ],
                 'attr' => [
-                    'class' => 'form-control',
+                    'class' => 'form-control border-primary',
                     'placeholder' => 'Min salary',
                 ],
             ])
@@ -90,7 +95,7 @@ class OfferType extends AbstractType
                     new Assert\GreaterThan(1000)
                 ],
                 'attr' => [
-                    'class' => 'form-control',
+                    'class' => 'form-control border-primary',
                     'placeholder' => 'Max salary',
                 ],
             ])
@@ -98,7 +103,7 @@ class OfferType extends AbstractType
                 'label' => false,
                 'required' => false,
                 'attr' => [
-                    'class' => 'form-control',
+                    'class' => 'form-control border-primary',
                     'placeholder' => 'Location',
                 ],
             ])
@@ -106,7 +111,7 @@ class OfferType extends AbstractType
                 'label' => false,
                 'required' => false,
                 'attr' => [
-                    'class' => 'form-control',
+                    'class' => 'form-control border-primary',
                     'placeholder' => 'Recrutement Process',
                 ],
             ])
