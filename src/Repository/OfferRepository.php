@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Candidate;
 use App\Entity\Offer;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -88,6 +89,25 @@ class OfferRepository extends ServiceEntityRepository
                 ->andWhere('o.minSalary < :salary AND o.maxSalary > :salary')
                 ->setParameter('salary', $data['salary']);
         }
+
+        $queryBuilder = $queryBuilder
+            ->orderBy('o.createdAt', 'DESC')
+            ->getQuery();
+
+        return $queryBuilder->getResult();
+    }
+
+    public function customizeSearch(?array $data): ?array
+    {
+        $queryBuilder = $this->createQueryBuilder('o')
+            ->select('o', 'c')
+            ->join('o.company', 'c')
+
+
+
+            ->andWhere('o.title c.y AND o.maxSalary > :salary')
+            ->setParameter('salary', $data['salary']);
+
 
         $queryBuilder = $queryBuilder
             ->orderBy('o.createdAt', 'DESC')
