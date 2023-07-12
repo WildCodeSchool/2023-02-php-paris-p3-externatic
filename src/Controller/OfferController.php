@@ -4,10 +4,8 @@ namespace App\Controller;
 
 use App\Form\SearchOfferFilterType;
 use App\Entity\Offer;
-use App\Entity\Application;
-use App\Entity\Skill;
-use App\Repository\ApplicationRepository;
 use App\Repository\OfferRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -49,6 +47,34 @@ class OfferController extends AbstractController
         return $this->render('offer/show.html.twig', [
             'offer'        => $offer,
             'dateInterval' => $dateInterval,
+        ]);
+    }
+
+    #[Route('/form/new', name: 'form_new', methods: ['GET', 'POST'])]
+    public function new(Request $request, EntityManagerInterface $manager): Response
+    {
+        $offer = new Offer();
+        $form = $this->createForm(Offer::class, $offer);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $offer = $form->getData();
+            $offer->setCompany($this->getUser()->getCompany());
+
+            $manager->persist($offer);
+            $manager->flush();
+
+            $this->addFlash(
+                'succes',
+                'Votre offre a été ajoutée avec succes'
+            );
+
+            return $this->redirectToRoute('offer_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('offer_type/new.html.twig', [
+            'offer' => $offer,
+            'form' => $form,
         ]);
     }
 }
