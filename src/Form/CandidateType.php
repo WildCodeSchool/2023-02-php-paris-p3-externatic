@@ -22,10 +22,10 @@ class CandidateType extends AbstractType
             ->add('experience')
             ->add('picture')
             ->add('visible')
-            ->add('user')
-            ->add('skills')
-            ->add('favoriteOffers')
-            ->add('favorite')
+            // ->add('user')
+            // ->add('skills')
+            // ->add('favoriteOffers')
+            // ->add('favorite')
         ;
     }
 
