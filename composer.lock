@@ -4,11 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-<<<<<<< HEAD
-    "content-hash": "0d1f562084fa255f11ae45e20e228490",
-=======
     "content-hash": "702059e8a565cf0e64ab91056c7ce7cc",
->>>>>>> dev
     "packages": [
         {
             "name": "behat/transliterator",
@@ -1584,8 +1580,6 @@
             "time": "2023-06-12T08:44:38+00:00"
         },
         {
-<<<<<<< HEAD
-=======
             "name": "gedmo/doctrine-extensions",
             "version": "v3.12.0",
             "source": {
@@ -1713,7 +1707,6 @@
             "time": "2023-07-08T20:38:42+00:00"
         },
         {
->>>>>>> dev
             "name": "jms/metadata",
             "version": "2.8.0",
             "source": {

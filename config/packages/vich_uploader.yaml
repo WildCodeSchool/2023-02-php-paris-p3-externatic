@@ -5,12 +5,10 @@ vich_uploader:
         type: attribute
 
     mappings:
-<<<<<<< HEAD
         offer_pictures:
             uri_prefix: /uploads/offerPictures
             upload_destination: '%upload_directory%'
             namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
-=======
         candidates:
            uri_prefix: /uploads/images
            upload_destination: '%kernel.project_dir%/public/uploads/images'
@@ -21,4 +19,3 @@ vich_uploader:
            upload_destination: '%kernel.project_dir%/public/uploads/resumes'
            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
            
->>>>>>> dev
