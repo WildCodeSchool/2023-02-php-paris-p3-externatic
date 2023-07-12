@@ -21,13 +21,14 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 class OfferController extends AbstractController
 {
     #[Route('/show/{id}', name: 'show', methods: ['GET', 'POST'])]
-    public function show(Offer $offer, ApplicationRepository $applicationRepository): Response
+    public function show(Offer $offer, ApplicationRepository $applyRepository): Response
     {
         $interval = date_diff(new DateTime(), $offer->getCreatedAt());
         $dateInterval = $interval->format('%m month(s) and %d day(s)');
 
         $applied = false;
-        if ($applicationRepository->findOneBy(array('offer' => $offer, 'candidate' => $this->getUser()->getCandidate()))) {
+        $candidate = $this->getUser()->getCandidate();
+        if ($applyRepository->findOneBy(array('offer' => $offer,'candidate' => $candidate))) {
             $applied = true;
         }
 
