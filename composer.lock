@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f15059e6e9de9ca45ab216679c7d64c3",
+    "content-hash": "9c8d8b87357cb51ae89bb3f42dbaa477",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -7161,16 +7161,16 @@
         },
         {
             "name": "symfony/ux-swup",
-            "version": "v2.9.1",
+            "version": "v2.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ux-swup.git",
-                "reference": "f4457453769b152429e977ee848038c81581ca3c"
+                "reference": "28eed50a87ced39c503cf9165b1099a76c8a0c19"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ux-swup/zipball/f4457453769b152429e977ee848038c81581ca3c",
-                "reference": "f4457453769b152429e977ee848038c81581ca3c",
+                "url": "https://api.github.com/repos/symfony/ux-swup/zipball/28eed50a87ced39c503cf9165b1099a76c8a0c19",
+                "reference": "28eed50a87ced39c503cf9165b1099a76c8a0c19",
                 "shasum": ""
             },
             "conflict": {
@@ -7208,7 +7208,7 @@
                 "symfony-ux"
             ],
             "support": {
-                "source": "https://github.com/symfony/ux-swup/tree/v2.9.1"
+                "source": "https://github.com/symfony/ux-swup/tree/v2.10.0"
             },
             "funding": [
                 {
@@ -7224,7 +7224,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-05-30T14:40:50+00:00"
+            "time": "2023-06-26T17:45:00+00:00"
         },
         {
             "name": "symfony/validator",

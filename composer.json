@@ -43,7 +43,7 @@
         "symfony/translation": "6.2.*",
         "symfony/twig-bundle": "6.2.*",
         "symfony/ux-dropzone": "*",
-        "symfony/ux-swup": "^2.9",
+        "symfony/ux-swup": "^2.10",
         "symfony/validator": "6.2.*",
         "symfony/web-link": "6.2.*",
         "symfony/webapp-meta": "^1.0",
