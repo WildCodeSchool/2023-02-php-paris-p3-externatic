@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Application;
 use App\Entity\Candidate;
+use App\Entity\Offer;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -64,5 +65,14 @@ class ApplicationRepository extends ServiceEntityRepository
             ->getQuery();
 
         return $queryBuilder->getResult();
+    }
+
+    public function apply(Offer $offer, Candidate $candidate): void
+    {
+        $application = new Application();
+        $application->setStatus(Application::STATUS_RECEIVED)
+            ->setCandidate($candidate)
+            ->setOffer($offer);
+        $this->save($application, true);
     }
 }

@@ -20,41 +20,15 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 #[Route('/offer', name: 'offer_')]
 class OfferController extends AbstractController
 {
-    #[Route('/index', name: 'index', methods: ['GET', 'POST'])]
-    public function index(OfferRepository $offerRepository, PaginatorInterface $paginator, Request $request): Response
-    {
-        $form = $this->createForm(SearchOfferFilterType::class);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $filters = $form->getData();
-            $offers = $offerRepository->findwithFilter($filters);
-        } else {
-            $offers = $offerRepository->findAll();
-        }
-
-        $offers = $paginator->paginate($offerRepository->findAll(), $request->query->getInt('page', 1), 6);
-
-        return $this->render('offer/index.html.twig', [
-            'offers' => $offers,
-            'now' => new DateTime(),
-            'form' => $form,
-        ]);
-    }
-
     #[Route('/show/{id}', name: 'show', methods: ['GET', 'POST'])]
-    public function show(Offer $offer): Response
+    public function show(Offer $offer, ApplicationRepository $applicationRepository): Response
     {
         $interval = date_diff(new DateTime(), $offer->getCreatedAt());
         $dateInterval = $interval->format('%m month(s) and %d day(s)');
 
         $applied = false;
-        if ($this->getUser()) {
-            foreach ($this->getUser()->getCandidate()->getApplications() as $application) {
-                if ($application->getOffer() == $offer) {
-                    $applied = true;
-                }
-            }
+        if ($applicationRepository->findOneBy(array('offer' => $offer, 'candidate' => $this->getUser()->getCandidate()))) {
+            $applied = true;
         }
 
         return $this->render('offer/show.html.twig', [
@@ -68,12 +42,8 @@ class OfferController extends AbstractController
     #[IsGranted('ROLE_CANDIDATE')]
     public function applyOffer(Offer $offer, ApplicationRepository $applyRepository): Response
     {
-        $application = new Application();
-        $application->setStatus("received")
-            ->setCreatedAt(new DateTime('now'))
-            ->setCandidate($this->getUser()->getCandidate())
-            ->setOffer($offer);
-        $applyRepository->save($application, true);
+        $applyRepository->apply($offer, $this->getUser()->getCandidate());
+
         return $this->redirectToRoute('offer_show', ['id' => $offer->getId()]);
     }
 }

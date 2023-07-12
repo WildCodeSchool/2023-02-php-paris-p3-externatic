@@ -32,11 +32,11 @@
 		</p>
 		<section class="before-footer-btn mt-2">
 		{% if app.user %}
-			{% if app.user.roles[0] == "ROLE_CANDIDATE" and not applied %}
+			{% if app.user.roles[0] is constant("App\\Entity\\USER::ROLE_CANDIDATE") and not applied %}
 				<div class="col text-center mt-4">
 					<button type="button" class="btn btn-secondary mt-2 applicationbtn" data-bs-toggle="modal" data-bs-target="#exampleModal">Apply</button>
 				</div>
-			{% elseif app.user.roles[0] == "ROLE_CANDIDATE" and applied %}
+			{% elseif app.user.roles[0] is constant("App\\Entity\\USER::ROLE_CANDIDATE") and applied %}
 				{% for application in app.user.candidate.applications %}
 					{% if application.status == constant('App\\Entity\\Application::STATUS_RECEIVED') and application.offer.id == offer.id %}
 						<div class="status-application-offer">
