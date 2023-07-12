@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Form\SearchOfferFilterType;
 use App\Entity\Offer;
+use App\Form\OfferType;
 use App\Repository\OfferRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -54,7 +55,7 @@ class OfferController extends AbstractController
     public function new(Request $request, EntityManagerInterface $manager): Response
     {
         $offer = new Offer();
-        $form = $this->createForm(Offer::class, $offer);
+        $form = $this->createForm(OfferType::class, $offer);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -65,7 +66,7 @@ class OfferController extends AbstractController
             $manager->flush();
 
             $this->addFlash(
-                'succes',
+                'success',
                 'Votre offre a été ajoutée avec succes'
             );
 

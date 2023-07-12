@@ -13,21 +13,30 @@ class Skill
 {
     public const SKILLS = [
         ['name' => 'PHP', 'type' => 'hard'],
-        ['name' => 'JS', 'type' => 'hard'],
+        ['name' => 'JavaScript', 'type' => 'hard'],
         ['name' => 'JAVA', 'type' => 'hard'],
         ['name' => 'Windev', 'type' => 'hard'],
         ['name' => 'html', 'type' => 'hard'],
         ['name' => 'CSS', 'type' => 'hard'],
-        ['name' => 'PHP1', 'type' => 'hard'],
-        ['name' => 'JS1', 'type' => 'hard'],
-        ['name' => 'full of idea', 'type' => 'soft'],
-        ['name' => 'alert', 'type' => 'soft'],
+        ['name' => 'React', 'type' => 'hard'],
+        ['name' => 'SQL', 'type' => 'hard'],
+        ['name' => 'creativity', 'type' => 'soft'],
+        ['name' => 'communication', 'type' => 'soft'],
         ['name' => 'smiling', 'type' => 'soft'],
-        ['name' => 'nice', 'type' => 'soft'],
-        ['name' => 'inventive', 'type' => 'soft'],
+        ['name' => 'critical thinking', 'type' => 'soft'],
+        ['name' => 'adaptability', 'type' => 'soft'],
         ['name' => 'perfectionist', 'type' => 'soft'],
-        ['name' => 'full of idea1', 'type' => 'soft'],
-        ['name' => 'alert1', 'type' => 'soft'],
+        ['name' => 'teamwork', 'type' => 'soft'],
+        ['name' => 'problem-solving', 'type' => 'soft'],
+    ];
+
+    public const HARD = [
+        ['PHP', 'JavaScript', 'JAVA','Windev', 'html', 'CSS', 'React', 'SQL'],
+    ];
+
+    public const SOFT = [
+        ['creativity', 'communication','smiling','critical thinking',
+        'adaptability', 'perfectionist', 'teamwork', 'problem-solving'],
     ];
 
     #[ORM\Id]

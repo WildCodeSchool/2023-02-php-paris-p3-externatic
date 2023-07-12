@@ -15,6 +15,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Vich\UploaderBundle\Form\Type\VichFileType;
+use Symfony\Component\Validator\Constraints\Count;
 use Doctrine\ORM\EntityRepository;
 
 class OfferType extends AbstractType
@@ -23,10 +24,10 @@ class OfferType extends AbstractType
     {
         $builder
             ->add('title', TextType::class, [
-                'label' => 'Job offer title',
+                'label' => false,
                 'attr' => [
-                    'class' => 'form-control mb-4',
-                    'placeholder' => 'Job offer title',
+                    'class' => 'form-control',
+                    'placeholder' => 'Title',
                 ],
                 'constraints' => [
                     new Assert\Length(['min' => 2, 'max' => 50]),
@@ -34,65 +35,78 @@ class OfferType extends AbstractType
                 ],
             ])
             ->add('startAt', DateType::class, [
+                'label' => 'Starting date',
                 'widget' => 'single_text',
-                'attr' => ['class' => 'mb-2',],
             ])
             ->add('contract', ChoiceType::class, [
                 'label' => 'Contract',
                 'choices' => Offer::JOB_TYPE,
-                'required' => true,
-                'attr' => ['class' => 'mb-2',],
+                'attr' => [
+                    'class' => 'form-select',
+                    'aria-label' => 'Default select example',
+                ]
             ])
             ->add('workFromHome', ChoiceType::class, [
                 'label' => 'Telework',
                 'choices' => Offer::WORK_FROM_HOME,
-                'required' => true,
-                'attr' => ['class' => 'mb-2',],
+                'attr' => [
+                    'class' => 'form-select',
+                    'aria-label' => 'Default select example',
+                ]
             ])
             ->add('description', TextareaType::class, [
                 'label' => 'Description',
                 'attr' => [
-                    'class' => 'form-control mb-2',
-                    'placeholder' => 'Job offer description',
+                    'class' => 'form-control',
+                    'placeholder' => 'Description',
                 ],
             ])
             ->add('experience', ChoiceType::class, [
                 'choices' => Offer::EXPERIENCE,
-                'required' => true,
                 'label' => 'Level of experience (in years)',
-                'attr' => ['class' => 'mb-2',],
+                'attr' => [
+                    'class' => 'form-select',
+                    'aria-label' => 'Default select example',
+                ]
             ])
             ->add('offerPicture', VichFileType::class, [
                 'required'      => false,
                 'allow_delete'  => true,
-                'attr' => ['class' => 'mb-2',],
             ])
             ->add('minSalary', IntegerType::class, [
-                'attr' => ['class' => 'mb-2',],
+                'label' => false,
                 'constraints' => [
                     new Assert\GreaterThan(1000),
                     new Assert\NotBlank()
                 ],
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'Min salary',
+                ],
             ])
             ->add('maxSalary', IntegerType::class, [
-                'attr' => ['class' => 'mb-2',],
+                'label' => false,
                 'constraints' => [
                     new Assert\GreaterThan(1000)
                 ],
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'Max salary',
+                ],
             ])
             ->add('location', TextType::class, [
-                'label' => 'Location',
+                'label' => false,
                 'required' => false,
                 'attr' => [
-                    'class' => 'form-control mb-2',
-                    'placeholder' => 'Job Location',
+                    'class' => 'form-control',
+                    'placeholder' => 'Location',
                 ],
             ])
             ->add('interviewProcess', TextareaType::class, [
-                'label' => 'Recrutement Process',
+                'label' => false,
                 'required' => false,
                 'attr' => [
-                    'class' => 'form-control mb-2',
+                    'class' => 'form-control',
                     'placeholder' => 'Recrutement Process',
                 ],
             ])
@@ -103,9 +117,10 @@ class OfferType extends AbstractType
                 'multiple' => true,
                 'expanded' => true,
                 'by_reference' => false,
-                'attr' => ['class' => 'mb-4',],
-            ])
-        ;
+                'constraints' => array(
+                    new Count(['min' => 1, 'minMessage' => 'Please select at least one skill'])
+                )
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

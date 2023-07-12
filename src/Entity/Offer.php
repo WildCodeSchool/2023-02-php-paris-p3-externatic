@@ -9,10 +9,11 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\OfferRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
-// use Vich\UploaderBundle\Entity\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\File;
+use DateTimeImmutable;
+use DateTime;
 
 #[ORM\Entity(repositoryClass: OfferRepository::class)]
 #[Vich\Uploadable]
@@ -113,7 +114,7 @@ class Offer
         $this->skills = new ArrayCollection();
         $this->applications = new ArrayCollection();
         $this->favorite = new ArrayCollection();
-        $this->createdAt = new \DateTimeImmutable();
+        $this->createdAt = new DateTimeImmutable();
     }
 
     public function getId(): ?int
@@ -363,7 +364,7 @@ class Offer
     {
         $this->offerPicture = $image;
         if ($image) {
-            $this->updatedAt = new \DateTime('now');
+            $this->updatedAt = new DateTime('now');
         }
 
         return $this;
