@@ -33,7 +33,6 @@ class OfferController extends AbstractController
                 $applied = true;
             }
         }
-        
 
         return $this->render('offer/show.html.twig', [
             'offer'        => $offer,
