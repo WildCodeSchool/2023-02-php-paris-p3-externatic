@@ -36,10 +36,6 @@ class CandidateController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            foreach ($candidate->getMetadata() as $data) {
-                $data->setCandidate($candidate);
-            }
-
             $candidateRepository->save($candidate, true);
 
             $this->addFlash('success', 'Your account has been created! :)');
@@ -123,12 +119,11 @@ class CandidateController extends AbstractController
 
         $form = $this->createForm(SearchApplicationFilterType::class, null, ['method' => 'GET']);
         $form->handleRequest($request);
+        $applications = $applicationRepo->findByCandidate($candidate);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $search = $form->getData();
             $applications = $applicationRepo->findApplication($search, $candidate);
-        } else {
-            $applications = $applicationRepo->findByCandidate($candidate);
         }
 
         $applications = $paginator->paginate($applications, $request->query->getInt('page', 1), 6);

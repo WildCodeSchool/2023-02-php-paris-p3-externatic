@@ -11,7 +11,7 @@
 			{% include "style/component/_navigationBtnDesktopCompany.html.twig" %}
 		</div>
 	{% endif %}
-	<section class="offer-show-header-section pt-4 pb-4" style="background-image: url( {{ asset(offer.picture) }} )">
+	<section class="offer-show-header-section" style="background-image: url( {{ asset(offer.picture) }} ); background-size: cover;">
 		<img class="index-company-logo" src="{{ asset(offer.company.logo) }}">
 		<p>{{ offer.company.name }}</p>
 		<h3 class="mb-4 mt-4">
@@ -85,7 +85,7 @@
 			</div>
 		{% endif %}
 		</section>
-		
+
 	</section>
 	<div class="margin">
 		<div id="offer-description-card" class="show-offer-single-section p-3">

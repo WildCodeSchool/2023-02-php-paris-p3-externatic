@@ -59,8 +59,7 @@ class ConnectionController extends AbstractController
                 )
             );
 
-            $entityManager->persist($user);
-            $entityManager->flush();
+            $userRepository->save($user, true);
 
             $userAuthenticator->authenticateUser(
                 $user,

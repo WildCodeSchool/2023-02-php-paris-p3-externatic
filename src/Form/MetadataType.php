@@ -3,16 +3,20 @@
 namespace App\Form;
 
 use App\Entity\CandidateMetadata;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Bundle\SecurityBundle\Security;
 
 class MetadataType extends AbstractType
 {
+    public function __construct(private Security $security)
+    {
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -25,7 +29,6 @@ class MetadataType extends AbstractType
                     'Github' => CandidateMetadata::METADATA_GITHUB,
                     'Portfolio' => CandidateMetadata::METADATA_PORTFOLIO,
                 ],
-                'by_reference' => false,
             ])
             ->add('metadata', UrlType::class, [
                 'label' => false,
@@ -33,6 +36,9 @@ class MetadataType extends AbstractType
                     'class' => 'form-control border-primary mt-2',
                     'placeholder' => 'http://...',
                 ],
+            ])
+            ->add('candidate', HiddenType::class, [
+                'empty_data' =>  $this->security->getUser()->getCandidate(),
                 'by_reference' => false,
             ])
         ;
