@@ -23,10 +23,6 @@ class ConnectionController extends AbstractController
     #[Route('/login', name: 'login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        // if ($this->getUser()) {
-        //     return $this->redirectToRoute('target_path');
-        // }
-
             $error = $authenticationUtils->getLastAuthenticationError();
             $lastUsername = $authenticationUtils->getLastUsername();
 

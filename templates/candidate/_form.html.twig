@@ -56,8 +56,9 @@
             <h3 class="mt-4 mb-4">My resume</h3>
             <div class="upload-btn-wrapper" id="upload-resume-new">
                 <button class="btn btn-primary" id="button">
-                <img class="img_icon fa-border" src=" {{ asset('build/images/picto/upload-white.svg') }} " alt="upload-resume"/>
-                Upload your resume</button>
+                    <img class="img_icon fa-border" src=" {{ asset('build/images/picto/upload-white.svg') }} " alt="upload-resume"/>
+                    Upload your resume
+                </button>
                 <span id="file-selected"></span>
                 <input type="file" name="{{ field_name(form.resumeFile) }}" id="file-upload" onchange="showname()">
             </div>
@@ -78,11 +79,11 @@
     <div class="text-center">
         <button type="submit" class="btn btn-secondary mt-4 bt-4">{{ button_label|default('Save') }}</button>
     </div>
-    {{ form_end(form) }}
+{{ form_end(form) }}
 
-    <script>
+<script>
     function showname() {
         const name = document.getElementById("file-upload");
         document.getElementById("file-selected").innerHTML = name.files.item(0).name;
     };
-    </script>
+</script>

@@ -429,12 +429,6 @@ class Candidate implements Serializable
         return $this;
     }
 
-    // public function removeMetadata(CandidateMetadata $metadata): void
-    // {
-    //     $this->metadata->removeElement($metadata);
-    // }
-
-
     public function getFavorite(): ?Company
     {
         return $this->favorite;
