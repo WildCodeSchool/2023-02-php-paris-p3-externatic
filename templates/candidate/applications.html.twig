@@ -4,8 +4,8 @@
 {% endblock %}
 
 {% block body %}
-	{% include 'style/component/_navigationBtnMobile.html.twig' %}
-	{% include 'style/component/_navigationBtnDesktop.html.twig' %}
+	{% include 'style/component/_navigationBtnMobileCandidate.html.twig' %}
+	{% include 'style/component/_navigationBtnDesktopCandidate.html.twig' %}
     {% include "application/_filter_application.html.twig" %}
 
     <div class="margin">
@@ -27,7 +27,7 @@
                                             <div id="card-body" class="card-body">
                                                 <article>
                                                     <section class="sub-head">
-                                                        <img class="index-company-logo me-1" src="{{ asset(application.offer.company.logo) }}" style="width:40%; margin-bottom: 1.5em;">
+                                                        <img class="index-company-logo me-1" src="{{ asset(application.offer.company.logo) }}" style="width:auto; height: 90px;">
                                                         <p>{{ application.offer.company.name }}</p>
                                                     </section>
                                                     <h4 class="index-offer-title-section">
