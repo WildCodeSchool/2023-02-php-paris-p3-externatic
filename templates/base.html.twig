@@ -12,7 +12,7 @@
 			{{ encore_entry_link_tags('app') }}
 		{% endblock %}
 
-		{% block javascripts %}
+        {% block javascripts %}
 			{{ encore_entry_script_tags('app') }}
 		{% endblock %}
 	</head>
@@ -27,6 +27,7 @@
 		{% endfor %}
 
         {% block body %}{% endblock %}
+
 		{% include "_footer.html.twig" %}
     </body>
 </html>
