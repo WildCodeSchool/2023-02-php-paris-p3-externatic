@@ -32,8 +32,13 @@ class CandidateController extends AbstractController
         $form->handleRequest($request);
         $filters = $form->getData();
 
-        $offers = $offerRepository->findwithFilter($filters);
-        $offersPersonalized = $offerRepository->customizeSearch($offers);
+
+
+
+
+
+        // $offers = $offerRepository->findwithFilter($filters);
+        $offersPersonalized = $offerRepository->customizeResearch($filters);
 
         $offers = $paginator->paginate($offersPersonalized, $request->query->getInt('page', 1), 6);
 
