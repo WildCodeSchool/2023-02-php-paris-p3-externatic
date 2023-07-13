@@ -68,16 +68,16 @@
 				{{ include('candidate/_modal_resume.html.twig') }}
 			</div>
 			<div id="upload-resume" class="col text-center mt-4">
-				{{ form_start(form, {'action': path('candidate_edit', { 'id': candidate.id })}) }} 
-				{# {{ form_start(form) }} #}
-				{{ form_widget(form) }}
+				{{ form_start(formUpload) }}
+				{{ form_widget(formUpload) }}
+				{{ form_errors(formUpload) }}
 					<div class="text-center">
 						<button class="btn btn-primary mt-2 mb-2">
 							<img class="img_icon fa-border" src=" {{ asset('build/images/picto/upload.svg') }} " alt="upload-resume"/>
 							{{ button_label|default('upload your resume') }}
 						</button>
 					</div>
-				{{ form_end(form) }}
+				{{ form_end(formUpload) }}
 			</div>
 		</div>
 		<div class="skills">

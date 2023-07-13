@@ -48,14 +48,14 @@ class CandidateController extends AbstractController
     #[Route('/{id}', name: 'show', methods: ['GET', 'POST'])]
     public function show(Candidate $candidate): Response
     {
-        $form = $this->createForm(UploadResumeType::class, $candidate, [
+        $formUpload = $this->createForm(UploadResumeType::class, $candidate, [
             'action' => $this->generateUrl('candidate_edit', ['id' => $candidate->getId()]),
             'method' => 'POST',
         ]);
 
         return $this->render('candidate/show.html.twig', [
             'candidate' => $candidate,
-            'form' => $form,
+            'formUpload' => $formUpload,
         ]);
     }
 
@@ -71,20 +71,26 @@ class CandidateController extends AbstractController
         if ($formUpload->isSubmitted() && $formUpload->isValid()) {
             $candidateRepository->save($candidate, true);
 
-            $this->addFlash('success', 'Your resume has been upload! :)');
+            $this->addFlash('success', 'Your resume has been uploaded! :)');
 
             return $this->redirectToRoute('candidate_show', ['id' => $candidate->getId()], Response::HTTP_SEE_OTHER);
-        } elseif ($form->isSubmitted() && $form->isValid()) {
-            $candidateRepository->save($candidate, true);
+        } else {
+            $this->addFlash('danger', 'Your file is not a pdf! :(');
 
             return $this->redirectToRoute('candidate_show', ['id' => $candidate->getId()], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('candidate/edit.html.twig', [
-            'candidate'  => $candidate,
-            'formUpload' => $formUpload,
-            'form'       => $form,
-        ]);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $candidateRepository->save($candidate, true);
+
+            return $this->redirectToRoute('candidate_show', ['id' => $candidate->getId()], Response::HTTP_SEE_OTHER);
+        } else {
+            return $this->render('candidate/edit.html.twig', [
+                'candidate'  => $candidate,
+                'formUpload' => $formUpload,
+                'form'       => $form,
+            ]);
+        }
     }
 
     #[Route('/{id}/updateVisibility', name: 'visibility')]
