@@ -67,7 +67,7 @@ class OfferController extends AbstractController
 
             $this->addFlash(
                 'success',
-                'Votre offre a été ajoutée avec succes'
+                'Your offer has been successfully added :D !'
             );
 
             return $this->redirectToRoute('offer_index', [], Response::HTTP_SEE_OTHER);
