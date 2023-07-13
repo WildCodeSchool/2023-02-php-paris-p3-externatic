@@ -198,6 +198,103 @@ $nav-underline-link-active-color:$secondary;
     background-color: $secondary;
 }
 
+// Media queries
+@media (min-width: 600px) {
+    #navigation-btn-mobile {
+        display: none;
+    }
+
+    //Show Candidate
+    .visibility-profile .profile h1 {
+        display: none;
+    }
+
+    .visibility-profile {
+        margin: 3em auto 4em auto;
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        grid-template-rows: 1fr;
+        width: 80%;
+        grid-gap: 2em;
+    }
+
+    //Box grey
+    .visibility-profile .visibility {
+        background-color: $tertiary;
+        padding: 1em 0.9em;
+        border: 0.09em solid #FED32C;
+        margin-block: auto;
+    }
+
+    #picture-profile{
+        margin-bottom: -9em;
+        margin-right: 25em;
+    }
+
+    .visibility-profile .visibility .viewers {
+        display: flex;
+        text-align: center;
+        justify-content: space-between;
+    }
+
+    #profile-card.p-3 .card-body.mt-2 {
+        display: flex;
+        margin-left: 11em;
+    }
+
+    #profile-card.p-3 .card-body.mt-2 .profile-informations {
+        width: 50%;
+        text-align: left;
+    }
+
+    #introduction.profile-blocks.mt-4 {
+        width: 70%;
+        margin: auto;
+    }
+
+    .skills {
+        display: flex;
+        justify-content: space-evenly;
+        padding-top: 2em;
+    }
+
+    .skills .profile-blocks.mt-4 {
+        width: 25%;
+    }
+
+    //Position buttons resume, uload resume
+    .resume-upload-resume {
+        margin: 1.5em 0 0 24em;
+        display: grid;
+        width: 40%;
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+    }
+
+    .portfolio {
+        margin: auto;
+        width: 50%;
+        padding-top: 2em;
+    }
+
+    .skills-tab > ul {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .picto-in-header {
+        justify-self: center;
+    }
+
+    .header-menu-for-mobile {
+        display: none;
+    }
+
+    .header-menu-for-desktop {
+        display: none;
+    }
+}
+
 //Title job , title exprience
 .visibility-profile .profile .profile-informations .job-title,
 .visibility-profile .profile .profile-informations .experience {
@@ -446,7 +543,6 @@ $navbar-padding-y: 0;
     justify-content: space-between;
 }
 
-
 //Offer index
 .offer-card {
     text-decoration: none;
@@ -569,7 +665,6 @@ hr {
     margin-right: 0.8rem;
 }
 
-
 .before-footer-btn {
     display: flex;
     justify-content: center;
@@ -585,6 +680,83 @@ hr {
     list-style-type: none;
 }
 
+.status-application-offer {
+    padding: 0.5em;
+    border-radius: 5px;
+    color: black;
+    background: rgba(254, 211, 44, .8);
+}
+
+//Create account
+#upload-candidate-picture-form {
+    background-color: $primary;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
+
+#upload-candidate-picture-form div ul li {
+    color: white;
+    list-style-type: none;
+}
+
+#profile-candidate-form .form-switch.form-check-reverse .form-check-input {
+    margin-top: 0.5rem;
+}
+
+#candidate_visible .form-check-input{
+    margin-top: 0.5rem;
+}
+
+#upload-candidate-picture-form .dropzone-placeholder,
+#upload-candidate-picture-form .dropzone-preview-filename,
+#upload-candidate-picture-form .dropzone-preview-button::before {
+    color: white;
+}
+
+#upload-candidate-picture-form .dropzone-container {
+    border: 2px dashed #fff;
+    justify-content: center;
+    min-height: 195px;
+}
+
+#upload-candidate-picture-form .dropzone-preview-image {
+    min-width: 130px;
+    height: 130px;
+}
+
+#profile-candidate-form {
+    background-color: rgba(243, 231, 236, 1);
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+#upload-resume-new {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+}
+
+#upload-resume-new input[type=file] {
+    font-size: 100px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+}
+
+//Register form
+#radio-button-roles input {
+    margin: 12px;
+}
+
+#radio-button-roles h6 {
+    font-weight: 600;
+}
+
+#radio-button-roles input[type='radio'] {
+    accent-color: $primary;
+}
+
 //Home Page
 #about-header {
     background-color: $primary;
@@ -597,10 +769,9 @@ hr {
     color: $light;
 }
 
-
 //Filter candidate application
 #status-application {
-    margin-top: -0.25em; 
+    margin-top: -0.25em;
     margin-left: 0.5em;
 }
 

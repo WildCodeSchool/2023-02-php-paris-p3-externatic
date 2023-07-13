@@ -29,7 +29,7 @@ class Application
     #[ORM\Column(length: 100)]
     private ?string $status = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type:"datetime", options:["default" => "CURRENT_TIMESTAMP"])]
     private DateTime $createdAt;
 
     #[ORM\ManyToOne(inversedBy: 'applications')]
