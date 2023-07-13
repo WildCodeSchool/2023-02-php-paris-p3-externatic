@@ -65,20 +65,17 @@ class Candidate implements Serializable
     #[Assert\NotBlank]
     private ?string $experience = null;
 
-    // #[Assert\Image(maxSize: '1M', mimeTypes: ['jpeg', 'jpg', 'png'], maxWidth: 79, maxHeight: 79)]
+    #[Assert\Image(
+        maxSize: '2M',
+        mimeTypes: ['image/jpeg', 'image/jpg', 'image/png'],
+        mimeTypesMessage:'Your image should be a jpeg, jpg or png'
+    )]
     #[Vich\UploadableField(mapping: 'candidates', fileNameProperty: 'picture')]
     private ?File $pictureFile = null;
 
     #[ORM\Column(length: 150, nullable: true)]
     #[Assert\Length(min: 2, max:100)]
     private ?string $picture = null;
-
-    // #[Vich\UploadableField(mapping: 'picture_file', fileNameProperty: 'picture')]
-    // #[Assert\File(
-    //     maxSize: '2M',
-    //     mimeTypes: ['image/jpeg', 'image/png', 'image/webp'],
-    // )]
-    // private ?File $pictureFile = null;
 
     #[ORM\OneToOne(inversedBy: 'candidate', cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
@@ -277,6 +274,11 @@ class Candidate implements Serializable
 
     public function getPicture(): ?string
     {
+        // if ($this->picture){
+        //     return $this->picture;
+        // } else {
+        //     return 'user.png';
+        // }
         return $this->picture;
     }
 

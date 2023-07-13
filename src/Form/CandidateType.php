@@ -8,8 +8,6 @@ use App\Entity\Skill;
 use Symfony\Component\Form\AbstractType;
 use Symfony\UX\Dropzone\Form\DropzoneType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\CallbackTransformer;
-use Symfony\Component\Form\ChoiceList\ChoiceList;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -18,8 +16,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\Choice;
-use Vich\UploaderBundle\Form\Type\VichFileType;
+use Symfony\Component\Validator\Constraints\Count as Count;
 
 class CandidateType extends AbstractType
 {
@@ -92,6 +89,11 @@ class CandidateType extends AbstractType
                 'expanded' => true,
                 'multiple' => true,
                 'by_reference' => false,
+                'constraints' => [
+                    new Count([
+                        'min' => 1, 'minMessage' => 'Please select at least one hard skill and one soft skill'
+                    ]),
+                ]
             ])
             ->add('resumeFile', DropzoneType::class, [
                 'required' => false,
@@ -110,7 +112,8 @@ class CandidateType extends AbstractType
             ])
             ->add('visible', CheckboxType::class, [
                 'label' => "I want my profile to be visible by recruiter",
-                'attr' => ['class' => 'form-check-input',],
+                'attr' => ['class' => 'form-check-input'],
+                'label_attr' => ['class' => 'fs-5'],
                 'required' => false,
             ])
         ;

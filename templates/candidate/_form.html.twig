@@ -1,4 +1,5 @@
-{{ form_start(form) }}
+{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+    {{ form_errors(form, {'attr': {'class': 'form-errors'}}) }}
     <div id="upload-candidate-picture-form"class="p-4">
         <div class="col mt-4" >
             {{ form_row(form.pictureFile) }}
@@ -35,19 +36,19 @@
         </div>
         <div class="col mt-4">
         <h3 class="mt-2 mb-4"> My Hard skills</h3>
+        {{ form_errors(form.skills) }}
             {% for label, value in field_choices(form.skills) %}
                 {% if label in constant('App\\Entity\\Skill::HARD')[0] %}
                     <input class="form-check-input border-primary" type="checkbox" name="{{ field_name(form.skills) }}[]" value="{{ value }}" id="flexCheckDefault" {{ value in field_value(form.skills) ? 'checked' : '' }}>
                     <label class="form-check-label" for="flexCheckDefault"> {{ label }} </label>
-                    {{ form_errors(form.skills) }}
                 {% endif %}
             {% endfor %}
         <h3 class="mt-4 mb-4">My Soft skills</h3>
+        {{ form_errors(form.skills) }}
             {% for label, value in field_choices(form.skills) %}
                 {% if label in constant('App\\Entity\\Skill::SOFT')[0] %}
                     <input class="form-check-input border-primary" type="checkbox" name="{{ field_name(form.skills) }}[]" value="{{ value }}" id="flexCheckDefault" {{ value in field_value(form.skills) ? 'checked' : '' }}>
                     <label class="form-check-label" for="flexCheckDefault"> {{ label }} </label>
-                    {{ form_errors(form.skills) }}
                 {% endif %}
             {% endfor %}
         </div>
@@ -59,7 +60,7 @@
                 Upload your resume</button>
                 <span id="file-selected"></span>
                 <input type="file" name="{{ field_name(form.resumeFile) }}" id="file-upload" onchange="showname()">
-                {{ form_errors(form.resumeFile) }}
+                {# {{ form_errors(form.resumeFile) }} #}
             </div>
         </div>
         <h3 class="mt-4"> My web presence</h3>
@@ -74,7 +75,6 @@
                 </div>
             </div>
         </div>
-        {{ form_errors(form) }}
     </div>
     <div class="text-center">
         <button type="submit" class="btn btn-secondary mt-4 bt-4">{{ button_label|default('Save') }}</button>
