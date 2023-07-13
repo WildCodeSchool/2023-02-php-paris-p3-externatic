@@ -71,7 +71,7 @@ class CandidateController extends AbstractController
         if ($formUpload->isSubmitted() && $formUpload->isValid()) {
             $candidateRepository->save($candidate, true);
 
-            $this->addFlash('success', 'Your resume has been upload! :)');
+            $this->addFlash('success', 'Your resume has been uploaded! :)');
 
             return $this->redirectToRoute('candidate_show', ['id' => $candidate->getId()], Response::HTTP_SEE_OTHER);
         } elseif ($form->isSubmitted() && $form->isValid()) {

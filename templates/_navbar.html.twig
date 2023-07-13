@@ -19,7 +19,7 @@
 				</li>
 			</ul>
 			{% if app.user %}
-				{% if app.user.roles[0] == "ROLE_CANDIDATE" %}
+				{% if app.user.roles[0] is constant("App\\Entity\\USER::ROLE_CANDIDATE") %}
 						<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 							<img src="{{ asset(app.user.candidate.picture) }}" id="profile-picture-navbar" alt="profile-picture">
 						</a>
@@ -27,7 +27,7 @@
 							<li><a class="dropdown-item" href="{{ path('logout') }}">Logout</a></li>
 							<li><a class="dropdown-item" href="{{ path('candidate_show', {'id': app.user.candidate.id}) }}">Show profile</a></li>
 						</ul>
-				{% elseif app.user.roles[0] == "ROLE_COMPANY" %}
+				{% elseif app.user.roles[0] is constant("App\\Entity\\USER::ROLE_COMPANY") %}
 						<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 							<img src="{{ asset(app.user.company.logo) }}"  alt="company-logo" width="50px">
 						</a>

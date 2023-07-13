@@ -27,10 +27,13 @@ class OfferController extends AbstractController
         $dateInterval = $interval->format('%m month(s) and %d day(s)');
 
         $applied = false;
-        $candidate = $this->getUser()->getCandidate();
-        if ($applyRepository->findOneBy(array('offer' => $offer,'candidate' => $candidate))) {
-            $applied = true;
+        if ($this->getUser()) {
+            $candidate = $this->getUser()->getCandidate();
+            if ($applyRepository->findOneBy(array('offer' => $offer,'candidate' => $candidate))) {
+                $applied = true;
+            }
         }
+        
 
         return $this->render('offer/show.html.twig', [
             'offer'        => $offer,
