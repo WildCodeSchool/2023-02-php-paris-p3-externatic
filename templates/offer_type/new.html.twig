@@ -5,7 +5,8 @@
 {% block body %}
     <h1>Create new Offer</h1>
 
-    {{ include('offer_type/_form.html.twig') }}
-
-    <a href="{{ path('app_offer_type_index') }}">back to list</a>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button type="submit">Add Offer</button>
+    {{ form_end(form) }}
 {% endblock %}

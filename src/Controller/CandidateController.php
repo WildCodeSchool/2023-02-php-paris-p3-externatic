@@ -3,15 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Candidate;
-use App\Entity\User;
 use App\Form\CandidateType;
 use App\Form\UploadResumeType;
 use App\Repository\CandidateRepository;
-use App\Repository\CandidateMetadataRepository;
-use App\Repository\UserRepository;
-use App\Service\Visibility;
-use Doctrine\DBAL\Schema\Visitor\Visitor;
-use GrumPHP\Task\Config\Metadata;
 use App\Form\SearchApplicationFilterType;
 use App\Repository\ApplicationRepository;
 use Knp\Component\Pager\PaginatorInterface;
@@ -48,7 +42,9 @@ class CandidateController extends AbstractController
 
             $candidateRepository->save($candidate, true);
 
-            return $this->redirectToRoute('candidate_index', [], Response::HTTP_SEE_OTHER);
+            $this->addFlash('success', 'Your account has been created! :)');
+
+            return $this->redirectToRoute('home_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('candidate/new.html.twig', [
@@ -83,7 +79,7 @@ class CandidateController extends AbstractController
         if ($formUpload->isSubmitted() && $formUpload->isValid()) {
             $candidateRepository->save($candidate, true);
 
-            $this->addFlash('success', 'Your resume has been upload! :)');
+            $this->addFlash('success', 'Your resume has been uploaded! :)');
 
             return $this->redirectToRoute('candidate_show', ['id' => $candidate->getId()], Response::HTTP_SEE_OTHER);
         } elseif ($form->isSubmitted() && $form->isValid()) {
@@ -127,11 +123,12 @@ class CandidateController extends AbstractController
 
         $form = $this->createForm(SearchApplicationFilterType::class, null, ['method' => 'GET']);
         $form->handleRequest($request);
-        $applications = $applicationRepo->findByCandidate($this->getUser());
 
         if ($form->isSubmitted() && $form->isValid()) {
             $search = $form->getData();
             $applications = $applicationRepo->findApplication($search, $candidate);
+        } else {
+            $applications = $applicationRepo->findByCandidate($candidate);
         }
 
         $applications = $paginator->paginate($applications, $request->query->getInt('page', 1), 6);

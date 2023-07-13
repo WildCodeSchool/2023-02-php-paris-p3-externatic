@@ -274,11 +274,6 @@ class Candidate implements Serializable
 
     public function getPicture(): ?string
     {
-        // if ($this->picture){
-        //     return $this->picture;
-        // } else {
-        //     return 'user.png';
-        // }
         return $this->picture;
     }
 

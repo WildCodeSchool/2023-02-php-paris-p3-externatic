@@ -1,5 +1,5 @@
 {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
-    {{ form_errors(form, {'attr': {'class': 'form-errors'}}) }}
+    {{ form_errors(form) }}
     <div id="upload-candidate-picture-form"class="p-4">
         <div class="col mt-4" >
             {{ form_row(form.pictureFile) }}
@@ -60,7 +60,6 @@
                 Upload your resume</button>
                 <span id="file-selected"></span>
                 <input type="file" name="{{ field_name(form.resumeFile) }}" id="file-upload" onchange="showname()">
-                {# {{ form_errors(form.resumeFile) }} #}
             </div>
         </div>
         <h3 class="mt-4"> My web presence</h3>
