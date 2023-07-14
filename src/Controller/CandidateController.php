@@ -29,14 +29,18 @@ class CandidateController extends AbstractController
     #[Route('/new', name: 'new', methods: ['GET', 'POST'])]
     public function new(Request $request, CandidateRepository $candidateRepository): Response
     {
-        $candidate = new Candidate();
+        $user = $this->getUser();
+        $candidate = $user->getCandidate();
+
         $form = $this->createForm(CandidateType::class, $candidate);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $candidateRepository->save($candidate, true);
 
-            return $this->redirectToRoute('candidate_index', [], Response::HTTP_SEE_OTHER);
+            $this->addFlash('success', 'Your account has been created! :)');
+
+            return $this->redirectToRoute('home_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('candidate/new.html.twig', [
@@ -71,7 +75,7 @@ class CandidateController extends AbstractController
         if ($formUpload->isSubmitted() && $formUpload->isValid()) {
             $candidateRepository->save($candidate, true);
 
-            $this->addFlash('success', 'Your resume has been upload! :)');
+            $this->addFlash('success', 'Your resume has been uploaded! :)');
 
             return $this->redirectToRoute('candidate_show', ['id' => $candidate->getId()], Response::HTTP_SEE_OTHER);
         } elseif ($form->isSubmitted() && $form->isValid()) {
@@ -79,7 +83,6 @@ class CandidateController extends AbstractController
 
             return $this->redirectToRoute('candidate_show', ['id' => $candidate->getId()], Response::HTTP_SEE_OTHER);
         }
-
         return $this->render('candidate/edit.html.twig', [
             'candidate'  => $candidate,
             'formUpload' => $formUpload,
@@ -116,7 +119,7 @@ class CandidateController extends AbstractController
 
         $form = $this->createForm(SearchApplicationFilterType::class, null, ['method' => 'GET']);
         $form->handleRequest($request);
-        $applications = $applicationRepo->findByCandidate($this->getUser());
+        $applications = $applicationRepo->findByCandidate($candidate);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $search = $form->getData();

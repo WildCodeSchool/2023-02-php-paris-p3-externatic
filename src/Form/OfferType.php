@@ -17,6 +17,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Vich\UploaderBundle\Form\Type\VichFileType;
 use Symfony\Component\Validator\Constraints\Count;
 use Doctrine\ORM\EntityRepository;
+use Symfony\UX\Dropzone\Form\DropzoneType;
 
 class OfferType extends AbstractType
 {
@@ -37,6 +38,7 @@ class OfferType extends AbstractType
             ->add('startAt', DateType::class, [
                 'label' => 'Starting date',
                 'widget' => 'single_text',
+                'by_reference' => true,
             ])
             ->add('contract', ChoiceType::class, [
                 'placeholder' => 'Contract',
@@ -74,9 +76,12 @@ class OfferType extends AbstractType
                     'placeholder' => 'Level of experience (in years)',
                 ]
             ])
-            ->add('offerPicture', VichFileType::class, [
+            ->add('offerPicture', DropzoneType::class, [
                 'required'      => false,
-                'allow_delete'  => true,
+                'label'         => false,
+                'attr' => [
+                    'placeholder' => 'Browse your picture offer here',
+                ],
             ])
             ->add('minSalary', IntegerType::class, [
                 'label' => false,
@@ -101,7 +106,6 @@ class OfferType extends AbstractType
             ])
             ->add('location', TextType::class, [
                 'label' => false,
-                'required' => false,
                 'attr' => [
                     'class' => 'form-control border-primary',
                     'placeholder' => 'Location',
@@ -112,8 +116,9 @@ class OfferType extends AbstractType
                 'required' => false,
                 'attr' => [
                     'class' => 'form-control border-primary',
-                    'placeholder' => 'Recrutement Process',
+                    'placeholder' => '1. Call with HR 2.Technical Test 3.Last interview',
                 ],
+                    'empty_data' => '1. Call with HR 2.Technical Test 3.Last interview',
             ])
             ->add('skills', EntityType::class, [
                 'label' => 'Required skills',

@@ -5,17 +5,17 @@ vich_uploader:
         type: attribute
 
     mappings:
-        offer_pictures:
+        offers:
             uri_prefix: /uploads/offerPictures
             upload_destination: '%upload_directory%'
             namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+
         candidates:
-           uri_prefix: /uploads/images
-           upload_destination: '%kernel.project_dir%/public/uploads/images'
-           namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+            uri_prefix: /uploads/images
+            upload_destination: '%kernel.project_dir%/public/uploads/images'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
 
         resumes:
-           uri_prefix: /uploads/resumes
-           upload_destination: '%kernel.project_dir%/public/uploads/resumes'
-           namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
-           
+            uri_prefix: /uploads/resumes
+            upload_destination: '%kernel.project_dir%/public/uploads/resumes'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer

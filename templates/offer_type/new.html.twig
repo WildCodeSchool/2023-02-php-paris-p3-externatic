@@ -7,7 +7,7 @@
     <h1>Create a new offer</h1>
 </div>
 <section class="margin">
-    {{ form_start(form) }}
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
     <div id="new-offer-form" class="p-4">
         <h3 class="mt-4">Job description</h3>
         <div class="col mt-4">
@@ -28,7 +28,7 @@
         <div class="col mt-4">
             {{ form_row(form.experience) }}
         </div>
-        <div class="col mt-4">
+        <div id="upload-offer-picture-form" class="col mt-4">
             {{ form_row(form.offerPicture) }}
         </div>
         <div class="col mt-4">
@@ -45,19 +45,19 @@
         </div>
         <div class="col mt-4">
         <h3 class="mt-2 mb-4"> Required Hard skills</h3>
+        {{ form_errors(form.skills) }}
             {% for label, value in field_choices(form.skills) %}
                 {% if label in constant('App\\Entity\\Skill::HARD')[0] %}
                     <input class="form-check-input border-primary" type="checkbox" name="{{ field_name(form.skills) }}[]" value="{{ value }}" id="flexCheckDefault" {{ value in field_value(form.skills) ? 'checked' : '' }}>
                     <label class="form-check-label" for="flexCheckDefault"> {{ label }} </label>
-                    {{ form_errors(form.skills) }}
                 {% endif %}
             {% endfor %}
         <h3 class="mt-4 mb-4"> Required Soft skills</h3>
+        {{ form_errors(form.skills) }}
             {% for label, value in field_choices(form.skills) %}
                 {% if label in constant('App\\Entity\\Skill::SOFT')[0] %}
                     <input class="form-check-input border-primary" type="checkbox" name="{{ field_name(form.skills) }}[]" value="{{ value }}" id="flexCheckDefault" {{ value in field_value(form.skills) ? 'checked' : '' }}>
                     <label class="form-check-label" for="flexCheckDefault"> {{ label }} </label>
-                    {{ form_errors(form.skills) }}
                 {% endif %}
             {% endfor %}
         </div>

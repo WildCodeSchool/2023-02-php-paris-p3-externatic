@@ -3,59 +3,78 @@
 namespace App\Entity;
 
 use App\Repository\CandidateRepository;
+use DateTime;
+use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use DateTime;
-use DateTimeInterface;
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Serializable;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: CandidateRepository::class)]
 #[Vich\Uploadable]
-class Candidate implements \Serializable
+class Candidate implements Serializable
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 100)]
+    #[ORM\Column(length: 100, nullable: true)]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 2, max:50)]
     private ?string $firstname = null;
 
-    #[ORM\Column(length: 100)]
+    #[ORM\Column(length: 100, nullable: true)]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 2, max:50)]
     private ?string $lastname = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 2, max:30)]
     private ?string $location = null;
 
     #[ORM\Column(length: 100, nullable: true)]
+    #[Assert\Length(min: 2, max:20)]
     private ?string $phone = null;
 
-    #[ORM\Column(length: 150)]
+    #[ORM\Column(length: 150, nullable: true)]
+    #[Assert\Length(min: 2, max:150)]
     private ?string $resume = null;
 
     #[Assert\File(maxSize: '2M', extensions: 'pdf', extensionsMessage: 'This is not a pdf file.')]
     #[Vich\UploadableField(mapping: 'resumes', fileNameProperty: 'resume')]
     private ?File $resumeFile = null;
 
-    #[ORM\Column(type: Types::TEXT, length: 300)]
+    #[ORM\Column(type: Types::TEXT, length: 300, nullable: true)]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 10, max:300)]
     private ?string $introduction = null;
 
-    #[ORM\Column(length: 150)]
+    #[ORM\Column(length: 150, nullable: true)]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 5, max:100)]
     private ?string $jobTitle = null;
 
     #[ORM\Column(length: 100, nullable: true)]
+    #[Assert\NotBlank]
     private ?string $experience = null;
 
-    // #[Assert\Image(maxSize: '1M', mimeTypes: ['jpeg', 'jpg', 'png'], maxWidth: 79, maxHeight: 79)]
+    #[Assert\Image(
+        maxSize: '2M',
+        mimeTypes: ['image/jpeg', 'image/jpg', 'image/png'],
+        mimeTypesMessage:'Your image should be a jpeg, jpg or png'
+    )]
     #[Vich\UploadableField(mapping: 'candidates', fileNameProperty: 'picture')]
     private ?File $pictureFile = null;
 
     #[ORM\Column(length: 150, nullable: true)]
+    #[Assert\Length(min: 2, max:100)]
     private ?string $picture = null;
 
     #[ORM\OneToOne(inversedBy: 'candidate', cascade: ['persist', 'remove'])]
@@ -65,7 +84,7 @@ class Candidate implements \Serializable
     #[ORM\ManyToMany(targetEntity: Skill::class, mappedBy: 'candidates')]
     private Collection $skills;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?bool $visible = null;
 
     #[ORM\OneToMany(mappedBy: 'candidate', targetEntity: Application::class)]
@@ -80,8 +99,8 @@ class Candidate implements \Serializable
     #[ORM\OneToMany(mappedBy: 'favorite', targetEntity: Company::class)]
     private Collection $favoriteCompanies;
 
-    #[ORM\OneToMany(mappedBy: 'candidate', targetEntity: CandidateMetadata::class)]
-    private Collection $metadata;
+    #[ORM\OneToMany(mappedBy: 'candidate', targetEntity: CandidateMetadata::class, cascade:['persist'])]
+    protected Collection $metadata;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?DateTimeInterface $updatedAt = null;
@@ -255,7 +274,7 @@ class Candidate implements \Serializable
 
     public function getPicture(): ?string
     {
-        return 'uploads/candidatePictures/' . $this->picture;
+        return $this->picture;
     }
 
     public function setPicture(string $picture): self
@@ -384,6 +403,13 @@ class Candidate implements \Serializable
             $this->favoriteCompanies->add($favoriteCompany);
             $favoriteCompany->setFavorite($this);
         }
+
+        return $this;
+    }
+
+    public function setMetadata(collection $metadata): self
+    {
+        $this->metadata = $metadata;
 
         return $this;
     }

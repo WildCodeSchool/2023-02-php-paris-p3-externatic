@@ -57,7 +57,7 @@ class Offer
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $createdAt = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable:true)]
     private ?\DateTimeInterface $startAt = null;
 
     #[ORM\Column(length: 150)]
@@ -93,7 +93,7 @@ class Offer
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $picture = null;
 
-    #[Vich\UploadableField(mapping: 'offer_pictures', fileNameProperty: 'picture')]
+    #[Vich\UploadableField(mapping: 'offers', fileNameProperty: 'picture')]
     #[Assert\File(
         maxSize:'1M',
         mimeTypes: ['image/jpeg', 'image/png','image/jpg'],
@@ -314,7 +314,7 @@ class Offer
 
     public function getPicture(): ?string
     {
-        return 'uploads/offerPictures/' . $this->picture;
+        return $this->picture;
     }
 
     public function setPicture(?string $picture): self
@@ -380,7 +380,7 @@ class Offer
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(?\DateTimeInterface $updatedAt): static
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
 
