@@ -97,6 +97,7 @@ class Offer
     #[Assert\File(
         maxSize:'1M',
         mimeTypes: ['image/jpeg', 'image/png','image/jpg'],
+        mimeTypesMessage:'Your image should be a jpeg, jpg or png'
     )]
     private ?File $offerPicture = null;
 
