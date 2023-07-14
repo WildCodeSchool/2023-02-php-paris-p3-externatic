@@ -54,7 +54,6 @@ class OfferType extends AbstractType
                 'attr' => [
                     'class' => 'form-select border-primary',
                     'aria-label' => 'Default select example',
-
                 ]
             ])
             ->add('description', TextareaType::class, [
