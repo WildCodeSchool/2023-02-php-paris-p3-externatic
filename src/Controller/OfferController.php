@@ -46,7 +46,9 @@ class OfferController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $offerRepository->save($offer, true);
 
-            return $this->redirectToRoute('offer_index', [], Response::HTTP_SEE_OTHER);
+            $this->addFlash('success', 'Your offer has been succesfully edited 😉');
+
+            return $this->redirectToRoute('home_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('offer_type/edit.html.twig', [
