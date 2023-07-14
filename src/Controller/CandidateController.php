@@ -11,6 +11,7 @@ use App\Repository\ApplicationRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -55,7 +56,7 @@ class CandidateController extends AbstractController
 
         return $this->render('candidate/show.html.twig', [
             'candidate' => $candidate,
-            'formUpload' => $formUpload,
+            'formUpload' => $formUpload ->createView(),
         ]);
     }
 
@@ -76,8 +77,10 @@ class CandidateController extends AbstractController
 
             return $this->redirectToRoute('candidate_show', ['id' => $candidate->getId()], Response::HTTP_SEE_OTHER);
         } else {
-            $this->addFlash('danger', 'Your file is not a pdf! :(');
-
+            $errors = $formUpload->getErrors();
+            foreach ($errors as $error) {
+                $this->addFlash('danger', $error->getMessage());
+            }
             return $this->redirectToRoute('candidate_show', ['id' => $candidate->getId()], Response::HTTP_SEE_OTHER);
         }
 
@@ -88,8 +91,8 @@ class CandidateController extends AbstractController
         } else {
             return $this->render('candidate/edit.html.twig', [
                 'candidate'  => $candidate,
-                'formUpload' => $formUpload,
-                'form'       => $form,
+                // 'formUpload' => $formUpload,
+                'form'       => $form->createView(),
             ]);
         }
     }

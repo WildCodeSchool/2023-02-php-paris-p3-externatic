@@ -16,32 +16,12 @@ class UploadResumeType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        // $fileConstraints = [
-        //     new File([
-        //         'maxSize' => '5M'
-        //     ])
-        // ];
         $builder
             ->add('resumeFile', DropzoneType::class, [
-
-                // 'validation_groups' => [
-                //     DropzoneType::class,
-                //     'Default'
-                // ],
-
-
+                'error_bubbling' => true,
                 'attr' => [ 'placeholder' => 'Drag & drop or browse your file', 'accept' => 'resume/pdf'],
-                // 'constraints' => [
-                //     new Assert\File([
-                //        'maxSize' => '2M',
-                //        'mimeTypes' => ['resume/pdf'],
-                //     ]),
-                //  ],
-
-                // 'mapped' => false,
                 'required' => false,
                 'label' => false,
-                // 'constraints' =>  $fileConstraints,
             ]);
     }
 

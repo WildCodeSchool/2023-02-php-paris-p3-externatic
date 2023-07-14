@@ -39,11 +39,12 @@ class Candidate implements Serializable
     #[ORM\Column(length: 150)]
     private ?string $resume = null;
 
-    // #[Assert\File(
-    //     maxSize: '2M',
-    //     maxSizeMessage: 'The size of this file is too large',
-    //     extensions: ['pdf'],
-    //     extensionsMessage: 'This is not a pdf file.')]
+    #[Assert\File(
+        maxSize: '2M',
+        maxSizeMessage: 'The size of this file is too large',
+        extensions: ['pdf'],
+        extensionsMessage: 'This is not a pdf file.'
+    )]
     #[Vich\UploadableField(mapping: 'resumes', fileNameProperty: 'resume')]
     private ?File $resumeFile = null;
 
