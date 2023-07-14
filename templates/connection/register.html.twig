@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+<section class="margin">
+    <div class="container text-center">
+        <h1> WELCOME !</h1>
+        <div class="row justify-content-center mt-4">
+            <div class="col col-sm-12 col-md-8 col-lg-6 col-xl-5 col-xxl-5">
+                <div id ="connection-header">
+                    <ul class="nav nav-underline justify-content-around" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link"  href="/login">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active"  href="/register" aria-current="page">Create an account</a>
+                        </li>
+                    </ul>
+                </div>
+                <div id="connection-form">
+                    <div class="tab-content">
+                        <button type="button" class="btn btn-primary btn-lg mt-2 mb-2">connect with Linkedin</button>
+                        <button type="button" class="btn btn-secondary btn-lg mt-2 mb-2">connect with Google</button>
+                            {{ form_start(registrationForm) }}
+                            <div class="col mt-4" id="radio-button-roles">
+                                <h6>You are...</h6>
+                                {{ form_row(registrationForm.roles) }}
+                            </div>
+                            <div class="col mt-4">
+                                {{ form_row(registrationForm.login) }}
+                            </div>
+                            <div class="col mt-4">
+                                {{ form_row(registrationForm.plainPassword) }}
+                            </div>
+                            <div class="col mt-4">
+                                {{ form_row(registrationForm.RGPDconsent) }}
+                            </div>
+                                {{ form_errors(registrationForm) }}
+                                <button type="submit" class="btn btn-secondary mt-4">Register</button>
+                            {{ form_end(registrationForm) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

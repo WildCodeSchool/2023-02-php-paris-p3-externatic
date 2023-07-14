@@ -53,7 +53,6 @@ class CandidateMetadata
     public function setMetadata(string $metadata): self
     {
         $this->metadata = $metadata;
-
         return $this;
     }
 

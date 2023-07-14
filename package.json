@@ -9,6 +9,7 @@
         "@swup/slide-theme": "^1.0",
         "@symfony/stimulus-bridge": "^3.2.0",
         "@symfony/ux-dropzone": "file:vendor/symfony/ux-dropzone/assets",
+        "@symfony/ux-live-component": "file:vendor/symfony/ux-live-component/assets",
         "@symfony/ux-swup": "file:vendor/symfony/ux-swup/assets",
         "@symfony/webpack-encore": "^4.0.0",
         "bootstrap": "^5.3.0",

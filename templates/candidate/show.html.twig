@@ -4,8 +4,8 @@
 {% endblock %}
 
 {% block body %}
-	{% include 'style/component/_navigationBtnMobile.html.twig' %}
-	{% include 'style/component/_navigationBtnDesktop.html.twig' %}
+	{% include 'style/component/_navigationBtnMobileCandidate.html.twig' %}
+	{% include 'style/component/_navigationBtnDesktopCandidate.html.twig' %}
 
 	<section class="margin">
 		<div class="visibility-profile">
@@ -70,9 +70,6 @@
 			<div id="upload-resume" class="col text-center mt-4">
 				{{ form_start(formUpload) }}
 				{{ form_errors(formUpload) }}
-				{# <pre>
-					{{ dump(form_errors(formUpload)) }}
-				</pre> #}
 				{{ form_widget(formUpload) }}
 					<div class="text-center">
 						<button class="btn btn-primary mt-2 mb-2">

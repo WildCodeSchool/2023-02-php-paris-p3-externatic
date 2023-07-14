@@ -19,7 +19,10 @@ class UploadResumeType extends AbstractType
         $builder
             ->add('resumeFile', DropzoneType::class, [
                 'error_bubbling' => true,
-                'attr' => [ 'placeholder' => 'Drag & drop or browse your file', 'accept' => 'resume/pdf'],
+                'attr' => [
+                    'placeholder' => 'Browse your resume here',
+                    'accept' => 'resume/pdf'
+                ],
                 'required' => false,
                 'label' => false,
             ]);
