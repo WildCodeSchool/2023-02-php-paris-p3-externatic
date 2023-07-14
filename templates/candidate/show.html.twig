@@ -69,8 +69,11 @@
 			</div>
 			<div id="upload-resume" class="col text-center mt-4">
 				{{ form_start(formUpload) }}
-				{{ form_widget(formUpload) }}
 				{{ form_errors(formUpload) }}
+				{# <pre>
+					{{ dump(form_errors(formUpload)) }}
+				</pre> #}
+				{{ form_widget(formUpload) }}
 					<div class="text-center">
 						<button class="btn btn-primary mt-2 mb-2">
 							<img class="img_icon fa-border" src=" {{ asset('build/images/picto/upload.svg') }} " alt="upload-resume"/>

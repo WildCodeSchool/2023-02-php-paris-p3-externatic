@@ -9,6 +9,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use DateTime;
 use DateTimeInterface;
+use Serializable;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -16,7 +17,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: CandidateRepository::class)]
 #[Vich\Uploadable]
-class Candidate implements \Serializable
+class Candidate implements Serializable
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -38,7 +39,11 @@ class Candidate implements \Serializable
     #[ORM\Column(length: 150)]
     private ?string $resume = null;
 
-    #[Assert\File(maxSize: '2M', extensions: 'pdf', extensionsMessage: 'This is not a pdf file.')]
+    // #[Assert\File(
+    //     maxSize: '2M',
+    //     maxSizeMessage: 'The size of this file is too large',
+    //     extensions: ['pdf'],
+    //     extensionsMessage: 'This is not a pdf file.')]
     #[Vich\UploadableField(mapping: 'resumes', fileNameProperty: 'resume')]
     private ?File $resumeFile = null;
 

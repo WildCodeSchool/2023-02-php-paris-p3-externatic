@@ -68,6 +68,7 @@ class CandidateController extends AbstractController
         $formUpload = $this->createForm(UploadResumeType::class, $candidate);
         $formUpload->handleRequest($request);
 
+
         if ($formUpload->isSubmitted() && $formUpload->isValid()) {
             $candidateRepository->save($candidate, true);
 
