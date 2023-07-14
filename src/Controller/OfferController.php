@@ -2,20 +2,14 @@
 
 namespace App\Controller;
 
-use App\Form\SearchOfferFilterType;
 use App\Entity\Offer;
 use App\Form\OfferType;
-use App\Entity\Application;
-use App\Entity\Skill;
-use App\Form\ApplicationType;
 use App\Repository\ApplicationRepository;
-use App\Repository\OfferRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Knp\Component\Pager\PaginatorInterface;
 use DateTime;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
@@ -59,10 +53,10 @@ class OfferController extends AbstractController
 
             $this->addFlash(
                 'success',
-                'Your offer has been successfully added :D !'
+                'Your offer has been successfully added 😇 !'
             );
 
-            return $this->redirectToRoute('offer_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('home_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('offer_type/new.html.twig', [
