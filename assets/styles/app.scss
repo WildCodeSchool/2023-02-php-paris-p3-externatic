@@ -198,8 +198,6 @@ $nav-underline-link-active-color:$secondary;
     background-color: $secondary;
 }
 
-<<<<<<< HEAD
-=======
 // Media queries
 @media (min-width: 600px) {
     #navigation-btn-mobile {
@@ -297,7 +295,6 @@ $nav-underline-link-active-color:$secondary;
     }
 }
 
->>>>>>> dev
 //Title job , title exprience
 .visibility-profile .profile .profile-informations .job-title,
 .visibility-profile .profile .profile-informations .experience {
@@ -546,7 +543,6 @@ $navbar-padding-y: 0;
     justify-content: space-between;
 }
 
-
 //Offer index
 .offer-card {
     text-decoration: none;
@@ -669,7 +665,6 @@ hr {
     margin-right: 0.8rem;
 }
 
-
 .before-footer-btn {
     display: flex;
     justify-content: center;
@@ -685,6 +680,83 @@ hr {
     list-style-type: none;
 }
 
+.status-application-offer {
+    padding: 0.5em;
+    border-radius: 5px;
+    color: black;
+    background: rgba(254, 211, 44, .8);
+}
+
+//Create account
+#upload-candidate-picture-form {
+    background-color: $primary;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
+
+#upload-candidate-picture-form div ul li {
+    color: white;
+    list-style-type: none;
+}
+
+#profile-candidate-form .form-switch.form-check-reverse .form-check-input {
+    margin-top: 0.5rem;
+}
+
+#candidate_visible .form-check-input{
+    margin-top: 0.5rem;
+}
+
+#upload-candidate-picture-form .dropzone-placeholder,
+#upload-candidate-picture-form .dropzone-preview-filename,
+#upload-candidate-picture-form .dropzone-preview-button::before {
+    color: white;
+}
+
+#upload-candidate-picture-form .dropzone-container {
+    border: 2px dashed #fff;
+    justify-content: center;
+    min-height: 195px;
+}
+
+#upload-candidate-picture-form .dropzone-preview-image {
+    min-width: 130px;
+    height: 130px;
+}
+
+#profile-candidate-form {
+    background-color: rgba(243, 231, 236, 1);
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+#upload-resume-new {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+}
+
+#upload-resume-new input[type=file] {
+    font-size: 100px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+}
+
+//Register form
+#radio-button-roles input {
+    margin: 12px;
+}
+
+#radio-button-roles h6 {
+    font-weight: 600;
+}
+
+#radio-button-roles input[type='radio'] {
+    accent-color: $primary;
+}
+
 //Home Page
 #about-header {
     background-color: $primary;
@@ -697,10 +769,9 @@ hr {
     color: $light;
 }
 
-
 //Filter candidate application
 #status-application {
-    margin-top: -0.25em; 
+    margin-top: -0.25em;
     margin-left: 0.5em;
 }
 
@@ -711,6 +782,39 @@ hr {
     border-radius: 5px;
     margin-top: 1em;
     padding: 0.5em;
+}
+
+//Create Offer
+
+#new-offer-form {
+    background-color: rgba(243, 231, 236, 1);
+    border-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+input[type="date"] {
+    margin-left: 10px;
+    background-color: $tertiary;
+    border-radius: 5px;
+    padding: 2px;
+}
+
+#upload-offer-picture-form .dropzone-placeholder,
+#upload-offer-picture-form .dropzone-preview-filename,
+#upload-offer-picture-form .dropzone-preview-button::before {
+    color: $primary;
+}
+
+#upload-offer-picture-form .dropzone-container {
+    border: 2px dashed $primary;
+    justify-content: center;
+    min-height: 195px;
+}
+
+#upload-offer-picture-form .dropzone-preview-image {
+    min-width: 260px;
+    height: 144px;
 }
 
 //Media queries

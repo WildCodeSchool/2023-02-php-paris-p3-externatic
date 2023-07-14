@@ -12,6 +12,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\File;
+use DateTimeImmutable;
 
 #[ORM\Entity(repositoryClass: OfferRepository::class)]
 #[Vich\Uploadable]
@@ -91,7 +92,7 @@ class Offer
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $picture = null;
 
-    #[Vich\UploadableField(mapping: 'offer_pictures', fileNameProperty: 'picture')]
+    #[Vich\UploadableField(mapping: 'offers', fileNameProperty: 'picture')]
     #[Assert\File(
         maxSize:'1M',
         mimeTypes: ['image/jpeg', 'image/png','image/jpg'],
@@ -112,7 +113,7 @@ class Offer
         $this->skills = new ArrayCollection();
         $this->applications = new ArrayCollection();
         $this->favorite = new ArrayCollection();
-        $this->createdAt = new \DateTimeImmutable();
+        $this->createdAt = new DateTimeImmutable();
     }
 
     public function getId(): ?int

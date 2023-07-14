@@ -3,45 +3,78 @@
 namespace App\Entity;
 
 use App\Repository\CandidateRepository;
+use DateTime;
+use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use phpDocumentor\Reflection\Types\Nullable;
+use Serializable;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: CandidateRepository::class)]
-class Candidate
+#[Vich\Uploadable]
+class Candidate implements Serializable
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 100)]
+    #[ORM\Column(length: 100, nullable: true)]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 2, max:50)]
     private ?string $firstname = null;
 
-    #[ORM\Column(length: 100)]
+    #[ORM\Column(length: 100, nullable: true)]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 2, max:50)]
     private ?string $lastname = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 2, max:30)]
     private ?string $location = null;
 
     #[ORM\Column(length: 100, nullable: true)]
+    #[Assert\Length(min: 2, max:20)]
     private ?string $phone = null;
 
-    #[ORM\Column(length: 150)]
+    #[ORM\Column(length: 150, nullable: true)]
+    #[Assert\Length(min: 2, max:150)]
     private ?string $resume = null;
 
-    #[ORM\Column(type: Types::TEXT, length: 300)]
+    #[Assert\File(maxSize: '2M', extensions: 'pdf', extensionsMessage: 'This is not a pdf file.')]
+    #[Vich\UploadableField(mapping: 'resumes', fileNameProperty: 'resume')]
+    private ?File $resumeFile = null;
+
+    #[ORM\Column(type: Types::TEXT, length: 300, nullable: true)]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 10, max:300)]
     private ?string $introduction = null;
 
-    #[ORM\Column(length: 150)]
+    #[ORM\Column(length: 150, nullable: true)]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 5, max:100)]
     private ?string $jobTitle = null;
 
     #[ORM\Column(length: 100, nullable: true)]
+    #[Assert\NotBlank]
     private ?string $experience = null;
 
+    #[Assert\Image(
+        maxSize: '2M',
+        mimeTypes: ['image/jpeg', 'image/jpg', 'image/png'],
+        mimeTypesMessage:'Your image should be a jpeg, jpg or png'
+    )]
+    #[Vich\UploadableField(mapping: 'candidates', fileNameProperty: 'picture')]
+    private ?File $pictureFile = null;
+
     #[ORM\Column(length: 150, nullable: true)]
+    #[Assert\Length(min: 2, max:100)]
     private ?string $picture = null;
 
     #[ORM\OneToOne(inversedBy: 'candidate', cascade: ['persist', 'remove'])]
@@ -51,7 +84,7 @@ class Candidate
     #[ORM\ManyToMany(targetEntity: Skill::class, mappedBy: 'candidates')]
     private Collection $skills;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?bool $visible = null;
 
     #[ORM\OneToMany(mappedBy: 'candidate', targetEntity: Application::class)]
@@ -66,8 +99,13 @@ class Candidate
     #[ORM\OneToMany(mappedBy: 'favorite', targetEntity: Company::class)]
     private Collection $favoriteCompanies;
 
-    #[ORM\OneToMany(mappedBy: 'candidate', targetEntity: CandidateMetadata::class)]
-    private Collection $metadata;
+    #[ORM\OneToMany(mappedBy: 'candidate', targetEntity: CandidateMetadata::class, cascade:['persist'])]
+    protected Collection $metadata;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?DateTimeInterface $updatedAt = null;
+
+    public const UPLOAD_REPOSITORY = '/public/uploads/resumes';
 
     public function __construct()
     {
@@ -131,12 +169,57 @@ class Candidate
         return $this;
     }
 
-    public function getResume(): ?string
+    public function serialize()
     {
-        return 'upload/resumees/' . $this->resume;
+        return serialize(array(
+            $this->id,
+            $this->picture,
+            $this->resume,
+        ));
     }
 
-    public function setResume(string $resume): self
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->picture,
+            $this->resume,
+            ) = unserialize($serialized, array('allowed_classes' => false));
+    }
+
+    public function setResumeFile(?File $resumeFile = null): Candidate
+    {
+        $this->resumeFile = $resumeFile;
+        if ($resumeFile) {
+            $this->updatedAt = new DateTime('now');
+        }
+
+        return $this;
+    }
+
+    public function getResumeFile(): ?File
+    {
+        return $this->resumeFile;
+    }
+
+    public function setUpdatedAt(?DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function getResume(): ?string
+    {
+        return $this->resume;
+    }
+
+    public function setResume(?string $resume): self
     {
         $this->resume = $resume;
 
@@ -179,9 +262,19 @@ class Candidate
         return $this;
     }
 
+    public function setPictureFile(?File $pictureFile = null): void
+    {
+        $this->pictureFile = $pictureFile;
+    }
+
+    public function getPictureFile(): ?File
+    {
+        return $this->pictureFile;
+    }
+
     public function getPicture(): ?string
     {
-        return 'uploads/candidatePictures/' . $this->picture;
+        return $this->picture;
     }
 
     public function setPicture(string $picture): self
@@ -299,18 +392,6 @@ class Candidate
         return $this;
     }
 
-    public function getFavorite(): ?Company
-    {
-        return $this->favorite;
-    }
-
-    public function setFavorite(?Company $favorite): self
-    {
-        $this->favorite = $favorite;
-
-        return $this;
-    }
-
     public function getFavoriteCompanies(): Collection
     {
         return $this->favoriteCompanies;
@@ -322,6 +403,13 @@ class Candidate
             $this->favoriteCompanies->add($favoriteCompany);
             $favoriteCompany->setFavorite($this);
         }
+
+        return $this;
+    }
+
+    public function setMetadata(collection $metadata): self
+    {
+        $this->metadata = $metadata;
 
         return $this;
     }
@@ -338,6 +426,16 @@ class Candidate
             $metadata->setCandidate($this);
         }
 
+        return $this;
+    }
+
+    public function getFavorite(): ?Company
+    {
+        return $this->favorite;
+    }
+    public function setFavorite(?Company $favorite): self
+    {
+        $this->favorite = $favorite;
         return $this;
     }
 }

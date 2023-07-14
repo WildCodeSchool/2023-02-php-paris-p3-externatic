@@ -4,8 +4,8 @@
 {% endblock %}
 
 {% block body %}
-	{% include 'style/component/_navigationBtnMobile.html.twig' %}
-	{% include 'style/component/_navigationBtnDesktop.html.twig' %}
+	{% include 'style/component/_navigationBtnMobileCandidate.html.twig' %}
+	{% include 'style/component/_navigationBtnDesktopCandidate.html.twig' %}
 
 	<section class="margin">
 		<div class="visibility-profile">
@@ -18,17 +18,18 @@
 						</a>
 					</div>
 					<div>
-						<p>Viewed by X people</p>
+						<p>Viewed by 54 people</p>
 						<img class="img_icon fa-border" src="{{ asset('build/images/picto/profil_views.svg') }}" alt="profil_views"/>
 					</div>
 				</div>
 				<div class="candidate-completion">
 					<span>Profil completion</span>
+					<img class="img_icon fa-border" src="{{ asset('build/images/picto/completion.svg') }}" alt="profil_completion"/>
 				</div>
 			</div>
 			<div class="profile">
 				<h1>YOUR PROFILE</h1>
-				<img id="picture-profile"src="{{ asset(app.user.candidate.picture) }}" alt="profile-picture">
+				<img id="picture-profile" src="{{ vich_uploader_asset(candidate, 'pictureFile') }}" alt="profile-picture">
 				<div id="profile-card" class="p-3">
 					<div class="card-body mt-2">
 						<div class="profile-informations">
@@ -64,10 +65,18 @@
 		</div>
 		<div class="resume-upload-resume">
 			<div id="resume" class="col text-center mt-4">
-				<button type="button" class="btn btn-secondary mt-2"><img class="img_icon fa-border" src=" {{ asset('build/images/picto/cv.svg') }} " alt=" curriculum"/>your resume</button>
+				{{ include('candidate/_modal_resume.html.twig') }}
 			</div>
 			<div id="upload-resume" class="col text-center mt-4">
-				<button type="button" class="btn btn-secondary upload mt-2"><img class="img_icon fa-border" src="{{ asset('build/images/picto/upload.svg') }}" alt="upload"/>update your resume</button>
+				{{ form_start(form, {'action': path('candidate_edit', { 'id': candidate.id })}) }}
+				{{ form_widget(form) }}
+					<div class="text-center">
+						<button class="btn btn-primary mt-2 mb-2">
+							<img class="img_icon fa-border" src=" {{ asset('build/images/picto/upload.svg') }} " alt="upload-resume"/>
+							{{ button_label|default('upload your resume') }}
+						</button>
+					</div>
+				{{ form_end(form) }}
 			</div>
 		</div>
 		<div class="skills">
