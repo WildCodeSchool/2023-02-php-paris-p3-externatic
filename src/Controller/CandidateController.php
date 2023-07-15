@@ -66,6 +66,7 @@ class CandidateController extends AbstractController
     #[Route('/{id}/edit', name: 'edit', methods: ['GET', 'POST'])]
     public function edit(Candidate $candidate, Request $request, CandidateRepository $candidateRepository): Response
     {
+        // dd($candidate);
         $form = $this->createForm(CandidateType::class, $candidate);
         $form->handleRequest($request);
 
@@ -80,6 +81,8 @@ class CandidateController extends AbstractController
             return $this->redirectToRoute('candidate_show', ['id' => $candidate->getId()], Response::HTTP_SEE_OTHER);
         } elseif ($form->isSubmitted() && $form->isValid()) {
             $candidateRepository->save($candidate, true);
+
+            $this->addFlash('success', 'Your account has been updated! :)');
 
             return $this->redirectToRoute('candidate_show', ['id' => $candidate->getId()], Response::HTTP_SEE_OTHER);
         }
@@ -116,7 +119,6 @@ class CandidateController extends AbstractController
         ApplicationRepository $applicationRepo,
         PaginatorInterface $paginator
     ): Response {
-
         $form = $this->createForm(SearchApplicationFilterType::class, null, ['method' => 'GET']);
         $form->handleRequest($request);
         $applications = $applicationRepo->findByCandidate($candidate);
@@ -127,7 +129,6 @@ class CandidateController extends AbstractController
         }
 
         $applications = $paginator->paginate($applications, $request->query->getInt('page', 1), 6);
-
         return $this->render('candidate/applications.html.twig', [
             'candidate' => $candidate,
             'now' => new DateTime(),

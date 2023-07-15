@@ -25,6 +25,11 @@ class UserAuthenticator extends AbstractLoginFormAuthenticator
     {
     }
 
+    public function supports(Request $request): bool
+    {
+        return 'app_login' === $request->attributes->get('_route') && $request->isMethod('POST');
+    }
+
     public function authenticate(Request $request): Passport
     {
         $login = $request->request->get('login', '');

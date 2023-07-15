@@ -63,16 +63,23 @@
                 <input type="file" name="{{ field_name(form.resumeFile) }}" id="file-upload" onchange="showname()">
             </div>
         </div>
-        <h3 class="mt-4"> My web presence</h3>
+        <h3 class="mt-4" id="web-presence"> My web presence</h3>
         <div class="row">
             <div class="col">
-                <div {{ stimulus_controller('form-collection') }}
-                data-form-collection-index-value="{{ form.metadata|length > 0 ? form.metadata|last.vars.name + 1 : 0 }}"
-                data-form-collection-prototype-value="{{ form_widget(form.metadata.vars.prototype)|e('html_attr') }}"
-                >
-                <div {{ stimulus_target('form-collection', 'collectionContainer') }}></div>
-                    <button type="button" class="btn btn-primary mt-2" {{ stimulus_action('form-collection', 'addCollectionElement') }}>Add a link</button>
-                </div>
+                {% if candidate.metadata %}
+                    {%  for metadata in candidate.metadata %}
+                        {{ form_row(form.metadata) }}
+                    {% endfor %}
+                {% else %}
+                    <div {{ stimulus_controller('form-collection')}}
+                    data-form-collection-index-value="{{ form.metadata|length > 0 ? form.metadata|last.vars.name + 1 : 0 }}"
+                    data-form-collection-prototype-value="{{ form_widget(form.metadata.vars.prototype)|e('html_attr') }}"
+                    >
+
+                    <div {{ stimulus_target('form-collection', 'collectionContainer') }} id="metadata"></div>
+                        <button type="button" class="btn btn-primary mt-2" {{ stimulus_action('form-collection', 'addCollectionElement') }}>Add a link</button>
+                    </div>
+                {% endif %}
             </div>
         </div>
     </div>
@@ -86,4 +93,9 @@
         const name = document.getElementById("file-upload");
         document.getElementById("file-selected").innerHTML = name.files.item(0).name;
     };
+
+    // const container = document.createElement('div');
+    // const metadata = document.getElementById('candidate_metadata');
+    // container.appendChild(metadata);
+
 </script>

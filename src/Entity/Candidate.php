@@ -438,4 +438,8 @@ class Candidate implements Serializable
         $this->favorite = $favorite;
         return $this;
     }
+
+    // public function __toString() {
+    //     return $this->getId();
+    // }
 }
