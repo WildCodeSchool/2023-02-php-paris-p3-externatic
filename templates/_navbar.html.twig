@@ -35,7 +35,11 @@
                     </ul>
 				{% elseif app.user.roles[0] is constant("App\\Entity\\USER::ROLE_COMPANY") %}
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="{{ asset(app.user.company.logo) }}"  alt="company-logo" width="50px">
+                        {% if app.user.company.logo %}
+                            <img src="{{ vich_uploader_asset(app.user.company, 'logoFile') }}"  alt="company-logo" width="50px">
+                        {% else %}
+                            <img src="{{ asset("build/images/user.png") }}"  alt="default-user" width="50px">
+                        {% endif %}
                     </a>
                     <ul class="dropdown-menu" style="position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate(0px, 55px);" data-popper-placement="bottom-end">
                         <li><a class="dropdown-item" href="{{ path('logout') }}">Logout</a></li>
