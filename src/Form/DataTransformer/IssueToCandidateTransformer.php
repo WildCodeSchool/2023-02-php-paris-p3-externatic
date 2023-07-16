@@ -29,7 +29,7 @@ class IssueToCandidateTransformer implements DataTransformerInterface
     }
 
     /**
-     * Transforms a string (number) to an object (issue).
+     * Transforms a string (id) to an object (candidate).
      *
      * @param  string $candidateId
      * @throws TransformationFailedException if object (candidate) is not found.

@@ -120,6 +120,7 @@ class CandidateController extends AbstractController
     ): Response {
         $form = $this->createForm(SearchApplicationFilterType::class, null, ['method' => 'GET']);
         $form->handleRequest($request);
+
         $applications = $applicationRepo->findByCandidate($candidate);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -128,6 +129,7 @@ class CandidateController extends AbstractController
         }
 
         $applications = $paginator->paginate($applications, $request->query->getInt('page', 1), 6);
+
         return $this->render('candidate/applications.html.twig', [
             'candidate' => $candidate,
             'now' => new DateTime(),

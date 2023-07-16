@@ -37,11 +37,17 @@
                 <div id="profile-card" class="p-3">
 					<div class="card-body mt-2">
 						<div class="profile-informations">
-							<p class="name">{{ candidate.firstname }}
-								{{ candidate.lastname }}</p>
-							<p class="job-title">{{ candidate.jobTitle }}</p>
+							<p class="name">
+                                {{ candidate.firstname }}
+								{{ candidate.lastname }}
+                            </p>
+							<p class="job-title">
+                                {{ candidate.jobTitle }}
+                            </p>
 							<p class="experience">
-								{{ candidate.experience }} years of experience</p>
+								{{ candidate.experience }}
+                                years of experience
+                            </p>
 						</div>
 						<div class="metadata">
 							{% for metadata in candidate.metadata %}

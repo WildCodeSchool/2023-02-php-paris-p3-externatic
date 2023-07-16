@@ -60,14 +60,14 @@
         </div>
         <div class="col mt-4">
             <h3 class="mt-4 mb-4">My resume</h3>
-                <div class="upload-btn-wrapper" id="upload-resume-new">
-                    <button class="btn btn-primary" id="button">
-                        <img class="img_icon fa-border" src=" {{ asset('build/images/picto/upload-white.svg') }} " alt="upload-resume"/>
-                        Upload your resume
-                    </button>
-                    <span id="file-selected">{{ candidate.resume}}</span>
-                    <input type="file" name="{{ field_name(form.resumeFile) }}" id="file-upload" onchange="showname()">
-                </div>
+            <div class="upload-btn-wrapper" id="upload-resume-new">
+                <button class="btn btn-primary" id="button">
+                    <img class="img_icon fa-border" src=" {{ asset('build/images/picto/upload-white.svg') }} " alt="upload-resume"/>
+                    Upload your resume
+                </button>
+                <span id="file-selected">{{ candidate.resume}}</span>
+                <input type="file" name="{{ field_name(form.resumeFile) }}" id="file-upload" onchange="showname()">
+            </div>
         </div>
         <h3 class="mt-4" id="web-presence"> My web presence</h3>
         <div class="row">

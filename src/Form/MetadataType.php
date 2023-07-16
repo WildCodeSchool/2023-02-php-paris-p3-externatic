@@ -65,8 +65,8 @@ class MetadataType extends AbstractType
             ->add('candidate', HiddenType::class, [
                 'empty_data' =>  $this->security->getUser()->getCandidate(),
                 'by_reference' => false,
-            ])
-        ;
+            ]);
+
         $builder->get('candidate')
         ->addModelTransformer($this->transformer);
     }
