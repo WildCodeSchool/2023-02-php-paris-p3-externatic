@@ -66,7 +66,6 @@ class CandidateController extends AbstractController
     #[Route('/{id}/edit', name: 'edit', methods: ['GET', 'POST'])]
     public function edit(Candidate $candidate, Request $request, CandidateRepository $candidateRepository): Response
     {
-        // dd($candidate);
         $form = $this->createForm(CandidateType::class, $candidate);
         $form->handleRequest($request);
 

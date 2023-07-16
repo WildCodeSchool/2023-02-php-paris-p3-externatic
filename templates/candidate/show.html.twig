@@ -29,24 +29,29 @@
 			</div>
 			<div class="profile">
 				<h1>YOUR PROFILE</h1>
-				<img id="picture-profile" src="{{ vich_uploader_asset(candidate, 'pictureFile') }}" alt="profile-picture">
+                {% if app.user.candidate.picture is not null %}
+                    <img id="picture-profile" src="{{ vich_uploader_asset(candidate, 'pictureFile') }}" alt="profile-picture">
+                {% else %}
+                    <img src="{{ asset("build/images/user.png") }}" id="picture-profile" alt="default-user" width="50px">
+                {% endif %}
                 <div id="profile-card" class="p-3">
 					<div class="card-body mt-2">
 						<div class="profile-informations">
 							<p class="name">{{ candidate.firstname }}
 								{{ candidate.lastname }}</p>
 							<p class="job-title">{{ candidate.jobTitle }}</p>
-							<p class="experience">XP
-								{{ candidate.experience }}</p>
+							<p class="experience">
+								{{ candidate.experience }} years of experience</p>
 						</div>
 						<div class="metadata">
 							{% for metadata in candidate.metadata %}
-								{% if metadata.type == 'GitHub' %}
-									<a href="{{ metadata.metadata }}">
+								{% if metadata.github %}
+									<a target="_blank" href="{{ metadata.github}}">
 										<img class="metadata" src="{{ asset('build/images/picto/github_black.svg') }}" alt="github"/>
 									</a>
-								{% elseif metadata.type == 'linkedin' %}
-									<a href="{{ metadata.metadata }}">
+                                {% endif %}
+								{% if metadata.linkedin %}
+									<a target="_blank" href="{{ metadata.linkedin }}">
 										<img class="metadata" src="{{ asset('build/images/picto/linkedin_black.svg') }}" alt="linkedin"/>
 									</a>
 								{% endif %}
@@ -111,18 +116,23 @@
 				</div>
 			</div>
 		</div>
-		<div class="portfolio">
-			<div class="profile-blocks mt-4">
-				<div class="card-body p-4 ">
-					<p>PORTEFOLIO</p>
-					{% for metadata in candidate.metadata %}
-						{% if metadata.type == 'portfolio' %}
-							<a href="{{ metadata.metadata }}">Portfolio<img src="{{ asset('build/images/picto/link.svg') }}" alt="portfolio"/></a>
-						{% endif %}
-					{% endfor %}
-				</div>
-			</div>
-		</div>
+        {% for metadata in candidate.metadata %}
+            {% if metadata.portefolio or metadata.other %}
+                <div class="portfolio">
+                    <div class="profile-blocks mt-4">
+                        <div class="card-body p-4 ">
+                            <p>MY PROJECTS</p>
+                            {% if metadata.portefolio %}
+                                <a target="_blank" href="{{ metadata.portefolio }}">Portfolio<img src="{{ asset('build/images/picto/link.svg') }}" alt="portfolio"/></a>
+                            {% endif %}
+                            {% if metadata.other %}
+                                <a target="_blank" href="{{ metadata.other }}">Other<img src="{{ asset('build/images/picto/link.svg') }}" alt="portfolio"/></a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
 		<div class="col text-center mt-4">
 			<button type="button" class="btn btn-secondary mt-2">
 				<a href="{{ path('candidate_edit', {'id': candidate.id}) }}">Edit</a>

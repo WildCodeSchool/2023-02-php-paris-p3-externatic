@@ -49,14 +49,14 @@ class CandidateType extends AbstractType
             'attr' => [
                 'class' => 'form-control border-primary',
                 'placeholder' => 'Location',
-            ],
+                ],
             ])
             ->add('phone', TelType::class, [
             'label' => false,
             'attr' => [
                 'class' => 'form-control border-primary',
                 'placeholder' => 'Phone number',
-            ],
+                ],
             'required' => false,
             ])
             ->add('jobTitle', TextType::class, [
@@ -106,6 +106,7 @@ class CandidateType extends AbstractType
                 'entry_type' => MetadataType::class,
                 'entry_options' => ['label' => false],
                 'allow_add' => true,
+                'prototype' => true,
                 'allow_delete' => true,
                 'label' => false,
                 'by_reference' => false,
