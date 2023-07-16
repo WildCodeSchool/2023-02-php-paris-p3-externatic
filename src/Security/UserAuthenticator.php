@@ -21,9 +21,8 @@ class UserAuthenticator extends AbstractLoginFormAuthenticator
 
     public const LOGIN_ROUTE = 'login';
 
-    public function supports(Request $request): bool
+    public function __construct(private UrlGeneratorInterface $urlGenerator)
     {
-        return 'app_login' === $request->attributes->get('_route') && $request->isMethod('POST');
     }
 
     public function authenticate(Request $request): Passport
