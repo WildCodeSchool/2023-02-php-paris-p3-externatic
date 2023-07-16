@@ -21,10 +21,6 @@ class UserAuthenticator extends AbstractLoginFormAuthenticator
 
     public const LOGIN_ROUTE = 'login';
 
-    public function __construct(private UrlGeneratorInterface $urlGenerator)
-    {
-    }
-
     public function supports(Request $request): bool
     {
         return 'app_login' === $request->attributes->get('_route') && $request->isMethod('POST');
