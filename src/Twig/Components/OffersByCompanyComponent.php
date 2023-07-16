@@ -22,6 +22,7 @@ final class OffersByCompanyComponent
 
     public function searchOfferByCompany(): ?array
     {
-        return $this->repository->searchOffersByCompany($this->security->getUser()->getCompany()->getId(), $this->search);
+        return $this->repository
+            ->searchOffersByCompany($this->security->getUser()->getCompany()->getId(), $this->search);
     }
 }
