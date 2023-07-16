@@ -32,12 +32,16 @@ class OfferController extends AbstractController
             if ($applyRepository->findOneBy(array('offer' => $offer,'candidate' => $candidate))) {
                 $applied = true;
             }
+            if ($this->getUser()->getCompany()) {
+                $company = $this->getUser()->getCompany();
+            }
         }
 
         return $this->render('offer/show.html.twig', [
             'offer'        => $offer,
             'dateInterval' => $dateInterval,
             'applied'      => $applied,
+            'company'      => $company,
         ]);
     }
 

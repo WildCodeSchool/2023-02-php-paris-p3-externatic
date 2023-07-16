@@ -1,0 +1,197 @@
+<div{{ attributes }}>
+    <div class="row align-items-center justify-content-center mt-2" id="search-input">
+        <div class="col-md-4 mt-4">
+            <input type="text" class="form-control" placeholder="Find an offer" type="text" id="input_search" data-model="search">
+            <img id="glass" class="position-absolute" src="{{ asset('build/images/picto/glass.svg') }}">
+        </div>
+    </div>
+    <div class="row align-items-center justify-content-end mt-2" id="search-input">
+        <div class="col-md-2 mt-2">
+            <a class="btn btn-secondary d-block w-100" role="button" href="#">Add offer <img src="{{ asset('build/images/picto/add_doc.svg') }}"></a>
+        </div>
+    </div>
+    <div class="count mt-4">
+        <h5>
+            {{ app.user.company.offers.count }}
+            offers found
+        </h5><hr>
+    </div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="accordion accordion-flush" id="application-card" tabindex="1">
+                {% for offer in this.searchOfferByCompany %}
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <div class="row align-items-center p-3">
+                                <h4 class="col-6">Offer #{{ offer.id }} {{ offer.title }}</h4>
+                                <p class="col-3 h6 mb-4">
+                                    <img class="picto" src="{{ asset('build/images/picto/location-offer.svg') }}" alt="pictoLocation">
+                                    {{ offer.location }}
+                                </p>
+                                <div class="col-1">
+                                    <a href="{{ path('offer_show', {'id': offer.id}) }}"><button class="btn btn-secondary btn-sm" >See more</button></a>
+                                </div>
+                                <div class="col-1">
+                                    <a href="#"><button class="btn btn-secondary btn-sm" style="--bs-btn-padding-x: 1.7rem;">Edit</button></a>
+                                </div>
+                                <div class="col-1">
+                                    <a href="#"><button class="btn btn-secondary btn-sm" style="--bs-btn-padding-x: 1rem;">Archive</button></a>
+                                </div>
+                            </div>
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{ offer.id }}" aria-expanded="false" aria-controls="flush-collapseOne">
+                            {{ offer.applications.count }} Candidates
+                            </button>
+                        </h2>
+                        <div id="flush-collapse{{ offer.id }}" class="accordion-collapse collapse" data-bs-parent="#application-card">
+                            <div class="accordion-body">
+                                {% if offer.applications.count / 12 | round(0, 'ceil') <= 1 %}
+                                    <div class="row row-cols-3">
+                                        {% for application in offer.applications %}
+                                            <div class="col col-md-border">
+                                                {% if (loop.index % 3) == 0 %}
+                                                <div class="row align-items-center">
+                                                {% else %}
+                                                <div class="row align-items-center border-end">
+                                                {% endif %}
+                                                    <div class="col-2">
+                                                        <img src="{{ vich_uploader_asset(application.candidate, 'pictureFile') }}" id="profile-picture-navbar" alt="profile-picture">
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <p>{{ application.candidate.firstname }} {{ application.candidate.lastname }}</p>
+                                                    </div>
+                                                    <div class="col-4">
+                                                        {% if application.status == constant('App\\Entity\\Application::STATUS_RECEIVED') %}
+                                                            <p ><img class="picto" src="{{ asset('build/images/picto/received.svg') }}" alt="pictoReceivedApplication">
+                                                                {{ application.status }}
+                                                            </p>
+                                                        {% elseif application.status == constant('App\\Entity\\Application::STATUS_INREVIEW') %}
+                                                            <p><img class="picto" src="{{ asset('build/images/picto/in-review.svg') }}" alt="pictoInReviewApplication">
+                                                                {{ application.status }}
+                                                            </p>
+                                                        {% elseif application.status == constant('App\\Entity\\Application::STATUS_ACCEPTED') %}
+                                                            <p><img class="picto" src="{{ asset('build/images/picto/accepted.svg') }}" alt="pictoAcceptedApplication">
+                                                                {{ application.status }}
+                                                            </p>
+                                                        {% elseif application.status == constant('App\\Entity\\Application::STATUS_REJECTED') %}
+                                                            <p><img class="picto" src="{{ asset('build/images/picto/rejected.svg') }}" alt="pictoRejectedApplication">
+                                                                {{ application.status }}
+                                                            </p>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                <div id="carouselExampleIndicators" class="carousel slide">
+                                    <div class="carousel-indicators">
+                                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                                        {% for i in 0..(((offer.applications.count / 12)|round(0, 'ceil')|number_format) - 2) %}
+                                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ i + 1 }}" aria-label="Slide {{ i + 2 }}"></button>
+                                        {% endfor %}
+                                    </div>
+                                    <div class="carousel-inner">
+                                        <div class="carousel-item active">
+                                            <div class="row row-cols-3">
+                                                {% for application in offer.applications %}
+                                                    {% if loop.index <= 12 %}
+                                                        <div class="col col-md-border">
+                                                            {% if (loop.index % 3) == 0 %}
+                                                            <div class="row align-items-center">
+                                                            {% else %}
+                                                            <div class="row align-items-center border-end">
+                                                            {% endif %}
+                                                                <div class="col-2">
+                                                                    <img src="{{ vich_uploader_asset(application.candidate, 'pictureFile') }}" id="profile-picture-navbar" alt="profile-picture">
+                                                                </div>
+                                                                <div class="col-6">
+                                                                    <p>{{ application.candidate.firstname }} {{ application.candidate.lastname }}</p>
+                                                                </div>
+                                                                <div class="col-4">
+                                                                    {% if application.status == constant('App\\Entity\\Application::STATUS_RECEIVED') %}
+                                                                        <p ><img class="picto" src="{{ asset('build/images/picto/received.svg') }}" alt="pictoReceivedApplication">
+                                                                            {{ application.status }}
+                                                                        </p>
+                                                                    {% elseif application.status == constant('App\\Entity\\Application::STATUS_INREVIEW') %}
+                                                                        <p><img class="picto" src="{{ asset('build/images/picto/in-review.svg') }}" alt="pictoInReviewApplication">
+                                                                            {{ application.status }}
+                                                                        </p>
+                                                                    {% elseif application.status == constant('App\\Entity\\Application::STATUS_ACCEPTED') %}
+                                                                        <p><img class="picto" src="{{ asset('build/images/picto/accepted.svg') }}" alt="pictoAcceptedApplication">
+                                                                            {{ application.status }}
+                                                                        </p>
+                                                                    {% elseif application.status == constant('App\\Entity\\Application::STATUS_REJECTED') %}
+                                                                        <p><img class="picto" src="{{ asset('build/images/picto/rejected.svg') }}" alt="pictoRejectedApplication">
+                                                                            {{ application.status }}
+                                                                        </p>
+                                                                    {% endif %}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                        {% for j in 0..(((offer.applications.count / 12)|round(0, 'ceil')|number_format) - 2) %}
+                                            <div class="carousel-item">
+                                                <div class="row row-cols-3">
+                                                    {% for application in offer.applications %}
+                                                        {% if loop.index > (12 * (j + 1)) and loop.index <= (12 * (j + 2)) %}
+                                                            <div class="col col-md-border">
+                                                                {% if (loop.index % 3) == 0 %}
+                                                                <div class="row align-items-center">
+                                                                {% else %}
+                                                                <div class="row align-items-center border-end">
+                                                                {% endif %}
+                                                                    <div class="col-2">
+                                                                        <img src="{{ vich_uploader_asset(application.candidate, 'pictureFile') }}" id="profile-picture-navbar" alt="profile-picture">
+                                                                    </div>
+                                                                    <div class="col-6">
+                                                                        <p>{{ application.candidate.firstname }} {{ application.candidate.lastname }}</p>
+                                                                    </div>
+                                                                    <div class="col-4">
+                                                                        {% if application.status == constant('App\\Entity\\Application::STATUS_RECEIVED') %}
+                                                                            <p ><img class="picto" src="{{ asset('build/images/picto/received.svg') }}" alt="pictoReceivedApplication">
+                                                                                {{ application.status }}
+                                                                            </p>
+                                                                        {% elseif application.status == constant('App\\Entity\\Application::STATUS_INREVIEW') %}
+                                                                            <p><img class="picto" src="{{ asset('build/images/picto/in-review.svg') }}" alt="pictoInReviewApplication">
+                                                                                {{ application.status }}
+                                                                            </p>
+                                                                        {% elseif application.status == constant('App\\Entity\\Application::STATUS_ACCEPTED') %}
+                                                                            <p><img class="picto" src="{{ asset('build/images/picto/accepted.svg') }}" alt="pictoAcceptedApplication">
+                                                                                {{ application.status }}
+                                                                            </p>
+                                                                        {% elseif application.status == constant('App\\Entity\\Application::STATUS_REJECTED') %}
+                                                                            <p><img class="picto" src="{{ asset('build/images/picto/rejected.svg') }}" alt="pictoRejectedApplication">
+                                                                                {{ application.status }}
+                                                                            </p>
+                                                                        {% endif %}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                    <button class="carousel-control-prev" id="previous-arrow" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Previous</span>
+                                    </button>
+                                    <button class="carousel-control-next" id="next-arrow" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Next</span>
+                                    </button>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    
+</div>
