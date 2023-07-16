@@ -1,0 +1,53 @@
+<div class="text-center"id="dashboard-candidate">
+<h3 class="p-4">Welcome {{ candidate.firstname }} :)</h3>
+    <div class="row">
+        <div class="col">
+            <img src="{{ asset('build/images/picto/received-white.svg') }}" alt="pictoReceivedApplication">
+                {% set receveidNbre = 0 %}
+                {% for application in candidate.applications %}
+                    {% if  application.status == constant('App\\Entity\\Application::STATUS_RECEIVED') %}
+                        {% set receveidNbre = receveidNbre + 1 %}
+                    {% endif %}
+                {% endfor %}
+            <div class="col mt-4">
+                <p>{{ receveidNbre }} <span class="dashboard-candidate-text">application(s)</span></p>
+            </div>
+        </div>
+        <div class="col">
+            <img src="{{ asset('build/images/picto/in-review-white.svg') }}" alt="pictoInReviewApplication">
+                {% set inReviewNbre = 0 %}
+                {% for application in candidate.applications %}
+                    {% if  application.status == constant('App\\Entity\\Application::STATUS_INREVIEW') %}
+                        {% set inReviewNbre = inReviewNbre + 1 %}
+                    {% endif %}
+                {% endfor %}
+            <div class="col mt-3">
+                <p>{{ inReviewNbre }} <span class="dashboard-candidate-text">in study</span></p>
+            </div>
+        </div>
+        <div class="col">
+            <img src="{{ asset('build/images/picto/accepted-white.svg') }}" alt="pictoAcceptedApplication">
+                {% set AcceptedNbre = 0 %}
+                {% for application in candidate.applications %}
+                    {% if  application.status == constant('App\\Entity\\Application::STATUS_ACCEPTED') %}
+                        {% set AcceptedNbre = AcceptedNbre + 1 %}
+                    {% endif %}
+                {% endfor %}
+            <div class="col mt-4">
+                <p>{{ AcceptedNbre }} <span class="dashboard-candidate-text">approved</span></p>
+            </div>
+        </div>
+        <div class="col">
+            <img src="{{ asset('build/images/picto/rejected-white.svg') }}" alt="pictoRejectedApplication">
+                {% set rejecteddNbre = 0 %}
+                {% for application in candidate.applications %}
+                    {% if  application.status == constant('App\\Entity\\Application::STATUS_REJECTED') %}
+                        {% set rejecteddNbre = rejecteddNbre + 1 %}
+                    {% endif %}
+                {% endfor %}
+            <div class="col mt-4">
+                <p>{{ rejecteddNbre }} <span class="dashboard-candidate-text">refused</span></p>
+            </div>
+        </div>
+    </div>
+</div>

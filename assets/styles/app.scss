@@ -198,7 +198,14 @@ $nav-underline-link-active-color:$secondary;
     background-color: $secondary;
 }
 
-// Media queries
+//Dashboard candidate
+#dashboard-candidate {
+    background-color: $primary;
+    color:white;
+    height: 13.6rem;
+}
+
+//Media queries
 @media (min-width: 600px) {
     #navigation-btn-mobile {
         display: none;
@@ -956,6 +963,10 @@ hr {
 
     #submit-search-application {
         width: 85%;
+    }
+
+    #dashboard-candidate .dashboard-candidate-text {
+        display:none;
     }
 }
 
