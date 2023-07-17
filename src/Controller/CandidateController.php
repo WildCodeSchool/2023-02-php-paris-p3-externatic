@@ -140,34 +140,37 @@ class CandidateController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/addFavorite', name: 'favorite', methods: ['GET', 'POST'])]
+    #[Route('/{id}/addToFavorite', name: 'favorites', methods: ['GET', 'POST'])]
     public function addOfferToFavorites(
         CandidateRepository $candidateRepository,
-        Offer $offer,
-        Candidate $candidate
+        Offer $offer
     ): Response {
-        $this->getUser()->getCanditate()->addFavoriteOffer($offer);
+        $candidate = $this->getUser()->getCandidate();
+
+        $candidate->isOfferInFavorites($offer) ?
+        $candidate->removeFavoriteOffer($offer) :
+        $candidate->addFavoriteOffer($offer);
 
         $candidateRepository->save($candidate, true);
 
-        //à redirect sur candidate_research
-        return $this->redirectToRoute('home_index', ['id' => $candidate->getId()], Response::HTTP_SEE_OTHER);
+        //changer la redirection vers la page candidate_research
+        return $this->redirectToRoute('home_index', ['offer' => $offer->getId()], Response::HTTP_SEE_OTHER);
     }
 
     #[Route('/{id}/collection', name: 'collection')]
-    public function showCollection(Candidate $candidate): Response
-    {
-        $collection = $candidate->getFavoriteOffers();
+    public function showCollection(
+        Candidate $candidate,
+        PaginatorInterface $paginator,
+        Request $request
+    ): Response {
+        $offers = $candidate->getFavoriteOffers();
 
-        // if (empty($collection)) {
-        //     throw $this->createNotFoundException(
-        //         'No offer registered as favorites.'
-        //     );
-        // }
+        $offers = $paginator->paginate($offers, $request->query->getInt('page', 1), 6);
 
         return $this->render('candidate/collection.html.twig', [
             'candidate' => $candidate,
-            'collection' => $collection,
+            'offers' => $offers,
+            'now' => new DateTime(),
         ]);
     }
 }

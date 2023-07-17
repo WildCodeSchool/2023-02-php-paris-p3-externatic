@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ candidate.firstname }}'s applications
+{% endblock %}
+
+{% block body %}
+	{% include 'style/component/_navigationBtnMobileCandidate.html.twig' %}
+	{% include 'style/component/_navigationBtnDesktopCandidate.html.twig' %}
+    {% include "offer/_offerCard.html.twig" %}
+
+{% endblock %}

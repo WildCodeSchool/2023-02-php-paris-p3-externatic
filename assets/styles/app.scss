@@ -565,11 +565,15 @@ $navbar-padding-y: 0;
 
 .grey-area {
     width: 30%;
+    height: 3rem;
     background-color: $tertiary;
     text-align: center;
     font-size: 14px;
     font-weight: 600;
     padding: 0.3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #offer-date {
