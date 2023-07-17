@@ -137,4 +137,13 @@ class CandidateController extends AbstractController
             'form' => $form,
         ]);
     }
+
+    #[Route('/{id}/addFavory', name: 'favory')]
+    public function addOfferToFavorites(CandidateRepository $candidateRepository, Candidate $candidate): Response
+    {
+        $candidate->setVisible(!($candidateRepository->findOneById($candidate->getId()))->isVisible());
+        $candidateRepository->save($candidate, true);
+
+        return $this->redirectToRoute('candidate_show', ['id' => $candidate->getId()], Response::HTTP_SEE_OTHER);
+    }
 }
