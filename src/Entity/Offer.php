@@ -13,6 +13,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\File;
 use DateTimeImmutable;
+use DateTime;
 
 #[ORM\Entity(repositoryClass: OfferRepository::class)]
 #[Vich\Uploadable]
@@ -56,7 +57,7 @@ class Offer
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $createdAt = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable:true)]
     private ?\DateTimeInterface $startAt = null;
 
     #[ORM\Column(length: 150)]
@@ -96,6 +97,7 @@ class Offer
     #[Assert\File(
         maxSize:'1M',
         mimeTypes: ['image/jpeg', 'image/png','image/jpg'],
+        mimeTypesMessage:'Your image should be a jpeg, jpg or png'
     )]
     private ?File $offerPicture = null;
 
@@ -283,8 +285,6 @@ class Offer
             $this->applications->add($application);
             $application->setOffer($this);
         }
-
-
         return $this;
     }
 
@@ -313,7 +313,7 @@ class Offer
 
     public function getPicture(): ?string
     {
-        return 'uploads/offerPictures/' . $this->picture;
+        return $this->picture;
     }
 
     public function setPicture(?string $picture): self
@@ -363,7 +363,7 @@ class Offer
     {
         $this->offerPicture = $image;
         if ($image) {
-            $this->updatedAt = new \DateTime('now');
+            $this->updatedAt = new DateTime('now');
         }
 
         return $this;
@@ -379,7 +379,7 @@ class Offer
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(?\DateTimeInterface $updatedAt): static
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
 

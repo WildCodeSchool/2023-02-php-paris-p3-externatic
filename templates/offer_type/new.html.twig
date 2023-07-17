@@ -7,9 +7,10 @@
         <h1>Edit Offer : {{ offer.title }}</h1>
     </div>
     {% include "_form.html.twig" %}
+
     <div class="text-center">
         <button type="submit" class="btn btn-secondary mt-4 bt-4">{{ button_label|default('Add Offer') }}</button>
     </div>
     {{ form_end(form) }}
-    </section>
+</section>
 {% endblock %}

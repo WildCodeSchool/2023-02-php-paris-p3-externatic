@@ -8,21 +8,22 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: CandidateMetadataRepository::class)]
 class CandidateMetadata
 {
-    public const METADATA_LINKEDIN = 'linkedin';
-    public const METADATA_GITHUB = 'GitHub';
-    public const METADATA_PORTFOLIO = 'portfolio';
-    public const METADATA = [self::METADATA_LINKEDIN, self::METADATA_GITHUB, self::METADATA_PORTFOLIO];
-
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 100)]
-    private ?string $type = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $linkedin = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $metadata = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $github = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $portefolio = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $other = null;
 
     #[ORM\ManyToOne(inversedBy: 'metadata')]
     #[ORM\JoinColumn(nullable: false)]
@@ -33,26 +34,51 @@ class CandidateMetadata
         return $this->id;
     }
 
-    public function getType(): ?string
+    public function getLinkedin(): ?string
     {
-        return $this->type;
+        return $this->linkedin;
     }
 
-    public function setType(string $type): self
+    public function setLinkedin(string $linkedin): self
     {
-        $this->type = $type;
+        $this->linkedin = $linkedin;
 
         return $this;
     }
 
-    public function getMetadata(): ?string
+    public function getGithub(): ?string
     {
-        return $this->metadata;
+        return $this->github;
     }
 
-    public function setMetadata(string $metadata): self
+    public function setGithub(string $github): self
     {
-        $this->metadata = $metadata;
+        $this->github = $github;
+
+        return $this;
+    }
+
+    public function getPortefolio(): ?string
+    {
+        return $this->portefolio;
+    }
+
+    public function setPortefolio(string $portefolio): self
+    {
+        $this->portefolio = $portefolio;
+
+        return $this;
+    }
+
+    public function getOther(): ?string
+    {
+        return $this->other;
+    }
+
+    public function setOther(string $other): self
+    {
+        $this->other = $other;
+
         return $this;
     }
 

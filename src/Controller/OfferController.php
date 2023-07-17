@@ -5,7 +5,7 @@ namespace App\Controller;
 use App\Entity\Offer;
 use App\Form\OfferType;
 use App\Repository\ApplicationRepository;
-use App\Repository\OfferRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -36,27 +36,53 @@ class OfferController extends AbstractController
             'applied'      => $applied,
         ]);
     }
-
+  
     #[Route('/{id}/edit', name: 'form_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Offer $offer, OfferRepository $offerRepository): Response
+      public function edit(Request $request, Offer $offer, OfferRepository $offerRepository): Response
+      {
+          $form = $this->createForm(OfferType::class, $offer);
+          $form->handleRequest($request);
+
+          if ($form->isSubmitted() && $form->isValid()) {
+              $offerRepository->save($offer, true);
+
+              $this->addFlash('success', 'Your offer has been succesfully edited 😉');
+
+              return $this->redirectToRoute('home_index', [], Response::HTTP_SEE_OTHER);
+          }
+
+          return $this->render('offer_type/edit.html.twig', [
+              'offer' => $offer,
+              'form' => $form,
+          ]);
+      }
+
+    #[Route('/form/new', name: 'form_new', methods: ['GET', 'POST'])]
+    public function new(Request $request, EntityManagerInterface $manager): Response
     {
+        $offer = new Offer();
         $form = $this->createForm(OfferType::class, $offer);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $offerRepository->save($offer, true);
+            $offer = $form->getData();
+            $offer->setCompany($this->getUser()->getCompany());
 
-            $this->addFlash('success', 'Your offer has been succesfully edited 😉');
+            $manager->persist($offer);
+            $manager->flush();
 
+            $this->addFlash(
+                'success',
+                'Your offer has been successfully added 😇 !'
+            );
+          
             return $this->redirectToRoute('home_index', [], Response::HTTP_SEE_OTHER);
         }
-
-        return $this->render('offer_type/edit.html.twig', [
+        return $this->render('offer_type/new.html.twig', [
             'offer' => $offer,
             'form' => $form,
         ]);
     }
-
     #[Route('/apply/{id}', name: 'apply', methods: ['GET'])]
     #[IsGranted('ROLE_CANDIDATE')]
     public function applyOffer(Offer $offer, ApplicationRepository $applyRepository): Response
