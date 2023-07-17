@@ -14,12 +14,12 @@
 								<a class="offer-card" href="{{ path('offer_show', { id : offer.id }) }}">
 									<div class="card">
 										<div class="cardHead ratio ratio-16x9">
-											<img class="index-offer-picture" src="{{ asset(offer.picture) }}">
+											<img class="index-offer-picture" src="{{ vich_uploader_asset(offer, 'offerPicture') }}">
 										</div>
 										<div id="card-body" class="card-body">
 											<article>
 												<section class="sub-head">
-													<img class="index-company-logo me-1" src="{{ asset(offer.company.logo) }}">
+													<img class="index-company-logo me-1" src="{{ vich_uploader_asset(offer.company, 'logoFile') }}">
 													<p>{{ offer.company.name }}</p>
 												</section>
 												<h4 class="index-offer-title-section">
@@ -59,17 +59,21 @@
 														day(s) ago
 													{% endif %}
 												</p>
-                                                {# {# {% if app.user.candidate is not null %} #}
-                                                <div class="text-end">
-                                                    <a href="{{ path('candidate_favorites', {id: offer.id})}}">
-                                                        <i class="bi {{ app.user.candidate.isOfferInFavorites(offer) ? 'bi bi-bookmark-fill' : 'bi bi-bookmark' }}"></i>
-                                                    </a>
-                                                </div>
-                                                {# {% endif %} #}
-											</article>
+                                            </article>
 										</div>
 									</div>
 								</a>
+                                {% if app.user %}
+                                    {% if app.user.roles[0] is constant("App\\Entity\\USER::ROLE_CANDIDATE") %}
+                                        <div class="text-end">
+                                            <a href="{{ path('candidate_favorites', {id: offer.id})}}">
+                                                <div class="mb-2 me-2">
+                                                    <i class="bi {{ app.user.candidate.isOfferInFavorites(offer) ? 'bi bi-bookmark-fill' : 'bi bi-bookmark' }}"></i>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    {% endif %}
+                                {% endif %}
 							</div>
 						</div>
 					</div>

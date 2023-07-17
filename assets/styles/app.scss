@@ -533,10 +533,6 @@ $navbar-padding-y: 0;
     top: -0.5rem;
 }
 
-.index-offer-picture {
-    border-radius: 5px;
-}
-
 .other-info {
     display: flex;
     justify-content: space-between;
@@ -633,7 +629,7 @@ $navbar-padding-y: 0;
 }
 
 .index-company-logo {
-    width: 4rem;
+    max-height: 2rem;
 }
 
 .index-offer-title-section {

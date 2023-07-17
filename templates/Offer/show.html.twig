@@ -12,8 +12,8 @@
 			{% include "style/component/_navigationBtnDesktopCompany.html.twig" %}
 		</div>
 	{% endif %}
-	<section class="offer-show-header-section" style="background-image: url( {{ asset(offer.picture) }} ); background-size: cover;">
-		<img class="index-company-logo" src="{{ asset(offer.company.logo) }}">
+	<section class="offer-show-header-section" style="background-image: url( {{ vich_uploader_asset(offer, 'offerPicture') }} ); background-size: cover;">
+		<img class="index-company-logo" src="{{ vich_uploader_asset(offer.company, 'logoFile') }}">
 		<p>{{ offer.company.name }}</p>
 		<h3 class="mb-4 mt-4">
 			<strong>{{ offer.title }}</strong>
