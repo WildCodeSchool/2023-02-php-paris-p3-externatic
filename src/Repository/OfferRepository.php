@@ -97,24 +97,17 @@ class OfferRepository extends ServiceEntityRepository
         return $queryBuilder->getResult();
     }
 
-    public function customizeResearch(?array $data): ?array
+    public function customizeResearch(Candidate $candidate): ?array
     {
-
         $queryBuilder = $this->createQueryBuilder('o')
-            ->select('o', 'ca')
-            ->join('o.candidate', 'ca')
+            ->select('o', 'c')
+            ->join('o.company', 'c')
 
-            // ->having('o.title := title', { title : ca.job_title})
-
-            // ->andWhere('o.skills LIKE ca.skills')
-            // ->setParameter('skills', $data['skills'])
-
-            // ->andWhere('o.title LIKE ca.job_title')
-            // ->setParameter('title', $data['title'])
-
-
+            //Filtrer Candidate jobTitle
+            ->andWhere('o.title LIKE :title')
+            ->setParameter('title', '%' . $candidate->getJobTitle() . '%')
             ->getQuery();
-                //por defecto todas las ofertas con prefltraje
+
         return $queryBuilder->getResult();
     }
 }

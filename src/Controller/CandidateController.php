@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Candidate;
+use App\Entity\Offer;
 use App\Form\CandidateType;
 use App\Form\UploadResumeType;
 use App\Repository\CandidateRepository;
@@ -26,20 +27,12 @@ class CandidateController extends AbstractController
         Candidate $candidate,
         Request $request,
         OfferRepository $offerRepository,
-        PaginatorInterface $paginator
+        PaginatorInterface $paginator,
     ): Response {
         $form = $this->createForm(SearchOfferFilterType::class, null, ['method' => 'GET']);
         $form->handleRequest($request);
-        $filters = $form->getData();
 
-
-
-
-
-
-        // $offers = $offerRepository->findwithFilter($filters);
-        $offersPersonalized = $offerRepository->customizeResearch($filters);
-
+        $offersPersonalized = $offerRepository->customizeResearch($candidate);
         $offers = $paginator->paginate($offersPersonalized, $request->query->getInt('page', 1), 6);
 
         return $this->render('candidate/research.html.twig', [
@@ -49,11 +42,6 @@ class CandidateController extends AbstractController
             'candidate' => $candidate,
         ]);
     }
-
-
-
-
-
 
     #[Route('/new', name: 'new', methods: ['GET', 'POST'])]
     public function new(Request $request, CandidateRepository $candidateRepository): Response
