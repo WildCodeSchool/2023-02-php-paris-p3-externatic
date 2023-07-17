@@ -25,6 +25,11 @@ class UserAuthenticator extends AbstractLoginFormAuthenticator
     {
     }
 
+    public function supports(Request $request): bool
+    {
+        return 'app_login' === $request->attributes->get('_route') && $request->isMethod('POST');
+    }
+
     public function authenticate(Request $request): Passport
     {
         $login = $request->request->get('login', '');
@@ -42,6 +47,7 @@ class UserAuthenticator extends AbstractLoginFormAuthenticator
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
+        //$targetParth = get page where the user where before login
         $targetPath = $this->getTargetPath($request->getSession(), $firewallName);
         if ($targetPath) {
             return new RedirectResponse($targetPath);
@@ -53,10 +59,5 @@ class UserAuthenticator extends AbstractLoginFormAuthenticator
     protected function getLoginUrl(Request $request): string
     {
         return $this->urlGenerator->generate(self::LOGIN_ROUTE);
-    }
-
-    public function supports(Request $request): bool
-    {
-        return 'app_login' === $request->attributes->get('_route') && $request->isMethod('POST');
     }
 }
