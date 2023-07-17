@@ -477,7 +477,7 @@ $navbar-padding-y: 0;
 
 .navbar-toggler {
     height: 60px;
-}
+}offer
 
 // footer
 #main-footer {
@@ -686,6 +686,16 @@ hr {
     color: black;
     background: rgba(254, 211, 44, .8);
 }
+
+.archived-offer-status {
+    padding: 0.5em;
+    border-radius: 5px;
+    color: black;
+    background: $primary;
+    width: 10%;
+    height: 45%;
+}
+
 
 //Create account
 #upload-candidate-picture-form {

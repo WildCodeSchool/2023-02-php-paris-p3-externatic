@@ -73,9 +73,19 @@
 				{% endfor %}
 			{% elseif app.user.company is defined and app.user.company is not null %}
 				{% if app.user.company is same as offer.getCompany %}
-					<div class="col text-center mt-4">
-						<button type="button" class="btn btn-secondary mt-2 applicationbtn" href="{{ path('offer_form_edit', {'id':offer.id})}}">Edit</button>
-						<button type="button" class="btn btn-secondary mt-2 applicationbtn">Archive</button>
+				<section class="before-footer-btn">
+				<div class="col text-center mt-4">
+						<button type="button" class="btn btn-secondary mt-2 applicationbtn" href="{{ path('offer_form_edit', {"id" : offer.id})}}">Edit</button>
+						{% if offer.archived == true %}
+						<div class="archived-offer-status">
+							<p><img class="picto" src="{{ asset('build/images/picto/archived.svg') }}" alt="pictoArchivedOffer">
+								archived
+							</p>
+						</div>
+						{% else %}
+						<button type="button" class="btn btn-secondary mt-2 applicationbtn" href="{{ path('offer_form_archive', {"id":offer.id})}}">Archive</button>
+						{% endif %}
+				</section>
 					</div>
 				{% endif %}
 			{% endif %}
@@ -134,8 +144,16 @@
 			{% if app.user.company is defined and app.user.company is not null %}
 				{% if app.user.company is same as offer.getCompany %}
 					<div class="col text-center mt-4">
-						<button type="button" class="btn btn-secondary mt-2 applicationbtn" href="{{ path('offer_form_edit', {'id':offer.id})}}">Edit</button>
-						<button type="button" class="btn btn-secondary mt-2 applicationbtn">Archive</button>
+						<button type="button" class="btn btn-secondary mt-2 applicationbtn" href="{{ path('offer_form_edit', {"id" :offer.id})}}">Edit</button>
+						{% if offer.archived == true %}
+						<div class="archived-offer-status">
+							<p><img class="picto" src="{{ asset('build/images/picto/archived.svg') }}" alt="pictoArchivedOffer">
+								<p>archived</p> 
+							</p>
+						</div>
+						{% else %}
+						<button type="button" class="btn btn-secondary mt-2 applicationbtn" href="{{ path('offer_form_archive', {"id":offer.id})}}">Archive</button>
+						{% endif %}
 					</div>
 				{% endif %}
 			{% elseif app.user.roles[0] is constant("App\\Entity\\USER::ROLE_CANDIDATE") and not applied %}

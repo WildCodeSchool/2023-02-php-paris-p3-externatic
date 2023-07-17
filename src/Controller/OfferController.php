@@ -58,11 +58,23 @@ class OfferController extends AbstractController
     }
 
     #[Route('/apply/{id}', name: 'apply', methods: ['GET'])]
-    #[IsGranted('ROLE_CANDIDATE')]
+    // #[IsGranted('ROLE_CANDIDATE')]
     public function applyOffer(Offer $offer, ApplicationRepository $applyRepository): Response
     {
         $applyRepository->apply($offer, $this->getUser()->getCandidate());
 
         return $this->redirectToRoute('offer_show', ['id' => $offer->getId()]);
+    }
+
+    #[Route('/{id}/archive', name: 'form_archive', methods: ['GET', 'POST'])]
+    // #[IsGranted('ROLE_COMPANY')]
+    public function archive(Offer $offer, OfferRepository $repo): Response
+    {
+        $offer->setArchived(true);
+        $repo->save($offer, true);
+
+        $this->addFlash('success', 'Your offer has been succesfully archived 😉');
+
+        return $this->redirectToRoute('home_index', [], Response::HTTP_SEE_OTHER);
     }
 }
