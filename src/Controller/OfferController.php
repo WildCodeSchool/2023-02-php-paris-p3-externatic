@@ -6,6 +6,7 @@ use App\Entity\Offer;
 use App\Form\OfferType;
 use App\Repository\ApplicationRepository;
 use App\Repository\OfferRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -56,9 +57,40 @@ class OfferController extends AbstractController
             'form' => $form,
         ]);
     }
+    
+    #[Route('/form/new', name: 'form_new', methods: ['GET', 'POST'])]
+    public function new(Request $request, EntityManagerInterface $manager, OfferRepository $offerRepository): Response
+    {
+        $offer = new Offer();
+        $form = $this->createForm(OfferType::class, $offer);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $offerRepository->save($offer, true);
+
+            $this->addFlash('success', 'Your offer has been succesfully edited 😉');
+            $offer = $form->getData();
+            $offer->setCompany($this->getUser()->getCompany());
+
+            $manager->persist($offer);
+            $manager->flush();
+
+            $this->addFlash(
+                'success',
+                'Your offer has been successfully added 😇 !'
+            );
+            return $this->redirectToRoute('home_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('offer_type/new.html.twig',  [
+            'offer' => $offer,
+            'form' => $form,
+        ]);
+    }
+
 
     #[Route('/apply/{id}', name: 'apply', methods: ['GET'])]
-    // #[IsGranted('ROLE_CANDIDATE')]
+    #[IsGranted('ROLE_CANDIDATE')]
     public function applyOffer(Offer $offer, ApplicationRepository $applyRepository): Response
     {
         $applyRepository->apply($offer, $this->getUser()->getCandidate());
@@ -67,7 +99,7 @@ class OfferController extends AbstractController
     }
 
     #[Route('/{id}/archive', name: 'form_archive', methods: ['GET', 'POST'])]
-    // #[IsGranted('ROLE_COMPANY')]
+    #[IsGranted('ROLE_COMPANY')]
     public function archive(Offer $offer, OfferRepository $repo): Response
     {
         $offer->setArchived(true);

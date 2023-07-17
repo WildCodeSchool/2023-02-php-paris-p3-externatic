@@ -16,6 +16,7 @@ security:
         main:
             lazy: true
             provider: app_user_provider
+<<<<<<< HEAD
             # A enlever avant de push !!
             form_login:
                 login_path: login
@@ -26,6 +27,14 @@ security:
             # A enlever avant de push !!
             entry_point: form_login
             # A enlever avant de push !!
+=======
+            form_login: 
+                login_path: login
+                check_path: login
+                enable_csrf: true
+            custom_authenticator: App\Security\UserAuthenticator
+            entry_point: form_login
+>>>>>>> dev
             logout:
                 path: logout
             remember_me:
