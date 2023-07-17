@@ -81,6 +81,8 @@ class CandidateController extends AbstractController
         } elseif ($form->isSubmitted() && $form->isValid()) {
             $candidateRepository->save($candidate, true);
 
+            $this->addFlash('success', 'Your account has been updated! :)');
+
             return $this->redirectToRoute('candidate_show', ['id' => $candidate->getId()], Response::HTTP_SEE_OTHER);
         }
         return $this->render('candidate/edit.html.twig', [
@@ -116,9 +118,9 @@ class CandidateController extends AbstractController
         ApplicationRepository $applicationRepo,
         PaginatorInterface $paginator
     ): Response {
-
         $form = $this->createForm(SearchApplicationFilterType::class, null, ['method' => 'GET']);
         $form->handleRequest($request);
+
         $applications = $applicationRepo->findByCandidate($candidate);
 
         if ($form->isSubmitted() && $form->isValid()) {
