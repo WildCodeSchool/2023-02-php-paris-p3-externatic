@@ -2,7 +2,6 @@
 .vscode/
 .DS_Store
 /public/uploads
-/templates/offer/_modalArchive.html.twig
 ###> symfony/framework-bundle ###
 /.env.local
 /.env.local.php
