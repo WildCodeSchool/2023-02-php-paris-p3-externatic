@@ -99,14 +99,16 @@ class OfferRepository extends ServiceEntityRepository
 
     public function customizeResearch(Candidate $candidate): ?array
     {
-        $queryBuilder = $this->createQueryBuilder('o')
-            ->select('o', 'c')
-            ->join('o.company', 'c')
+        $oneWordJobTitle = explode(" ", $candidate->getJobTitle());
 
-            //Filtrer Candidate jobTitle
-            ->andWhere('o.title LIKE :title')
-            ->setParameter('title', '%' . $candidate->getJobTitle() . '%')
-            ->getQuery();
+        $queryBuilder = $this->createQueryBuilder('o')
+        ->select('o', 'c')
+        ->join('o.company', 'c')
+
+        //Filtrer Candidate jobTitle
+        ->andWhere('o.title LIKE :title')
+        ->setParameter('title', '%' . $oneWordJobTitle[0] . '%')
+        ->getQuery();
 
         return $queryBuilder->getResult();
     }
