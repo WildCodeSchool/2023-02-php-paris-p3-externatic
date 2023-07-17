@@ -3,11 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\Candidate;
+use App\Entity\Offer;
 use App\Form\CandidateType;
 use App\Form\UploadResumeType;
 use App\Repository\CandidateRepository;
 use App\Form\SearchApplicationFilterType;
 use App\Repository\ApplicationRepository;
+use App\Repository\OfferRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -138,12 +140,34 @@ class CandidateController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/addFavory', name: 'favory')]
-    public function addOfferToFavorites(CandidateRepository $candidateRepository, Candidate $candidate): Response
-    {
-        $candidate->setVisible(!($candidateRepository->findOneById($candidate->getId()))->isVisible());
+    #[Route('/{id}/addFavorite', name: 'favorite', methods: ['GET', 'POST'])]
+    public function addOfferToFavorites(
+        CandidateRepository $candidateRepository,
+        Offer $offer,
+        Candidate $candidate
+    ): Response {
+        $this->getUser()->getCanditate()->addFavoriteOffer($offer);
+
         $candidateRepository->save($candidate, true);
 
-        return $this->redirectToRoute('candidate_show', ['id' => $candidate->getId()], Response::HTTP_SEE_OTHER);
+        //à redirect sur candidate_research
+        return $this->redirectToRoute('home_index', ['id' => $candidate->getId()], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/{id}/collection', name: 'collection')]
+    public function showCollection(Candidate $candidate): Response
+    {
+        $collection = $candidate->getFavoriteOffers();
+
+        // if (empty($collection)) {
+        //     throw $this->createNotFoundException(
+        //         'No offer registered as favorites.'
+        //     );
+        // }
+
+        return $this->render('candidate/collection.html.twig', [
+            'candidate' => $candidate,
+            'collection' => $collection,
+        ]);
     }
 }
