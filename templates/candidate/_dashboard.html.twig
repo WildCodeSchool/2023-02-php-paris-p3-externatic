@@ -3,50 +3,50 @@
     <div class="row">
         <div class="col">
             <img src="{{ asset('build/images/picto/received-white.svg') }}" alt="pictoReceivedApplication">
-                {% set receveidNbre = 0 %}
+                {% set receveidNber = 0 %}
                 {% for application in candidate.applications %}
                     {% if  application.status == constant('App\\Entity\\Application::STATUS_RECEIVED') %}
-                        {% set receveidNbre = receveidNbre + 1 %}
+                        {% set receveidNber = receveidNber + 1 %}
                     {% endif %}
                 {% endfor %}
             <div class="col mt-4">
-                <p>{{ receveidNbre }} <span class="dashboard-candidate-text">application(s)</span></p>
+                <p>{{ receveidNber }} <span class="dashboard-candidate-text">application(s)</span></p>
             </div>
         </div>
         <div class="col">
             <img src="{{ asset('build/images/picto/in-review-white.svg') }}" alt="pictoInReviewApplication">
-                {% set inReviewNbre = 0 %}
+                {% set inReviewNber = 0 %}
                 {% for application in candidate.applications %}
                     {% if  application.status == constant('App\\Entity\\Application::STATUS_INREVIEW') %}
-                        {% set inReviewNbre = inReviewNbre + 1 %}
+                        {% set inReviewNber = inReviewNber + 1 %}
                     {% endif %}
                 {% endfor %}
             <div class="col mt-3">
-                <p>{{ inReviewNbre }} <span class="dashboard-candidate-text">in study</span></p>
+                <p>{{ inReviewNber }} <span class="dashboard-candidate-text">in study</span></p>
             </div>
         </div>
         <div class="col">
             <img src="{{ asset('build/images/picto/accepted-white.svg') }}" alt="pictoAcceptedApplication">
-                {% set AcceptedNbre = 0 %}
+                {% set AcceptedNber = 0 %}
                 {% for application in candidate.applications %}
                     {% if  application.status == constant('App\\Entity\\Application::STATUS_ACCEPTED') %}
-                        {% set AcceptedNbre = AcceptedNbre + 1 %}
+                        {% set AcceptedNber = AcceptedNber + 1 %}
                     {% endif %}
                 {% endfor %}
             <div class="col mt-4">
-                <p>{{ AcceptedNbre }} <span class="dashboard-candidate-text">approved</span></p>
+                <p>{{ AcceptedNber }} <span class="dashboard-candidate-text">approved</span></p>
             </div>
         </div>
         <div class="col">
             <img src="{{ asset('build/images/picto/rejected-white.svg') }}" alt="pictoRejectedApplication">
-                {% set rejecteddNbre = 0 %}
+                {% set rejectedNber = 0 %}
                 {% for application in candidate.applications %}
                     {% if  application.status == constant('App\\Entity\\Application::STATUS_REJECTED') %}
-                        {% set rejecteddNbre = rejecteddNbre + 1 %}
+                        {% set rejectedNber = rejectedNber + 1 %}
                     {% endif %}
                 {% endfor %}
             <div class="col mt-4">
-                <p>{{ rejecteddNbre }} <span class="dashboard-candidate-text">refused</span></p>
+                <p>{{ rejectedNber }} <span class="dashboard-candidate-text">refused</span></p>
             </div>
         </div>
     </div>
