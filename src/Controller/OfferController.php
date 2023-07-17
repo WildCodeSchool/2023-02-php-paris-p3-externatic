@@ -6,12 +6,13 @@ use App\Entity\Offer;
 use App\Form\OfferType;
 use App\Repository\ApplicationRepository;
 use App\Repository\OfferRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use DateTime;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/offer', name: 'offer_')]
 class OfferController extends AbstractController
@@ -52,6 +53,33 @@ class OfferController extends AbstractController
         }
 
         return $this->render('offer_type/edit.html.twig', [
+            'offer' => $offer,
+            'form' => $form,
+        ]);
+    }
+
+    #[Route('/form/new', name: 'form_new', methods: ['GET', 'POST'])]
+    public function new(Request $request, EntityManagerInterface $manager): Response
+    {
+        $offer = new Offer();
+        $form = $this->createForm(OfferType::class, $offer);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $offer = $form->getData();
+            $offer->setCompany($this->getUser()->getCompany());
+
+            $manager->persist($offer);
+            $manager->flush();
+
+            $this->addFlash(
+                'success',
+                'Your offer has been successfully added 😇 !'
+            );
+
+            return $this->redirectToRoute('home_index', [], Response::HTTP_SEE_OTHER);
+        }
+        return $this->render('offer_type/new.html.twig', [
             'offer' => $offer,
             'form' => $form,
         ]);
