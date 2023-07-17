@@ -27,13 +27,7 @@ class HomeController extends AbstractController
         $filters = $form->getData();
         $offers = $offerRepository->findwithFilter($filters);
 
-        $unarchivedOffers = [];
-        foreach ($offers as $offer) {
-            if ($offer->isArchived() === false) {
-                $unarchivedOffers[] = $offer;
-            }
-        }
-        $offers = $paginator->paginate($unarchivedOffers, $request->query->getInt('page', 1), 6);
+        $offers = $paginator->paginate($offers, $request->query->getInt('page', 1), 6);
 
         return $this->render('home/index.html.twig', [
             'offers' => $offers,

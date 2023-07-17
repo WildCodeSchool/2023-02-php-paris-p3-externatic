@@ -91,6 +91,7 @@ class OfferRepository extends ServiceEntityRepository
         }
 
         $queryBuilder = $queryBuilder
+            ->andWhere('o.archived = false')
             ->orderBy('o.createdAt', 'DESC')
             ->getQuery();
 
