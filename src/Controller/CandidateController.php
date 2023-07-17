@@ -9,7 +9,6 @@ use App\Form\UploadResumeType;
 use App\Repository\CandidateRepository;
 use App\Form\SearchApplicationFilterType;
 use App\Repository\ApplicationRepository;
-use App\Repository\OfferRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

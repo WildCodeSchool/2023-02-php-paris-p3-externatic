@@ -390,11 +390,7 @@ class Candidate implements Serializable
 
     public function isOfferInFavorites(Offer $favoriteOffer): bool
     {
-        if ($this->favoriteOffers->contains($favoriteOffer)) {
-            return true;
-        } else {
-            return false;
-        }
+        return $this->favoriteOffers->contains($favoriteOffer) ? true : false;
     }
 
     public function removeFavoriteOffer(Offer $favoriteOffer): self
