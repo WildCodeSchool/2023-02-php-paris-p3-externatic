@@ -7,8 +7,6 @@ grumphp:
             config: .eslintrc.yml
         phpversion:
             project: '8.0'
-        phpcpd:
-            directory: [ 'src' ]
         phpcs:
             standard: ~
         phpstan:

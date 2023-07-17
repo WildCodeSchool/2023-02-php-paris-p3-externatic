@@ -26,6 +26,7 @@ class CandidateType extends AbstractType
             ->add('pictureFile', DropzoneType::class, [
                 'required' => false,
                 'label' => false,
+                'empty_data' => '',
                 'attr' => [
                     'placeholder' => 'Browse your picture profile here',
                 ],
