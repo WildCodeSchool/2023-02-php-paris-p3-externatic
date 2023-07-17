@@ -1,11 +1,12 @@
 {% extends "base.html.twig" %}
 
-{% block title %}
-{{ offer.title }}
+{% block title %}Job Offer -
+	{{ offer.title }}
 {% endblock %}
 
 {% block body %}
 	{% if app.user.company is defined and app.user.company is not null %}
+		{% include "company/_dashboard.html.twig" %}
 		<div class="mb-4 mt-2">
 			{% include "style/component/_navigationBtnMobileCompany.html.twig" %}
 			{% include "style/component/_navigationBtnDesktopCompany.html.twig" %}
@@ -74,7 +75,7 @@
 			{% elseif app.user.company is defined and app.user.company is not null %}
 				{% if app.user.company is same as offer.getCompany %}
 					<div class="col text-center mt-4">
-						<button type="button" class="btn btn-secondary mt-2 applicationbtn" href="#">Edit</button>
+						<button type="button" class="btn btn-secondary mt-2 applicationbtn" href="{{ path('offer_form_edit', {'id':offer.id})}}">Edit</button>
 						<button type="button" class="btn btn-secondary mt-2 applicationbtn">Archive</button>
 					</div>
 				{% endif %}
@@ -134,7 +135,7 @@
 			{% if app.user.company is defined and app.user.company is not null %}
 				{% if app.user.company is same as offer.getCompany %}
 					<div class="col text-center mt-4">
-						<button type="button" class="btn btn-secondary mt-2 applicationbtn" href="#">Edit</button>
+						<button type="button" class="btn btn-secondary mt-2 applicationbtn" href="{{ path('offer_form_edit', {'id':offer.id})}}">Edit</button>
 						<button type="button" class="btn btn-secondary mt-2 applicationbtn">Archive</button>
 					</div>
 				{% endif %}

@@ -65,12 +65,12 @@ class Candidate implements Serializable
     #[Assert\NotBlank]
     private ?string $experience = null;
 
+    #[Vich\UploadableField(mapping: 'candidates', fileNameProperty: 'picture')]
     #[Assert\Image(
         maxSize: '2M',
         mimeTypes: ['image/jpeg', 'image/jpg', 'image/png'],
         mimeTypesMessage:'Your image should be a jpeg, jpg or png'
     )]
-    #[Vich\UploadableField(mapping: 'candidates', fileNameProperty: 'picture')]
     private ?File $pictureFile = null;
 
     #[ORM\Column(length: 150, nullable: true)]
@@ -262,9 +262,14 @@ class Candidate implements Serializable
         return $this;
     }
 
-    public function setPictureFile(?File $pictureFile = null): void
+    public function setPictureFile(File $image = null): Candidate
     {
-        $this->pictureFile = $pictureFile;
+        $this->pictureFile = $image;
+        if ($image) {
+            $this->updatedAt = new DateTime('now');
+        }
+
+        return $this;
     }
 
     public function getPictureFile(): ?File
@@ -277,7 +282,7 @@ class Candidate implements Serializable
         return $this->picture;
     }
 
-    public function setPicture(string $picture): self
+    public function setPicture(?string $picture): self
     {
         $this->picture = $picture;
 
@@ -437,5 +442,10 @@ class Candidate implements Serializable
     {
         $this->favorite = $favorite;
         return $this;
+    }
+
+    public function __toString()
+    {
+        return strval($this->getId());
     }
 }
