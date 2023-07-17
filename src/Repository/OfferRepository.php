@@ -96,4 +96,24 @@ class OfferRepository extends ServiceEntityRepository
 
         return $queryBuilder->getResult();
     }
+
+    public function searchOffersByCompany(int $company, ?string $data): ?array
+    {
+        $queryBuilder = $this->createQueryBuilder('o')
+            ->select('o', 'c')
+            ->join('o.company', 'c')
+            ->andWhere('c.id =' . $company);
+
+        if (!empty($data)) {
+            $queryBuilder = $queryBuilder
+                ->andWhere('o.title Like :title')
+                ->setParameter('title', '%' . $data . '%');
+        }
+
+        $queryBuilder = $queryBuilder
+            ->orderBy('o.createdAt', 'DESC')
+            ->getQuery();
+
+        return $queryBuilder->getResult();
+    }
 }

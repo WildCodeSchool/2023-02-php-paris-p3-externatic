@@ -24,10 +24,14 @@ class OfferController extends AbstractController
         $dateInterval = $interval->format('%m month(s) and %d day(s)');
 
         $applied = false;
+        $company = null;
         if ($this->getUser()) {
             $candidate = $this->getUser()->getCandidate();
             if ($applyRepository->findOneBy(array('offer' => $offer,'candidate' => $candidate))) {
                 $applied = true;
+            }
+            if ($this->getUser()->getCompany()) {
+                $company = $this->getUser()->getCompany();
             }
         }
 
@@ -35,6 +39,7 @@ class OfferController extends AbstractController
             'offer'        => $offer,
             'dateInterval' => $dateInterval,
             'applied'      => $applied,
+            'company'      => $company,
         ]);
     }
 
@@ -66,9 +71,6 @@ class OfferController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $offerRepository->save($offer, true);
-
-            $this->addFlash('success', 'Your offer has been succesfully edited 😉');
             $offer = $form->getData();
             $offer->setCompany($this->getUser()->getCompany());
 
@@ -87,7 +89,6 @@ class OfferController extends AbstractController
             'form' => $form,
         ]);
     }
-
 
     #[Route('/apply/{id}', name: 'apply', methods: ['GET'])]
     #[IsGranted('ROLE_CANDIDATE')]

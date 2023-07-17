@@ -4,6 +4,7 @@
 {% endblock %}
 {% block body %}
     {% if app.user.company is defined and app.user.company is not null %}
+        {% include "company/_dashboard.html.twig" %}
         <div class="mb-4 mt-2">
             {% include "style/component/_navigationBtnMobileCompany.html.twig" %}
             {% include "style/component/_navigationBtnDesktopCompany.html.twig" %}
@@ -80,7 +81,7 @@
 							</p>
 						</div>
 						{% else %}
-                        <a href="{{ path('offer_form_archive', { id :offer.id })}}"><button type="button" class="btn btn-secondary mt-2 applicationbtn">Archive</button></a>
+                        <a href="{{ path('offer_form_archive', { id : offer.id })}}"><button type="button" class="btn btn-secondary mt-2 applicationbtn">Archive</button></a>
 						{% endif %}
                     </div>
                 {% endif %}
@@ -147,7 +148,7 @@
 							</p>
 						</div>
 						{% else %}
-                        <a href="{{ path('offer_form_archive', { id :offer.id })}}"><button type="button" class="btn btn-secondary mt-2 applicationbtn">Archive</button></a>
+                        <a href="{{ path('offer_form_archive', { id : offer.id })}}"><button type="button" class="btn btn-secondary mt-2 applicationbtn">Archive</button></a>
 						{% endif %}
                     </div>
                 {% endif %}
