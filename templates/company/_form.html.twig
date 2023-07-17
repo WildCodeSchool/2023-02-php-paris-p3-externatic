@@ -1,0 +1,26 @@
+{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+    {{ form_errors(form) }}
+    <div id="profile-company-form" class="p-4">
+        <div class="col mt-4">
+            {{ form_row(form.name) }}
+        </div>
+        <div class="col mt-4">
+            {{ form_row(form.sector) }}
+        </div>
+        <div class="col mt-4">
+            {{ form_row(form.size) }}
+        </div>
+        <div class="col mt-4">
+            {{ form_row(form.location) }}
+        </div>
+        <div class="col mt-4">
+            {{ form_row(form.presentation) }}
+        </div>
+        <div class="col mt-4" id="upload-company-picture-form">
+            {{ form_row(form.logoFile) }}
+        </div>
+    </div>
+    <div class="text-center">
+        <button class="btn btn-secondary mt-4 bt-4">{{ button_label|default('Save') }}</button>
+    </div>
+{{ form_end(form) }}

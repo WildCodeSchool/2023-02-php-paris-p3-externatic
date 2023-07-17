@@ -711,7 +711,7 @@ hr {
     background: rgba(254, 211, 44, .8);
 }
 
-//Create account
+//Create candidate account
 #upload-candidate-picture-form {
     background-color: $primary;
     border-top-right-radius: 10px;
@@ -744,7 +744,8 @@ hr {
     min-height: 195px;
 }
 
-#upload-candidate-picture-form .dropzone-preview-image {
+#upload-candidate-picture-form .dropzone-preview-image,
+#upload-company-picture-form .dropzone-preview-image {
     min-width: 130px;
     height: 130px;
 }
@@ -767,6 +768,29 @@ hr {
     left: 0;
     top: 0;
     opacity: 0;
+}
+
+//Create company account
+#profile-company-form {
+    background-color: rgba(243, 231, 236, 1);
+    border-radius: 10px;
+}
+
+#upload-company-picture-form .dropzone-placeholder,
+#upload-company-picture-form .dropzone-preview-filename,
+#upload-company-picture-form .dropzone-preview-button::before {
+    color: $primary;
+}
+
+#upload-company-picture-form .dropzone-container {
+    border: 2px dashed $primary;
+    justify-content: center;
+    min-height: 195px;
+}
+
+#upload-candidate-picture-form .dropzone-preview-image {
+    min-width: 130px;
+    height: 130px;
 }
 
 //Edit candidate account
