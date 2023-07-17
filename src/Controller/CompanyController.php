@@ -5,11 +5,11 @@ namespace App\Controller;
 use App\Entity\Company;
 use App\Form\CompanyType;
 use App\Repository\CompanyRepository;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 #[Route('/company', name: 'company_')]
 #[IsGranted('ROLE_COMPANY')]
