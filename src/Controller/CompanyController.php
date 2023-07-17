@@ -44,4 +44,33 @@ class CompanyController extends AbstractController
             'company' => $company,
         ]);
     }
+
+    #[Route('/{id}/edit', name: 'edit', methods: ['GET', 'POST'])]
+    public function edit(Company $company, Request $request, CompanyRepository $companyRepository): Response
+    {
+        $form = $this->createForm(CompanyType::class, $company);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $companyRepository->save($company, true);
+
+            $this->addFlash('success', 'Your account has been updated! :)');
+
+            return $this->redirectToRoute('company_offers', ['id' => $company->getId()], Response::HTTP_SEE_OTHER);
+        }
+        return $this->render('company/edit.html.twig', [
+            'company' => $company,
+            'form' => $form,
+        ]);
+    }
+
+    #[Route('/{id}', name: 'delete', methods: ['POST'])]
+    public function delete(Request $request, Company $company, CompanyRepository $companyRepository): Response
+    {
+        if ($this->isCsrfTokenValid('delete' . $company->getId(), $request->request->get('_token'))) {
+            $companyRepository->remove($company, true);
+        }
+
+        return $this->redirectToRoute('home_index', [], Response::HTTP_SEE_OTHER);
+    }
 }
