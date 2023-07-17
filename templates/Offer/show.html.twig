@@ -1,172 +1,167 @@
 {% extends "base.html.twig" %}
-
 {% block title %}Job Offer -
-	{{ offer.title }}
+    {{ offer.title }}
 {% endblock %}
-
 {% block body %}
-	{% if app.user.company is defined and app.user.company is not null %}
-		<div class="mb-4 mt-2">
-			{% include "style/component/_navigationBtnMobileCompany.html.twig" %}
-			{% include "style/component/_navigationBtnDesktopCompany.html.twig" %}
-		</div>
-	{% endif %}
-	<section class="offer-show-header-section" style="background-image: url( {{ asset(offer.picture) }} ); background-size: cover;">
-		<img class="index-company-logo" src="{{ asset(offer.company.logo) }}">
-		<p>{{ offer.company.name }}</p>
-		<h3 class="mb-4 mt-4">
-			<strong>{{ offer.title }}</strong>
-		</h3>
-		<section class="other-info-in-offer-show">
-			<div class="grey-area-in-offer-show">
-				<img class="picto-in-header" src="{{ asset('build/images/picto/location-offer.svg') }}" alt="location-icon">
-				<p>{{ offer.location }}</p>
-			</div>
-			<div class="grey-area-in-offer-show">
-				<img class="picto-in-header" src="{{ asset('build/images/picto/contract.svg') }}" alt="briefcase-icon">
-				<p>{{ offer.contract }}</p>
-			</div>
-			<div class="grey-area-in-offer-show">
-				<img class="picto-in-header" src="{{ asset('build/images/picto/piggy-bank.svg') }}" alt="piggy-bank-icon">
-				<p>{{ offer.minSalary // 1000 }}K - {{ offer.maxSalary // 1000 }}K</p>
-			</div>
-		</section>
-		<p class="mt-4 mb-2">
-		<img class="picto picto-calendar picto-in-header" src="{{ asset('build/images/picto/calendar.svg') }}" alt="Calendar-icon">
-		posted
-			{{ dateInterval }}
-			ago
-		</p>
-		<section class="before-footer-btn mt-2">
-		{% if app.user %}
-			{% if app.user.roles[0] is constant("App\\Entity\\USER::ROLE_CANDIDATE") and not applied %}
-				<div class="col text-center mt-4">
-					<button type="button" class="btn btn-secondary mt-2 applicationbtn" data-bs-toggle="modal" data-bs-target="#exampleModal">Apply</button>
-				</div>
-			{% elseif app.user.roles[0] is constant("App\\Entity\\USER::ROLE_CANDIDATE") and applied %}
-				{% for application in app.user.candidate.applications %}
-					{% if application.status == constant('App\\Entity\\Application::STATUS_RECEIVED') and application.offer.id == offer.id %}
-						<div class="status-application-offer">
-							<p ><img class="picto" src="{{ asset('build/images/picto/received.svg') }}" alt="pictoReceivedApplication">
-								{{ application.status }}
-							</p>
-						</div>
-					{% elseif application.status == constant('App\\Entity\\Application::STATUS_INREVIEW') and application.offer.id == offer.id %}
-						<div class="status-application-offer">
-							<p><img class="picto" src="{{ asset('build/images/picto/in-review.svg') }}" alt="pictoInReviewApplication">
-								{{ application.status }}
-							</p>
-						</div>
-					{% elseif application.status == constant('App\\Entity\\Application::STATUS_ACCEPTED') and application.offer.id == offer.id %}
-						<div class="status-application-offer">
-							<p><img class="picto" src="{{ asset('build/images/picto/accepted.svg') }}" alt="pictoAcceptedApplication">
-								{{ application.status }}
-							</p>
-						</div>
-					{% elseif application.status == constant('App\\Entity\\Application::STATUS_REJECTED') and application.offer.id == offer.id %}
-						<div class="status-application-offer">
-							<p><img class="picto" src="{{ asset('build/images/picto/rejected.svg') }}" alt="pictoRejectedApplication">
-								{{ application.status }}
-							</p>
-						</div>
-					{% endif %}
-				{% endfor %}
-			{% elseif app.user.company is defined and app.user.company is not null %}
-				{% if app.user.company is same as offer.getCompany %}
-				<section class="before-footer-btn">
-				<div class="col text-center mt-4">
-						<button type="button" class="btn btn-secondary mt-2 applicationbtn" href="{{ path('offer_form_edit', {"id" : offer.id})}}">Edit</button>
+    {% if app.user.company is defined and app.user.company is not null %}
+        <div class="mb-4 mt-2">
+            {% include "style/component/_navigationBtnMobileCompany.html.twig" %}
+            {% include "style/component/_navigationBtnDesktopCompany.html.twig" %}
+        </div>
+    {% endif %}
+    <section class="offer-show-header-section" style="background-image: url( {{ asset(offer.picture) }} ); background-size: cover;">
+        <img class="index-company-logo" src="{{ asset(offer.company.logo) }}">
+        <p>{{ offer.company.name }}</p>
+        <h3 class="mb-4 mt-4">
+            <strong>{{ offer.title }}</strong>
+        </h3>
+        <section class="other-info-in-offer-show">
+            <div class="grey-area-in-offer-show">
+                <img class="picto-in-header" src="{{ asset('build/images/picto/location-offer.svg') }}" alt="location-icon">
+                <p>{{ offer.location }}</p>
+            </div>
+            <div class="grey-area-in-offer-show">
+                <img class="picto-in-header" src="{{ asset('build/images/picto/contract.svg') }}" alt="briefcase-icon">
+                <p>{{ offer.contract }}</p>
+            </div>
+            <div class="grey-area-in-offer-show">
+                <img class="picto-in-header" src="{{ asset('build/images/picto/piggy-bank.svg') }}" alt="piggy-bank-icon">
+                <p>{{ offer.minSalary // 1000 }}K - {{ offer.maxSalary // 1000 }}K</p>
+            </div>
+        </section>
+        <p class="mt-4 mb-2">
+        <img class="picto picto-calendar picto-in-header" src="{{ asset('build/images/picto/calendar.svg') }}" alt="Calendar-icon">
+        posted
+            {{ dateInterval }}
+            ago
+        </p>
+        <section class="before-footer-btn mt-2">
+        {% if app.user %}
+            {% if app.user.roles[0] is constant("App\\Entity\\USER::ROLE_CANDIDATE") and not applied %}
+                <div class="col text-center mt-4">
+                    <button type="button" class="btn btn-secondary mt-2 applicationbtn" data-bs-toggle="modal" data-bs-target="#exampleModal">Apply</button>
+                </div>
+            {% elseif app.user.roles[0] is constant("App\\Entity\\USER::ROLE_CANDIDATE") and applied %}
+                {% for application in app.user.candidate.applications %}
+                    {% if application.status == constant('App\\Entity\\Application::STATUS_RECEIVED') and application.offer.id == offer.id %}
+                        <div class="status-application-offer">
+                            <p ><img class="picto" src="{{ asset('build/images/picto/received.svg') }}" alt="pictoReceivedApplication">
+                                {{ application.status }}
+                            </p>
+                        </div>
+                    {% elseif application.status == constant('App\\Entity\\Application::STATUS_INREVIEW') and application.offer.id == offer.id %}
+                        <div class="status-application-offer">
+                            <p><img class="picto" src="{{ asset('build/images/picto/in-review.svg') }}" alt="pictoInReviewApplication">
+                                {{ application.status }}
+                            </p>
+                        </div>
+                    {% elseif application.status == constant('App\\Entity\\Application::STATUS_ACCEPTED') and application.offer.id == offer.id %}
+                        <div class="status-application-offer">
+                            <p><img class="picto" src="{{ asset('build/images/picto/accepted.svg') }}" alt="pictoAcceptedApplication">
+                                {{ application.status }}
+                            </p>
+                        </div>
+                    {% elseif application.status == constant('App\\Entity\\Application::STATUS_REJECTED') and application.offer.id == offer.id %}
+                        <div class="status-application-offer">
+                            <p><img class="picto" src="{{ asset('build/images/picto/rejected.svg') }}" alt="pictoRejectedApplication">
+                                {{ application.status }}
+                            </p>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% elseif app.user.company is defined and app.user.company is not null %}
+                {% if app.user.company is same as offer.getCompany %}
+                    <div class="col text-center mt-4">
+                        <a href="{{ path('offer_form_edit', { id : offer.id })}}"><button type="button" class="btn btn-secondary mt-2 applicationbtn">Edit</button></a>
 						{% if offer.archived == true %}
-						<div class="archived-offer-status">
+						 <div class="status-application-offer archived-offer-status">
 							<p><img class="picto" src="{{ asset('build/images/picto/archived.svg') }}" alt="pictoArchivedOffer">
 								archived
 							</p>
 						</div>
 						{% else %}
-						<button type="button" class="btn btn-secondary mt-2 applicationbtn" href="{{ path('offer_form_archive', {"id":offer.id})}}">Archive</button>
+                        <a href="{{ path('offer_form_archive', { id :offer.id })}}"><button type="button" class="btn btn-secondary mt-2 applicationbtn">Archive</button></a>
 						{% endif %}
-				</section>
-					</div>
-				{% endif %}
-			{% endif %}
-		{% else %}
-			<div class="col text-center mt-4">
-				<a href="{{ path('login') }}"><button type="button" class="btn btn-secondary mt-2 applicationbtn">Apply</button></a>
-			</div>
-		{% endif %}
-		</section>
-
-	</section>
-	<div class="margin">
-		<div id="offer-description-card" class="show-offer-single-section p-3">
-			<h4 class="card-title"><img class="picto" src="{{ asset('build/images/picto/building.svg') }}" alt="building-icon">Company
-			</h4><hr>
-			<div class="card-body mt-2 offer-show-content">
-				{{ offer.company.presentation }}
-			</div>
-		</div>
-		<div id="offer-description-card" class="show-offer-single-section p-3">
-			<h4 class="card-title"><img class="picto-briefcase" src="{{ asset('build/images/picto/contract.svg') }}" alt="briefcase-icon">Job Description
-			</h4><hr>
-			<div class="card-body mt-2 offer-show-content">
-				{{ offer.description }}
-			</div>
-		</div>
-		<div id="offer-description-card" class="show-offer-single-section p-3">
-			<h4 class="card-title"><img class="picto" src="{{ asset('build/images/picto/job-description.svg') }}" alt="job-description-icon">Candidate Profil
-			</h4><hr>
-			<div class="card-body mt-2 skills-tab offer-show-content">
-				<ul>
-				{% for offerSkill in offer.getSkills %}
-					{% if offerSkill.type == 'hard' %}
-						<li><img class="picto" src="{{ asset('build/images/picto/checked.svg') }}" alt="pictoChecked">{{ offerSkill.name }}</li>
-					{% endif %}
-				{% endfor %}
-				</ul>
-				<ul>
-				{% for offerSkill in offer.getSkills %}
-					{% if offerSkill.type == 'soft' %}
-						<li><img class="picto" src="{{ asset('build/images/picto/checked.svg') }}" alt="pictoChecked">{{ offerSkill.name }}</li>
-					{% endif %}
-				{% endfor %}
-				</ul>
-			</div>
-		</div>
-		<div id="offer-description-card" class="show-offer-single-section p-3">
-			<h4 class="card-title"><img class="picto" src="{{ asset('build/images/picto/interview.svg') }}" alt="interview-process-icon">Interview Process
-			</h4><hr>
-			<div class="card-body mt-2 offer-show-content">
-				{{ offer.interviewProcess }}
-			</div>
-		</div>
-		<section class="before-footer-btn mt-2">
-		{% if app.user %}
-			{% if app.user.company is defined and app.user.company is not null %}
-				{% if app.user.company is same as offer.getCompany %}
-					<div class="col text-center mt-4">
-						<button type="button" class="btn btn-secondary mt-2 applicationbtn" href="{{ path('offer_form_edit', {"id" :offer.id})}}">Edit</button>
+                    </div>
+                {% endif %}
+            {% endif %}
+        {% else %}
+            <div class="col text-center mt-4">
+                <a href="{{ path('login') }}"><button type="button" class="btn btn-secondary mt-2 applicationbtn">Apply</button></a>
+            </div>
+        {% endif %}
+        </section>
+    </section>
+    <div class="margin">
+        <div id="offer-description-card" class="show-offer-single-section p-3">
+            <h4 class="card-title"><img class="picto" src="{{ asset('build/images/picto/building.svg') }}" alt="building-icon">Company
+            </h4><hr>
+            <div class="card-body mt-2 offer-show-content">
+                {{ offer.company.presentation }}
+            </div>
+        </div>
+        <div id="offer-description-card" class="show-offer-single-section p-3">
+            <h4 class="card-title"><img class="picto-briefcase" src="{{ asset('build/images/picto/contract.svg') }}" alt="briefcase-icon">Job Description
+            </h4><hr>
+            <div class="card-body mt-2 offer-show-content">
+                {{ offer.description }}
+            </div>
+        </div>
+        <div id="offer-description-card" class="show-offer-single-section p-3">
+            <h4 class="card-title"><img class="picto" src="{{ asset('build/images/picto/job-description.svg') }}" alt="job-description-icon">Candidate Profil
+            </h4><hr>
+            <div class="card-body mt-2 skills-tab offer-show-content">
+                <ul>
+                {% for offerSkill in offer.getSkills %}
+                    {% if offerSkill.type == 'hard' %}
+                        <li><img class="picto" src="{{ asset('build/images/picto/checked.svg') }}" alt="pictoChecked">{{ offerSkill.name }}</li>
+                    {% endif %}
+                {% endfor %}
+                </ul>
+                <ul>
+                {% for offerSkill in offer.getSkills %}
+                    {% if offerSkill.type == 'soft' %}
+                        <li><img class="picto" src="{{ asset('build/images/picto/checked.svg') }}" alt="pictoChecked">{{ offerSkill.name }}</li>
+                    {% endif %}
+                {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div id="offer-description-card" class="show-offer-single-section p-3">
+            <h4 class="card-title"><img class="picto" src="{{ asset('build/images/picto/interview.svg') }}" alt="interview-process-icon">Interview Process
+            </h4><hr>
+            <div class="card-body mt-2 offer-show-content">
+                {{ offer.interviewProcess }}
+            </div>
+        </div>
+        <section class="before-footer-btn mt-2">
+        {% if app.user %}
+            {% if app.user.company is defined and app.user.company is not null %}
+                {% if app.user.company is same as offer.getCompany %}
+                    <div class="col text-center mt-4">
+                        <a href="{{ path('offer_form_edit', { id : offer.id })}}"><button type="button" class="btn btn-secondary mt-2 applicationbtn">Edit</button></a>
 						{% if offer.archived == true %}
-						<div class="archived-offer-status">
+						 <div class="status-application-offer archived-offer-status">
 							<p><img class="picto" src="{{ asset('build/images/picto/archived.svg') }}" alt="pictoArchivedOffer">
-								<p>archived</p> 
+								archived
 							</p>
 						</div>
 						{% else %}
-						<button type="button" class="btn btn-secondary mt-2 applicationbtn" href="{{ path('offer_form_archive', {"id":offer.id})}}">Archive</button>
+                        <a href="{{ path('offer_form_archive', { id :offer.id })}}"><button type="button" class="btn btn-secondary mt-2 applicationbtn">Archive</button></a>
 						{% endif %}
-					</div>
-				{% endif %}
-			{% elseif app.user.roles[0] is constant("App\\Entity\\USER::ROLE_CANDIDATE") and not applied %}
-				<div class="col text-center mt-4">
-					<button type="button" class="btn btn-secondary mt-2 applicationbtn" data-bs-toggle="modal" data-bs-target="#exampleModal">Apply</button>
-				</div>
-			{% endif %}
-		{% else %}
-			<div class="col text-center mt-4">
-				<a href="{{ path('login') }}"><button type="button" class="btn btn-secondary mt-2 applicationbtn">Apply</button></a>
-			</div>
-		{% endif %}
-		</section>
-		{% include "offer/_modalApply.html.twig" %}
-	</div>
+                    </div>
+                {% endif %}
+            {% elseif app.user.roles[0] is constant("App\\Entity\\USER::ROLE_CANDIDATE") and not applied %}
+                <div class="col text-center mt-4">
+                    <button type="button" class="btn btn-secondary mt-2 applicationbtn" data-bs-toggle="modal" data-bs-target="#exampleModal">Apply</button>
+                </div>
+            {% endif %}
+        {% else %}
+            <div class="col text-center mt-4">
+                <a href="{{ path('login') }}"><button type="button" class="btn btn-secondary mt-2 applicationbtn">Apply</button></a>
+            </div>
+        {% endif %}
+        </section>
+        {% include "offer/_modalApply.html.twig" %}
+    </div>
 {% endblock %}

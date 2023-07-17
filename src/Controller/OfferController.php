@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use DateTime;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/offer', name: 'offer_')]
 class OfferController extends AbstractController
@@ -57,7 +57,7 @@ class OfferController extends AbstractController
             'form' => $form,
         ]);
     }
-    
+
     #[Route('/form/new', name: 'form_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $manager, OfferRepository $offerRepository): Response
     {
@@ -82,7 +82,7 @@ class OfferController extends AbstractController
             return $this->redirectToRoute('home_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('offer_type/new.html.twig',  [
+        return $this->render('offer_type/new.html.twig', [
             'offer' => $offer,
             'form' => $form,
         ]);
