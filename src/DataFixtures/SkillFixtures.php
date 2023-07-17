@@ -11,7 +11,6 @@ class SkillFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         $counter = 0;
-
         foreach (Skill::SKILLS as $key) {
                 $skill = new Skill();
 
