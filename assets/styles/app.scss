@@ -103,8 +103,29 @@ $nav-underline-link-active-color:$secondary;
     @include cards($primary, 10px);
 }
 
-#application-card {
+#application-card .accordion-item {
     @include cards($tertiary, 0px);
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.accordion-body .row-cols-3 {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+$carousel-indicator-active-bg: #343a40;
+
+#carouselExampleIndicators {
+    padding: 0px 20px 40px 20px;
+}
+
+#previous-arrow {
+    justify-content: flex-start;
+}
+
+#next-arrow {
+    justify-content: flex-end;
 }
 
 #profile-card {
@@ -817,6 +838,13 @@ hr {
     border-radius: 5px;
     margin-top: 1em;
     padding: 0.5em;
+}
+
+//Dashboard company
+#dashboard-company {
+    background-color: $primary;
+    color:white;
+    height: 8rem;
 }
 
 //Create Offer
