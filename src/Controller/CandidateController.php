@@ -147,13 +147,10 @@ class CandidateController extends AbstractController
         PaginatorInterface $paginator,
         Request $request
     ): Response {
-        $offers = $candidate->getFavoriteOffers();
-
-        $offers = $paginator->paginate($offers, $request->query->getInt('page', 1), 6);
 
         return $this->render('candidate/collection.html.twig', [
             'candidate' => $candidate,
-            'offers' => $offers,
+            'offers' => $paginator->paginate($candidate->getFavoriteOffers(), $request->query->getInt('page', 1), 6),
             'now' => new DateTime(),
         ]);
     }
