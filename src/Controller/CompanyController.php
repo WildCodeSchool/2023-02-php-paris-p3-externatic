@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Company;
 use App\Form\CompanyType;
 use App\Repository\CompanyRepository;
+use App\Repository\UserRepository;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -62,15 +63,5 @@ class CompanyController extends AbstractController
             'company' => $company,
             'form' => $form,
         ]);
-    }
-
-    #[Route('/{id}', name: 'delete', methods: ['POST'])]
-    public function delete(Request $request, Company $company, CompanyRepository $companyRepository): Response
-    {
-        if ($this->isCsrfTokenValid('delete' . $company->getId(), $request->request->get('_token'))) {
-            $companyRepository->remove($company, true);
-        }
-
-        return $this->redirectToRoute('home_index', [], Response::HTTP_SEE_OTHER);
     }
 }
