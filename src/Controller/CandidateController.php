@@ -11,6 +11,7 @@ use App\Repository\ApplicationRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -52,14 +53,8 @@ class CandidateController extends AbstractController
     #[Route('/{id}', name: 'show', methods: ['GET', 'POST'])]
     public function show(Candidate $candidate): Response
     {
-        $form = $this->createForm(UploadResumeType::class, $candidate, [
-            'action' => $this->generateUrl('candidate_edit', ['id' => $candidate->getId()]),
-            'method' => 'POST',
-        ]);
-
         return $this->render('candidate/show.html.twig', [
             'candidate' => $candidate,
-            'form' => $form,
         ]);
     }
 
@@ -69,16 +64,7 @@ class CandidateController extends AbstractController
         $form = $this->createForm(CandidateType::class, $candidate);
         $form->handleRequest($request);
 
-        $formUpload = $this->createForm(UploadResumeType::class, $candidate);
-        $formUpload->handleRequest($request);
-
-        if ($formUpload->isSubmitted() && $formUpload->isValid()) {
-            $candidateRepository->save($candidate, true);
-
-            $this->addFlash('success', 'Your resume has been uploaded! :)');
-
-            return $this->redirectToRoute('candidate_show', ['id' => $candidate->getId()], Response::HTTP_SEE_OTHER);
-        } elseif ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $candidateRepository->save($candidate, true);
 
             $this->addFlash('success', 'Your account has been updated! :)');
@@ -87,7 +73,6 @@ class CandidateController extends AbstractController
         }
         return $this->render('candidate/edit.html.twig', [
             'candidate'  => $candidate,
-            'formUpload' => $formUpload,
             'form'       => $form,
         ]);
     }

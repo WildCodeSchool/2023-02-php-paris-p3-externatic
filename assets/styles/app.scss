@@ -298,8 +298,6 @@ $carousel-indicator-active-bg: #343a40;
         margin: 1.5em 0 0 24em;
         display: grid;
         width: 40%;
-        grid-template-columns: 1fr 1fr;
-        align-items: center;
     }
 
     .portfolio {
@@ -417,21 +415,15 @@ $carousel-indicator-active-bg: #343a40;
 }
 
 //Button cv, upload
-#resume button img,
-#upload-resume button img {
+#resume button img {
     padding-right: .5em;
 }
 
-//Button color upload
-#upload-resume button.btn {
+//Button color show resume
+#no-resume {
     background-color: $tertiary;
     border-color: $tertiary;
     color: #828282;
-}
-
-//Button upload error
-form #upload_resume div ul li {
-    color: red;
 }
 
 //Skills
@@ -895,6 +887,11 @@ input[type="date"] {
     height: 144px;
 }
 
+#card-apply-candidate {
+    width: 57%;
+    margin: 0 auto;
+}
+
 //Media queries
 @media (min-width: 600px) {
     #navigation-btn-mobile {
@@ -966,8 +963,6 @@ input[type="date"] {
         margin: 1.5em 0 0 24em;
         display: grid;
         width: 40%;
-        grid-template-columns: 1fr 1fr;
-        align-items: end;
     }
 
     .portfolio {
