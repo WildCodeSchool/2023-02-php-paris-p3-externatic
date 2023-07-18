@@ -597,6 +597,9 @@ $navbar-padding-y: 0;
     margin-top: 1.5rem;
 }
 
+.btnfocused {
+    background-color: $secondary;
+}
 //Paginator
 .page-link.active,
 .active>.page-link {
