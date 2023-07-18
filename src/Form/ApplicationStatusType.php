@@ -19,8 +19,7 @@ class ApplicationStatusType extends AbstractType
                 'attr' => [
                     'class' => 'form-select',
                 ],
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
