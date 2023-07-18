@@ -6,8 +6,8 @@
 	{% if app.user.company is defined and app.user.company is not null %}
 		{% include "company/_dashboard.html.twig" %}
 		<div class="mb-4 mt-2">
-			{% include "style/component/_navigationBtnMobileCompany.html.twig" %}
-			{% include "style/component/_navigationBtnDesktopCompany.html.twig" %}
+			{% include "company/_navigationBtnMobileCompany.html.twig" %}
+			{% include "company/_navigationBtnDesktopCompany.html.twig" %}
 		</div>
 	{% endif %}
 	<section class="offer-show-header-section" style="background-image: url( {{ vich_uploader_asset(offer, 'offerPicture') }} ); background-size: cover;">

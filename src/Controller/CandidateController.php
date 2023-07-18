@@ -5,27 +5,25 @@ namespace App\Controller;
 use App\Entity\Candidate;
 use App\Entity\Offer;
 use App\Form\CandidateType;
-use App\Form\UploadResumeType;
 use App\Repository\CandidateRepository;
 use App\Form\SearchApplicationFilterType;
-use App\Form\SearchOfferCandidateType;
 use App\Form\SearchOfferFilterType;
 use App\Repository\ApplicationRepository;
 use App\Repository\OfferRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/candidate', name: 'candidate_')]
+#[IsGranted('ROLE_CANDIDATE')]
 class CandidateController extends AbstractController
 {
-    #[Route('/{id}/research', name: 'research', methods: ['GET'])]
+    #[Route('/research', name: 'research', methods: ['GET'])]
     public function index(
-        Candidate $candidate,
         Request $request,
         OfferRepository $offerRepository,
         PaginatorInterface $paginator,
@@ -42,7 +40,7 @@ class CandidateController extends AbstractController
             'offers' => $offers,
             'now' => new DateTime(),
             'form' => $form,
-            'candidate' => $candidate,
+            'candidate' => $this->getUser()->getCandidate(),
         ]);
     }
 
@@ -60,7 +58,13 @@ class CandidateController extends AbstractController
 
             $this->addFlash('success', 'Your account has been created! :)');
 
-            return $this->redirectToRoute('home_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute(
+                'candidate_research',
+                [
+                'id' => $candidate->getId()
+                ],
+                Response::HTTP_SEE_OTHER
+            );
         }
 
         return $this->render('candidate/new.html.twig', [
@@ -155,8 +159,14 @@ class CandidateController extends AbstractController
 
         $candidateRepository->save($candidate, true);
 
-        //changer la redirection vers la page candidate_research
-        return $this->redirectToRoute('home_index', ['offer' => $offer->getId()], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute(
+            'candidate_research',
+            [
+            'offer' => $offer->getId(),
+            'id' => $candidate->getId()
+            ],
+            Response::HTTP_SEE_OTHER
+        );
     }
 
     #[Route('/{id}/collection', name: 'collection')]

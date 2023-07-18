@@ -9,13 +9,10 @@
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav">
 				<li class="nav-item">
-					<a class="nav-link active" aria-current="page" href="#">About us</a>
+					<a class="nav-link active" aria-current="page" target="_blank" href="https://www.externatic.fr/qui-sommes-nous/">About us</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link active" aria-current="page" href="#">Find a job</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link active" aria-current="page" href="#">Find a company</a>
+					<a class="nav-link active" aria-current="page" href="{{ path('home_index') }}">Offers</a>
 				</li>
 			</ul>
 			{% if app.user %}
@@ -43,7 +40,6 @@
                     </a>
                     <ul class="dropdown-menu" style="position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate(0px, 55px);" data-popper-placement="bottom-end">
                         <li><a class="dropdown-item" href="{{ path('logout') }}">Logout</a></li>
-						<li><a class="dropdown-item" href="{{ path('company_offers', {'id': app.user.company.id}) }}">Offers</a></li>
                     </ul>
 				{% endif %}
 			{% else %}

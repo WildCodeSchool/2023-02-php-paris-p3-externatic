@@ -21,8 +21,10 @@ class UserAuthenticator extends AbstractLoginFormAuthenticator
 
     public const LOGIN_ROUTE = 'login';
 
-    public function __construct(private UrlGeneratorInterface $urlGenerator)
-    {
+    public function __construct(
+        private UrlGeneratorInterface $urlGenerator,
+        private Security $security
+    ) {
     }
 
     public function supports(Request $request): bool
@@ -47,13 +49,22 @@ class UserAuthenticator extends AbstractLoginFormAuthenticator
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
-        //$targetParth = get page where the user where before login
+        $user = $token->getUser();
         $targetPath = $this->getTargetPath($request->getSession(), $firewallName);
+
+        if (in_array('ROLE_CANDIDATE', $user->getRoles())) {
+            return new RedirectResponse($this->urlGenerator->generate('candidate_research'));
+        }
+
+        if (in_array('ROLE_COMPANY', $user->getRoles())) {
+            return new RedirectResponse($this->urlGenerator->generate('company_offers'));
+        }
+
         if ($targetPath) {
             return new RedirectResponse($targetPath);
         }
 
-        return new RedirectResponse($this->urlGenerator->generate('home_index'));
+        return new RedirectResponse($this->urlGenerator->generate('home'));
     }
 
     protected function getLoginUrl(Request $request): string

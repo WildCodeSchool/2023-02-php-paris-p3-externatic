@@ -32,7 +32,7 @@ class CompanyController extends AbstractController
 
             $this->addFlash('success', 'Your account has been created! :)');
 
-            return $this->redirectToRoute('home_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('company_offers', ['id' => $company->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('company/new.html.twig', [
