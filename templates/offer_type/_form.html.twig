@@ -36,16 +36,16 @@
             {{ form_row(form.interviewProcess) }}
         </div>
         <div class="col mt-4">
-        <h3 class="mt-2 mb-4"> Required Hard skills</h3>
-        {{ form_errors(form.skills) }}
+            <h3 class="mt-2 mb-4"> Required Hard skills</h3>
+            {{ form_errors(form.skills) }}
             {% for label, value in field_choices(form.skills) %}
                 {% if label in constant('App\\Entity\\Skill::HARD')[0] %}
                     <input class="form-check-input border-primary" type="checkbox" name="{{ field_name(form.skills) }}[]" value="{{ value }}" id="flexCheckDefault" {{ value in field_value(form.skills) ? 'checked' : '' }}>
                     <label class="form-check-label" for="flexCheckDefault"> {{ label }} </label>
                 {% endif %}
             {% endfor %}
-        <h3 class="mt-4 mb-4"> Required Soft skills</h3>
-        {{ form_errors(form.skills) }}
+            <h3 class="mt-4 mb-4"> Required Soft skills</h3>
+            {{ form_errors(form.skills) }}
             {% for label, value in field_choices(form.skills) %}
                 {% if label in constant('App\\Entity\\Skill::SOFT')[0] %}
                     <input class="form-check-input border-primary" type="checkbox" name="{{ field_name(form.skills) }}[]" value="{{ value }}" id="flexCheckDefault" {{ value in field_value(form.skills) ? 'checked' : '' }}>

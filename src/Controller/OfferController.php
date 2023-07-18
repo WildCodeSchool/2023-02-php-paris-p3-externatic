@@ -64,7 +64,7 @@ class OfferController extends AbstractController
     }
 
     #[Route('/form/new', name: 'form_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $manager): Response
+    public function new(Request $request, EntityManagerInterface $manager, OfferRepository $offerRepository): Response
     {
         $offer = new Offer();
         $form = $this->createForm(OfferType::class, $offer);
@@ -81,9 +81,9 @@ class OfferController extends AbstractController
                 'success',
                 'Your offer has been successfully added 😇 !'
             );
-
             return $this->redirectToRoute('home_index', [], Response::HTTP_SEE_OTHER);
         }
+
         return $this->render('offer_type/new.html.twig', [
             'offer' => $offer,
             'form' => $form,
@@ -97,5 +97,17 @@ class OfferController extends AbstractController
         $applyRepository->apply($offer, $this->getUser()->getCandidate());
 
         return $this->redirectToRoute('offer_show', ['id' => $offer->getId()]);
+    }
+
+    #[Route('/{id}/delete', name: 'form_delete', methods: ['POST'])]
+    #[IsGranted('ROLE_COMPANY')]
+    public function delete(Request $request, Offer $offer, OfferRepository $repo): Response
+    {
+        if ($this->isCsrfTokenValid('delete' . $offer->getId(), $request->request->get('_token'))) {
+            $repo->remove($offer, true);
+
+            $this->addFlash('success', 'Your offer has been succesfully deleted 🚮');
+        }
+        return $this->redirectToRoute('home_index', [], Response::HTTP_SEE_OTHER);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Offer;
 use App\Form\SearchOfferFilterType;
 use App\Repository\OfferRepository;
 use DateTime;
@@ -15,8 +16,11 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends AbstractController
 {
     #[Route('/', name:'index', methods: ['GET'])]
-    public function index(Request $request, OfferRepository $offerRepository, PaginatorInterface $paginator): Response
-    {
+    public function index(
+        Request $request,
+        OfferRepository $offerRepository,
+        PaginatorInterface $paginator,
+    ): Response {
         $form = $this->createForm(SearchOfferFilterType::class, null, ['method' => 'GET']);
         $form->handleRequest($request);
         $filters = $form->getData();

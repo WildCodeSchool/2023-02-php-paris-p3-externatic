@@ -7,10 +7,10 @@
     </div>
     <div class="row align-items-center justify-content-end mt-2" id="search-input">
         <div class="col-md-2 mt-2">
-            <a class="btn btn-secondary d-block w-100" role="button" href="#">Add offer <img src="{{ asset('build/images/picto/add_doc.svg') }}"></a>
+            <a class="btn btn-secondary d-block w-100" role="button" href="{{ path('offer_form_new') }}">Add offer <img src="{{ asset('build/images/picto/add_doc.svg') }}"></a>
         </div>
     </div>
-    <div class="count mt-4">
+    <div class="count m-4">
         <h5>
             {{ app.user.company.offers.count }}
             offers found
@@ -24,7 +24,7 @@
                         <h2 class="accordion-header">
                             <div class="row align-items-center p-3">
                                 <h4 class="col-6">Offer #{{ offer.id }} {{ offer.title }}</h4>
-                                <p class="col-3 h6 mb-4">
+                                <p class="col-3 h6">
                                     <img class="picto" src="{{ asset('build/images/picto/location-offer.svg') }}" alt="pictoLocation">
                                     {{ offer.location }}
                                 </p>
@@ -47,6 +47,7 @@
                                 {% if offer.applications.count / 12 | round(0, 'ceil') <= 1 %}
                                     <div class="row row-cols-3">
                                         {% for application in offer.applications %}
+                                        <a href="{{ path('company_candidate_application', {'id': application.id}) }}">
                                             <div class="col col-md-border">
                                                 {% if (loop.index % 3) == 0 %}
                                                 <div class="row align-items-center">
@@ -80,6 +81,7 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                        </a>
                                         {% endfor %}
                                     </div>
                                 {% else %}
@@ -95,48 +97,7 @@
                                             <div class="row row-cols-3">
                                                 {% for application in offer.applications %}
                                                     {% if loop.index <= 12 %}
-                                                        <div class="col col-md-border">
-                                                            {% if (loop.index % 3) == 0 %}
-                                                            <div class="row align-items-center">
-                                                            {% else %}
-                                                            <div class="row align-items-center border-end">
-                                                            {% endif %}
-                                                                <div class="col-2">
-                                                                    <img src="{{ vich_uploader_asset(application.candidate, 'pictureFile') }}" id="profile-picture-navbar" alt="profile-picture">
-                                                                </div>
-                                                                <div class="col-6">
-                                                                    <p>{{ application.candidate.firstname }} {{ application.candidate.lastname }}</p>
-                                                                </div>
-                                                                <div class="col-4">
-                                                                    {% if application.status == constant('App\\Entity\\Application::STATUS_RECEIVED') %}
-                                                                        <p ><img class="picto" src="{{ asset('build/images/picto/received.svg') }}" alt="pictoReceivedApplication">
-                                                                            {{ application.status }}
-                                                                        </p>
-                                                                    {% elseif application.status == constant('App\\Entity\\Application::STATUS_INREVIEW') %}
-                                                                        <p><img class="picto" src="{{ asset('build/images/picto/in-review.svg') }}" alt="pictoInReviewApplication">
-                                                                            {{ application.status }}
-                                                                        </p>
-                                                                    {% elseif application.status == constant('App\\Entity\\Application::STATUS_ACCEPTED') %}
-                                                                        <p><img class="picto" src="{{ asset('build/images/picto/accepted.svg') }}" alt="pictoAcceptedApplication">
-                                                                            {{ application.status }}
-                                                                        </p>
-                                                                    {% elseif application.status == constant('App\\Entity\\Application::STATUS_REJECTED') %}
-                                                                        <p><img class="picto" src="{{ asset('build/images/picto/rejected.svg') }}" alt="pictoRejectedApplication">
-                                                                            {{ application.status }}
-                                                                        </p>
-                                                                    {% endif %}
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    {% endif %}
-                                                {% endfor %}
-                                            </div>
-                                        </div>
-                                        {% for j in 0..(((offer.applications.count / 12)|round(0, 'ceil')|number_format) - 2) %}
-                                            <div class="carousel-item">
-                                                <div class="row row-cols-3">
-                                                    {% for application in offer.applications %}
-                                                        {% if loop.index > (12 * (j + 1)) and loop.index <= (12 * (j + 2)) %}
+                                                        <a href="{{ path('company_candidate_application', {'id': application.id}) }}">
                                                             <div class="col col-md-border">
                                                                 {% if (loop.index % 3) == 0 %}
                                                                 <div class="row align-items-center">
@@ -170,6 +131,51 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
+                                                        </a>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                        {% for j in 0..(((offer.applications.count / 12)|round(0, 'ceil')|number_format) - 2) %}
+                                            <div class="carousel-item">
+                                                <div class="row row-cols-3">
+                                                    {% for application in offer.applications %}
+                                                        {% if loop.index > (12 * (j + 1)) and loop.index <= (12 * (j + 2)) %}
+                                                            <a href="{{ path('company_candidate_application', {'id': application.id}) }}">
+                                                                <div class="col col-md-border">
+                                                                    {% if (loop.index % 3) == 0 %}
+                                                                    <div class="row align-items-center">
+                                                                    {% else %}
+                                                                    <div class="row align-items-center border-end">
+                                                                    {% endif %}
+                                                                        <div class="col-2">
+                                                                            <img src="{{ vich_uploader_asset(application.candidate, 'pictureFile') }}" id="profile-picture-navbar" alt="profile-picture">
+                                                                        </div>
+                                                                        <div class="col-6">
+                                                                            <p>{{ application.candidate.firstname }} {{ application.candidate.lastname }}</p>
+                                                                        </div>
+                                                                        <div class="col-4">
+                                                                            {% if application.status == constant('App\\Entity\\Application::STATUS_RECEIVED') %}
+                                                                                <p ><img class="picto" src="{{ asset('build/images/picto/received.svg') }}" alt="pictoReceivedApplication">
+                                                                                    {{ application.status }}
+                                                                                </p>
+                                                                            {% elseif application.status == constant('App\\Entity\\Application::STATUS_INREVIEW') %}
+                                                                                <p><img class="picto" src="{{ asset('build/images/picto/in-review.svg') }}" alt="pictoInReviewApplication">
+                                                                                    {{ application.status }}
+                                                                                </p>
+                                                                            {% elseif application.status == constant('App\\Entity\\Application::STATUS_ACCEPTED') %}
+                                                                                <p><img class="picto" src="{{ asset('build/images/picto/accepted.svg') }}" alt="pictoAcceptedApplication">
+                                                                                    {{ application.status }}
+                                                                                </p>
+                                                                            {% elseif application.status == constant('App\\Entity\\Application::STATUS_REJECTED') %}
+                                                                                <p><img class="picto" src="{{ asset('build/images/picto/rejected.svg') }}" alt="pictoRejectedApplication">
+                                                                                    {{ application.status }}
+                                                                                </p>
+                                                                            {% endif %}
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
                                                         {% endif %}
                                                     {% endfor %}
                                                 </div>
