@@ -5,8 +5,11 @@ $font-family-base: 'Jost', sans-serif;
 $primary: #851342;
 $secondary: #FED32C;
 $tertiary: #D9D9D9;
+$success: $secondary;
 $info: #ECEEF1;
 $light: #F6F7F8;
+
+$alert-margin-bottom:0;
 
 $btn-font-weight: 700;
 $btn-font-size: 1rem;
@@ -100,8 +103,29 @@ $nav-underline-link-active-color:$secondary;
     @include cards($primary, 10px);
 }
 
-#application-card {
+#application-card .accordion-item {
     @include cards($tertiary, 0px);
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.accordion-body .row-cols-3 {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+$carousel-indicator-active-bg: #343a40;
+
+#carouselExampleIndicators {
+    padding: 0px 20px 40px 20px;
+}
+
+#previous-arrow {
+    justify-content: flex-start;
+}
+
+#next-arrow {
+    justify-content: flex-end;
 }
 
 #profile-card {
@@ -198,7 +222,14 @@ $nav-underline-link-active-color:$secondary;
     background-color: $secondary;
 }
 
-// Media queries
+//Dashboard candidate
+#dashboard-candidate {
+    background-color: $primary;
+    color:white;
+    height: 13.6rem;
+}
+
+//Media queries
 @media (min-width: 600px) {
     #navigation-btn-mobile {
         display: none;
@@ -679,7 +710,7 @@ hr {
     background: rgba(254, 211, 44, .8);
 }
 
-//Create account
+//Create candidate account
 #upload-candidate-picture-form {
     background-color: $primary;
     border-top-right-radius: 10px;
@@ -699,6 +730,7 @@ hr {
     margin-top: 0.5rem;
 }
 
+#upload-candidate-picture-form,
 #upload-candidate-picture-form .dropzone-placeholder,
 #upload-candidate-picture-form .dropzone-preview-filename,
 #upload-candidate-picture-form .dropzone-preview-button::before {
@@ -711,7 +743,8 @@ hr {
     min-height: 195px;
 }
 
-#upload-candidate-picture-form .dropzone-preview-image {
+#upload-candidate-picture-form .dropzone-preview-image,
+#upload-company-picture-form .dropzone-preview-image {
     min-width: 130px;
     height: 130px;
 }
@@ -734,6 +767,36 @@ hr {
     left: 0;
     top: 0;
     opacity: 0;
+}
+
+//Create company account
+#profile-company-form {
+    background-color: rgba(243, 231, 236, 1);
+    border-radius: 10px;
+}
+
+#upload-company-picture-form .dropzone-placeholder,
+#upload-company-picture-form .dropzone-preview-filename,
+#upload-company-picture-form .dropzone-preview-button::before {
+    color: $primary;
+}
+
+#upload-company-picture-form .dropzone-container {
+    border: 2px dashed $primary;
+    justify-content: center;
+    min-height: 195px;
+}
+
+#upload-candidate-picture-form .dropzone-preview-image {
+    min-width: 130px;
+    height: 130px;
+}
+
+//Edit candidate account
+#candidate-picture-form {
+    width: 16%;
+    border-radius: 50%;
+    margin-bottom: 1rem;
 }
 
 //Register form
@@ -774,6 +837,45 @@ hr {
     border-radius: 5px;
     margin-top: 1em;
     padding: 0.5em;
+}
+
+//Dashboard company
+#dashboard-company {
+    background-color: $primary;
+    color:white;
+    height: 8rem;
+}
+
+//Create Offer
+#new-offer-form {
+    background-color: rgba(243, 231, 236, 1);
+    border-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+input[type="date"] {
+    margin-left: 10px;
+    background-color: $tertiary;
+    border-radius: 5px;
+    padding: 2px;
+}
+
+#upload-offer-picture-form .dropzone-placeholder,
+#upload-offer-picture-form .dropzone-preview-filename,
+#upload-offer-picture-form .dropzone-preview-button::before {
+    color: $primary;
+}
+
+#upload-offer-picture-form .dropzone-container {
+    border: 2px dashed $primary;
+    justify-content: center;
+    min-height: 195px;
+}
+
+#upload-offer-picture-form .dropzone-preview-image {
+    min-width: 260px;
+    height: 144px;
 }
 
 //Media queries
@@ -946,6 +1048,10 @@ hr {
 
     #submit-search-application {
         width: 85%;
+    }
+
+    #dashboard-candidate .dashboard-candidate-text {
+        display:none;
     }
 }
 

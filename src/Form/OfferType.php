@@ -14,7 +14,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Doctrine\ORM\EntityRepository;
+use Symfony\Component\Validator\Constraints\Count;
+use Symfony\UX\Dropzone\Form\DropzoneType;
 
 class OfferType extends AbstractType
 {
@@ -22,34 +23,100 @@ class OfferType extends AbstractType
     {
         $builder
             ->add('title', TextType::class, [
+                'label' => false,
+                'attr' => [
+                    'class' => 'form-control border-primary',
+                    'placeholder' => 'Title',
+                ],
                 'constraints' => [
                     new Assert\Length(['min' => 2, 'max' => 50]),
                     new Assert\NotBlank()
-                ]
+                ],
             ])
             ->add('startAt', DateType::class, [
+                'label' => 'Starting date',
                 'widget' => 'single_text',
+                'by_reference' => true,
             ])
             ->add('contract', ChoiceType::class, [
+                'placeholder' => 'Contract',
+                'label' => false,
                 'choices' => Offer::JOB_TYPE,
-                'required' => true,
-                'label' => 'Contract',
+                'attr' => [
+                    'class' => 'form-select border-primary',
+                    'aria-label' => 'Default select example',
+                ]
             ])
             ->add('workFromHome', ChoiceType::class, [
+                'placeholder' => 'work from home',
+                'label' => false,
                 'choices' => Offer::WORK_FROM_HOME,
-                'required' => true,
-                'label' => 'Telework',
+                'attr' => [
+                    'class' => 'form-select border-primary',
+                    'aria-label' => 'Default select example',
+                ]
             ])
-            ->add('description', TextareaType::class)
+            ->add('description', TextareaType::class, [
+                'label' => false,
+                'attr' => [
+                    'class' => 'form-control border-primary',
+                    'placeholder' => 'Description',
+                ],
+            ])
             ->add('experience', ChoiceType::class, [
+                'placeholder' => 'Years of experience',
                 'choices' => Offer::EXPERIENCE,
-                'required' => true,
-                'label' => 'Level of experience (in years)',
+                'label' => false,
+                'attr' => [
+                    'class' => 'form-select border-primary',
+                    'aria-label' => 'Default select example',
+                    'placeholder' => 'Level of experience (in years)',
+                ]
             ])
-            ->add('minSalary', IntegerType::class)
-            ->add('maxSalary', IntegerType::class)
-            ->add('location', TextType::class)
-            ->add('interviewProcess', TextareaType::class)
+            ->add('offerPicture', DropzoneType::class, [
+                'required'      => false,
+                'label'         => false,
+                'attr' => [
+                    'placeholder' => 'Browse your picture offer here',
+                ],
+            ])
+            ->add('minSalary', IntegerType::class, [
+                'label' => false,
+                'constraints' => [
+                    new Assert\GreaterThan(1000),
+                    new Assert\NotBlank()
+                ],
+                'attr' => [
+                    'class' => 'form-control border-primary',
+                    'placeholder' => 'Min salary',
+                ],
+            ])
+            ->add('maxSalary', IntegerType::class, [
+                'label' => false,
+                'constraints' => [
+                    new Assert\GreaterThan(1000)
+                ],
+                'attr' => [
+                    'class' => 'form-control border-primary',
+                    'placeholder' => 'Max salary',
+                ],
+            ])
+            ->add('location', TextType::class, [
+                'label' => false,
+                'attr' => [
+                    'class' => 'form-control border-primary',
+                    'placeholder' => 'Location',
+                ],
+            ])
+            ->add('interviewProcess', TextareaType::class, [
+                'label' => false,
+                'required' => false,
+                'attr' => [
+                    'class' => 'form-control border-primary',
+                    'placeholder' => '1. Call with HR 2.Technical Test 3.Last interview',
+                ],
+                    'empty_data' => '1. Call with HR 2.Technical Test 3.Last interview',
+            ])
             ->add('skills', EntityType::class, [
                 'label' => 'Required skills',
                 'class' => Skill::class,
@@ -57,8 +124,10 @@ class OfferType extends AbstractType
                 'multiple' => true,
                 'expanded' => true,
                 'by_reference' => false,
-            ])
-        ;
+                'constraints' => array(
+                    new Count(['min' => 1, 'minMessage' => 'Please select at least one skill'])
+                )
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

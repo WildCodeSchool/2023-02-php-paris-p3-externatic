@@ -23,8 +23,12 @@ class ConnectionController extends AbstractController
     #[Route('/login', name: 'login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-            $error = $authenticationUtils->getLastAuthenticationError();
-            $lastUsername = $authenticationUtils->getLastUsername();
+        if ($this->getUser()) {
+            return $this->redirectToRoute('home_index');
+        }
+
+        $error = $authenticationUtils->getLastAuthenticationError();
+        $lastUsername = $authenticationUtils->getLastUsername();
 
         return $this->render('connection/login.html.twig', [
             'last_username' => $lastUsername,
@@ -45,7 +49,6 @@ class ConnectionController extends AbstractController
         UserAuthenticatorInterface $userAuthenticator,
         UserAuthenticator $authenticator,
         UserRepository $userRepository,
-        EntityManagerInterface $entityManager
     ): Response {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);

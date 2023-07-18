@@ -61,9 +61,30 @@ class CandidateController extends AbstractController
     #[Route('/{id}/edit', name: 'edit', methods: ['GET', 'POST'])]
     public function edit(Candidate $candidate, Request $request, CandidateRepository $candidateRepository): Response
     {
-            return $this->render('candidate/edit.html.twig', [
-                'candidate'  => $candidate,
-            ]);
+        $form = $this->createForm(CandidateType::class, $candidate);
+        $form->handleRequest($request);
+
+        $formUpload = $this->createForm(UploadResumeType::class, $candidate);
+        $formUpload->handleRequest($request);
+
+        if ($formUpload->isSubmitted() && $formUpload->isValid()) {
+            $candidateRepository->save($candidate, true);
+
+            $this->addFlash('success', 'Your resume has been uploaded! :)');
+
+            return $this->redirectToRoute('candidate_show', ['id' => $candidate->getId()], Response::HTTP_SEE_OTHER);
+        } elseif ($form->isSubmitted() && $form->isValid()) {
+            $candidateRepository->save($candidate, true);
+
+            $this->addFlash('success', 'Your account has been updated! :)');
+
+            return $this->redirectToRoute('candidate_show', ['id' => $candidate->getId()], Response::HTTP_SEE_OTHER);
+        }
+        return $this->render('candidate/edit.html.twig', [
+            'candidate'  => $candidate,
+            'formUpload' => $formUpload,
+            'form'       => $form,
+        ]);
     }
 
     #[Route('/{id}/updateVisibility', name: 'visibility')]
@@ -92,9 +113,9 @@ class CandidateController extends AbstractController
         ApplicationRepository $applicationRepo,
         PaginatorInterface $paginator
     ): Response {
-
         $form = $this->createForm(SearchApplicationFilterType::class, null, ['method' => 'GET']);
         $form->handleRequest($request);
+
         $applications = $applicationRepo->findByCandidate($candidate);
 
         if ($form->isSubmitted() && $form->isValid()) {
