@@ -30,7 +30,7 @@ class CompanyController extends AbstractController
         Application $application,
         Request $request,
         ApplicationRepository $repository
-        ): Response {
+    ): Response {
         $form = $this->createForm(ApplicationStatusType::class, $application);
         $form->handleRequest($request);
 
