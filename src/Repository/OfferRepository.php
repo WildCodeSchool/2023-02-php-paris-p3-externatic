@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Candidate;
+use App\Entity\Company;
 use App\Entity\Offer;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -125,6 +126,28 @@ class OfferRepository extends ServiceEntityRepository
         // ->setParameter('skills', '%' . $candidate->getSkills() . '%')
 
         ->getQuery();
+
+        return $queryBuilder->getResult();
+    }
+
+
+
+    public function searchOffersByCompany(int $company, ?string $data): ?array
+    {
+        $queryBuilder = $this->createQueryBuilder('o')
+            ->select('o', 'c')
+            ->join('o.company', 'c')
+            ->andWhere('c.id =' . $company);
+
+        if (!empty($data)) {
+            $queryBuilder = $queryBuilder
+                ->andWhere('o.title Like :title')
+                ->setParameter('title', '%' . $data . '%');
+        }
+
+        $queryBuilder = $queryBuilder
+            ->orderBy('o.createdAt', 'DESC')
+            ->getQuery();
 
         return $queryBuilder->getResult();
     }
