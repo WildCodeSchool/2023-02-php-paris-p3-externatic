@@ -20,11 +20,11 @@ use DateTime;
 class Offer
 {
     public const JOB_TYPE = [
-        'permanent contract' => 'permanent-contract',
-        'work study' => 'work-study',
-        'intership' => 'intership',
-        'fixed-term / temporary' => 'fixed-term-temporary',
-        'freelance' => 'freelance',
+        'Permanent contract' => 'permanent-contract',
+        'Work study' => 'work-study',
+        'Intership' => 'intership',
+        'Fixed-term / temporary' => 'fixed-term-temporary',
+        'Freelance' => 'freelance',
     ];
 
     public const EXPERIENCE = [
