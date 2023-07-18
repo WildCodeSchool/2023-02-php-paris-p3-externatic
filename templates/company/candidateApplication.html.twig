@@ -1,0 +1,147 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+	{{ application.candidate.firstname }} {{ application.candidate.lastname }} - Application {{application.id }}
+{% endblock %}
+
+{% block body %}
+	{% include "company/_dashboard.html.twig" %}
+    {% if app.user.company is defined and app.user.company is not null %}
+		<div class="mb-5 mt-2">
+			{% include "style/component/_navigationBtnMobileCompany.html.twig" %}
+			{% include "style/component/_navigationBtnDesktopCompany.html.twig" %}
+		</div>
+	{% endif %}
+    <div class="container">
+        <div class="row justify-content-center" id="card-apply-candidate">
+            <div class="accordion accordion-flush" id="search-card" tabindex="1">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <div class="row align-items-center text-center p-3">
+                            <a href="{{ path('offer_show', {'id': application.offer.id}) }}" class="col-12"><h3>Offer #{{ application.offer.id }} {{ application.offer.title }}</h3></a>
+                        </div>
+						{{ form_start(form) }}
+						<div class="row align-items-center justify-content-center p-2 h4">
+							<div class="col-4 text-center">{{ form_label(form.status) }}</div>
+							<div class="col-3">{{ form_widget(form.status) }}</div>
+							<button type="submit" class="col-2 btn btn-secondary ">{{ button_label|default('Save') }}</button>
+						</div>
+						{{ form_end(form) }}
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+	<div class="row text-center">
+		<div class="col mt-5">
+			<hr style="width: 80%; margin: 0 auto;">
+			<h1 class="mt-4">Candidate profile</h1>
+		</div>
+	</div>
+    <section class="margin">
+		<div class="row justify-content-center align-items-center visibility-profile" style="width: 100%;">
+			<div class="col-5 profile">
+				<h1>YOUR PROFILE</h1>
+                {% if application.candidate.picture is not null %}
+                    <img id="picture-profile" src="{{ vich_uploader_asset(application.candidate, 'pictureFile') }}" alt="profile-picture" style="margin-right: 350px;">
+                {% else %}
+                    <img src="{{ asset("build/images/user.png") }}" id="picture-profile" alt="default-user" width="50px" style="margin-right: 350px;">
+                {% endif %}
+                <div id="profile-card" class="p-3">
+					<div class="card-body mt-2" style="margin-left: 160px;">
+						<div class="profile-informations">
+							<p class="name">
+                                {{ application.candidate.firstname }}
+								{{ application.candidate.lastname }}
+                            </p>
+							<p class="job-title">
+                                {{ application.candidate.jobTitle }}
+                            </p>
+							<p class="experience">
+								{{ application.candidate.experience }}
+                                years of experience
+                            </p>
+						</div>
+						<div class="metadata">
+							{% for metadata in application.candidate.metadata %}
+								{% if metadata.github %}
+									<a target="_blank" href="{{ metadata.github}}">
+										<img class="metadata" src="{{ asset('build/images/picto/github_black.svg') }}" alt="github"/>
+									</a>
+                                {% endif %}
+								{% if metadata.linkedin %}
+									<a target="_blank" href="{{ metadata.linkedin }}">
+										<img class="metadata" src="{{ asset('build/images/picto/linkedin_black.svg') }}" alt="linkedin"/>
+									</a>
+								{% endif %}
+							{% endfor %}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="introduction" class="profile-blocks mt-4">
+			<div class="card-body p-4 ">
+				<img class="quote-left" src="{{ asset('build/images/picto/quoteopen.png') }}" alt="quote"/>
+				{{ application.candidate.introduction }}
+				<img class="quote-right" src="{{ asset('build/images/picto/quoteclose.png') }}" alt="quote"/>
+			</div>
+		</div>
+        {% if application.candidate.resume %}
+            <div class="row justify-content-center" style="width: 100%;">
+                <div id="resume" class="col text-center mt-4">
+                    {{ include('company/_modal_resume.html.twig') }}
+                </div>
+            </div>
+        {% endif %}
+		<div class="skills">
+			<div class="profile-blocks mt-4">
+				<div class="card-body p-4 ">
+					<div class="hard-skills">
+						<p>HARD SKILLS</p>
+						{% for skill in application.candidate.skills %}
+							{% if skill.type == 'hard' %}
+								<div>
+									<img class="img_icon fa-border" src="{{ asset('build/images/picto/checked.svg') }}" alt="check"/>
+									<span>{{ skill.name }}</span>
+								</div>
+							{% endif %}
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+			<div class="profile-blocks mt-4">
+				<div class="card-body p-4 ">
+					<div class="soft-skills">
+						<p>SOFT SKILLS</p>
+						{% for skill in application.candidate.skills %}
+							{% if skill.type == 'soft' %}
+								<div>
+									<img class="img_icon fa-border" src="{{ asset('build/images/picto/checked.svg') }}" alt="check"/>
+									<span>{{ skill.name }}</span>
+								</div>
+							{% endif %}
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+		</div>
+        {% for metadata in application.candidate.metadata %}
+            {% if metadata.portefolio or metadata.other %}
+                <div class="portfolio">
+                    <div class="profile-blocks mt-4">
+                        <div class="card-body p-4 ">
+                            <p>MY PROJECTS</p>
+                            {% if metadata.portefolio %}
+                                <a target="_blank" href="{{ metadata.portefolio }}">Portfolio<img src="{{ asset('build/images/picto/link.svg') }}" alt="portfolio"/></a>
+                            {% endif %}
+                            {% if metadata.other %}
+                                <a target="_blank" href="{{ metadata.other }}">Other<img src="{{ asset('build/images/picto/link.svg') }}" alt="portfolio"/></a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+	</section>
+{% endblock %}
