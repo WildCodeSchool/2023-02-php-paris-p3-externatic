@@ -267,8 +267,6 @@ $nav-underline-link-active-color:$secondary;
         margin: 1.5em 0 0 24em;
         display: grid;
         width: 40%;
-        grid-template-columns: 1fr 1fr;
-        align-items: center;
     }
 
     .portfolio {
@@ -386,22 +384,21 @@ $nav-underline-link-active-color:$secondary;
 }
 
 //Button cv, upload
-#resume button img,
-#upload-resume button img {
+#resume button img {
     padding-right: .5em;
 }
 
-//Button color upload
-#upload-resume button.btn {
+//Button color show resume
+#no-resume {
     background-color: $tertiary;
     border-color: $tertiary;
     color: #828282;
 }
 
-//Button upload error
-form #upload_resume div ul li {
-    color: red;
-}
+// //Button upload error
+// form #upload_resume div ul li {
+//     color: red;
+// }
 
 //Skills
 .skills .hard-skills,
@@ -855,8 +852,6 @@ hr {
         margin: 1.5em 0 0 24em;
         display: grid;
         width: 40%;
-        grid-template-columns: 1fr 1fr;
-        align-items: end;
     }
 
     .portfolio {
