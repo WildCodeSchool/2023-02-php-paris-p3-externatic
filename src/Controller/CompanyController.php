@@ -49,11 +49,32 @@ class CompanyController extends AbstractController
         ]);
     }
 
+    #[Route('/{id}/edit', name: 'edit', methods: ['GET', 'POST'])]
+    public function edit(Company $company, Request $request, CompanyRepository $companyRepository): Response
+    {
+        $form = $this->createForm(CompanyType::class, $company);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $companyRepository->save($company, true);
+
+            $this->addFlash('success', 'Your account has been updated! :)');
+
+            return $this->redirectToRoute('company_offers', ['id' => $company->getId()], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('company/edit.html.twig', [
+            'company' => $company,
+            'form' => $form,
+        ]);
+    }
+
     #[Route('/candidate/application/{id}', name: 'candidate_application')]
     public function candidateApplication(
         Application $application,
         Request $request,
-        ApplicationRepository $repository
+        ApplicationRepository $repository,
+        Company $company,
     ): Response {
         $form = $this->createForm(ApplicationStatusType::class, $application);
         $form->handleRequest($request);
@@ -68,6 +89,7 @@ class CompanyController extends AbstractController
 
         return $this->render('company/candidateApplication.html.twig', [
             'application' => $application,
+            'company' => $company,
             'form' => $form,
         ]);
     }
