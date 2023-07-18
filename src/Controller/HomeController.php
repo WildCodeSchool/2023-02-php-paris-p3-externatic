@@ -20,7 +20,6 @@ class HomeController extends AbstractController
         Request $request,
         OfferRepository $offerRepository,
         PaginatorInterface $paginator,
-        Offer $offers
     ): Response {
         $form = $this->createForm(SearchOfferFilterType::class, null, ['method' => 'GET']);
         $form->handleRequest($request);
