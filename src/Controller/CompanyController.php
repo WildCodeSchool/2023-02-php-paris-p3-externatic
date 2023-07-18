@@ -2,8 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Application;
+use App\Entity\Candidate;
 use App\Entity\Company;
+use App\Form\ApplicationStatusType;
 use App\Form\CompanyType;
+use App\Repository\ApplicationRepository;
 use App\Repository\CompanyRepository;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -42,6 +46,29 @@ class CompanyController extends AbstractController
     {
         return $this->render('company/indexOffer.html.twig', [
             'company' => $company,
+        ]);
+    }
+
+    #[Route('/candidate/application/{id}', name: 'candidate_application')]
+    public function candidateApplication(
+        Application $application,
+        Request $request,
+        ApplicationRepository $repository
+    ): Response {
+        $form = $this->createForm(ApplicationStatusType::class, $application);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $repository->save($application, true);
+
+            return $this->redirectToRoute('company_offers', [
+                'id' => $application->getOffer()->getCompany()->getId()
+            ], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('company/candidateApplication.html.twig', [
+            'application' => $application,
+            'form' => $form,
         ]);
     }
 }

@@ -77,18 +77,11 @@
 		</div>
 		<div class="resume-upload-resume">
 			<div id="resume" class="col text-center mt-4">
-				{{ include('candidate/_modal_resume.html.twig') }}
-			</div>
-			<div id="upload-resume" class="col text-center mt-4">
-				{{ form_start(form, {'action': path('candidate_edit', { 'id': candidate.id })}) }}
-				{{ form_widget(form) }}
-					<div class="text-center">
-						<button class="btn btn-primary mt-2 mb-2">
-							<img class="img_icon fa-border" src=" {{ asset('build/images/picto/upload.svg') }} " alt="upload-resume"/>
-							{{ button_label|default('upload your resume') }}
-						</button>
-					</div>
-				{{ form_end(form) }}
+				{% if candidate.resume == "" %}
+					<button type="button" id="no-resume" class="btn mt-2"><img class="img_icon fa-border" src=" {{ asset('build/images/picto/cv.svg') }} " alt=" curriculum"/>your resume is empty</button>
+				{% else %}		
+					{{ include('candidate/_modal_resume.html.twig') }}
+				{% endif %}
 			</div>
 		</div>
 		<div class="skills">
