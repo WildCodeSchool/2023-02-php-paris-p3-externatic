@@ -1,0 +1,91 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Research{% endblock %}
+
+{% block body %}
+	<div class="row justify-content-center" id="about-header">
+		<div class="col-10">
+			<h5>Welcome {{ app.user.candidate.firstname }}</h5>
+		</div>
+	</div>
+
+	{% include 'style/component/_navigationBtnMobileCandidate.html.twig' %}
+	{% include 'style/component/_navigationBtnDesktopCandidate.html.twig' %}
+	{% include "candidate/_filter_research.html.twig" %}
+	
+	<div class="margin">
+		<div class="count mt-4">
+			<h4>
+				{{ offers.getTotalItemCount }}
+				offers found
+			</h4><hr>
+		</div>
+		<div class="container">
+			<div class="row justify-content-center">
+				{% for offer in offers %}
+					<div class="col-12 col-md-6 col-lg-4 col-xl-4 mt-4">
+						<div id="search-card" class="text-center h-100">
+							<div class="card-body mt-2">
+								<a class="offer-card" href="{{ path('offer_show', { id : offer.id }) }}">
+									<div class="card">
+										<div class="cardHead ratio ratio-16x9">
+											<img class="index-offer-picture" src="{{ asset(offer.picture) }}">
+										</div>
+										<div id="card-body" class="card-body">
+											<article>
+												<section class="sub-head">
+													<img class="index-company-logo me-1" src="{{ asset(offer.company.logo) }}">
+													<p>{{ offer.company.name }}</p>
+												</section>
+												<h4 class="index-offer-title-section">
+													<strong>{{ offer.title }}</strong>
+												</h4>
+												<p class="mb-4">
+													<img class="picto" src="{{ asset('build/images/picto/location-offer.svg') }}" alt="pictoLocation">
+													{{ offer.location }}
+												</p>
+												<p>
+													<section class="other-info mt-2 mb-2">
+														<div class="grey-area">
+															{{ offer.contract }}
+														</div>
+														<div class="grey-area">
+															{{ offer.workFromHome }}
+														</div>
+														<div class="grey-area">
+															{{ offer.minSalary // 1000 }}K
+                                                        </div>
+													</section>
+												</p>
+												<p id="offer-date">
+													<img class="picto" src="{{ asset('build/images/picto/calendar.svg') }}" alt="pictoCalendar">
+													posted
+													{% set difference = date(offer.createdAt).diff(date(now)) %}
+													{% set leftDays = difference.days %}
+													{% if leftDays == 1 %}
+														1 day
+													{% else %}
+														{% set years = (leftDays // 365 )%}
+														{% set months = (leftDays % 365) // 30.5 %}
+														{{ months }}
+														month(s) and
+														{% set days = ((leftDays % 365 ) % 30.5) %}
+														{{ days }}
+														day(s) ago
+													{% endif %}
+												</p>
+											</article>
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+		<div class="navigation d-flex justify-content-center mt-4">
+			{{ knp_pagination_render(offers) }}
+		</div>
+	</div>
+{% endblock %}

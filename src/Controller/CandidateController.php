@@ -8,7 +8,10 @@ use App\Form\CandidateType;
 use App\Form\UploadResumeType;
 use App\Repository\CandidateRepository;
 use App\Form\SearchApplicationFilterType;
+use App\Form\SearchOfferCandidateType;
+use App\Form\SearchOfferFilterType;
 use App\Repository\ApplicationRepository;
+use App\Repository\OfferRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -20,11 +23,26 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/candidate', name: 'candidate_')]
 class CandidateController extends AbstractController
 {
-    #[Route('/', name: 'index', methods: ['GET'])]
-    public function index(CandidateRepository $candidateRepository): Response
-    {
-        return $this->render('candidate/index.html.twig', [
-            'candidates' => $candidateRepository->findAll(),
+    #[Route('/{id}/research', name: 'research', methods: ['GET'])]
+    public function index(
+        Candidate $candidate,
+        Request $request,
+        OfferRepository $offerRepository,
+        PaginatorInterface $paginator,
+    ): Response {
+        $form = $this->createForm(SearchOfferFilterType::class, null, ['method' => 'GET']);
+        $form->handleRequest($request);
+
+        $filters = $form->getData();
+        $offers = $offerRepository->findwithFilter($filters);
+
+        $offers = $paginator->paginate($offers, $request->query->getInt('page', 1), 6);
+
+        return $this->render('candidate/research.html.twig', [
+            'offers' => $offers,
+            'now' => new DateTime(),
+            'form' => $form,
+            'candidate' => $candidate,
         ]);
     }
 

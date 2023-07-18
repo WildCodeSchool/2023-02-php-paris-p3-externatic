@@ -5,7 +5,7 @@
 			<div class="row">
 				<div class="btn-group justify-content-center gap-4">
 					<div class="col-4">
-						<a class="btn d-block w-100" role="button" href="#">RESEARCH</a>
+						<a class="btn d-block w-100" role="button" href="{{ path('candidate_research', { id: candidate.id }) }}">RESEARCH</a>
 					</div>
 					<div class="col-4">
 						<a class="btn d-block w-100" role="button" href="{{ path('candidate_applications', { id: candidate.id }) }}">APPLICATIONS</a>
