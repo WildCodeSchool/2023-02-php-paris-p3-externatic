@@ -111,19 +111,16 @@ class OfferController extends AbstractController
         return $this->redirectToRoute('home_index', [], Response::HTTP_SEE_OTHER);
     }
 
-    #[Route('/{id}/delete', name: 'form_delete', methods: ['GET', 'POST'])]
+    #[Route('/{id}/delete', name: 'form_delete', methods: ['POST'])]
     #[IsGranted('ROLE_COMPANY')]
-    public function delete(Request $request, Offer $offer, EntityManagerInterface $entityManager): Response
+    public function delete(Request $request, Offer $offer, OfferRepository $repo): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$offer->getId(), $request->request->get('_token'))) {
-            $entityManager->remove($offer);
-            $entityManager->flush();
+        if ($this->isCsrfTokenValid('delete' . $offer->getId(), $request->request->get('_token'))) {
+            $repo->remove($offer, true);
 
             $this->addFlash('success', 'Your offer has been succesfully deleted 🚮');
-
-            return $this->redirectToRoute('home_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->redirectToRoute('offer_form_edit', ['id' => $offer->getId()]);
+        return $this->redirectToRoute('home_index', [], Response::HTTP_SEE_OTHER);
     }
 }

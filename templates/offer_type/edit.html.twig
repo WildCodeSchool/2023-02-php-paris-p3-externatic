@@ -8,10 +8,12 @@
     </div>
     {% include "offer_type/_form.html.twig" %}
     <div class="text-center">
-        <button type="submit" class="btn btn-secondary mt-4 bt-4">{{ button_label|default('Edit Offer') }}</button>
-        <button type="submit" class="btn btn-secondary mt-4 bt-4" data-bs-toggle="modal" data-bs-target="#exampleModal">Delete Offer</button>
+        <button type="submit" class="btn btn-secondary mt-4 bt-4">{{ button_label|default('Edit') }}</button>
     </div>
     {{ form_end(form) }}
+    <div class="text-center">
+        <button type="submit" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-secondary mt-4 bt-4">Delete</button>
+    </div>
     </section>
-{% include "offer_type/_modalDeleteOffer.html.twig" %}
+    {% include "offer_type/_modalDeleteOffer.html.twig" %}
 {% endblock %}
