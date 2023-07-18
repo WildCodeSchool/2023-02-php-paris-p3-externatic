@@ -99,18 +99,6 @@ class OfferController extends AbstractController
         return $this->redirectToRoute('offer_show', ['id' => $offer->getId()]);
     }
 
-    #[Route('/{id}/archive', name: 'form_archive', methods: ['GET', 'POST'])]
-    #[IsGranted('ROLE_COMPANY')]
-    public function archive(Offer $offer, OfferRepository $repo): Response
-    {
-        $offer->setArchived(true);
-        $repo->save($offer, true);
-
-        $this->addFlash('success', 'Your offer has been succesfully archived 😉');
-
-        return $this->redirectToRoute('home_index', [], Response::HTTP_SEE_OTHER);
-    }
-
     #[Route('/{id}/delete', name: 'form_delete', methods: ['POST'])]
     #[IsGranted('ROLE_COMPANY')]
     public function delete(Request $request, Offer $offer, OfferRepository $repo): Response
@@ -120,7 +108,6 @@ class OfferController extends AbstractController
 
             $this->addFlash('success', 'Your offer has been succesfully deleted 🚮');
         }
-
         return $this->redirectToRoute('home_index', [], Response::HTTP_SEE_OTHER);
     }
 }

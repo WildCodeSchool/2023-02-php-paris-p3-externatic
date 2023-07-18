@@ -20,20 +20,14 @@ class HomeController extends AbstractController
         Request $request,
         OfferRepository $offerRepository,
         PaginatorInterface $paginator,
-        Offer $unarchivedOffers
+        Offer $offers
     ): Response {
         $form = $this->createForm(SearchOfferFilterType::class, null, ['method' => 'GET']);
         $form->handleRequest($request);
         $filters = $form->getData();
         $offers = $offerRepository->findwithFilter($filters);
 
-        $unarchivedOffers = [];
-        foreach ($offers as $offer) {
-            if ($offer->isArchived() === false) {
-                $unarchivedOffers[] = $offer;
-            }
-        }
-        $offers = $paginator->paginate($unarchivedOffers, $request->query->getInt('page', 1), 6);
+        $offers = $paginator->paginate($offers, $request->query->getInt('page', 1), 6);
 
         return $this->render('home/index.html.twig', [
             'offers' => $offers,
