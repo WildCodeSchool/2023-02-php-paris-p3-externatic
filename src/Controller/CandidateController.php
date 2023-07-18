@@ -28,15 +28,14 @@ class CandidateController extends AbstractController
         Request $request,
         OfferRepository $offerRepository,
         PaginatorInterface $paginator,
-        CandidateRepository $candidateRepository,
     ): Response {
         $form = $this->createForm(SearchOfferFilterType::class, null, ['method' => 'GET']);
         $form->handleRequest($request);
 
-        //Il manque skills et ameliorer jobtitle
-        $offersPersonalized = $offerRepository->customizeResearch($candidate);
+        $filters = $form->getData();
+        $offers = $offerRepository->findwithFilter($filters);
 
-        $offers = $paginator->paginate($offersPersonalized, $request->query->getInt('page', 1), 6);
+        $offers = $paginator->paginate($offers, $request->query->getInt('page', 1), 6);
 
         return $this->render('candidate/research.html.twig', [
             'offers' => $offers,
