@@ -3,7 +3,10 @@
 {% block title %}Edit Offer : {{ offer.title }}{% endblock %}
 
 {% block body %}
-    <div class="text-center mb-4">
+    {% include "company/_dashboard.html.twig" %}
+    {% include "style/component/_navigationBtnMobileCompany.html.twig" %}
+	{% include "style/component/_navigationBtnDesktopCompany.html.twig" %}
+    <div class="text-center mt-4 mb-4">
         <h1>Edit Offer : {{ offer.title }}</h1>
     </div>
     {% include "offer_type/_form.html.twig" %}

@@ -95,7 +95,7 @@ class Candidate implements Serializable
     #[ORM\OneToMany(mappedBy: 'candidate', targetEntity: Application::class)]
     private Collection $applications;
 
-    #[ORM\ManyToMany(targetEntity: Offer::class, mappedBy: 'favorite')]
+    #[ORM\ManyToMany(targetEntity: Offer::class, mappedBy: 'favorites')]
     private Collection $favoriteOffers;
 
     #[ORM\ManyToOne(inversedBy: 'favoriteCandidates')]
@@ -391,6 +391,11 @@ class Candidate implements Serializable
         }
 
         return $this;
+    }
+
+    public function isOfferInFavorites(Offer $favoriteOffer): bool
+    {
+        return $this->favoriteOffers->contains($favoriteOffer) ? true : false;
     }
 
     public function removeFavoriteOffer(Offer $favoriteOffer): self

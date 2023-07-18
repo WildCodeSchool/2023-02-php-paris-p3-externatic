@@ -525,10 +525,6 @@ $navbar-padding-y: 0;
     top: -0.5rem;
 }
 
-.index-offer-picture {
-    border-radius: 5px;
-}
-
 .other-info {
     display: flex;
     justify-content: space-between;
@@ -585,11 +581,15 @@ $navbar-padding-y: 0;
 
 .grey-area {
     width: 30%;
+    height: 3rem;
     background-color: $tertiary;
     text-align: center;
     font-size: 14px;
     font-weight: 600;
     padding: 0.3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #offer-date {
@@ -621,7 +621,7 @@ $navbar-padding-y: 0;
 }
 
 .index-company-logo {
-    width: 4rem;
+    max-height: 2rem;
 }
 
 .index-offer-title-section {

@@ -17,7 +17,7 @@
 			<div class="row">
 				<div class="btn-group justify-content-center gap-4">
 					<div class="col-4">
-						<a class="btn d-block w-100" role="button" href="#">COLLECTIONS</a>
+						<a class="btn d-block w-100" role="button" href="{{ path('candidate_collection', { id: candidate.id }) }}">COLLECTION</a>
 					</div>
 					<div class="col-4">
 						<a class="btn d-block w-100" role="button" href="{{ path('candidate_show', { id: candidate.id }) }}">PROFILE</a>

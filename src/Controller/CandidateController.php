@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Candidate;
+use App\Entity\Offer;
 use App\Form\CandidateType;
 use App\Form\UploadResumeType;
 use App\Repository\CandidateRepository;
@@ -120,6 +121,37 @@ class CandidateController extends AbstractController
             'now' => new DateTime(),
             'applications' => $applications,
             'form' => $form,
+        ]);
+    }
+
+    #[Route('/{id}/addToFavorite', name: 'favorites', methods: ['GET', 'POST'])]
+    public function addOfferToFavorites(
+        CandidateRepository $candidateRepository,
+        Offer $offer
+    ): Response {
+        $candidate = $this->getUser()->getCandidate();
+
+        $candidate->isOfferInFavorites($offer) ?
+        $candidate->removeFavoriteOffer($offer) :
+        $candidate->addFavoriteOffer($offer);
+
+        $candidateRepository->save($candidate, true);
+
+        //changer la redirection vers la page candidate_research
+        return $this->redirectToRoute('home_index', ['offer' => $offer->getId()], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/{id}/collection', name: 'collection')]
+    public function showCollection(
+        Candidate $candidate,
+        PaginatorInterface $paginator,
+        Request $request
+    ): Response {
+
+        return $this->render('candidate/collection.html.twig', [
+            'candidate' => $candidate,
+            'offers' => $paginator->paginate($candidate->getFavoriteOffers(), $request->query->getInt('page', 1), 6),
+            'now' => new DateTime(),
         ]);
     }
 }

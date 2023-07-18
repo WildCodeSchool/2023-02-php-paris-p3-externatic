@@ -40,7 +40,7 @@ class SearchOfferFilterType extends AbstractType
             ])
 
             ->add('salary', IntegerType::class, [
-                'label' => 'Salary',
+                'label' => 'Salary minimum required',
                 'required' => false,
                 'attr' => [
                     'placeholder' => '30000',
