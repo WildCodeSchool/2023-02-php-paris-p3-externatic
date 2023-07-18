@@ -33,6 +33,10 @@ class CandidateController extends AbstractController
         $form->handleRequest($request);
 
         $offersPersonalized = $offerRepository->customizeResearch($candidate);
+
+        // $researchSkill = $offerRepository->find
+
+
         $offers = $paginator->paginate($offersPersonalized, $request->query->getInt('page', 1), 6);
 
         return $this->render('candidate/research.html.twig', [

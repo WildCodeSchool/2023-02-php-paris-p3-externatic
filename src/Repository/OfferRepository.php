@@ -101,6 +101,14 @@ class OfferRepository extends ServiceEntityRepository
     {
         $oneWordJobTitle = explode(" ", $candidate->getJobTitle());
 
+
+        // foreach ($candidate->getSkills() as $skill)
+        // {
+        //     dd($skill);
+        // }
+
+
+
         $queryBuilder = $this->createQueryBuilder('o')
         ->select('o', 'c')
         ->join('o.company', 'c')
@@ -108,6 +116,14 @@ class OfferRepository extends ServiceEntityRepository
         //Filtrer Candidate jobTitle
         ->andWhere('o.title LIKE :title')
         ->setParameter('title', '%' . $oneWordJobTitle[0] . '%')
+
+
+
+
+        //Filtrer skills
+        // ->andWhere('o.skills LIKE :skills')
+        // ->setParameter('skills', '%' . $candidate->getSkills() . '%')
+
         ->getQuery();
 
         return $queryBuilder->getResult();
