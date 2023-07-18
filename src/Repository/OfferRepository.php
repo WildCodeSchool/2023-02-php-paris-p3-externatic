@@ -102,35 +102,22 @@ class OfferRepository extends ServiceEntityRepository
     {
         $oneWordJobTitle = explode(" ", $candidate->getJobTitle());
 
-
-        // foreach ($candidate->getSkills() as $skill)
-        // {
-        //     dd($skill);
-        // }
-
-
-
         $queryBuilder = $this->createQueryBuilder('o')
-        ->select('o', 'c')
-        ->join('o.company', 'c')
+        ->select('o')
+        ->andWhere('o.title LIKE :jobTitle')
+        ->setParameter('jobTitle', '%' . $oneWordJobTitle[0] . '%');
 
-        //Filtrer Candidate jobTitle
-        ->andWhere('o.title LIKE :title')
-        ->setParameter('title', '%' . $oneWordJobTitle[0] . '%')
+        //Skills ne marche pas
+        foreach ($candidate->getSkills() as $skillCandidate) {
+            $queryBuilder = $queryBuilder
+            ->andWhere('"' . $skillCandidate->getName() . '"' . ' IN (o.skills)');
+        }
 
-
-
-
-        //Filtrer skills
-        // ->andWhere('o.skills LIKE :skills')
-        // ->setParameter('skills', '%' . $candidate->getSkills() . '%')
-
+        $queryBuilder = $queryBuilder
         ->getQuery();
 
         return $queryBuilder->getResult();
     }
-
-
 
     public function searchOffersByCompany(int $company, ?string $data): ?array
     {
