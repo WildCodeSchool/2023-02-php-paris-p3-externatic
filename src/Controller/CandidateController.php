@@ -53,52 +53,17 @@ class CandidateController extends AbstractController
     #[Route('/{id}', name: 'show', methods: ['GET', 'POST'])]
     public function show(Candidate $candidate): Response
     {
-        $formUpload = $this->createForm(UploadResumeType::class, $candidate, [
-            'action' => $this->generateUrl('candidate_edit', ['id' => $candidate->getId()]),
-            'method' => 'POST',
-        ]);
-
         return $this->render('candidate/show.html.twig', [
             'candidate' => $candidate,
-            'formUpload' => $formUpload ->createView(),
         ]);
     }
 
     #[Route('/{id}/edit', name: 'edit', methods: ['GET', 'POST'])]
     public function edit(Candidate $candidate, Request $request, CandidateRepository $candidateRepository): Response
     {
-        $form = $this->createForm(CandidateType::class, $candidate);
-        $form->handleRequest($request);
-
-        $formUpload = $this->createForm(UploadResumeType::class, $candidate);
-        $formUpload->handleRequest($request);
-
-
-        if ($formUpload->isSubmitted() && $formUpload->isValid()) {
-            $candidateRepository->save($candidate, true);
-
-            $this->addFlash('success', 'Your resume has been uploaded! :)');
-
-            return $this->redirectToRoute('candidate_show', ['id' => $candidate->getId()], Response::HTTP_SEE_OTHER);
-        } else {
-            $errors = $formUpload->getErrors();
-            foreach ($errors as $error) {
-                $this->addFlash('danger', $error->getMessage());
-            }
-            return $this->redirectToRoute('candidate_show', ['id' => $candidate->getId()], Response::HTTP_SEE_OTHER);
-        }
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $candidateRepository->save($candidate, true);
-
-            return $this->redirectToRoute('candidate_show', ['id' => $candidate->getId()], Response::HTTP_SEE_OTHER);
-        } else {
             return $this->render('candidate/edit.html.twig', [
                 'candidate'  => $candidate,
-                // 'formUpload' => $formUpload,
-                'form'       => $form->createView(),
             ]);
-        }
     }
 
     #[Route('/{id}/updateVisibility', name: 'visibility')]
