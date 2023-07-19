@@ -33,12 +33,6 @@
                                 <input type="password" id="password" class="form-control" name="_password" placeholder="Password">
                             </div>
                             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-
-
-                                {# <input type="hidden" name="_target_path" value="{{ path('candidate_research') }}"> #}
-                            {# {% else %}
-                                <input type="hidden" name="_target_path" value="{{ path('company_offers') }}">
-                            {% endif %} #}
                             <button type="submit" class="btn btn-secondary mt-4">Login</button>
                         </form>
                     </div>

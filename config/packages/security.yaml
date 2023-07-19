@@ -20,7 +20,6 @@ security:
                 login_path: login
                 check_path: login
                 enable_csrf: true
-                # always_use_default_target_path: false
             custom_authenticator: App\Security\UserAuthenticator
             entry_point: form_login
             logout:
