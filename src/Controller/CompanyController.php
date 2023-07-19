@@ -57,7 +57,7 @@ class CompanyController extends AbstractController
     ): Response {
         $form = $this->createForm(ApplicationStatusType::class, $application);
         $form->handleRequest($request);
-        
+
         if ($application->getStatus() == Application::STATUS_RECEIVED) {
             $application->setStatus(Application::STATUS_INREVIEW);
             $repository->save($application, true);
