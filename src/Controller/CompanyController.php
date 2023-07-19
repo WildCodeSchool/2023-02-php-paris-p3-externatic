@@ -57,8 +57,11 @@ class CompanyController extends AbstractController
     ): Response {
         $form = $this->createForm(ApplicationStatusType::class, $application);
         $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
+        
+        if ($application->getStatus() == Application::STATUS_RECEIVED) {
+            $application->setStatus(Application::STATUS_INREVIEW);
+            $repository->save($application, true);
+        } elseif ($form->isSubmitted() && $form->isValid()) {
             $repository->save($application, true);
 
             return $this->redirectToRoute('company_offers', [
