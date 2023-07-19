@@ -44,6 +44,7 @@ class OfferController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'form_edit', methods: ['GET', 'POST'])]
+    #[IsGranted('ROLE_COMPANY')]
     public function edit(Request $request, Offer $offer, OfferRepository $offerRepository): Response
     {
         $form = $this->createForm(OfferType::class, $offer);
@@ -65,6 +66,7 @@ class OfferController extends AbstractController
     }
 
     #[Route('/new', name: 'form_new', methods: ['GET', 'POST'])]
+    #[IsGranted('ROLE_COMPANY')]
     public function new(Request $request, EntityManagerInterface $manager): Response
     {
         $offer = new Offer();
