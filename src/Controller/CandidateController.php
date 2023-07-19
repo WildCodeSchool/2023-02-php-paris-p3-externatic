@@ -22,11 +22,12 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 #[IsGranted('ROLE_CANDIDATE')]
 class CandidateController extends AbstractController
 {
-    #[Route('/research', name: 'research', methods: ['GET'])]
+    #[Route('/{id}/research', name: 'research', methods: ['GET'])]
     public function index(
         Request $request,
         OfferRepository $offerRepository,
         PaginatorInterface $paginator,
+        Candidate $candidate,
     ): Response {
         $form = $this->createForm(SearchOfferFilterType::class, null, ['method' => 'GET']);
         $form->handleRequest($request);
@@ -40,7 +41,7 @@ class CandidateController extends AbstractController
             'offers' => $offers,
             'now' => new DateTime(),
             'form' => $form,
-            'candidate' => $this->getUser()->getCandidate(),
+            'candidate' => $candidate,
         ]);
     }
 
