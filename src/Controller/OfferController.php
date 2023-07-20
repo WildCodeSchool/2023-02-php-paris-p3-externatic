@@ -44,6 +44,7 @@ class OfferController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'form_edit', methods: ['GET', 'POST'])]
+    #[IsGranted('ROLE_COMPANY')]
     public function edit(Request $request, Offer $offer, OfferRepository $offerRepository): Response
     {
         $form = $this->createForm(OfferType::class, $offer);
@@ -57,22 +58,26 @@ class OfferController extends AbstractController
             return $this->redirectToRoute('home_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('offer_type/edit.html.twig', [
+        return $this->render('offer/edit.html.twig', [
             'offer' => $offer,
             'form' => $form,
+            'company' => $this->getUser()->getCompany(),
         ]);
     }
 
-    #[Route('/form/new', name: 'form_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $manager, OfferRepository $offerRepository): Response
+    #[Route('/new', name: 'form_new', methods: ['GET', 'POST'])]
+    #[IsGranted('ROLE_COMPANY')]
+    public function new(Request $request, EntityManagerInterface $manager): Response
     {
         $offer = new Offer();
         $form = $this->createForm(OfferType::class, $offer);
         $form->handleRequest($request);
 
+        $company =  $this->getUser()->getCompany();
+
         if ($form->isSubmitted() && $form->isValid()) {
             $offer = $form->getData();
-            $offer->setCompany($this->getUser()->getCompany());
+            $offer->setCompany($company);
 
             $manager->persist($offer);
             $manager->flush();
@@ -84,9 +89,10 @@ class OfferController extends AbstractController
             return $this->redirectToRoute('home_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('offer_type/new.html.twig', [
+        return $this->render('offer/new.html.twig', [
             'offer' => $offer,
             'form' => $form,
+            'company' => $company,
         ]);
     }
 

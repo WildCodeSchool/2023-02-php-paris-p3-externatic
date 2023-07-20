@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Create Offer {% endblock %}
+
+{% block body %}
+    {% include "company/_dashboard.html.twig" %}
+    {% include "company/_navigationBtnMobileCompany.html.twig" %}
+	{% include "company/_navigationBtnDesktopCompany.html.twig" %}
+    <div class="text-center mb-2">
+        <h1>Create an Offer </h1>
+    </div>
+    {% include "offer/_form.html.twig" %}
+    <div class="text-center">
+        <button type="submit" class="btn btn-secondary mt-4 bt-4">{{ button_label|default('Save') }}</button>
+    </div>
+    {{ form_end(form) }}
+</section>
+{% endblock %}

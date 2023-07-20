@@ -32,7 +32,7 @@
                                     <a href="{{ path('offer_show', {'id': offer.id}) }}"><button class="btn btn-secondary btn-sm" >See more</button></a>
                                 </div>
                                 <div class="col-1">
-                                    <a href="#"><button class="btn btn-secondary btn-sm" style="--bs-btn-padding-x: 1.7rem;">Edit</button></a>
+                                    <a href="{{ path('offer_form_edit', {'id': offer.id}) }}"><button class="btn btn-secondary btn-sm" style="--bs-btn-padding-x: 1.7rem;">Edit</button></a>
                                 </div>
                                 <div class="col-1">
                                     <a href="#"><button class="btn btn-secondary btn-sm" style="--bs-btn-padding-x: 1rem;">Archive</button></a>
@@ -199,5 +199,5 @@
             </div>
         </div>
     </div>
-    
+
 </div>

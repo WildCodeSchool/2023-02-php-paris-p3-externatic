@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}my collection{% endblock %}
+
+{% block body %}
+    {% include 'candidate/_dashboard.html.twig' %}
+	{% include 'candidate/_navigationBtnMobileCandidate.html.twig' %}
+	{% include 'candidate/_navigationBtnDesktopCandidate.html.twig' %}
+    {% include "offer/_offerCard.html.twig" %}
+{% endblock %}

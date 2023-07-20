@@ -5,9 +5,8 @@
 
 {% block body %}
 	{% include 'candidate/_dashboard.html.twig' %}
-	{% include 'style/component/_navigationBtnMobileCandidate.html.twig' %}
-	{% include 'style/component/_navigationBtnDesktopCandidate.html.twig' %}
-
+	{% include 'candidate/_navigationBtnMobileCandidate.html.twig' %}
+	{% include 'candidate/_navigationBtnDesktopCandidate.html.twig' %}
 	<section class="margin">
 		<div class="visibility-profile">
 			<div class="visibility">
@@ -79,7 +78,7 @@
 			<div id="resume" class="col text-center mt-4">
 				{% if candidate.resume == "" %}
 					<button type="button" id="no-resume" class="btn mt-2"><img class="img_icon fa-border" src=" {{ asset('build/images/picto/cv.svg') }} " alt=" curriculum"/>your resume is empty</button>
-				{% else %}		
+				{% else %}
 					{{ include('candidate/_modal_resume.html.twig') }}
 				{% endif %}
 			</div>
