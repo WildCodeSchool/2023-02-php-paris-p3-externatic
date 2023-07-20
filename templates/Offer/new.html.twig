@@ -4,12 +4,12 @@
 
 {% block body %}
     {% include "company/_dashboard.html.twig" %}
-    {% include "style/component/_navigationBtnMobileCompany.html.twig" %}
-	{% include "style/component/_navigationBtnDesktopCompany.html.twig" %}
+    {% include "company/_navigationBtnMobileCompany.html.twig" %}
+	{% include "company/_navigationBtnDesktopCompany.html.twig" %}
     <div class="text-center mb-2">
         <h1>Create an Offer </h1>
     </div>
-    {% include "offer_type/_form.html.twig" %}
+    {% include "offer/_form.html.twig" %}
     <div class="text-center">
         <button type="submit" class="btn btn-secondary mt-4 bt-4">{{ button_label|default('Save') }}</button>
     </div>

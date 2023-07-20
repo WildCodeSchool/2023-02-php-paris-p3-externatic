@@ -8,7 +8,7 @@ use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
 
-#[AsLiveComponent('offer')]
+#[AsLiveComponent('companyOffers')]
 final class OffersByCompanyComponent
 {
     use DefaultActionTrait;

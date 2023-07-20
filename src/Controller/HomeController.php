@@ -15,8 +15,8 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/', name:'home_')]
 class HomeController extends AbstractController
 {
-    #[Route('/', name:'index', methods: ['GET'])]
-    public function index(
+    #[Route('/home', name:'index', methods: ['GET'])]
+    public function home(
         Request $request,
         OfferRepository $offerRepository,
         PaginatorInterface $paginator,
@@ -33,5 +33,18 @@ class HomeController extends AbstractController
             'now' => new DateTime(),
             'form' => $form,
         ]);
+    }
+
+    #[Route('/', name:'', methods: ['GET'])]
+    public function redirection(): Response
+    {
+        $roles = $this->getUser()->getRoles();
+        if (in_array('ROLE_CANDIDATE', $roles)) {
+            return $this->redirectToRoute('candidate_research', ['id' => $this->getuser()->getCandidate()->getId()]);
+        } elseif (in_array('ROLE_COMPANY', $roles)) {
+            return $this->redirectToRoute('company_offers', ['id' => $this->getuser()->getCompany()->getId()]);
+        } else {
+            return $this->redirectToRoute('home_index');
+        }
     }
 }
