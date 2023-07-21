@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Candidate;
 use App\Entity\Company;
 use App\Entity\Offer;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;

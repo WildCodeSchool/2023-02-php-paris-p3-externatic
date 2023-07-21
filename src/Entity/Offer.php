@@ -20,11 +20,11 @@ use DateTime;
 class Offer
 {
     public const JOB_TYPE = [
-        'permanent contract' => 'permanent-contract',
-        'work study' => 'work-study',
-        'intership' => 'intership',
-        'fixed-term / temporary' => 'fixed-term-temporary',
-        'freelance' => 'freelance',
+        'Permanent contract' => 'permanent-contract',
+        'Work study' => 'work-study',
+        'Intership' => 'intership',
+        'Fixed-term / temporary' => 'fixed-term-temporary',
+        'Freelance' => 'freelance',
     ];
 
     public const EXPERIENCE = [
@@ -102,7 +102,7 @@ class Offer
     private ?File $offerPicture = null;
 
     #[ORM\ManyToMany(targetEntity: Candidate::class, inversedBy: 'favoriteOffers')]
-    private Collection $favorite;
+    private Collection $favorites;
 
     #[ORM\Column(nullable: true)]
     private ?int $number = null;
@@ -117,7 +117,7 @@ class Offer
     {
         $this->skills = new ArrayCollection();
         $this->applications = new ArrayCollection();
-        $this->favorite = new ArrayCollection();
+        $this->favorites = new ArrayCollection();
         $this->createdAt = new DateTimeImmutable();
     }
 
@@ -330,15 +330,15 @@ class Offer
     /**
      * @return Collection<int, Candidate>
      */
-    public function getFavorite(): Collection
+    public function getFavorites(): Collection
     {
-        return $this->favorite;
+        return $this->favorites;
     }
 
     public function addFavorite(Candidate $favorite): self
     {
-        if (!$this->favorite->contains($favorite)) {
-            $this->favorite->add($favorite);
+        if (!$this->favorites->contains($favorite)) {
+            $this->favorites->add($favorite);
         }
 
         return $this;
@@ -347,7 +347,7 @@ class Offer
 
     public function removeFavorite(Candidate $favorite): self
     {
-        $this->favorite->removeElement($favorite);
+        $this->favorites->removeElement($favorite);
 
 
         return $this;

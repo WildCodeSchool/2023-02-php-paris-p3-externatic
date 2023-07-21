@@ -3,11 +3,15 @@
 namespace App\Controller;
 
 use App\Entity\Candidate;
+use App\Entity\Offer;
 use App\Form\CandidateType;
 use App\Form\UploadResumeType;
 use App\Repository\CandidateRepository;
 use App\Form\SearchApplicationFilterType;
+use App\Form\SearchOfferCandidateType;
+use App\Form\SearchOfferFilterType;
 use App\Repository\ApplicationRepository;
+use App\Repository\OfferRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -19,11 +23,26 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/candidate', name: 'candidate_')]
 class CandidateController extends AbstractController
 {
-    #[Route('/', name: 'index', methods: ['GET'])]
-    public function index(CandidateRepository $candidateRepository): Response
-    {
-        return $this->render('candidate/index.html.twig', [
-            'candidates' => $candidateRepository->findAll(),
+    #[Route('/{id}/research', name: 'research', methods: ['GET'])]
+    public function index(
+        Candidate $candidate,
+        Request $request,
+        OfferRepository $offerRepository,
+        PaginatorInterface $paginator,
+    ): Response {
+        $form = $this->createForm(SearchOfferFilterType::class, null, ['method' => 'GET']);
+        $form->handleRequest($request);
+
+        $filters = $form->getData();
+        $offers = $offerRepository->findwithFilter($filters);
+
+        $offers = $paginator->paginate($offers, $request->query->getInt('page', 1), 6);
+
+        return $this->render('candidate/research.html.twig', [
+            'offers' => $offers,
+            'now' => new DateTime(),
+            'form' => $form,
+            'candidate' => $candidate,
         ]);
     }
 
@@ -120,6 +139,37 @@ class CandidateController extends AbstractController
             'now' => new DateTime(),
             'applications' => $applications,
             'form' => $form,
+        ]);
+    }
+
+    #[Route('/{id}/addToFavorite', name: 'favorites', methods: ['GET', 'POST'])]
+    public function addOfferToFavorites(
+        CandidateRepository $candidateRepository,
+        Offer $offer
+    ): Response {
+        $candidate = $this->getUser()->getCandidate();
+
+        $candidate->isOfferInFavorites($offer) ?
+        $candidate->removeFavoriteOffer($offer) :
+        $candidate->addFavoriteOffer($offer);
+
+        $candidateRepository->save($candidate, true);
+
+        //changer la redirection vers la page candidate_research
+        return $this->redirectToRoute('home_index', ['offer' => $offer->getId()], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/{id}/collection', name: 'collection')]
+    public function showCollection(
+        Candidate $candidate,
+        PaginatorInterface $paginator,
+        Request $request
+    ): Response {
+
+        return $this->render('candidate/collection.html.twig', [
+            'candidate' => $candidate,
+            'offers' => $paginator->paginate($candidate->getFavoriteOffers(), $request->query->getInt('page', 1), 6),
+            'now' => new DateTime(),
         ]);
     }
 }

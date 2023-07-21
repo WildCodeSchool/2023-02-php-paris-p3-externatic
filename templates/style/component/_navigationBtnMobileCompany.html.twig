@@ -1,14 +1,11 @@
 {# Candidate Space #}
-<div id="navigation-btn-mobile" class="carousel slide" data-bs-touch="true" data-bs-interval="false">
+<div id="navigation-btn-mobile" class="carousel slide mt-4 mb-4" data-bs-touch="true" data-bs-interval="false">
 	<div class="carousel-inner">
 		<div class="carousel-item active">
 			<div class="row">
 				<div class="btn-group justify-content-center gap-4">
 					<div class="col-4">
-						<a class="btn d-block w-100" role="button" href="#">RESEARCH</a>
-					</div>
-					<div class="col-4">
-						<a class="btn d-block w-100" role="button" href="{{ path('company_offers', { id: app.user.company.id }) }}">JOB OFFERS</a>
+						<a class="btn d-block w-100" id="navbtn1" role="button" href="{{ path('company_offers', { id: app.user.company.id }) }}"> MY JOB OFFERS</a>
 					</div>
 				</div>
 			</div>
@@ -17,7 +14,7 @@
 			<div class="row">
 				<div class="btn-group justify-content-center gap-4">
 					<div class="col-4">
-						<a class="btn d-block w-100" role="button" href="#">PROFILE</a>
+						<a class="btn d-block w-100" id="navbtn2" role="button" href="{{ path('company_edit', { id: company.id }) }}">PROFILE</a>
 					</div>
 				</div>
 			</div>
