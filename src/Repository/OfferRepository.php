@@ -91,6 +91,12 @@ class OfferRepository extends ServiceEntityRepository
                 ->setParameter('salary', $data['salary']);
         }
 
+        if (!empty($data['skills']) && ($data['skills'] instanceof ArrayCollection && !$data['skills']->isEmpty())) {
+            $queryBuilder = $queryBuilder
+                ->andWhere(':skills MEMBER OF o.skills')
+                ->setParameter('skills', $data['skills']);
+        }
+
         $queryBuilder = $queryBuilder
             ->orderBy('o.createdAt', 'DESC')
             ->getQuery();
