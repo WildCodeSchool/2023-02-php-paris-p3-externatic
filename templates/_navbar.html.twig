@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg">
 	<div class="container-md" id="main-nav">
-		<a class="navbar-brand" href="{{ path('home_index') }}">
+		<a class="navbar-brand" href="{{ path('home') }}">
 			<img src="{{ asset('build/images/EXTERNATIC-LOGO.png') }}" alt="" width="170">
 		</a>
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -11,9 +11,11 @@
 				<li class="nav-item">
 					<a class="nav-link active" aria-current="page" target="_blank" href="https://www.externatic.fr/qui-sommes-nous/">About us</a>
 				</li>
+            {% if app.user and app.user.company %}
 				<li class="nav-item">
 					<a class="nav-link active" aria-current="page" href="{{ path('home_index') }}">Offers</a>
 				</li>
+            {% endif %}
 			</ul>
 			{% if app.user %}
 				{% if app.user.roles[0] is constant("App\\Entity\\USER::ROLE_CANDIDATE") %}

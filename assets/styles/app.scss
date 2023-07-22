@@ -143,6 +143,10 @@ $carousel-indicator-active-bg: #343a40;
 }
 
 // Forms
+#reset-filters-white {
+    color: black;
+}
+
 #search-input .form-control {
     text-indent: 16%;
 }
@@ -833,8 +837,12 @@ hr {
 }
 
 #about-header p,
-#about-header h5 {
+#about-header h3 {
     color: $light;
+}
+
+#about-header p  {
+    font-size: 18px;
 }
 
 //Filter candidate application
