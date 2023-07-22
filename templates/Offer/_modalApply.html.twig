@@ -2,22 +2,22 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Before you leave ..</h5>
+				<h5 class="modal-title" id="exampleModalLabel">Congrats for your application!</h5>
 				<button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
-			<div
-				class="modal-body">
-				{# TODO : à la suite du "hey you", mettre une Vb' affichant le prénom du current user #}
-				<strong>Hey you!</strong>
-				You're about to apply for the following offer :
-				{{ offer.title}}
-				<br>
-				Are you sure ?
-			</div>
+			<div class="modal-body">
+                {% if app.user.candidate %}
+                    <strong>Hey {{ app.user.candidate.firstname }}! </strong>
+                {% endif %}
+                <br>
+                You're about to apply for the following offer :
+                <strong>{{ offer.title }}</strong>
+                <br>
+            </div>
 			<div class="col text-center mt-4 modal-footer">
-				<a href="{{ path('offer_apply', {"id": offer.id}) }}"><button class="btn btn-secondary mt-2 applicationbtn" data-bs-dismiss="modal">All good 👍🏽</button></a>
+				<a href="{{ path('offer_apply', {"id": offer.id}) }}"><button class="btn btn-secondary mt-2 applicationbtn" data-bs-dismiss="modal">Confirm 👍🏽</button></a>
 			</div>
 		</div>
 	</div>

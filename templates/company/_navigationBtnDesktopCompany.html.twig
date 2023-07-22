@@ -1,0 +1,16 @@
+<div class="container text-center">
+	<div class="row justify-content-center mt-2 mb-5" id="navigation-btn-desktop">
+		<div class="col mt-4">
+			<a class="btn{% if app.request.attributes.get('_route') == 'company_offers' %} active{% endif %}" role="button" href="{{ path('company_offers', { id: app.user.company.id }) }}">
+				<h4> MY JOB OFFERS</h4>
+				<p>Create new offers, find candidates list by offer and update the offers status.</p>
+			</a>
+		</div>
+		<div class="col mt-4">
+			<a class="btn{% if app.request.attributes.get('_route') == 'company_edit' %} active{% endif %}" role="button" href="{{ path('company_edit', { id: company.id }) }}">
+				<h4>MY INFORMATION</h4>
+				<p>Update your information to increase your chances to increase applications.</p>
+			</a>
+		</div>
+	</div>
+</div>

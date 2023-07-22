@@ -32,7 +32,7 @@ class CompanyController extends AbstractController
 
             $this->addFlash('success', 'Your account has been created! :)');
 
-            return $this->redirectToRoute('home_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('company_offers', ['id' => $company->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('company/new.html.twig', [
@@ -79,7 +79,10 @@ class CompanyController extends AbstractController
         $form = $this->createForm(ApplicationStatusType::class, $application);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($application->getStatus() == Application::STATUS_RECEIVED) {
+            $application->setStatus(Application::STATUS_INREVIEW);
+            $repository->save($application, true);
+        } elseif ($form->isSubmitted() && $form->isValid()) {
             $repository->save($application, true);
 
             return $this->redirectToRoute('company_offers', [

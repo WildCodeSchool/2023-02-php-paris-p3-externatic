@@ -14,7 +14,10 @@ class ApplicationStatusType extends AbstractType
     {
         $builder
             ->add('status', ChoiceType::class, [
-                'choices' => Application::APPLICATION_STATUS,
+                'choices' => [
+                    Application::STATUS_ACCEPTED => Application::STATUS_ACCEPTED,
+                    Application::STATUS_REJECTED => Application::STATUS_REJECTED,
+                ],
                 'label' => 'Change the status',
                 'attr' => [
                     'class' => 'form-select',
