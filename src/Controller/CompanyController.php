@@ -74,7 +74,6 @@ class CompanyController extends AbstractController
         Application $application,
         Request $request,
         ApplicationRepository $repository,
-        Company $company,
     ): Response {
         $form = $this->createForm(ApplicationStatusType::class, $application);
         $form->handleRequest($request);
@@ -92,7 +91,7 @@ class CompanyController extends AbstractController
 
         return $this->render('company/candidateApplication.html.twig', [
             'application' => $application,
-            'company' => $company,
+            'company' => $application->getOffer()->getCompany(),
             'form' => $form,
         ]);
     }
