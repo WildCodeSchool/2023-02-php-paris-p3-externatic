@@ -44,7 +44,8 @@ class HomeController extends AbstractController
                 return $this->redirectToRoute('candidate_research', [
                     'id' => $this->getuser()->getCandidate()->getId()]);
             } elseif (in_array('ROLE_COMPANY', $roles)) {
-                return $this->redirectToRoute('company_offers', ['id' => $this->getuser()->getCompany()->getId()]);
+                return $this->redirectToRoute('company_offers', [
+                    'id' => $this->getuser()->getCompany()->getId()]);
             } else {
                 return $this->redirectToRoute('home_index');
             }
