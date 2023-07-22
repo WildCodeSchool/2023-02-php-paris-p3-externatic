@@ -54,6 +54,17 @@ $nav-underline-link-active-color:$secondary;
     padding: 1.5rem;
 }
 
+//Put footer on the bottom, modified #main-footer as well
+html {
+    height: 100%;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}
+
 // Cards
 @mixin border($color) {
     border: 2px solid $color;
@@ -510,6 +521,9 @@ $navbar-padding-y: 0;
 #main-footer {
     background-color: $primary;
     min-width: 100%;
+
+    //Put footer on the bottom, modified html and body as well
+    margin-top: auto;
 }
 
 #main-footer span {
