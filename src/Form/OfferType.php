@@ -132,7 +132,7 @@ class OfferType extends AbstractType
                 ],
             ])
             ->add('interviewProcess', TextareaType::class, [
-                'label' => false,
+                'label' => 'Interview process',
                 'required' => false,
                 'attr' => [
                     'class' => 'form-control border-primary',
