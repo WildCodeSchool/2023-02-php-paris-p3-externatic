@@ -60,6 +60,7 @@
         </div>
         <div class="col mt-4">
             <h3 class="mt-4 mb-4">My resume</h3>
+                {{ form_errors(form.resumeFile) }}
             <div class="upload-btn-wrapper" id="upload-resume-new">
                 <button class="btn btn-primary" id="button">
                     <img class="img_icon fa-border" src=" {{ asset('build/images/picto/upload-white.svg') }} " alt="upload-resume"/>
