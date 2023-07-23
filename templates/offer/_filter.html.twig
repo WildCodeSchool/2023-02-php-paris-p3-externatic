@@ -55,6 +55,24 @@
                         <label class="form-check-label" for="flexCheckDefault"> {{ label }} </label>
                     {% endfor %}
                     <div class="form-label-modal">
+                        Hard skills
+                    </div>
+                        {% for label, value in field_choices(form.skills) %}
+                            {% if label in constant('App\\Entity\\Skill::HARD')[0] %}
+                                <input class="form-check-input" type="checkbox" name="{{ field_name(form.skills) }}[]" value="{{ value }}" id="flexCheckDefault" {{ value in field_value(form.skills) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="flexCheckDefault"> {{ label }} </label>
+                            {% endif %}
+                        {% endfor %}
+                    <div class="form-label-modal">
+                        Soft skills
+                    </div>
+                        {% for label, value in field_choices(form.skills) %}
+                            {% if label in constant('App\\Entity\\Skill::SOFT')[0] %}
+                                <input class="form-check-input" type="checkbox" name="{{ field_name(form.skills) }}[]" value="{{ value }}" id="flexCheckDefault" {{ value in field_value(form.skills) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="flexCheckDefault"> {{ label }} </label>
+                            {% endif %}
+                        {% endfor %}
+                    <div class="form-label-modal">
                         {{ form_label(form.experience) }}
                     </div>
                     {% for label, value  in field_choices(form.experience) %}
