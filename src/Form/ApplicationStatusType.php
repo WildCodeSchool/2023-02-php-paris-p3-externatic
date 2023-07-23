@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Application;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -22,6 +23,10 @@ class ApplicationStatusType extends AbstractType
                 'attr' => [
                     'class' => 'form-select',
                 ],
+            ])
+            ->add('mailMessage', TextareaType::class, [
+                'required' => false,
+                'label' => 'Message',
             ]);
     }
 

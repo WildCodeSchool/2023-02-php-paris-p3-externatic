@@ -13,6 +13,8 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/company', name: 'company_')]
@@ -74,7 +76,7 @@ class CompanyController extends AbstractController
         Application $application,
         Request $request,
         ApplicationRepository $repository,
-        Company $company,
+        MailerInterface $mailer
     ): Response {
         $form = $this->createForm(ApplicationStatusType::class, $application);
         $form->handleRequest($request);
@@ -85,6 +87,17 @@ class CompanyController extends AbstractController
         } elseif ($form->isSubmitted() && $form->isValid()) {
             $repository->save($application, true);
 
+            if ($application->getMailMessage()) {
+                $email = (new Email())
+                ->from($this->getParameter('mailer_from'))
+                ->to($application->getCandidate()->getUser()->getLogin())
+                ->cc($application->getOffer()->getCompany()->getUser()->getLogin())
+                ->subject('you have received a reply to your application for offer ' . $application->getId())
+                ->html($this->renderView('application/mail.html.twig', ['application' => $application]));
+
+                $mailer->send($email);
+            }
+
             return $this->redirectToRoute('company_offers', [
                 'id' => $application->getOffer()->getCompany()->getId()
             ], Response::HTTP_SEE_OTHER);
@@ -92,7 +105,7 @@ class CompanyController extends AbstractController
 
         return $this->render('company/candidateApplication.html.twig', [
             'application' => $application,
-            'company' => $company,
+            'company' => $application->getOffer()->getCompany(),
             'form' => $form,
         ]);
     }

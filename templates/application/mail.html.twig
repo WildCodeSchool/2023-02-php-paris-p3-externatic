@@ -1,0 +1,15 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Application message</title>
+</head>
+<body>
+    <h1>Answer to your application to the offer #{{ application.id }}</h1>
+    <h2>Title : {{ application.offer.title }}</h2>
+    <p>Hello, the company {{ application.offer.company.name }} has sent you a reply to your application for the job "{{ application.offer.title }}".</p>
+    <p>your application has been {{ application.status }}.</p>
+    <p>they would like to send you a message : </p>
+    <p>{{ application.mailMessage }}</p>
+</body>
+</html>
