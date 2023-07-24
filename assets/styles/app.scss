@@ -991,6 +991,12 @@ hr {
     #search-bar-application {
         margin-left: 5.5em;
     }
+
+    //Company offers
+    #see-more,
+    #candidates-applications {
+        display: none;
+    }
 }
 
 @media (max-width: 599px) {
@@ -1073,6 +1079,13 @@ hr {
 
     #dashboard-candidate .dashboard-candidate-text {
         display:none;
+    }
+
+     //Company offers
+        #offer-buttons,
+        #offer-location,
+        #carouselExampleIndicators {
+        display: none;
     }
 }
 
