@@ -997,6 +997,11 @@ hr {
     #candidates-applications {
         display: none;
     }
+   
+    #offer-buttons {
+        display: flex;
+        justify-content: flex-end;
+    }
 }
 
 @media (max-width: 599px) {
@@ -1082,10 +1087,56 @@ hr {
     }
 
      //Company offers
-        #offer-buttons,
-        #offer-location,
-        #carouselExampleIndicators {
+    #offer-buttons,
+    #offer-location,
+    #carouselExampleIndicators {
         display: none;
+    }
+
+    //Company my job offers, candidates on desktop view
+    .row.row-cols-3 {
+        display: none;
+    }
+
+    #dashboard-company .col-3 {
+        width: auto;
+    }
+
+    //Offer card in Company, candidate application
+    #card-apply-candidate {
+        width: 100%;
+    }
+
+    // Change status and buttons 
+    .row.align-items-center.justify-content-center.p-2.h4 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+    }
+
+    //Text change status
+    .row.align-items-center.justify-content-center.p-2.h4 .col-4.text-center {
+        width: 100%;
+        font-size: .9em;
+    }
+
+    //Button save, offer card
+    .col-2.btn.btn-secondary {
+        width: 89%;
+        margin-top: 0.7em;
+        grid-column: 1/3;
+        margin: auto;
+    }
+
+    //Button accepted/refused, offer card
+    .row.align-items-center.justify-content-center.p-2.h4 .col-3 {
+        width: 94%;
+    }
+
+    //Candidate card in Company, candidate application
+    .col-5.profile {
+        flex: 0 0 auto;
+        width: 100%;    
     }
 }
 
