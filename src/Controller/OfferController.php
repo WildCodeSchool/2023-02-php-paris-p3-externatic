@@ -56,6 +56,8 @@ class OfferController extends AbstractController
             $this->addFlash('success', 'Your offer has been succesfully edited 😉');
 
             return $this->redirectToRoute('home_index', [], Response::HTTP_SEE_OTHER);
+        } elseif ($form->isSubmitted() && !$form->isValid()) {
+            $this->addFlash('danger', 'Some mandatory elements are incomplete or missing. Please review your answers.');
         }
 
         return $this->render('offer/edit.html.twig', [
@@ -87,6 +89,8 @@ class OfferController extends AbstractController
                 'Your offer has been successfully added 😇 !'
             );
             return $this->redirectToRoute('home_index', [], Response::HTTP_SEE_OTHER);
+        } elseif ($form->isSubmitted() && !$form->isValid()) {
+            $this->addFlash('danger', 'Some mandatory elements are incomplete or missing. Please review your answers.');
         }
 
         return $this->render('offer/new.html.twig', [

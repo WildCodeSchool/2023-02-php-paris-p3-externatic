@@ -8,7 +8,7 @@
 				</button>
 			</div>
 			<div class="modal-body">
-                {% if app.user.candidate %}
+                {% if app.user and app.user.candidate %}
                     <strong>Hey {{ app.user.candidate.firstname }}! </strong>
                 {% endif %}
                 <br>

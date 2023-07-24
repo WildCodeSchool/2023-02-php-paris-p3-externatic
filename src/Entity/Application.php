@@ -13,7 +13,7 @@ class Application
     public const STATUS_RECEIVED = "received";
     public const STATUS_INREVIEW = "in review";
     public const STATUS_ACCEPTED = "accepted";
-    public const STATUS_REJECTED = "rejected";
+    public const STATUS_REJECTED = "refused";
 
     public const APPLICATION_STATUS = [
         self::STATUS_RECEIVED => self::STATUS_RECEIVED,

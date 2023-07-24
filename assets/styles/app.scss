@@ -54,6 +54,13 @@ $nav-underline-link-active-color:$secondary;
     padding: 1.5rem;
 }
 
+form ul {
+    list-style-type: none;
+    padding-left: 0;
+    color: $primary;
+    font-weight: 500;
+}
+
 // Cards
 @mixin border($color) {
     border: 2px solid $color;
@@ -143,6 +150,10 @@ $carousel-indicator-active-bg: #343a40;
 }
 
 // Forms
+#reset-filters {
+    color: black;
+}
+
 #search-input .form-control {
     text-indent: 16%;
 }
@@ -714,15 +725,6 @@ hr {
     background: rgba(254, 211, 44, .8);
 }
 
-.archived-offer-status {
-    padding: 0.5em;
-    border-radius: 5px;
-    color: black;
-    background: $primary;
-    width: 41%;
-    height: 45%;
-}
-
 //Create candidate account
 #upload-candidate-picture-form {
     background-color: $primary;
@@ -833,8 +835,12 @@ hr {
 }
 
 #about-header p,
-#about-header h5 {
+#about-header h3 {
     color: $light;
+}
+
+#about-header p  {
+    font-size: 18px;
 }
 
 //Filter candidate application
@@ -867,13 +873,6 @@ hr {
     border-bottom-left-radius: 10px;
 }
 
-input[type="date"] {
-    margin-left: 10px;
-    background-color: $tertiary;
-    border-radius: 5px;
-    padding: 2px;
-}
-
 #upload-offer-picture-form .dropzone-placeholder,
 #upload-offer-picture-form .dropzone-preview-filename,
 #upload-offer-picture-form .dropzone-preview-button::before {
@@ -889,6 +888,10 @@ input[type="date"] {
 #upload-offer-picture-form .dropzone-preview-image {
     min-width: 260px;
     height: 144px;
+}
+
+#offer_interviewProcess {
+    min-height: 8rem;
 }
 
 #card-apply-candidate {
