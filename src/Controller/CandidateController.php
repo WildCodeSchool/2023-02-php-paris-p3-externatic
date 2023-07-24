@@ -155,7 +155,7 @@ class CandidateController extends AbstractController
     #[Route('/{id}/addToFavorite', name: 'favorites', methods: ['GET', 'POST'])]
     public function addOfferToFavorites(
         CandidateRepository $candidateRepository,
-        Offer $offer
+        Offer $offer,
     ): Response {
         $candidate = $this->getUser()->getCandidate();
 
@@ -164,6 +164,11 @@ class CandidateController extends AbstractController
         $candidate->addFavoriteOffer($offer);
 
         $candidateRepository->save($candidate, true);
+
+        $this->addFlash('success', 'The offer: ' . $offer->getTitle() . 'has been successfully added as favorite 😊');
+
+        //Faire en sorte de rediriger vers la même route sur laquelle on est
+        //+ ajout message flash quand on remove une offre des favories
 
         return $this->redirectToRoute(
             'candidate_research',
