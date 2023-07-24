@@ -133,15 +133,7 @@
                 {% if app.user.company is same as offer.getCompany %}
                     <div class="col text-center mt-4">
                         <a href="{{ path('offer_form_edit', { id : offer.id })}}"><button type="button" class="btn btn-secondary mt-2 applicationbtn">Edit</button></a>
-						{% if offer.archived == true %}
-						<div class="status-application-offer archived-offer-status">
-							<p><img class="picto" src="{{ asset('build/images/picto/archived.svg') }}" alt="pictoArchivedOffer">
-								archived
-							</p>
-						</div>
-						{% else %}
                         <a href="#"><button type="button" class="btn btn-secondary mt-2 applicationbtn">Archive</button></a>
-						{% endif %}
                     </div>
                 {% endif %}
             {% elseif app.user.roles[0] is constant("App\\Entity\\USER::ROLE_CANDIDATE") and not applied %}

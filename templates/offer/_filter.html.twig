@@ -1,5 +1,10 @@
 {{ form_start(form) }}
     <div class="row align-items-center mt-2" id="search-input">
+        {% if app.user and app.user.candidate %}
+            <a id="reset-filters" href="{{ path('home') }}">Reset</a>
+        {% else %}
+            <a id="reset-filters" href="{{ path('home_index') }}">Reset</a>
+        {% endif %}
         <div class="col-md-4 mt-4">
             <input type="text" class="form-control" placeholder="Find a job" name="{{ field_name(form.searchTitle) }}" value="{{ field_value(form.searchTitle) }}">
             <img id="glass" class="position-absolute" src="{{ asset('build/images/picto/glass.svg') }}">
@@ -54,6 +59,24 @@
                         <input class="form-check-input" type="checkbox" name="{{ field_name(form.companySector) }}[]" value="{{ value }}" id="flexCheckDefault" {{ value in field_value(form.companySector) ? 'checked' : '' }}>
                         <label class="form-check-label" for="flexCheckDefault"> {{ label }} </label>
                     {% endfor %}
+                    <div class="form-label-modal">
+                        Hard skills
+                    </div>
+                        {% for label, value in field_choices(form.skills) %}
+                            {% if label in constant('App\\Entity\\Skill::HARD')[0] %}
+                                <input class="form-check-input" type="checkbox" name="{{ field_name(form.skills) }}[]" value="{{ value }}" id="flexCheckDefault" {{ value in field_value(form.skills) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="flexCheckDefault"> {{ label }} </label>
+                            {% endif %}
+                        {% endfor %}
+                    <div class="form-label-modal">
+                        Soft skills
+                    </div>
+                        {% for label, value in field_choices(form.skills) %}
+                            {% if label in constant('App\\Entity\\Skill::SOFT')[0] %}
+                                <input class="form-check-input" type="checkbox" name="{{ field_name(form.skills) }}[]" value="{{ value }}" id="flexCheckDefault" {{ value in field_value(form.skills) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="flexCheckDefault"> {{ label }} </label>
+                            {% endif %}
+                        {% endfor %}
                     <div class="form-label-modal">
                         {{ form_label(form.experience) }}
                     </div>
