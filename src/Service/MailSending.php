@@ -7,17 +7,15 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 
-
-
 class MailSending
 {
-    private $mailer;
+    private MailerInterface $mailer;
     public function __construct(MailerInterface $mailer)
     {
         $this->mailer = $mailer;
     }
 
-    public function sendMessage(Application $application, string $sender, string $render)
+    public function sendMessage(Application $application, string $sender, string $render): void
     {
         $email = (new Email())
             ->from($sender)

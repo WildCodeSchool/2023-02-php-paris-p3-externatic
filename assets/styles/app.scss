@@ -207,6 +207,10 @@ $carousel-indicator-active-bg: #343a40;
 }
 
 //Navigation buttons
+a.btn.active {
+    border-color: transparent;
+}
+
 #navigation-btn-desktop .btn {
     border-radius: 10px;
     width: 300px;
