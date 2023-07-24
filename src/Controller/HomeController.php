@@ -12,10 +12,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/', name:'home_')]
+#[Route('/', name:'home')]
 class HomeController extends AbstractController
 {
-    #[Route('/home', name:'index', methods: ['GET'])]
+    #[Route('/home', name:'_index', methods: ['GET'])]
     public function home(
         Request $request,
         OfferRepository $offerRepository,
