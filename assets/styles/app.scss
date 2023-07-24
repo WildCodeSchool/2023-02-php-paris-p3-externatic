@@ -54,6 +54,17 @@ $nav-underline-link-active-color:$secondary;
     padding: 1.5rem;
 }
 
+//Put footer on the bottom, modified #main-footer as well
+html {
+    height: 100%;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}
+
 form ul {
     list-style-type: none;
     padding-left: 0;
@@ -207,6 +218,10 @@ $carousel-indicator-active-bg: #343a40;
 }
 
 //Navigation buttons
+a.btn.active {
+    border-color: transparent;
+}
+
 #navigation-btn-desktop .btn {
     border-radius: 10px;
     width: 300px;
@@ -521,6 +536,9 @@ $navbar-padding-y: 0;
 #main-footer {
     background-color: $primary;
     min-width: 100%;
+
+    //Put footer on the bottom, modified html and body as well
+    margin-top: auto;
 }
 
 #main-footer span {
