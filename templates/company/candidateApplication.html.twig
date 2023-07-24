@@ -24,9 +24,9 @@
 							<div class="row align-items-center justify-content-center p-2 h4">
 								<div class="col-4 text-center">{{ form_label(form.status) }}</div>
 								<div class="col-3">{{ form_widget(form.status) }}</div>
-								{# <button type="submit" class="col-2 btn btn-secondary ">{{ button_label|default('Save') }}</button> #}
 								<button type="button" class="col-2 btn btn-secondary" data-bs-toggle="modal" data-bs-target="#filterModal">{{ button_label|default('Save') }}</button>
 							</div>
+
 							<!-- Modal -->
 							<div id="filterModal" class="modal fade bd-example-modal-lg p-3" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
 								<div class="modal-dialog modal-lg" role="document">
@@ -52,6 +52,7 @@
 									</div>
 								</div>
 							</div>
+
 						{{ form_end(form) }}
                     </h2>
                 </div>
