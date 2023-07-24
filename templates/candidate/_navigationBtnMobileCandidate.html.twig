@@ -4,10 +4,10 @@
 			<div class="row">
 				<div class="btn-group justify-content-center gap-4">
 					<div class="col-4">
-						<a class="btn d-block w-100" role="button" href="{{ path('candidate_research', { id: candidate.id }) }}">RESEARCH</a>
+						<a class="btn d-block w-100{% if app.request.attributes.get('_route') == 'candidate_research' %} active{% endif %}" role="button" href="{{ path('candidate_research', { id: candidate.id }) }}">RESEARCH</a>
 					</div>
 					<div class="col-4">
-						<a class="btn d-block w-100" role="button" href="{{ path('candidate_applications', { id: candidate.id }) }}">APPLICATIONS</a>
+						<a class="btn d-block w-100{% if app.request.attributes.get('_route') == 'candidate_applications' %} active{% endif %}" role="button" href="{{ path('candidate_applications', { id: candidate.id }) }}">APPLICATIONS</a>
 					</div>
 				</div>
 			</div>
@@ -16,10 +16,10 @@
 			<div class="row">
 				<div class="btn-group justify-content-center gap-4">
 					<div class="col-4">
-						<a class="btn d-block w-100" role="button" href="{{ path('candidate_collection', { id: candidate.id }) }}">COLLECTION</a>
+						<a class="btn d-block w-100{% if app.request.attributes.get('_route') == 'candidate_collection' %} active{% endif %}" role="button" href="{{ path('candidate_collection', { id: candidate.id }) }}">COLLECTION</a>
 					</div>
 					<div class="col-4">
-						<a class="btn d-block w-100" role="button" href="{{ path('candidate_show', { id: candidate.id }) }}">PROFILE</a>
+						<a class="btn d-block w-100{% if app.request.attributes.get('_route') == 'candidate_show' %} active{% endif %}" role="button" href="{{ path('candidate_show', { id: candidate.id }) }}">PROFILE</a>
 					</div>
 				</div>
 			</div>
