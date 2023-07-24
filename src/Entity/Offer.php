@@ -95,7 +95,7 @@ class Offer
 
     #[Vich\UploadableField(mapping: 'offers', fileNameProperty: 'picture')]
     #[Assert\File(
-        maxSize:'1M',
+        maxSize:'2M',
         mimeTypes: ['image/jpeg', 'image/png','image/jpg'],
         mimeTypesMessage:'Your image should be a jpeg, jpg or png'
     )]

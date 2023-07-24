@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\UX\Dropzone\Form\DropzoneType;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class CompanyType extends AbstractType
 {
@@ -22,6 +23,9 @@ class CompanyType extends AbstractType
                     'class' => 'form-control border-primary',
                     'placeholder' => 'Name of the company',
                 ],
+                'constraints' => [
+                    new Assert\NotBlank(),
+                ],
             ])
             ->add('size', ChoiceType::class, [
                 'choices' => Company::COMPANY_SIZE,
@@ -30,13 +34,20 @@ class CompanyType extends AbstractType
                 },
                 'placeholder' => 'Size',
                 'attr' => ['class' => 'form-select border-primary'],
+                'empty_data' => '',
                 'label' => false,
+                'constraints' => [
+                    new Assert\NotBlank(),
+                ],
             ])
             ->add('sector', ChoiceType::class, [
                 'choices' => Company::COMPANY_SECTOR,
                 'placeholder' => 'Sector',
                 'attr' => ['class' => 'form-select border-primary'],
                 'label' => false,
+                'constraints' => [
+                    new Assert\NotBlank(),
+                ],
             ])
             ->add('presentation', TextareaType::class, [
                 'label' => false,
@@ -57,6 +68,9 @@ class CompanyType extends AbstractType
                 'label' => false,
                 'attr' => [
                     'placeholder' => 'Browse your logo here',
+                ],
+                'constraints' => [
+                    new Assert\NotBlank(),
                 ],
             ])
         ;

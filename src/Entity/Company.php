@@ -47,7 +47,6 @@ class Company implements Serializable
     private ?string $name = null;
 
     #[ORM\Column(length: 100, nullable: true)]
-    #[Assert\NotBlank]
     private ?string $size = null;
 
     #[ORM\Column(length: 150, nullable: true)]
@@ -119,7 +118,7 @@ class Company implements Serializable
         return $this->size;
     }
 
-    public function setSize(string $size): self
+    public function setSize(?string $size): self
     {
         $this->size = $size;
 
