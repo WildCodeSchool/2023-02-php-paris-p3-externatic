@@ -21,14 +21,14 @@ class Skill
         ['name' => 'CSS', 'type' => 'hard'],
         ['name' => 'React', 'type' => 'hard'],
         ['name' => 'SQL', 'type' => 'hard'],
-        ['name' => 'creativity', 'type' => 'soft'],
-        ['name' => 'communication', 'type' => 'soft'],
-        ['name' => 'smiling', 'type' => 'soft'],
-        ['name' => 'critical thinking', 'type' => 'soft'],
-        ['name' => 'adaptability', 'type' => 'soft'],
-        ['name' => 'perfectionist', 'type' => 'soft'],
-        ['name' => 'teamwork', 'type' => 'soft'],
-        ['name' => 'problem-solving', 'type' => 'soft'],
+        ['name' => 'Creativity', 'type' => 'soft'],
+        ['name' => 'Communication', 'type' => 'soft'],
+        ['name' => 'Smiling', 'type' => 'soft'],
+        ['name' => 'Critical thinking', 'type' => 'soft'],
+        ['name' => 'Adaptability', 'type' => 'soft'],
+        ['name' => 'Perfectionist', 'type' => 'soft'],
+        ['name' => 'Teamwork', 'type' => 'soft'],
+        ['name' => 'Problem-solving', 'type' => 'soft'],
     ];
 
     public const HARD = [
@@ -36,8 +36,8 @@ class Skill
     ];
 
     public const SOFT = [
-        ['creativity', 'communication','smiling','critical thinking',
-        'adaptability', 'perfectionist', 'teamwork', 'problem-solving'],
+        ['Creativity', 'Communication','Smiling','Critical thinking',
+        'Adaptability', 'Perfectionist', 'Teamwork', 'Problem-solving'],
     ];
 
     #[ORM\Id]

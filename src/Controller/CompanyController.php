@@ -33,6 +33,8 @@ class CompanyController extends AbstractController
             $this->addFlash('success', 'Your account has been created! :)');
 
             return $this->redirectToRoute('company_offers', ['id' => $company->getId()], Response::HTTP_SEE_OTHER);
+        } elseif ($form->isSubmitted() && !$form->isValid()) {
+            $this->addFlash('danger', 'Some mandatory elements are incomplete or missing. Please review your answers.');
         }
 
         return $this->render('company/new.html.twig', [
@@ -61,6 +63,8 @@ class CompanyController extends AbstractController
             $this->addFlash('success', 'Your account has been updated! :)');
 
             return $this->redirectToRoute('company_offers', ['id' => $company->getId()], Response::HTTP_SEE_OTHER);
+        } elseif ($form->isSubmitted() && !$form->isValid()) {
+            $this->addFlash('danger', 'Some mandatory elements are incomplete or missing. Please review your answers.');
         }
 
         return $this->render('company/edit.html.twig', [
@@ -74,7 +78,6 @@ class CompanyController extends AbstractController
         Application $application,
         Request $request,
         ApplicationRepository $repository,
-        Company $company,
     ): Response {
         $form = $this->createForm(ApplicationStatusType::class, $application);
         $form->handleRequest($request);
@@ -92,7 +95,7 @@ class CompanyController extends AbstractController
 
         return $this->render('company/candidateApplication.html.twig', [
             'application' => $application,
-            'company' => $company,
+            'company' => $application->getOffer()->getCompany(),
             'form' => $form,
         ]);
     }

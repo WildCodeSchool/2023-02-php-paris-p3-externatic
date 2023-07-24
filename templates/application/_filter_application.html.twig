@@ -1,5 +1,6 @@
 {{ form_start(form) }}
     <div id="search-bar-application" class="row align-items-center" id="search-input">
+        <a id="reset-filters" href="{{ path('candidate_applications', { id: candidate.id }) }}">Reset</a>
         <div class="col-md-4 mt-4">
             <input type="text" class="form-control" placeholder="Find an application" name="{{ field_name(form.searchTitleApplication) }}" value="{{ field_value(form.searchTitleApplication) }}" style="padding: 0.375rem 3.75rem;">
             <img id="glass" class="position-absolute" src="{{ asset('build/images/picto/glass.svg') }}">

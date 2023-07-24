@@ -26,7 +26,7 @@ class OfferType extends AbstractType
                 'label' => false,
                 'attr' => [
                     'class' => 'form-control border-primary',
-                    'placeholder' => 'Title',
+                    'placeholder' => 'Job title',
                 ],
                 'constraints' => [
                     new Assert\Length(['min' => 2, 'max' => 50]),
@@ -37,6 +37,12 @@ class OfferType extends AbstractType
                 'label' => 'Starting date',
                 'widget' => 'single_text',
                 'by_reference' => true,
+                'attr' => [
+                    'class' => 'form-control border-primary',
+                ],
+                'constraints' => [
+                    new Assert\NotBlank(),
+                ],
             ])
             ->add('contract', ChoiceType::class, [
                 'placeholder' => 'Contract',
@@ -45,22 +51,32 @@ class OfferType extends AbstractType
                 'attr' => [
                     'class' => 'form-select border-primary',
                     'aria-label' => 'Default select example',
-                ]
+                ],
+                'constraints' => [
+                    new Assert\NotBlank(),
+                ],
             ])
             ->add('workFromHome', ChoiceType::class, [
-                'placeholder' => 'work from home',
+                'placeholder' => 'Work from home',
                 'label' => false,
                 'choices' => Offer::WORK_FROM_HOME,
                 'attr' => [
                     'class' => 'form-select border-primary',
                     'aria-label' => 'Default select example',
-                ]
+                ],
+                'constraints' => [
+                    new Assert\NotBlank(),
+                ],
             ])
             ->add('description', TextareaType::class, [
                 'label' => false,
                 'attr' => [
                     'class' => 'form-control border-primary',
                     'placeholder' => 'Description',
+                ],
+                'constraints' => [
+                    new Assert\Length(['min' => 20]),
+                    new Assert\NotBlank()
                 ],
             ])
             ->add('experience', ChoiceType::class, [
@@ -71,7 +87,10 @@ class OfferType extends AbstractType
                     'class' => 'form-select border-primary',
                     'aria-label' => 'Default select example',
                     'placeholder' => 'Level of experience (in years)',
-                ]
+                ],
+                'constraints' => [
+                    new Assert\NotBlank(),
+                ],
             ])
             ->add('offerPicture', DropzoneType::class, [
                 'required'      => false,
@@ -107,15 +126,19 @@ class OfferType extends AbstractType
                     'class' => 'form-control border-primary',
                     'placeholder' => 'Location',
                 ],
+                'constraints' => [
+                    new Assert\Length(['min' => 2, 'max' => 50]),
+                    new Assert\NotBlank()
+                ],
             ])
             ->add('interviewProcess', TextareaType::class, [
-                'label' => false,
+                'label' => 'Interview process',
                 'required' => false,
                 'attr' => [
                     'class' => 'form-control border-primary',
-                    'placeholder' => '1. Call with HR 2.Technical Test 3.Last interview',
+                    'placeholder' => '1. Call with HR' . PHP_EOL . '2. Technical test' . PHP_EOL . '3. Last interview'
                 ],
-                    'empty_data' => '1. Call with HR 2.Technical Test 3.Last interview',
+                    'empty_data' => '1. Call with HR' . PHP_EOL . '2. Technical test' . PHP_EOL . '3. Last interview',
             ])
             ->add('skills', EntityType::class, [
                 'label' => 'Required skills',
