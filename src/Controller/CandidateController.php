@@ -80,7 +80,7 @@ class CandidateController extends AbstractController
     }
 
     #[Route('/{id}', name: 'show', methods: ['GET', 'POST'])]
-    public function show(Candidate $candidate, Request $request): Response
+    public function show(Candidate $candidate): Response
     {
 
         return $this->render('candidate/show.html.twig', [
