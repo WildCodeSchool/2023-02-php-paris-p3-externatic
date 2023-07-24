@@ -66,6 +66,8 @@ class CandidateController extends AbstractController
                 ],
                 Response::HTTP_SEE_OTHER
             );
+        } elseif ($form->isSubmitted() && !$form->isValid()) {
+            $this->addFlash('danger', 'Some mandatory elements are incomplete or missing. Please review your answers.');
         }
 
         return $this->render('candidate/new.html.twig', [
@@ -94,7 +96,10 @@ class CandidateController extends AbstractController
             $this->addFlash('success', 'Your account has been updated! :)');
 
             return $this->redirectToRoute('candidate_show', ['id' => $candidate->getId()], Response::HTTP_SEE_OTHER);
+        } elseif ($form->isSubmitted() && !$form->isValid()) {
+            $this->addFlash('danger', 'Some mandatory elements are incomplete or missing. Please review your answers.');
         }
+
         return $this->render('candidate/edit.html.twig', [
             'candidate'  => $candidate,
             'form'       => $form,

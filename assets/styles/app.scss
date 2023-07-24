@@ -54,6 +54,13 @@ $nav-underline-link-active-color:$secondary;
     padding: 1.5rem;
 }
 
+form ul {
+    list-style-type: none;
+    padding-left: 0;
+    color: $primary;
+    font-weight: 500;
+}
+
 // Cards
 @mixin border($color) {
     border: 2px solid $color;
@@ -867,13 +874,6 @@ hr {
     border-bottom-left-radius: 10px;
 }
 
-input[type="date"] {
-    margin-left: 10px;
-    background-color: $tertiary;
-    border-radius: 5px;
-    padding: 2px;
-}
-
 #upload-offer-picture-form .dropzone-placeholder,
 #upload-offer-picture-form .dropzone-preview-filename,
 #upload-offer-picture-form .dropzone-preview-button::before {
@@ -889,6 +889,10 @@ input[type="date"] {
 #upload-offer-picture-form .dropzone-preview-image {
     min-width: 260px;
     height: 144px;
+}
+
+#offer_interviewProcess {
+    min-height: 8rem;
 }
 
 #card-apply-candidate {

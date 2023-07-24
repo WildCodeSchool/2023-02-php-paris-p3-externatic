@@ -52,7 +52,7 @@ class Candidate implements Serializable
         maxSize: '2M',
         maxSizeMessage: 'The size of this file is too large',
         extensions: ['pdf'],
-        extensionsMessage: 'This is not a pdf file.'
+        extensionsMessage: 'Your resume should be a pdf file.'
     )]
     private ?File $resumeFile = null;
 
@@ -74,7 +74,7 @@ class Candidate implements Serializable
     #[Assert\Image(
         maxSize: '2M',
         mimeTypes: ['image/jpeg', 'image/jpg', 'image/png'],
-        mimeTypesMessage:'Your image should be a jpeg, jpg or png'
+        mimeTypesMessage:'Your picture should be a jpeg, jpg or png.'
     )]
     private ?File $pictureFile = null;
 
@@ -131,7 +131,7 @@ class Candidate implements Serializable
         return $this->firstname;
     }
 
-    public function setFirstname(string $firstname): self
+    public function setFirstname(?string $firstname): self
     {
         $this->firstname = $firstname;
 
@@ -143,7 +143,7 @@ class Candidate implements Serializable
         return $this->lastname;
     }
 
-    public function setLastname(string $lastname): self
+    public function setLastname(?string $lastname): self
     {
         $this->lastname = $lastname;
 
@@ -155,7 +155,7 @@ class Candidate implements Serializable
         return $this->location;
     }
 
-    public function setLocation(string $location): self
+    public function setLocation(?string $location): self
     {
         $this->location = $location;
 
@@ -236,7 +236,7 @@ class Candidate implements Serializable
         return $this->introduction;
     }
 
-    public function setIntroduction(string $introduction): self
+    public function setIntroduction(?string $introduction): self
     {
         $this->introduction = $introduction;
 
@@ -248,7 +248,7 @@ class Candidate implements Serializable
         return $this->jobTitle;
     }
 
-    public function setJobTitle(string $jobTitle): self
+    public function setJobTitle(?string $jobTitle): self
     {
         $this->jobTitle = $jobTitle;
 
