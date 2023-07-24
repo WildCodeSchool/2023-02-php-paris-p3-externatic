@@ -4,8 +4,11 @@ namespace App\Form;
 
 use App\Entity\Company;
 use App\Entity\Offer;
+use App\Entity\Skill;
 use PhpParser\Parser\Multiple;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\ChoiceList\ChoiceList;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\RangeType;
@@ -22,12 +25,10 @@ class SearchOfferFilterType extends AbstractType
                 'required' => false,
                 'label' => 'Find a job',
             ])
-
             ->add('searchLocation', SearchType::class, [
                 'required' => false,
                 'label' => 'Location',
             ])
-
             ->add('contract', ChoiceType::class, [
                 'choices' => Offer::JOB_TYPE,
                 'required' => false,
@@ -38,7 +39,6 @@ class SearchOfferFilterType extends AbstractType
                     'class' => 'dropdown-item form-check'
                 ],
             ])
-
             ->add('salary', IntegerType::class, [
                 'label' => 'Salary minimum required',
                 'required' => false,
@@ -46,7 +46,6 @@ class SearchOfferFilterType extends AbstractType
                     'placeholder' => '30000',
                 ]
             ])
-
             ->add('companySector', ChoiceType::class, [
                 'choices' => Company::COMPANY_SECTOR,
                 'required' => false,
@@ -54,7 +53,12 @@ class SearchOfferFilterType extends AbstractType
                 'expanded' => true,
                 'multiple' => true,
             ])
-
+            ->add('skills', EntityType::class, [
+                'choice_label' => 'name',
+                'class' => Skill::class,
+                'expanded' => true,
+                'multiple' => true,
+            ])
             ->add('experience', ChoiceType::class, [
                 'choices' => Offer::EXPERIENCE,
                 'required' => false,
@@ -62,7 +66,6 @@ class SearchOfferFilterType extends AbstractType
                 'expanded' => true,
                 'multiple' => true,
             ])
-
             ->add('workFromHome', ChoiceType::class, [
                 'choices' => Offer::WORK_FROM_HOME,
                 'required' => false,
