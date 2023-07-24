@@ -1,5 +1,10 @@
 {{ form_start(form) }}
     <div class="row align-items-center mt-2" id="search-input">
+        {% if app.user and app.user.candidate %}
+            <a id="reset-filters" href="{{ path('home') }}">Reset</a>
+        {% else %}
+            <a id="reset-filters" href="{{ path('home_index') }}">Reset</a>
+        {% endif %}
         <div class="col-md-4 mt-4">
             <input type="text" class="form-control" placeholder="Find a job" name="{{ field_name(form.searchTitle) }}" value="{{ field_value(form.searchTitle) }}">
             <img id="glass" class="position-absolute" src="{{ asset('build/images/picto/glass.svg') }}">
