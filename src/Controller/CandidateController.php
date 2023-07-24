@@ -170,8 +170,8 @@ class CandidateController extends AbstractController
 
         $candidateRepository->save($candidate, true);
 
-        $removeFavFlashMsg = 'The offer: ' . $offer->getTitle() . ' has been successfully added as favorite 😊';
-        $addFavFlashMsg = 'The offer: ' . $offer->getTitle() . ' has been successfully removed as favorite 😊';
+        $removeFavFlashMsg = 'The offer: ' . $offer->getTitle() . ' has been successfully added as favorite';
+        $addFavFlashMsg = 'The offer: ' . $offer->getTitle() . ' has been successfully removed as favorite';
 
         $candidate->isOfferInFavorites($offer) ?
         $this->addFlash('success', $removeFavFlashMsg) :
