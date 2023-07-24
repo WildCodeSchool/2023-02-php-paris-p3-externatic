@@ -1,0 +1,16 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Application message</title>
+</head>
+<body>
+    <h1>Answer to your application to the offer #{{ application.id }}</h1>
+    <h2>Title : {{ application.offer.title }}</h2>
+    <p>Dear {{ application.candidate.firstname }}, </p>
+    <p>Great news! Your application for {{ application.offer.title }} at {{ application.offer.company.name }} has been accepted!
+We'll be in touch shortly to schedule a meeting to discuss the next steps.</p>
+    <p>Best regards, </p>
+    <p>The {{ application.offer.company.name }} team</p>
+</body>
+</html>

@@ -26,7 +26,10 @@ class ApplicationStatusType extends AbstractType
             ])
             ->add('mailMessage', TextareaType::class, [
                 'required' => false,
-                'label' => 'Message',
+                'label' => 'Your message',
+                'attr' => [
+                    'placeholder' => 'Dear candidate, ...',
+                ],
             ]);
     }
 

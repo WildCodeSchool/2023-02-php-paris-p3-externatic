@@ -96,6 +96,24 @@ class CompanyController extends AbstractController
                 ->html($this->renderView('application/mail.html.twig', ['application' => $application]));
 
                 $mailer->send($email);
+            } elseif ($application->getStatus() == Application::STATUS_ACCEPTED) {
+                $email = (new Email())
+                ->from($this->getParameter('mailer_from'))
+                ->to($application->getCandidate()->getUser()->getLogin())
+                ->cc($application->getOffer()->getCompany()->getUser()->getLogin())
+                ->subject('you have received a reply to your application for offer ' . $application->getId())
+                ->html($this->renderView('application/mailAccepted.html.twig', ['application' => $application]));
+
+                $mailer->send($email);
+            } elseif ($application->getStatus() == Application::STATUS_REJECTED) {
+                $email = (new Email())
+                ->from($this->getParameter('mailer_from'))
+                ->to($application->getCandidate()->getUser()->getLogin())
+                ->cc($application->getOffer()->getCompany()->getUser()->getLogin())
+                ->subject('you have received a reply to your application for offer ' . $application->getId())
+                ->html($this->renderView('application/mailRefused.html.twig', ['application' => $application]));
+
+                $mailer->send($email);
             }
 
             return $this->redirectToRoute('company_offers', [
