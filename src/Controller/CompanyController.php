@@ -9,6 +9,7 @@ use App\Form\ApplicationStatusType;
 use App\Form\CompanyType;
 use App\Repository\ApplicationRepository;
 use App\Repository\CompanyRepository;
+use App\Service\MailSending;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -80,7 +81,8 @@ class CompanyController extends AbstractController
         Application $application,
         Request $request,
         ApplicationRepository $repository,
-        MailerInterface $mailer
+        MailerInterface $mailer,
+        MailSending $mailSending,
     ): Response {
         $form = $this->createForm(ApplicationStatusType::class, $application);
         $form->handleRequest($request);
@@ -92,32 +94,23 @@ class CompanyController extends AbstractController
             $repository->save($application, true);
 
             if ($application->getMailMessage()) {
-                $email = (new Email())
-                ->from($this->getParameter('mailer_from'))
-                ->to($application->getCandidate()->getUser()->getLogin())
-                ->cc($application->getOffer()->getCompany()->getUser()->getLogin())
-                ->subject('you have received a reply to your application for offer ' . $application->getId())
-                ->html($this->renderView('application/mail.html.twig', ['application' => $application]));
-
-                $mailer->send($email);
+                $mailSending->sendMessage(
+                    $application,
+                    $this->getParameter('mailer_from'),
+                    $this->renderView('application/mail.html.twig', ['application' => $application])
+                );
             } elseif ($application->getStatus() == Application::STATUS_ACCEPTED) {
-                $email = (new Email())
-                ->from($this->getParameter('mailer_from'))
-                ->to($application->getCandidate()->getUser()->getLogin())
-                ->cc($application->getOffer()->getCompany()->getUser()->getLogin())
-                ->subject('you have received a reply to your application for offer ' . $application->getId())
-                ->html($this->renderView('application/mailAccepted.html.twig', ['application' => $application]));
-
-                $mailer->send($email);
+                $mailSending->sendMessage(
+                    $application,
+                    $this->getParameter('mailer_from'),
+                    $this->renderView('application/mailAccepted.html.twig', ['application' => $application])
+                );
             } elseif ($application->getStatus() == Application::STATUS_REJECTED) {
-                $email = (new Email())
-                ->from($this->getParameter('mailer_from'))
-                ->to($application->getCandidate()->getUser()->getLogin())
-                ->cc($application->getOffer()->getCompany()->getUser()->getLogin())
-                ->subject('you have received a reply to your application for offer ' . $application->getId())
-                ->html($this->renderView('application/mailRefused.html.twig', ['application' => $application]));
-
-                $mailer->send($email);
+                $mailSending->sendMessage(
+                    $application,
+                    $this->getParameter('mailer_from'),
+                    $this->renderView('application/mailRefused.html.twig', ['application' => $application])
+                );
             }
 
             return $this->redirectToRoute('company_offers', [
