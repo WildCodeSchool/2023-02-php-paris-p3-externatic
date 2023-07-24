@@ -9,10 +9,13 @@ use App\Form\ApplicationStatusType;
 use App\Form\CompanyType;
 use App\Repository\ApplicationRepository;
 use App\Repository\CompanyRepository;
+use App\Service\MailSending;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/company', name: 'company_')]
@@ -78,6 +81,8 @@ class CompanyController extends AbstractController
         Application $application,
         Request $request,
         ApplicationRepository $repository,
+        MailerInterface $mailer,
+        MailSending $mailSending,
     ): Response {
         $form = $this->createForm(ApplicationStatusType::class, $application);
         $form->handleRequest($request);
@@ -87,6 +92,26 @@ class CompanyController extends AbstractController
             $repository->save($application, true);
         } elseif ($form->isSubmitted() && $form->isValid()) {
             $repository->save($application, true);
+
+            if ($application->getMailMessage()) {
+                $mailSending->sendMessage(
+                    $application,
+                    $this->getParameter('mailer_from'),
+                    $this->renderView('application/mail.html.twig', ['application' => $application])
+                );
+            } elseif ($application->getStatus() == Application::STATUS_ACCEPTED) {
+                $mailSending->sendMessage(
+                    $application,
+                    $this->getParameter('mailer_from'),
+                    $this->renderView('application/mailAccepted.html.twig', ['application' => $application])
+                );
+            } elseif ($application->getStatus() == Application::STATUS_REJECTED) {
+                $mailSending->sendMessage(
+                    $application,
+                    $this->getParameter('mailer_from'),
+                    $this->renderView('application/mailRefused.html.twig', ['application' => $application])
+                );
+            }
 
             return $this->redirectToRoute('company_offers', [
                 'id' => $application->getOffer()->getCompany()->getId()
