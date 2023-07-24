@@ -10,6 +10,10 @@
 			{% include "company/_navigationBtnDesktopCompany.html.twig" %}
 		</div>
 	{% endif %}
+
+
+
+
 	<section class="offer-show-header-section" style="background-image: url( {{ vich_uploader_asset(offer, 'offerPicture') }} ); background-size: cover;">
 		<img class="index-company-logo" src="{{ vich_uploader_asset(offer.company, 'logoFile') }}">
 		<p>{{ offer.company.name }}</p>
@@ -85,6 +89,21 @@
         {% endif %}
         </section>
     </section>
+
+    {% if app.user is null %}
+        <div class="mt-3 back-offers">
+            <a href="{{ path('home_index') }}"><< Back to offers</a>
+        </div>
+    {% elseif app.user and app.user.candidate %}
+        <div class="mt-3 back-offers">
+            <a class ="mt-4 back-offers" href="{{ path('candidate_research',  {'id': app.user.candidate.id}) }}"><< Back to offers</a>
+        </div>
+    {% elseif app.user and app.user.company %}
+        <div class="mt-3 back-offers">
+            <a class ="mt-4 back-offers" href="{{ path('company_offers',  {'id': app.user.company.id}) }}"><< Back to offers</a>
+        </div>
+    {% endif %}
+
     <div class="margin">
         <div id="offer-description-card" class="show-offer-single-section p-3">
             <h4 class="card-title"><img class="picto" src="{{ asset('build/images/picto/building.svg') }}" alt="building-icon">Company
