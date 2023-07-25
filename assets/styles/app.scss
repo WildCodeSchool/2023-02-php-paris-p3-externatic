@@ -743,6 +743,14 @@ hr {
     background: rgba(254, 211, 44, .8);
 }
 
+.mt-3.back-offers {
+    margin-left: 2em;
+}
+
+.mt-3.back-offers a:link {
+    text-decoration: none;
+}
+
 //Create candidate account
 #upload-candidate-picture-form {
     background-color: $primary;
