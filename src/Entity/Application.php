@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\ApplicationRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use DateTime;
 
@@ -39,6 +40,9 @@ class Application
     #[ORM\ManyToOne(inversedBy: 'applications')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Offer $offer = null;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $mailMessage = null;
 
     public function __construct()
     {
@@ -94,6 +98,18 @@ class Application
     public function setOffer(?Offer $offer): self
     {
         $this->offer = $offer;
+
+        return $this;
+    }
+
+    public function getMailMessage(): ?string
+    {
+        return $this->mailMessage;
+    }
+
+    public function setMailMessage(?string $mailMessage): static
+    {
+        $this->mailMessage = $mailMessage;
 
         return $this;
     }

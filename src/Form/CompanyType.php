@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\UX\Dropzone\Form\DropzoneType;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class CompanyType extends AbstractType
 {
@@ -30,6 +31,7 @@ class CompanyType extends AbstractType
                 },
                 'placeholder' => 'Size',
                 'attr' => ['class' => 'form-select border-primary'],
+                'empty_data' => '',
                 'label' => false,
             ])
             ->add('sector', ChoiceType::class, [

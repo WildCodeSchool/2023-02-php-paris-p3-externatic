@@ -14,9 +14,12 @@ use Knp\Component\Pager\PaginatorInterface;
 use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Routing\RouterInterface;
 
 #[Route('/candidate', name: 'candidate_')]
 #[IsGranted('ROLE_CANDIDATE')]
@@ -79,6 +82,7 @@ class CandidateController extends AbstractController
     #[Route('/{id}', name: 'show', methods: ['GET', 'POST'])]
     public function show(Candidate $candidate): Response
     {
+
         return $this->render('candidate/show.html.twig', [
             'candidate' => $candidate,
         ]);
@@ -155,7 +159,8 @@ class CandidateController extends AbstractController
     #[Route('/{id}/addToFavorite', name: 'favorites', methods: ['GET', 'POST'])]
     public function addOfferToFavorites(
         CandidateRepository $candidateRepository,
-        Offer $offer
+        Offer $offer,
+        RequestStack $requestStack
     ): Response {
         $candidate = $this->getUser()->getCandidate();
 
@@ -165,14 +170,27 @@ class CandidateController extends AbstractController
 
         $candidateRepository->save($candidate, true);
 
-        return $this->redirectToRoute(
-            'candidate_research',
-            [
-            'offer' => $offer->getId(),
-            'id' => $candidate->getId()
-            ],
-            Response::HTTP_SEE_OTHER
-        );
+        $removeFavFlashMsg = 'The offer: ' . $offer->getTitle() . ' has been successfully added as favorite';
+        $addFavFlashMsg = 'The offer: ' . $offer->getTitle() . ' has been successfully removed as favorite';
+
+        $candidate->isOfferInFavorites($offer) ?
+        $this->addFlash('success', $removeFavFlashMsg) :
+        $this->addFlash('success', $addFavFlashMsg);
+
+        $previousURL = $requestStack->getMainRequest()->headers->get('referer');
+        $previousPath = parse_url($previousURL, PHP_URL_PATH);
+
+        if ($previousPath === $this->generateUrl('candidate_research', ['id' => $candidate->getId()])) {
+            return $this->redirectToRoute('candidate_research', [
+                'offer' => $offer->getId(),
+                'id' => $candidate->getId(),
+            ], Response::HTTP_SEE_OTHER);
+        } else {
+            return $this->redirectToRoute('candidate_collection', [
+                'offer' => $offer->getId(),
+                'id' => $candidate->getId(),
+            ], Response::HTTP_SEE_OTHER);
+        }
     }
 
     #[Route('/{id}/collection', name: 'collection')]
