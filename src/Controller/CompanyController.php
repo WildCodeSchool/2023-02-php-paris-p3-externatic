@@ -97,19 +97,19 @@ class CompanyController extends AbstractController
                 $mailSending->sendMessage(
                     $application,
                     $this->getParameter('mailer_from'),
-                    $this->renderView('application/mail.html.twig', ['application' => $application])
+                    $this->renderView('mail/mail.html.twig', ['application' => $application])
                 );
             } elseif ($application->getStatus() == Application::STATUS_ACCEPTED) {
                 $mailSending->sendMessage(
                     $application,
                     $this->getParameter('mailer_from'),
-                    $this->renderView('application/mailAccepted.html.twig', ['application' => $application])
+                    $this->renderView('mail/mailAccepted.html.twig', ['application' => $application])
                 );
             } elseif ($application->getStatus() == Application::STATUS_REJECTED) {
                 $mailSending->sendMessage(
                     $application,
                     $this->getParameter('mailer_from'),
-                    $this->renderView('application/mailRefused.html.twig', ['application' => $application])
+                    $this->renderView('mail/mailRefused.html.twig', ['application' => $application])
                 );
             }
 

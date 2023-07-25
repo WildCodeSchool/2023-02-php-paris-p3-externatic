@@ -1017,17 +1017,6 @@ hr {
     #search-bar-application {
         margin-left: 5.5em;
     }
-
-    //Company offers
-    #see-more,
-    #candidates-applications {
-        display: none;
-    }
-
-    #offer-buttons {
-        display: flex;
-        justify-content: flex-end;
-    }
 }
 
 @media (max-width: 599px) {
@@ -1157,14 +1146,45 @@ hr {
         flex: 0 0 auto;
         width: 100%;
     }
+}
 
-     //Company offers
+@media (max-width: 991px) {
     #offer-buttons,
     #offer-location,
     #carouselExampleIndicators,
-    .status {
+    #candidates-applications-desktop {
         display: none;
     }
+
+}
+
+@media (min-width: 992px) {
+    #see-more,
+    #candidates-applications-mobile {
+        display: none;
+    }
+
+    // #offer-buttons {
+    //     display: flex;
+    //     justify-content: flex-end;
+    // }
+}
+
+@media (max-width: 1400px) {
+        #status-desktop .candidate-status-application {
+        display:none;
+    }
+}
+
+@media (max-width: 767px) {
+        #status-mobile .candidate-status-application {
+        display:none;
+    }
+}
+
+#next-arrow,
+#previous-arrow {
+    width: 2rem;
 }
 
 @import "~bootstrap/scss/bootstrap";

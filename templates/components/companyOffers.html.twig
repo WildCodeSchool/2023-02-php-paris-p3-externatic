@@ -24,24 +24,26 @@
                         <h2 class="accordion-header">
                             <div class="row align-items-center p-3">
                                 <h4 class="col col-md-6 col-sm-11">Offer #{{ offer.id }} {{ offer.title }}</h4>
-                                <p class="col-3 h6" id="offer-location">
+                                <p class="col col-md-2 h6" id="offer-location">
                                     <img class="picto-application" src="{{ asset('build/images/picto/location-offer.svg') }}" alt="pictoLocation">
                                     {{ offer.location }}
                                 </p>
-                                <a class="col-1" href="{{ path('offer_show', {'id': offer.id}) }}">
+                                <a class="col col-md-6 col-sm-1" href="{{ path('offer_show', {'id': offer.id}) }}">
                                     <div class="d-flex flex-row-reverse">
                                         <img id="see-more" src="{{ asset('build/images/picto/see.svg') }}" alt="picto-see">
                                     </div>
                                 </a>
-                                <div id="offer-buttons">
-                                    <div class="col-1">
-                                        <a href="{{ path('offer_show', {'id': offer.id}) }}"><button class="btn btn-secondary btn-sm" >See more</button></a>
-                                    </div>
-                                    <div class="col-1">
-                                        <a href="{{ path('offer_form_edit', {'id': offer.id}) }}"><button class="btn btn-secondary btn-sm" style="--bs-btn-padding-x: 1.7rem;">Edit</button></a>
-                                    </div>
-                                    <div class="col-1">
-                                        <a href="#"><button class="btn btn-secondary btn-sm" style="--bs-btn-padding-x: 1rem;">Archive</button></a>
+                                <div class="col col-md-4" id="offer-buttons">
+                                    <div class="row">
+                                        <div class="col">
+                                            <a href="{{ path('offer_show', {'id': offer.id}) }}"><button class="btn btn-secondary btn-sm" >See more</button></a>
+                                        </div>
+                                        <div class="col">
+                                            <a href="{{ path('offer_form_edit', {'id': offer.id}) }}"><button class="btn btn-secondary btn-sm" style="--bs-btn-padding-x: 1.7rem;">Edit</button></a>
+                                        </div>
+                                        <div class="col">
+                                            <a href="#"><button class="btn btn-secondary btn-sm" style="--bs-btn-padding-x: 1rem;">Archive</button></a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -52,7 +54,6 @@
                         <div id="flush-collapse{{ offer.id }}" class="accordion-collapse collapse" data-bs-parent="#application-card">
                             <div class="accordion-body">
                                 {% include "components/_carouselCandidates.html.twig" %}
-                                {% include "components/_candidates.html.twig" %}
                             </div>
                         </div>
                     </div>
