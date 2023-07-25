@@ -669,6 +669,10 @@ hr {
     list-style-type: none;
 }
 
+.skills-tab.offer-show-content {
+    display: flex;
+}
+
 .status-application-offer {
     padding: 0.5em;
     border-radius: 5px;
@@ -858,11 +862,6 @@ hr {
     margin: 0 auto;
 }
 
-
-
-
-//*******************************************************************************************
-
 //Media queries
 @media (min-width: 600px) {
     #navigation-btn-mobile {
@@ -943,10 +942,29 @@ hr {
         padding-top: 2em;
     }
 
-    .skills-tab > ul {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
+    // .skills-tab > ul {
+    //     display: grid;
+    //     grid-template-columns: 1fr 1fr;
+    // }
+
+
+    .skills-tab.offer-show-content ul{
+        margin-right: 10em;
     }
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     .picto-in-header {
         justify-self: center;
