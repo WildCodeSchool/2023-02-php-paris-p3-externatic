@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Candidate
+{% block title %}{{ candidate.firstname }}'s profile
 {% endblock %}
 
 {% block body %}
@@ -133,7 +133,7 @@
             {% endif %}
         {% endfor %}
 		<div class="col text-center mt-4">
-			<a type="button" class="btn btn-secondary mt-2" href="{{ path('candidate_edit', {'id': candidate.id}) }}">Edit</a>
+			<a href="{{ path('candidate_edit', {'id': candidate.id}) }}"><button type="button" class="btn btn-secondary mt-2">Edit</button></a>
 		</div>
 	</section>
 {% endblock %}
