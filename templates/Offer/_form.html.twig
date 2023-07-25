@@ -1,5 +1,15 @@
 <section class="margin">
     {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+        {{ form_errors(form) }}
+        <div id="upload-offer-picture-form"class="p-4">
+            <div class="col text-center" >
+                {% if offer.picture %}
+                    <p class="mb-2">Your current offer picture</p>
+                    <img src="{{ vich_uploader_asset(offer, 'offerPicture') }}" id="offer-picture-form" alt="offer-picture">
+                {% endif %}
+                {{ form_row(form.offerPicture) }}
+            </div>
+        </div>
     <div id="new-offer-form" class="p-4">
         <div class="col mt-4">
             {{ form_row(form.title) }}
@@ -18,9 +28,6 @@
         </div>
         <div class="col mt-4">
             {{ form_row(form.experience) }}
-        </div>
-        <div id="upload-offer-picture-form" class="col mt-4">
-            {{ form_row(form.offerPicture) }}
         </div>
         <div class="col mt-4">
             {{ form_row(form.minSalary) }}

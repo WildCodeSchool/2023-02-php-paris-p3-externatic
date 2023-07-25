@@ -3,7 +3,7 @@
     <div id="upload-candidate-picture-form"class="p-4">
         <div class="col text-center" >
             {% if candidate.picture %}
-                <p class="mb-2">Your current picture profile</p>
+                <p class="mb-2">Your current profile picture</p>
                 <img src="{{ vich_uploader_asset(app.user.candidate, 'pictureFile') }}" id="candidate-picture-form" alt="profile-picture">
                 {{ form_row(form.pictureFile) }}
             {% else %}
