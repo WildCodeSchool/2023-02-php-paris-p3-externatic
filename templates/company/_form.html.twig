@@ -1,5 +1,14 @@
 {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
     {{ form_errors(form) }}
+    <div id="upload-company-logo-form"class="p-4">
+        <div class="col text-center">
+            {% if company.logo %}
+                <p class="mb-2">Your current logo</p>
+                <img src="{{ vich_uploader_asset(company, 'logoFile') }}" id="company-logo-form" alt="company-logo">
+            {% endif %}
+            {{ form_row(form.logoFile) }}
+        </div>
+    </div>
     <div id="profile-company-form" class="p-4">
         <div class="col mt-4">
             {{ form_row(form.name) }}
@@ -15,9 +24,6 @@
         </div>
         <div class="col mt-4">
             {{ form_row(form.presentation) }}
-        </div>
-        <div class="col mt-4" id="upload-company-picture-form">
-            {{ form_row(form.logoFile) }}
         </div>
     </div>
     <div class="text-center">

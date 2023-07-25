@@ -22,7 +22,7 @@ class Offer
     public const JOB_TYPE = [
         'Permanent contract' => 'permanent-contract',
         'Work study' => 'work-study',
-        'Intership' => 'intership',
+        'Internship' => 'internship',
         'Fixed-term / temporary' => 'fixed-term-temporary',
         'Freelance' => 'freelance',
     ];
