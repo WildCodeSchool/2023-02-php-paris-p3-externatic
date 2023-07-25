@@ -260,99 +260,32 @@ a.btn.active {
 }
 
 //Media queries
-@media (min-width: 600px) {
-    #navigation-btn-mobile {
-        display: none;
-    }
 
-    //Show Candidate
-    .visibility-profile .profile h1 {
-        display: none;
-    }
 
-    .visibility-profile {
-        margin: 3em auto 4em auto;
-        display: grid;
-        grid-template-columns: 1fr 2fr;
-        grid-template-rows: 1fr;
-        width: 80%;
-        grid-gap: 2em;
-    }
 
-    //Box grey
-    .visibility-profile .visibility {
-        background-color: $tertiary;
-        padding: 1em 0.9em;
-        border: 0.09em solid #FED32C;
-        margin-block: auto;
-    }
 
-    #picture-profile{
-        margin-bottom: -9em;
-        margin-right: 25em;
-    }
 
-    .visibility-profile .visibility .viewers {
-        display: flex;
-        text-align: center;
-        justify-content: space-between;
-    }
 
-    #profile-card.p-3 .card-body.mt-2 {
-        display: flex;
-        margin-left: 11em;
-    }
 
-    #profile-card.p-3 .card-body.mt-2 .profile-informations {
-        width: 50%;
-        text-align: left;
-    }
 
-    #introduction.profile-blocks.mt-4 {
-        width: 70%;
-        margin: auto;
-    }
 
-    .skills {
-        display: flex;
-        justify-content: space-evenly;
-        padding-top: 2em;
-    }
 
-    .skills .profile-blocks.mt-4 {
-        width: 25%;
-    }
 
-    //Position buttons resume, uload resume
-    .resume-upload-resume {
-        margin: 1.5em 0 0 24em;
-        display: grid;
-        width: 40%;
-    }
 
-    .portfolio {
-        margin: auto;
-        width: 50%;
-        padding-top: 2em;
-    }
 
-    .skills-tab > ul {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-    }
 
-    .picto-in-header {
-        justify-self: center;
-    }
 
-    .header-menu-for-mobile {
-        display: none;
-    }
 
-    .header-menu-for-desktop {
-        display: none;
-    }
-}
+
+
+
+
+
+
+
+
+
+
 
 //Title job , title exprience
 .visibility-profile .profile .profile-informations .job-title,
@@ -925,6 +858,11 @@ hr {
     margin: 0 auto;
 }
 
+
+
+
+//*******************************************************************************************
+
 //Media queries
 @media (min-width: 600px) {
     #navigation-btn-mobile {
@@ -938,6 +876,7 @@ hr {
 
     .visibility-profile {
         margin: 0 auto 4em auto;
+        // margin: 3em auto 4em auto;  OJOOOOOOOOOOOOOOOOOOOOOOOOOOO
         display: grid;
         grid-template-columns: 1fr 2fr;
         grid-template-rows: 1fr;
@@ -951,11 +890,12 @@ hr {
         padding: 1em 0.9em;
         border: 0.09em solid #FED32C;
         margin-block: auto;
-        margin-top: 1.5em;
+        // margin-top: 1.5em;  OJOOOOOOOOOOOOOOOOOOOOOOOOOOO
     }
 
     #picture-profile{
-        margin-bottom: -12.5em;
+        // margin-bottom: -12.5em; OJOOOOOOOOOOOOOOOOOOOOOOOOOOO
+        margin-bottom: -9em;
         margin-right: 25em;
     }
 
@@ -968,7 +908,7 @@ hr {
     #profile-card.p-3 .card-body.mt-2 {
         display: flex;
         margin-left: 11em;
-        padding: 1.5em 0;
+        padding: 1.5em 0;  //OJOOOOOOOOOOOOOOOOOOOOOOOO
     }
 
     #profile-card.p-3 .card-body.mt-2 .profile-informations {
@@ -1013,11 +953,154 @@ hr {
         justify-self: center;
     }
 
+    .header-menu-for-mobile {  //OJOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+        // display: none;
+    }
+
+    .header-menu-for-desktop {   //OJOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+        // display: none;
+    }
+
     //Filter candidate applications
     #search-bar-application {
         margin-left: 5.5em;
     }
 }
+
+
+
+
+
+
+// @media (min-width: 600px) {
+//     // #navigation-btn-mobile {
+//     //     display: none;
+//     // }
+
+//     //Show Candidate
+//     // .visibility-profile .profile h1 {
+//     //     display: none;
+//     // }
+
+//     // .visibility-profile {
+//     //     margin: 3em auto 4em auto;
+//     //     display: grid;
+//     //     grid-template-columns: 1fr 2fr;
+//     //     grid-template-rows: 1fr;
+//     //     width: 80%;
+//     //     grid-gap: 2em;
+//     // }
+
+//     //Box grey
+//     // .visibility-profile .visibility {
+//     //     background-color: $tertiary;
+//     //     padding: 1em 0.9em;
+//     //     border: 0.09em solid #FED32C;
+//     //     margin-block: auto;
+//     // }
+
+//     // #picture-profile{
+//     //     margin-bottom: -9em;
+//     //     margin-right: 25em;
+//     // }
+
+//     // .visibility-profile .visibility .viewers {
+//     //     display: flex;
+//     //     text-align: center;
+//     //     justify-content: space-between;
+//     // }
+
+//     // #profile-card.p-3 .card-body.mt-2 {
+//     //     display: flex;
+//     //     margin-left: 11em;
+//     // }
+
+//     // #profile-card.p-3 .card-body.mt-2 .profile-informations {
+//     //     width: 50%;
+//     //     text-align: left;
+//     // }
+
+//     // #introduction.profile-blocks.mt-4 {
+//     //     width: 70%;
+//     //     margin: auto;
+//     // }
+
+//     // .skills {
+//     //     display: flex;
+//     //     justify-content: space-evenly;
+//     //     padding-top: 2em;
+//     // }
+
+//     // .skills .profile-blocks.mt-4 {
+//     //     width: 25%;
+//     // }
+
+//     //Position buttons resume, uload resume
+//     // .resume-upload-resume {
+//     //     margin: 1.5em 0 0 24em;
+//     //     display: grid;
+//     //     width: 40%;
+//     // }
+
+//     // .portfolio {
+//     //     margin: auto;
+//     //     width: 50%;
+//     //     padding-top: 2em;
+//     // }
+
+//     // .skills-tab > ul {
+//     //     display: grid;
+//     //     grid-template-columns: 1fr 1fr;
+//     // }
+
+//     // .picto-in-header {
+//     //     justify-self: center;
+//     // }
+
+//     .header-menu-for-mobile {
+//         display: none;
+//     }
+
+//     .header-menu-for-desktop {
+//         display: none;
+//     }
+// }
+
+
+
+
+//*******************************************************************************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 @media (max-width: 599px) {
     #navigation-btn-desktop {
