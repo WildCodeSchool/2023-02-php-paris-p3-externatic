@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace DoctrineMigrations;
 
-use App\Entity\Skill;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20230724143839 extends AbstractMigration
+final class Version20230725133729 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -48,10 +47,6 @@ final class Version20230724143839 extends AbstractMigration
         $this->addSql('ALTER TABLE skill_offer ADD CONSTRAINT FK_CFE140253C674EE FOREIGN KEY (offer_id) REFERENCES offer (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE `user` ADD CONSTRAINT FK_8D93D64991BD8781 FOREIGN KEY (candidate_id) REFERENCES candidate (id)');
         $this->addSql('ALTER TABLE `user` ADD CONSTRAINT FK_8D93D649979B1AD6 FOREIGN KEY (company_id) REFERENCES company (id)');
-        
-        foreach (Skill::SKILLS as $skill) {
-            $this->addSql('INSERT INTO skill (name, type) VALUES ("' . $skill['name'] . '", "' . $skill['type'] . '");');
-        }
     }
 
     public function down(Schema $schema): void

@@ -18,8 +18,12 @@
 		</h3>
 		<section class="other-info-in-offer-show">
 			<div class="grey-area-in-offer-show">
-				<img class="picto-in-header" src="{{ asset('build/images/picto/location-offer.svg') }}" alt="location-icon">
-				<p>{{ offer.location }}</p>
+				<img class="picto-in-header otherpicto" src="{{ asset('build/images/picto/yearsofexperience.svg') }}" alt="experience-icon">
+				<p>Experience: {{ offer.experience }} years</p>
+			</div>
+			<div class="grey-area-in-offer-show">
+				<img class="picto-in-header otherpicto" src="{{ asset('build/images/picto/telework.svg') }}" alt="telework-icon">
+				<p>WFH: {{ offer.workfromhome }}</p>
 			</div>
 			<div class="grey-area-in-offer-show">
 				<img class="picto-in-header" src="{{ asset('build/images/picto/contract.svg') }}" alt="briefcase-icon">
@@ -31,10 +35,8 @@
 			</div>
 		</section>
 		<p class="mt-4 mb-2">
-		<img class="picto picto-calendar picto-in-header" src="{{ asset('build/images/picto/calendar.svg') }}" alt="Calendar-icon">
-		posted
-			{{ dateInterval }}
-			ago
+		<img class="picto picto-calendar picto-in-header" src="{{ asset('build/images/picto/location-offer.svg') }}" alt="location-icon">
+			{{ offer.location }}
 		</p>
 		<section class="before-footer-btn mt-2">
 		{% if app.user %}
