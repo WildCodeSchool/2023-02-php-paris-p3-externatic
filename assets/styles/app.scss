@@ -997,7 +997,7 @@ hr {
     #candidates-applications {
         display: none;
     }
-   
+
     #offer-buttons {
         display: flex;
         justify-content: flex-end;
@@ -1086,13 +1086,6 @@ hr {
         display:none;
     }
 
-     //Company offers
-    #offer-buttons,
-    #offer-location,
-    #carouselExampleIndicators {
-        display: none;
-    }
-
     //Company my job offers, candidates on desktop view
     .row.row-cols-3 {
         display: none;
@@ -1107,7 +1100,7 @@ hr {
         width: 100%;
     }
 
-    // Change status and buttons 
+    // Change status and buttons
     .row.align-items-center.justify-content-center.p-2.h4 {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -1136,7 +1129,15 @@ hr {
     //Candidate card in Company, candidate application
     .col-5.profile {
         flex: 0 0 auto;
-        width: 100%;    
+        width: 100%;
+    }
+
+     //Company offers
+    #offer-buttons,
+    #offer-location,
+    #carouselExampleIndicators,
+    .status {
+        display: none;
     }
 }
 

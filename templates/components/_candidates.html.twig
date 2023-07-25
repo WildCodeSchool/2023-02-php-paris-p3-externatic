@@ -1,12 +1,8 @@
-<div id="candidates-applications" class="row">
+<div id="candidates-applications" class="rowgit">
     {% for application in offer.applications %}
         <a href="{{ path('company_candidate_application', {'id': application.id}) }}">
-            <div class="col col-md-border">
-                {% if (loop.index % 3) == 0 %}
-                    <div class="row align-items-center">
-                {% else %}
-                    <div class="row align-items-center border-end">
-                {% endif %}
+            <div class="col ">
+                <div class="row align-items-center">
                     <div class="col-2">
                         <img src="{{ vich_uploader_asset(application.candidate, 'pictureFile') }}" id="profile-picture-navbar" alt="profile-picture">
                     </div>
