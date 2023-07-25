@@ -93,10 +93,12 @@ class OfferType extends AbstractType
                 ],
             ])
             ->add('offerPicture', DropzoneType::class, [
-                'required'      => false,
                 'label'         => false,
                 'attr' => [
                     'placeholder' => 'Browse your picture offer here',
+                ],
+                'constraints' => [
+                    new Assert\NotBlank(),
                 ],
             ])
             ->add('minSalary', IntegerType::class, [

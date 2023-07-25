@@ -119,7 +119,7 @@ class Company implements Serializable
         return $this->size;
     }
 
-    public function setSize(string $size): self
+    public function setSize(?string $size): self
     {
         $this->size = $size;
 
@@ -131,7 +131,7 @@ class Company implements Serializable
         return $this->sector;
     }
 
-    public function setSector(string $sector): self
+    public function setSector(?string $sector): self
     {
         $this->sector = $sector;
 
