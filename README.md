@@ -1,78 +1,45 @@
-# Project 3 - Starter Kit - Symfony
+# Externatic
+*student project*
 
 ## Presentation
 
-This starter kit is here to easily start a repository for Wild Code School students.
+[Externatic](https://www.externatic.fr/) is a company specializing in IT profile recruitment.
+Our mission was to create a hirement website. We have decided to focus on facilitating the hiring process for both candidates and companies. With just one click, a candidate can apply for a job offer, and companies can easily update applications.
 
-It's symfony website-skeleton project with some additional library (webpack, fixtures) and tools to validate code standards.
+## Authors
 
-* GrumPHP, as pre-commit hook, will run 2 tools when `git commit` is run :
+-[Erika Ikelempo](https://github.com/Erikaike)
+-[Esther Martinez](https://github.com/strmarlop)
+-[Léa Hadida](https://github.com/leahad)
+-[Lionel Da Rosa](https://github.com/Lionel-darosa)
 
-    * PHP_CodeSniffer to check PSR12
-    * PHPStan focuses on finding errors in your code (without actually running it)
-    * PHPmd will check if you follow PHP best practices
+## Technical specifications
 
-  If tests fail, the commit is canceled and a warning message is displayed to developper.
-
-* Github Action as Continuous Integration will be run when a branch with active pull request is updated on github. It will run :
-
-    * Tasks to check if vendor, .idea, env.local are not versionned,
-    * PHP_CodeSniffer, PHPStan and PHPmd with same configuration as GrumPHP.
-
-## Getting Started for Students
+This project has been created with the help of a starter kit developed by Wild Code School teachers.
+It's a symfony website with some additional libraries (webpack, GrumPHP, fixtures) and tools to validate code standards.
 
 ### Prerequisites
 
-1. Check composer is installed
-2. Check yarn & node are installed
+1. Check that composer is installed
+2. Check that yarn & node are installed
 
 ### Install
 
 1. Clone this project
 2. Run `composer install`
 3. Run `yarn install`
-4. Run `yarn encore dev` to build assets
+4. Run `yarn build` to build assets
+5. Create and configure _.env.local_ from _.env_ file :
+    * add your database parameters by entering your mySQL credentials and the name of your database
+    * add your MAILER_DSN credentials and your MAILER_FROM_ADDRESS
+6. Run `symfony console doctrine:database:create` to create your database 
+7. Run `symfony console doctrine:migrations:migrate` to import the content of the database app
 
 ### Working
 
 1. Run `symfony server:start` to launch your local php web server
 2. Run `yarn run dev --watch` to launch your local server for assets (or `yarn dev-server` do the same with Hot Module Reload activated)
-
-### Testing
-
-1. Run `php ./vendor/bin/phpcs` to launch PHP code sniffer
-2. Run `php ./vendor/bin/phpstan analyse src --level max` to launch PHPStan
-3. Run `php ./vendor/bin/phpmd src text phpmd.xml` to launch PHP Mess Detector
-4. Run `./node_modules/.bin/eslint assets/js` to launch ESLint JS linter
-
-### Windows Users
-
-If you develop on Windows, you should edit you git configuration to change your end of line rules with this command:
-
-`git config --global core.autocrlf true`
-
-The `.editorconfig` file in root directory do this for you. You probably need `EditorConfig` extension if your IDE is VSCode.
-
-### Run locally with Docker
-
-1. Fill DATABASE_URL variable in .env.local file with
-`DATABASE_URL="mysql://root:password@database:3306/<choose_a_db_name>"`
-2. Install Docker Desktop an run the command:
-```bash
-docker-compose up -d
-```
-3. Wait a moment and visit http://localhost:8000
-
-
-## Deployment
-
-Some files are used to manage automatic deployments (using tools as Caprover, Docker and Github Action). Please do not modify them.
-
-* [Dockerfile](/Dockerfile) Web app configuration for Docker container
-* [docker-entry.sh](/docker-entry.sh) shell instruction to execute when docker image is built
-* [nginx.conf](/ginx.conf) Nginx server configuration
-* [php.ini](/php.ini) Php configuration
-
+3. Go to `localhost:8000` with your favorite browser
 
 ## Built With
 
@@ -83,19 +50,6 @@ Some files are used to manage automatic deployments (using tools as Caprover, Do
 * [PHPMD](http://phpmd.org)
 * [ESLint](https://eslint.org/)
 * [Sass-Lint](https://github.com/sasstools/sass-lint)
-
-
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-
-## Authors
-
-Wild Code School trainers team
 
 ## License
 
@@ -120,6 +74,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
-## Acknowledgments
-
