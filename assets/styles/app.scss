@@ -715,6 +715,12 @@ hr {
     height: 130px;
 }
 
+#upload-offer-picture-form img,
+#upload-candidate-picture-form img {
+    width: 50%;
+    margin-bottom: 1rem;
+}
+
 #profile-candidate-form {
     background-color: rgba(243, 231, 236, 1);
     border-bottom-right-radius: 10px;

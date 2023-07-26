@@ -55,7 +55,7 @@ class OfferController extends AbstractController
 
             $this->addFlash('success', 'Your offer has been succesfully updated! 👍');
 
-            return $this->redirectToRoute('home_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('offer_show', ['id' => $offer->getId()], Response::HTTP_SEE_OTHER);
         } elseif ($form->isSubmitted() && !$form->isValid()) {
             $this->addFlash('danger', 'Some mandatory elements are incomplete or missing. Please review your answers.');
         }

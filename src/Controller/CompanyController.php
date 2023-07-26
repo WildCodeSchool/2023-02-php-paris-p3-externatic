@@ -81,7 +81,6 @@ class CompanyController extends AbstractController
         Application $application,
         Request $request,
         ApplicationRepository $repository,
-        MailerInterface $mailer,
         MailSending $mailSending,
     ): Response {
         $form = $this->createForm(ApplicationStatusType::class, $application);
