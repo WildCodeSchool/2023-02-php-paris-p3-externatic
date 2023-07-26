@@ -47,17 +47,17 @@
 													posted
 													{% set difference = date(offer.createdAt).diff(date(now)) %}
 													{% set leftDays = difference.days %}
-													{% if leftDays == 1 %}
-														1 day
-													{% else %}
-														{% set years = (leftDays // 365 )%}
-														{% set months = (leftDays % 365) // 30.5 %}
-														{{ months }}
-														month(s) and
-														{% set days = ((leftDays % 365 ) % 30.5) %}
-														{{ days }}
-														day(s) ago
-													{% endif %}
+													    {% if leftDays == 1 %}
+														    1
+													    {% else %}
+														    {% set years = (leftDays // 365 )%}
+														    {% set months = (leftDays % 365) // 30.5 %}
+														    {{ months }}
+														    month(s) and
+														    {% set days = ((leftDays % 365 ) % 30.5) %}
+														    {{ days }}
+														{% endif %}
+                                                    day(s) ago
 												</p>
                                             </article>
 										</div>
