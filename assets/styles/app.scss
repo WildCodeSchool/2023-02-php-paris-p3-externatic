@@ -840,6 +840,35 @@ hr {
     margin: 0 auto;
 }
 
+//company offers page
+#next-arrow,
+#previous-arrow {
+    width: 2rem;
+}
+
+#carouselExampleIndicators .carousel-inner {
+    padding-left: 7rem;
+}
+
+@media (min-width: 992px) {
+    #see-more,
+    #candidates-applications-mobile {
+        display: none;
+    }
+}
+
+@media (max-width: 1400px) {
+        #status-desktop .candidate-status-application {
+        display:none;
+    }
+}
+
+@media (max-width: 767px) {
+        #status-mobile .candidate-status-application {
+        display:none;
+    }
+}
+
 //Media queries
 @media (min-width: 600px) {
     #navigation-btn-mobile {
@@ -867,7 +896,7 @@ hr {
         padding: 1em 0.9em;
         border: 0.09em solid #FED32C;
         margin-block: auto;
-        margin-top: 1.5em;  
+        margin-top: 1.5em;
     }
 
     #picture-profile{
@@ -923,7 +952,7 @@ hr {
     .skills-tab.offer-show-content ul{
         margin-right: 10em;
     }
-    
+
     .picto-in-header {
         justify-self: center;
     }
@@ -1079,39 +1108,6 @@ hr {
         display: none;
     }
 
-}
-
-@media (min-width: 992px) {
-    #see-more,
-    #candidates-applications-mobile {
-        display: none;
-    }
-
-    // #offer-buttons {
-    //     display: flex;
-    //     justify-content: flex-end;
-    // }
-}
-
-@media (max-width: 1400px) {
-        #status-desktop .candidate-status-application {
-        display:none;
-    }
-}
-
-@media (max-width: 767px) {
-        #status-mobile .candidate-status-application {
-        display:none;
-    }
-}
-
-#next-arrow,
-#previous-arrow {
-    width: 2rem;
-}
-
-#carouselExampleIndicators .carousel-inner {
-    padding-left: 7rem;
 }
 
 @import "~bootstrap/scss/bootstrap";
