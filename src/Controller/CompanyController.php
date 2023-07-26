@@ -100,7 +100,7 @@ class CompanyController extends AbstractController
                     $this->renderView('mail/mail.html.twig', ['application' => $application])
                 );
                 $this->addFlash('success', 'An email has been sent to ' . $application->getCandidate()->getFirstname()
-                                . ' ' . $application->getCandidate()->getLastname() . '😉');
+                                . ' ' . $application->getCandidate()->getLastname() . ' 👍');
             } elseif ($application->getStatus() == Application::STATUS_ACCEPTED) {
                 $mailSending->sendMessage(
                     $application,
@@ -108,7 +108,7 @@ class CompanyController extends AbstractController
                     $this->renderView('mail/mailAccepted.html.twig', ['application' => $application])
                 );
                 $this->addFlash('success', 'An email has been sent to ' . $application->getCandidate()->getFirstname()
-                                . ' ' . $application->getCandidate()->getLastname() . '😉');
+                                . ' ' . $application->getCandidate()->getLastname() . ' 👍');
             } elseif ($application->getStatus() == Application::STATUS_REJECTED) {
                 $mailSending->sendMessage(
                     $application,
@@ -116,7 +116,7 @@ class CompanyController extends AbstractController
                     $this->renderView('mail/mailRefused.html.twig', ['application' => $application])
                 );
                 $this->addFlash('success', 'An email has been sent to ' . $application->getCandidate()->getFirstname()
-                                . ' ' . $application->getCandidate()->getLastname() . '😉');
+                                . ' ' . $application->getCandidate()->getLastname() . ' 👍');
             }
 
             return $this->redirectToRoute('company_offers', [

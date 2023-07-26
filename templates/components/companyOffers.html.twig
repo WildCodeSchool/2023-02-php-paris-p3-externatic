@@ -6,9 +6,7 @@
         </div>
     </div>
     <div class="row align-items-center justify-content-end mt-2" id="search-input">
-        <div class="col-md-2 mt-2">
-            <a class="btn btn-secondary d-block w-100" role="button" href="{{ path('offer_form_new') }}">Add offer <img src="{{ asset('build/images/picto/add_doc.svg') }}"></a>
-        </div>
+        <a class="btn btn-secondary" role="button" href="{{ path('offer_form_new') }}" style="width: 14rem; margin-right: 0.8rem;">Add offer <img src="{{ asset('build/images/picto/add_doc.svg') }}"></a>
     </div>
     <div class="count m-4">
         <h5>
@@ -28,11 +26,6 @@
                                     <img class="picto-application" src="{{ asset('build/images/picto/location-offer.svg') }}" alt="pictoLocation">
                                     {{ offer.location }}
                                 </p>
-                                <a class="col col-md-6 col-sm-1" href="{{ path('offer_show', {'id': offer.id}) }}">
-                                    <div class="d-flex flex-row-reverse">
-                                        <img id="see-more" src="{{ asset('build/images/picto/see.svg') }}" alt="picto-see">
-                                    </div>
-                                </a>
                                 <div class="col col-md-4" id="offer-buttons">
                                     <div class="row">
                                         <div class="col">
@@ -46,6 +39,11 @@
                                         </div>
                                     </div>
                                 </div>
+                                <a class="col col-md-6 col-sm-1" href="{{ path('offer_show', {'id': offer.id}) }}">
+                                    <div class="d-flex flex-row-reverse">
+                                        <img id="see-more" src="{{ asset('build/images/picto/see.svg') }}" alt="picto-see">
+                                    </div>
+                                </a>
                             </div>
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{ offer.id }}" aria-expanded="false" aria-controls="flush-collapseOne">
                                 {{ offer.applications.count }} Candidate(s)

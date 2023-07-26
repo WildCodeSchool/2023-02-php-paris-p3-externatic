@@ -791,8 +791,8 @@ hr {
     background-color: $primary;
 }
 
-#upload-company-logo-form .dropzone-container, 
-#upload-offer-picture-form .dropzone-container, 
+#upload-company-logo-form .dropzone-container,
+#upload-offer-picture-form .dropzone-container,
 #upload-candidate-picture-form .dropzone-container {
     border: 2px dashed #fff;
     justify-content: center;
@@ -1191,6 +1191,10 @@ hr {
 #next-arrow,
 #previous-arrow {
     width: 2rem;
+}
+
+#carouselExampleIndicators .carousel-inner {
+    padding-left: 7rem;
 }
 
 @import "~bootstrap/scss/bootstrap";

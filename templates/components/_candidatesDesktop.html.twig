@@ -1,10 +1,12 @@
 
 <a id="candidates-applications-desktop" href="{{ path('company_candidate_application', {'id': application.id}) }}">
-    {% if (loop.index % 2) == 0 %}
+    {# {% if (loop.index % 2) == 0 %} #}
+
+        <div class="justify-content-center">
         <div class="row align-items-center">
-    {% else %}
+    {# {% else %}
         <div class="row align-items-center border-end">
-    {% endif %}
+    {% endif %}  #}
             <div class="col-2">
                 <img src="{{ vich_uploader_asset(application.candidate, 'pictureFile') }}" id="profile-picture-navbar" alt="profile-picture">
             </div>
@@ -51,6 +53,7 @@
                 {% endif %}
             </div>
         </div>
+    </div>
     </a>
 
 
