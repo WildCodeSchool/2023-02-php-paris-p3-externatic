@@ -716,8 +716,14 @@ hr {
 }
 
 #upload-offer-picture-form img,
-#upload-candidate-picture-form img {
+#upload-candidate-picture-form img,
+#upload-company-logo-form img {
     width: 50%;
+    margin-bottom: 1rem;
+}
+
+#upload-company-logo-form img {
+    width: 10%;
     margin-bottom: 1rem;
 }
 
