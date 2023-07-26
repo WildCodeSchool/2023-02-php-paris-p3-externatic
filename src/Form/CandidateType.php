@@ -92,7 +92,7 @@ class CandidateType extends AbstractType
                 'by_reference' => false,
                 'constraints' => [
                     new Count([
-                        'min' => 1, 'minMessage' => 'Please select at least one hard skill and one soft skill.'
+                        'min' => 2, 'minMessage' => 'Please select at least one hard skill and one soft skill.'
                     ]),
                 ]
             ])
