@@ -52,6 +52,10 @@
                         <div id="flush-collapse{{ offer.id }}" class="accordion-collapse collapse" data-bs-parent="#application-card">
                             <div class="accordion-body">
                                 {% include "components/_carouselCandidates.html.twig" %}
+                                {# display version mobile without carousel #}
+                                {% for application in offer.applications %}
+                                    {% include "components/_candidatesMobile.html.twig" %}
+                                {% endfor %}
                             </div>
                         </div>
                     </div>

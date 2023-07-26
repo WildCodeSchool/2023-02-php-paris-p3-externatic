@@ -53,7 +53,7 @@ class OfferController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $offerRepository->save($offer, true);
 
-            $this->addFlash('success', 'Your offer has been succesfully edited 😉');
+            $this->addFlash('success', 'Your offer has been succesfully updated! 👍');
 
             return $this->redirectToRoute('home_index', [], Response::HTTP_SEE_OTHER);
         } elseif ($form->isSubmitted() && !$form->isValid()) {
@@ -86,7 +86,7 @@ class OfferController extends AbstractController
 
             $this->addFlash(
                 'success',
-                'Your offer has been successfully added 😇 !'
+                'Your offer has been successfully added! 👍'
             );
             return $this->redirectToRoute('home_index', [], Response::HTTP_SEE_OTHER);
         } elseif ($form->isSubmitted() && !$form->isValid()) {
@@ -116,7 +116,7 @@ class OfferController extends AbstractController
         if ($this->isCsrfTokenValid('delete' . $offer->getId(), $request->request->get('_token'))) {
             $repo->remove($offer, true);
 
-            $this->addFlash('success', 'Your offer has been succesfully deleted 🚮');
+            $this->addFlash('success', 'Your offer has been succesfully deleted! 🗑️');
         }
         return $this->redirectToRoute('home_index', [], Response::HTTP_SEE_OTHER);
     }

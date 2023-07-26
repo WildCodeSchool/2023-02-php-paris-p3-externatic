@@ -1,55 +1,52 @@
-<div id="candidates-applications-mobile" class="rowgit">
-    {% for application in offer.applications %}
-        <a href="{{ path('company_candidate_application', {'id': application.id}) }}">
-            <div class="col">
-                <div class="row align-items-center">
-                    <div class="col-2">
-                        <img src="{{ vich_uploader_asset(application.candidate, 'pictureFile') }}" id="profile-picture-navbar" alt="profile-picture">
-                    </div>
-                    <div class="col-6">
-                        <p>{{ application.candidate.firstname }} {{ application.candidate.lastname }}</p>
-                    </div>
-                    <div id="status-mobile" class="col">
-                        {% if application.status == constant('App\\Entity\\Application::STATUS_RECEIVED') %}
-                            <div class="row">
-                                <div class="col-2">
-                                    <img class="picto-application" src="{{ asset('build/images/picto/received.svg') }}" alt="pictoReceivedApplication">
-                                </div>
-                                <div class="col align-self-center">
-                                    <p class="candidate-status-application">{{ application.status }}</p>
-                                </div>
-                            </div>
-                        {% elseif application.status == constant('App\\Entity\\Application::STATUS_INREVIEW') %}
-                            <div class="row">
-                                <div class="col-2">
-                                    <img class="picto-application" src="{{ asset('build/images/picto/in-review.svg') }}" alt="pictoInReviewApplication">
-                                </div>
-                                <div class="col align-self-center">
-                                    <p class="candidate-status-application">{{ application.status }}</p>
-                                </div>
-                            </div>
-                        {% elseif application.status == constant('App\\Entity\\Application::STATUS_ACCEPTED') %}
-                            <div class="row">
-                                <div class="col-2">
-                                    <img class="picto-application" src="{{ asset('build/images/picto/accepted.svg') }}" alt="pictoAcceptedApplication">
-                                </div>
-                                <div class="col align-self-center">
-                                    <p class="candidate-status-application">{{ application.status }}</p>
-                                </div>
-                            </div>
-                        {% elseif application.status == constant('App\\Entity\\Application::STATUS_REJECTED') %}
-                            <div class="row">
-                                <div class="col-2">
-                                    <img class="picto-aplication" src="{{ asset('build/images/picto/rejected.svg') }}" alt="pictoRejectedApplication">
-                                </div>
-                                <div class="col align-self-center">
-                                    <p class="candidate-status-application">{{ application.status }}</p>
-                                </div>
-                            </div>
-                        {% endif %}
-                    </div>
-                </div>
+<a id="candidates-applications-mobile" href="{{ path('company_candidate_application', {'id': application.id}) }}">
+    <div class="col">
+        <div class="row align-items-center">
+            <div class="col-2">
+                <img src="{{ vich_uploader_asset(application.candidate, 'pictureFile') }}" id="profile-picture-navbar" alt="profile-picture">
             </div>
-        </a>
-    {% endfor %}
-</div>
+            <div class="col-6">
+                <p>{{ application.candidate.firstname }} {{ application.candidate.lastname }}</p>
+            </div>
+            <div id="status-mobile" class="col">
+                {% if application.status == constant('App\\Entity\\Application::STATUS_RECEIVED') %}
+                    <div class="row">
+                        <div class="col-2">
+                            <img class="picto-application" src="{{ asset('build/images/picto/received.svg') }}" alt="pictoReceivedApplication">
+                        </div>
+                        <div class="col align-self-center">
+                            <p class="candidate-status-application">{{ application.status }}</p>
+                        </div>
+                    </div>
+                {% elseif application.status == constant('App\\Entity\\Application::STATUS_INREVIEW') %}
+                    <div class="row">
+                        <div class="col-2">
+                            <img class="picto-application" src="{{ asset('build/images/picto/in-review.svg') }}" alt="pictoInReviewApplication">
+                        </div>
+                        <div class="col align-self-center">
+                            <p class="candidate-status-application">{{ application.status }}</p>
+                        </div>
+                    </div>
+                {% elseif application.status == constant('App\\Entity\\Application::STATUS_ACCEPTED') %}
+                    <div class="row">
+                        <div class="col-2">
+                            <img class="picto-application" src="{{ asset('build/images/picto/accepted.svg') }}" alt="pictoAcceptedApplication">
+                        </div>
+                        <div class="col align-self-center">
+                            <p class="candidate-status-application">{{ application.status }}</p>
+                        </div>
+                    </div>
+                {% elseif application.status == constant('App\\Entity\\Application::STATUS_REJECTED') %}
+                    <div class="row">
+                        <div class="col-2">
+                            <img class="picto-aplication" src="{{ asset('build/images/picto/rejected.svg') }}" alt="pictoRejectedApplication">
+                        </div>
+                        <div class="col align-self-center">
+                            <p class="candidate-status-application">{{ application.status }}</p>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</a>
+
