@@ -174,7 +174,7 @@ class Offer
     {
         return $this->contract;
     }
-    public function setContract(string $contract): self
+    public function setContract(?string $contract): self
     {
         $this->contract = $contract;
         return $this;
@@ -185,7 +185,7 @@ class Offer
         return $this->workFromHome;
     }
 
-    public function setWorkFromHome(string $workFromHome): self
+    public function setWorkFromHome(?string $workFromHome): self
     {
         $this->workFromHome = $workFromHome;
         return $this;
@@ -207,7 +207,7 @@ class Offer
         return $this->experience;
     }
 
-    public function setExperience(string $experience): self
+    public function setExperience(?string $experience): self
     {
         $this->experience = $experience;
         return $this;

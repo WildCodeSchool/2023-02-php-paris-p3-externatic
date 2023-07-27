@@ -1,0 +1,54 @@
+{% if offer.applications.count / 12 | round(0, 'ceil') <= 1 %}
+{# if number of applications divided by 12 rounded = 0 or 1, no carousel #}
+    <div class="row row-cols-2">
+        {% for application in offer.applications %}
+            {% include "components/_candidatesDesktop.html.twig" %}
+        {% endfor %}
+    </div>
+{% else %}
+    <div id="carouselExampleIndicators" class="carousel slide">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            {% for i in 0..(((offer.applications.count / 12)|round(0, 'ceil')|number_format) - 2) %}
+            {# between 0 and number of page (number of applications as a float divided by 12 rounded transformed in integer) - 2 #}
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ i + 1 }}" aria-label="Slide {{ i + 2 }}"></button>
+            {% endfor %}
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                {# display of the carousel 1st page #}
+                <div class="row row-cols-2">
+                    {% for application in offer.applications %}
+                        {% if loop.index <= 12 %}
+                        {# loop = "for application in offer.applications"
+                        if loop index number <=12, display first 12 applications #}
+                            {% include "components/_candidatesDesktop.html.twig" %}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+            {% for j in 0..(((offer.applications.count / 12)|round(0, 'ceil')|number_format) - 2) %}
+            {# between 0 and number of page (number of applications as a float divided by 12 rounded transformed in integer) - 2 #}
+                <div class="carousel-item">
+                    <div class="row row-cols-2">
+                        {% for application in offer.applications %}
+                            {% if loop.index > (12 * (j + 1)) and loop.index <= (12 * (j + 2)) %}
+                            {# if index of the loop > 12 * page number (index of the loop) and <= 12 * page number (index of the loop) + 2 #}
+                            {# ex page 2 = if loop.index > (12 * (0 + 1)) and loop.index <= (12 * (0 + 2)) #}
+                                {% include "components/_candidatesDesktop.html.twig" %}
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <button class="carousel-control-prev" id="previous-arrow" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" id="next-arrow" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+{% endif %}

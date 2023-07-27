@@ -150,7 +150,7 @@ class OfferType extends AbstractType
                 'expanded' => true,
                 'by_reference' => false,
                 'constraints' => array(
-                    new Count(['min' => 1, 'minMessage' => 'Please select at least one skill'])
+                    new Count(['min' => 2, 'minMessage' => 'Please select at least one skill'])
                 )
             ]);
     }

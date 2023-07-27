@@ -60,7 +60,7 @@ class CandidateController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $candidateRepository->save($candidate, true);
 
-            $this->addFlash('success', 'Your account has been created! :)');
+            $this->addFlash('success', 'Your account has been succesfully created! 🎉');
 
             return $this->redirectToRoute(
                 'candidate_research',
@@ -97,7 +97,7 @@ class CandidateController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $candidateRepository->save($candidate, true);
 
-            $this->addFlash('success', 'Your account has been updated! :)');
+            $this->addFlash('success', 'Your account has been succesfully updated! 👍');
 
             return $this->redirectToRoute('candidate_show', ['id' => $candidate->getId()], Response::HTTP_SEE_OTHER);
         } elseif ($form->isSubmitted() && !$form->isValid()) {
@@ -170,8 +170,8 @@ class CandidateController extends AbstractController
 
         $candidateRepository->save($candidate, true);
 
-        $removeFavFlashMsg = 'The offer: ' . $offer->getTitle() . ' has been successfully added as favorite';
-        $addFavFlashMsg = 'The offer: ' . $offer->getTitle() . ' has been successfully removed as favorite';
+        $removeFavFlashMsg = 'The offer: ' . $offer->getTitle() . ' has been successfully added as favorite 💖';
+        $addFavFlashMsg = 'The offer: ' . $offer->getTitle() . ' has been successfully removed from your favorites 💔';
 
         $candidate->isOfferInFavorites($offer) ?
         $this->addFlash('success', $removeFavFlashMsg) :

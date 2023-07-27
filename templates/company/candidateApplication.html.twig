@@ -52,7 +52,6 @@
 									</div>
 								</div>
 							</div>
-
 						{{ form_end(form) }}
                     </h2>
                 </div>
@@ -70,12 +69,12 @@
 			<div class="col-5 profile">
 				<h1>YOUR PROFILE</h1>
                 {% if application.candidate.picture is not null %}
-                    <img id="picture-profile" src="{{ vich_uploader_asset(application.candidate, 'pictureFile') }}" alt="profile-picture" style="margin-right: 350px;">
+                    <img id="picture-profile" src="{{ vich_uploader_asset(application.candidate, 'pictureFile') }}" alt="profile-picture">
                 {% else %}
-                    <img src="{{ asset("build/images/user.png") }}" id="picture-profile" alt="default-user" width="50px" style="margin-right: 350px;">
+                    <img src="{{ asset("build/images/user.png") }}" id="picture-profile" alt="default-user" width="50px">
                 {% endif %}
                 <div id="profile-card" class="p-3">
-					<div class="card-body mt-2" style="margin-left: 160px;">
+					<div class="card-body mt-2">
 						<div class="profile-informations">
 							<p class="name">
                                 {{ application.candidate.firstname }}
@@ -117,7 +116,11 @@
         {% if application.candidate.resume %}
             <div class="row justify-content-center" style="width: 100%;">
                 <div id="resume" class="col text-center mt-4">
+                {% if application.candidate.resume is null %}
+                    <button type="button" id="no-resume" class="btn mt-2"><img class="img_icon fa-border" src=" {{ asset('build/images/picto/cv.svg') }} " alt=" curriculum"/>your resume is empty</button>
+                {% else %}
                     {{ include('company/_modal_resume.html.twig') }}
+                {% endif %}
                 </div>
             </div>
         {% endif %}

@@ -7,7 +7,7 @@
     {% include 'candidate/_dashboard.html.twig' %}
 	{% include 'candidate/_navigationBtnMobileCandidate.html.twig' %}
 	{% include 'candidate/_navigationBtnDesktopCandidate.html.twig' %}
-    {% include "application/_filter_application.html.twig" %}
+    {% include "candidate/_filter_application.html.twig" %}
 
     <div class="margin">
         <div class="count mt-4">
@@ -58,7 +58,7 @@
                                                     {% set difference = date(application.offer.createdAt).diff(date(now)) %}
                                                     {% set leftDays = difference.days %}
                                                     {% if leftDays == 1 %}
-                                                        1 day
+                                                        1
                                                     {% else %}
                                                         {% set years = (leftDays // 365 )%}
                                                         {% set months = (leftDays % 365) // 30.5 %}
@@ -66,8 +66,8 @@
                                                         month(s) and
                                                         {% set days = ((leftDays % 365 ) % 30.5) %}
                                                         {{ days }}
-                                                        day(s) ago
                                                     {% endif %}
+                                                    day(s) ago
                                                 </p>
                                                 {% if application.status == constant('App\\Entity\\Application::STATUS_RECEIVED') %}
                                                     <div class="status-application-area" style="background: rgba(254, 211, 44, .5);">
