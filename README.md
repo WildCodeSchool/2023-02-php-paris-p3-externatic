@@ -8,10 +8,10 @@ Our mission was to create a hirement website. We have decided to focus on facili
 
 ## Authors
 
--[Erika Ikelempo](https://github.com/Erikaike)
--[Esther Martinez](https://github.com/strmarlop)
--[Léa Hadida](https://github.com/leahad)
--[Lionel Da Rosa](https://github.com/Lionel-darosa)
+* [Erika Ikelempo](https://github.com/Erikaike)
+* [Esther Martinez](https://github.com/strmarlop)
+* [Léa Hadida](https://github.com/leahad)
+* [Lionel Da Rosa](https://github.com/Lionel-darosa)
 
 ## Technical specifications
 
