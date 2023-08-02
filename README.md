@@ -4,14 +4,14 @@
 ## Presentation
 
 [Externatic](https://www.externatic.fr/) is a company specializing in IT profile recruitment.
-Our mission was to create a hirement website. We have decided to focus on facilitating the hiring process for both candidates and companies. With just one click, a candidate can apply for a job offer, and companies can easily update applications.
+Our mission was to create a hirement website. We have decided to focus on facilitating the hiring process for both candidates and companies. With just one click, a candidate can apply for a job offer, and companies can easily update applications.You can find a demo of the application [here](https://www.loom.com/share/b2266e12c2aa40419b5a8efb44e4042d?sid=9112185d-7a4e-4c5f-8111-6635b3dd207f).
 
 ## Authors
 
--[Erika Ikelempo](https://github.com/Erikaike)
--[Esther Martinez](https://github.com/strmarlop)
--[Léa Hadida](https://github.com/leahad)
--[Lionel Da Rosa](https://github.com/Lionel-darosa)
+* [Erika Ikelempo](https://github.com/Erikaike)
+* [Esther Martinez](https://github.com/strmarlop)
+* [Léa Hadida](https://github.com/leahad)
+* [Lionel Da Rosa](https://github.com/Lionel-darosa)
 
 ## Technical specifications
 

@@ -30,9 +30,11 @@
                                                     <img class="index-company-logo me-1" src="{{ vich_uploader_asset(application.offer.company, 'logoFile') }}" style="width:auto; height: 90px;">
                                                     <p>{{ application.offer.company.name }}</p>
                                                 </section>
-                                                <h4 class="index-offer-title-section">
-                                                    <strong>{{ application.offer.title }}</strong>
-                                                </h4>
+                                                <div class="d-flex justify-content-center">
+                                                    <h4 class="index-offer-title-section" style="display: flex; align-items: center;">
+                                                        <strong>{{ application.offer.title }}</strong>
+                                                    </h4>
+                                                </div>
                                                 <p class="mb-4">
                                                     <img class="picto" src="{{ asset('build/images/picto/location-offer.svg') }}" alt="pictoLocation">
                                                     {{ application.offer.location }}

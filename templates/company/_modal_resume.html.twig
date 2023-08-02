@@ -4,9 +4,9 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modal-title">{{ application.candidate.firstname }}, this is your resume </h5>
+                    <h5 class="modal-title" id="modal-title"> This is {{ application.candidate.firstname }}'s resume </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>  
+                </div>
                 <div class="modal-body">
                     <embed src="/uploads/resumes/{{ application.candidate.resume }}" frameborder="0" width="100%" height="400vh"></embed>
                 </div>

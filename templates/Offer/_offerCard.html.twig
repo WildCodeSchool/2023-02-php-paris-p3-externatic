@@ -22,9 +22,11 @@
 													<img class="index-company-logo me-1" src="{{ vich_uploader_asset(offer.company, 'logoFile') }}">
 													<p>{{ offer.company.name }}</p>
 												</section>
-												<h4 class="index-offer-title-section">
-													<strong>{{ offer.title }}</strong>
-												</h4>
+                                                <div class="d-flex justify-content-center">
+                                                    <h4 class="index-offer-title-section" style="display: flex; align-items: center;">
+                                                        <strong>{{ offer.title }}</strong>
+                                                    </h4>
+                                                </div>
 												<p class="mb-4">
 													<img class="picto" src="{{ asset('build/images/picto/location-offer.svg') }}" alt="pictoLocation">
 													{{ offer.location }}
@@ -47,15 +49,15 @@
 													posted
 													{% set difference = date(offer.createdAt).diff(date(now)) %}
 													{% set leftDays = difference.days %}
-													    {% if leftDays == 1 %}
-														    1
-													    {% else %}
+                                                        {% if leftDays == 1 %}
+                                                            1
+                                                        {% else %}
 														    {% set years = (leftDays // 365 )%}
 														    {% set months = (leftDays % 365) // 30.5 %}
-														    {{ months }}
-														    month(s) and
-														    {% set days = ((leftDays % 365 ) % 30.5) %}
-														    {{ days }}
+                                                            {{ months }}
+                                                            month(s) and
+                                                            {% set days = ((leftDays % 365 ) % 30.5) %}
+                                                            {{ days }}
 														{% endif %}
                                                     day(s) ago
 												</p>
